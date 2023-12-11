@@ -25,7 +25,7 @@ type CommonPropsType =
   | WalletConnectLoginButtonPropsType;
 
 const commonProps: CommonPropsType = {
-  callbackRoute: RouteNamesEnum.dashboard,
+  callbackRoute: RouteNamesEnum.game,
   nativeAuth
 };
 

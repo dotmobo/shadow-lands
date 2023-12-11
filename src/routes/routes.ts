@@ -1,5 +1,5 @@
 import { RouteNamesEnum } from 'localConstants';
-import { Dashboard, Disclaimer, Home } from 'pages';
+import { Dashboard, Home, Game } from 'pages';
 import { RouteType } from 'types';
 
 interface RouteWithTitleType extends RouteType {
@@ -18,8 +18,8 @@ export const routes: RouteWithTitleType[] = [
     component: Dashboard
   },
   {
-    path: RouteNamesEnum.disclaimer,
-    title: 'Disclaimer',
-    component: Disclaimer
+    path: RouteNamesEnum.game,
+    title: 'Shadow Lands',
+    component: Game
   }
 ];

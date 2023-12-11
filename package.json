@@ -12,12 +12,16 @@
     "@multiversx/sdk-core": "12.11.0",
     "@multiversx/sdk-dapp": "2.23.0",
     "@multiversx/sdk-network-providers": "2.0.0",
+    "@react-three/fiber": "^8.15.12",
+    "@types/three": "^0.159.0",
     "axios": "0.24.0",
     "classnames": "2.3.2",
+    "lodash": "^4.17.21",
     "moment": "2.29.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-router-dom": "6.16.0"
+    "react-router-dom": "6.16.0",
+    "three": "^0.159.0"
   },
   "scripts": {
     "lint": "eslint --ext js,ts,tsx src",
@@ -45,6 +49,7 @@
     "@testing-library/react": "14.0.0",
     "@testing-library/user-event": "14.5.1",
     "@types/jest": "29.5.5",
+    "@types/lodash": "^4.14.202",
     "@types/node": "20.7.1",
     "@types/react": "18.2.23",
     "@types/react-dom": "18.2.8",
