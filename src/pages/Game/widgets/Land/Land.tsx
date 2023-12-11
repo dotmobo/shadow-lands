@@ -8,7 +8,7 @@ import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 function Loader() {
-  return <Html center><FontAwesomeIcon icon={faSpinner} spin/></Html>
+  return <Html center><FontAwesomeIcon icon={faSpinner} spin color='white'/></Html>
 }
 
 export const Land = () => {
