@@ -12,6 +12,7 @@
     "@multiversx/sdk-core": "12.11.0",
     "@multiversx/sdk-dapp": "2.23.0",
     "@multiversx/sdk-network-providers": "2.0.0",
+    "@react-three/drei": "^9.92.0",
     "@react-three/fiber": "^8.15.12",
     "@types/three": "^0.159.0",
     "axios": "0.24.0",

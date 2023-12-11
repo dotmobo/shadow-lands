@@ -1,36 +1,32 @@
 import { OutputContainer } from 'components/OutputContainer';
-import { MutableRefObject, useRef, useState } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
-
-function Box(props: any) {
-  const ref: MutableRefObject<any> = useRef();
-  const [hovered, hover] = useState(false);
-  const [clicked, click] = useState(false);
-  useFrame((state, delta) => (ref.current.rotation.x += delta));
-
-  return (
-    <mesh
-      {...props}
-      ref={ref}
-      scale={clicked ? 5 : 3}
-      onClick={(event) => click(!clicked)}
-      onPointerOver={(event) => hover(true)}
-      onPointerOut={(event) => hover(false)}
-    >
-      <boxGeometry args={[1, 1, 1]} />
-      <meshStandardMaterial color={hovered ? 'hotpink' : 'orange'} />
-    </mesh>
-  );
-}
+import { Suspense, useRef } from 'react';
+import { Canvas } from '@react-three/fiber';
+import { Model } from './Model';
+import { OrbitControls, PerspectiveCamera, Stage } from '@react-three/drei';
 
 export const Land = () => {
+  const ref = useRef();
   return (
-    <OutputContainer>
-      <Canvas>
-        <ambientLight />
-        <pointLight position={[10, 10, 10]} />
-        <Box position={[0, 0, 0]} />
-      </Canvas>
-    </OutputContainer>
+    <Canvas shadows dpr={[1, 2]}>
+      <Suspense fallback={null}>
+        <Stage
+          controls={ref}
+          preset='rembrandt'
+          intensity={1}
+          environment='city'
+        >
+          false
+          <Model />
+          false
+        </Stage>
+      </Suspense>
+      <OrbitControls ref={ref} autoRotate />
+      <PerspectiveCamera
+        makeDefault
+        position={[500, 200, 1]}
+        fov={50}
+        zoom={2}
+      />
+    </Canvas>
   );
 };
