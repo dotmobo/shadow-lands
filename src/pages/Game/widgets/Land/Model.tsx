@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 
 export function Model(props) {
-  const { nodes, materials } = useGLTF("public/game/Road Scene.glb");
+  const { nodes, materials } = useGLTF("/game/Road Scene.glb");
   return (
     <group {...props} dispose={null}>
       <mesh
@@ -93,4 +93,4 @@ export function Model(props) {
   );
 }
 
-useGLTF.preload("public/game/Road Scene.glb");
+useGLTF.preload("/game/Road Scene.glb");
