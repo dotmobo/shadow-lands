@@ -1,7 +1,7 @@
 import { OutputContainer } from 'components/OutputContainer';
 import { Suspense, useRef } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { Model } from './Model';
+import { Model101 } from './Model101';
 import { OrbitControls, PerspectiveCamera, Stage } from '@react-three/drei';
 
 export const Land = () => {
@@ -16,7 +16,7 @@ export const Land = () => {
           environment='city'
         >
           false
-          <Model />
+          <Model101 />
           false
         </Stage>
       </Suspense>
@@ -25,7 +25,7 @@ export const Land = () => {
         makeDefault
         position={[500, 200, 1]}
         fov={50}
-        zoom={2}
+        zoom={20}
       />
     </Canvas>
   );
