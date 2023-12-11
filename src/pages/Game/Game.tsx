@@ -66,7 +66,7 @@ export const Game = () => {
           <div className='flex items-start sm:items-center h-full sm:w-1/2 sm:bg-center'>
             <Land />
           </div>
-          <div className='h-4/6 bg-mvx-white bg-contain bg-no-repeat w-1/2 bg-center'>
+          <div className='flex items-start sm:items-center h-full sm:w-1/2 sm:bg-center'>
             {bones !== undefined && bones.length === 0 && (
               <div className='flex flex-col gap-4'>
                 <div>
