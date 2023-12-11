@@ -3,12 +3,19 @@ import { Suspense, useRef } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { Model101 } from './Model101';
 import { OrbitControls, PerspectiveCamera, Stage } from '@react-three/drei';
+import { Html } from '@react-three/drei'
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+function Loader() {
+  return <Html center><FontAwesomeIcon icon={faSpinner} spin/></Html>
+}
 
 export const Land = () => {
   const ref = useRef();
   return (
     <Canvas shadows dpr={[1, 2]}>
-      <Suspense fallback={null}>
+      <Suspense fallback={<Loader />}>
         <Stage
           controls={ref}
           preset='rembrandt'
