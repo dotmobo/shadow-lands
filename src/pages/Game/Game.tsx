@@ -64,7 +64,7 @@ export const Game = () => {
       <PageWrapper>
         <div className='flex flex-col-reverse sm:flex-row items-center h-full w-full'>
           <div className='flex items-start sm:items-center h-full sm:w-1/2 sm:bg-center bg-slate-900'>
-            <Land />
+            {bones !== undefined && bones.length > 0 && <Land />}
           </div>
           <div className='flex items-start sm:items-center h-full sm:w-1/2 sm:bg-center'>
             {bones !== undefined && bones.length === 0 && (
