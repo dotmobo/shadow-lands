@@ -15,6 +15,24 @@ function Loader() {
   );
 }
 
+const Sphere = () => {
+  return (
+    <mesh visible position={[1, 2, 3]} rotation={[Math.PI / 2, 0, 0]}>
+      <sphereGeometry args={[1, 16, 16]} />
+      <meshStandardMaterial color='blue' transparent />
+    </mesh>
+  );
+};
+
+const Box = () => {
+  return (
+    <mesh visible position={[5, 2, 1]} rotation={[Math.PI / 2, 0, 0]}>
+      <boxGeometry args={[1, 1, 1]} />
+      <meshStandardMaterial color='blue' transparent />
+    </mesh>
+  );
+};
+
 export const Land = () => {
   const ref = useRef();
   return (
@@ -26,9 +44,9 @@ export const Land = () => {
           intensity={4}
           environment='dawn'
         >
-          false
           <Model101 />
-          false
+          <Sphere />
+          <Box />
         </Stage>
       </Suspense>
       <OrbitControls ref={ref} autoRotate />
