@@ -6,6 +6,8 @@ import { OrbitControls, PerspectiveCamera, Stage } from '@react-three/drei';
 import { Html } from '@react-three/drei';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Grave } from './Grave';
+import { GraveHp } from './GraveHp';
 
 function Loader() {
   return (
@@ -15,26 +17,15 @@ function Loader() {
   );
 }
 
-const Box = ({ position }: { position: [number, number, number] }) => {
-  const [hovered, hover] = useState(false);
-  const [clicked, click] = useState(false);
-  return (
-    <mesh
-      onPointerOver={(event) => hover(true)}
-      onPointerOut={(event) => hover(false)}
-      onClick={(event) => click(!clicked)}
-      visible={!clicked}
-      position={position}
-      rotation={[Math.PI / 2, 0, 0]}
-    >
-      <boxGeometry args={[1, 1, 1]} />
-      <meshStandardMaterial color={hovered ? 'yellow' : 'blue'} transparent />
-    </mesh>
-  );
-};
-
 export const Land = () => {
   const ref = useRef();
+
+  const [clicked1, click1] = useState(false);
+  const [clicked2, click2] = useState(false);
+  const [clicked3, click3] = useState(false);
+  const [clicked4, click4] = useState(false);
+  const [clicked5, click5] = useState(false);
+
   return (
     <Canvas shadows dpr={[1, 2]}>
       <Suspense fallback={<Loader />}>
@@ -45,11 +36,46 @@ export const Land = () => {
           environment='dawn'
         >
           <Model101 />
-          <Box position={[5, 2, 1]} />
-          <Box position={[1, 1.5, 3]} />
-          <Box position={[-6, 1.5, 5]} />
-          <Box position={[-6, 2.3, -7]} />
-          <Box position={[3, 1.5, -8]} />
+          {!clicked1 ? (
+            <Grave
+              onClick={(event) => click1(!clicked1)}
+              position={[3, 1.2, -2.5]}
+            />
+          ) : (
+            <GraveHp position={[3, 1.2, -2.5]} />
+          )}
+          {!clicked2 ? (
+            <Grave
+              onClick={(event) => click2(!clicked2)}
+              position={[1, 1.1, 3]}
+            />
+          ) : (
+            <GraveHp position={[1, 1.1, 3]} />
+          )}
+          {!clicked3 ? (
+            <Grave
+              onClick={(event) => click3(!clicked3)}
+              position={[-5, 1.1, 5]}
+            />
+          ) : (
+            <GraveHp position={[-5, 1.1, 5]} />
+          )}
+          {!clicked4 ? (
+            <Grave
+              onClick={(event) => click4(!clicked4)}
+              position={[-6, 2, -6]}
+            />
+          ) : (
+            <GraveHp position={[-6, 2, -6]} />
+          )}
+          {!clicked5 ? (
+            <Grave
+              onClick={(event) => click5(!clicked5)}
+              position={[3, 1.3, -8]}
+            />
+          ) : (
+            <GraveHp position={[3, 1.3, -8]} />
+          )}
         </Stage>
       </Suspense>
       <OrbitControls ref={ref} autoRotate />
