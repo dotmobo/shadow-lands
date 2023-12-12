@@ -20,6 +20,8 @@ function Loader() {
 export const Land = () => {
   const ref = useRef();
 
+  const [hovered, hover] = useState(false);
+
   const [clicked1, click1] = useState(false);
   const [clicked2, click2] = useState(false);
   const [clicked3, click3] = useState(false);
@@ -35,7 +37,10 @@ export const Land = () => {
           intensity={4}
           environment='dawn'
         >
-          <Model101 />
+          <Model101 
+          onPointerOver={(event) => hover(true)}
+          onPointerOut={(event) => hover(false)}
+          />
           {!clicked1 ? (
             <Grave
               onClick={(event) => click1(!clicked1)}
@@ -78,7 +83,7 @@ export const Land = () => {
           )}
         </Stage>
       </Suspense>
-      <OrbitControls ref={ref} autoRotate />
+      <OrbitControls ref={ref} autoRotate={hovered ? false : true} />
       <PerspectiveCamera
         makeDefault
         position={[500, 200, 1]}
