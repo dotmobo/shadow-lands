@@ -3,12 +3,16 @@ import { Suspense, useRef } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { Model101 } from './Model101';
 import { OrbitControls, PerspectiveCamera, Stage } from '@react-three/drei';
-import { Html } from '@react-three/drei'
+import { Html } from '@react-three/drei';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 function Loader() {
-  return <Html center><FontAwesomeIcon icon={faSpinner} spin color='white'/></Html>
+  return (
+    <Html center>
+      <FontAwesomeIcon icon={faSpinner} spin color='white' />
+    </Html>
+  );
 }
 
 export const Land = () => {
@@ -19,8 +23,8 @@ export const Land = () => {
         <Stage
           controls={ref}
           preset='rembrandt'
-          intensity={1}
-          environment='city'
+          intensity={4}
+          environment='dawn'
         >
           false
           <Model101 />
