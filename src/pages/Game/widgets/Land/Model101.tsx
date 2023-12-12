@@ -10,6 +10,13 @@ export function Model101(props) {
   return (
     <group {...props} dispose={null}>
       <group name="Scene">
+        <mesh
+          name="Terrain3"
+          castShadow
+          receiveShadow
+          geometry={nodes.Terrain3.geometry}
+          material={materials.Ground}
+        />
         <group name="Cylinder" position={[3.837, 1.016, -3.726]} scale={0.11}>
           <mesh
             name="Cylinder_1"
@@ -28,7 +35,7 @@ export function Model101(props) {
         </group>
         <group
           name="Cylinder001"
-          position={[5.825, 1.016, -5.757]}
+          position={[5.825, 2.382, -5.757]}
           scale={0.138}
         >
           <mesh
@@ -48,7 +55,7 @@ export function Model101(props) {
         </group>
         <group
           name="Cylinder002"
-          position={[5.418, 1.016, -6.536]}
+          position={[5.418, 2.12, -6.536]}
           scale={0.138}
         >
           <mesh
@@ -68,7 +75,7 @@ export function Model101(props) {
         </group>
         <group
           name="Cylinder003"
-          position={[7.518, 1.016, -7.687]}
+          position={[7.518, 1.406, -7.687]}
           scale={0.138}
         >
           <mesh
@@ -86,7 +93,7 @@ export function Model101(props) {
             material={materials.Pins}
           />
         </group>
-        <group name="Cylinder004" position={[5.57, 1.016, -5.026]} scale={0.11}>
+        <group name="Cylinder004" position={[5.57, 2.382, -5.026]} scale={0.11}>
           <mesh
             name="Cylinder004_1"
             castShadow
@@ -104,7 +111,7 @@ export function Model101(props) {
         </group>
         <group
           name="Cylinder005"
-          position={[-6.024, 1.016, 1.476]}
+          position={[-6.024, 0.934, 1.476]}
           scale={0.11}
         >
           <mesh
@@ -124,7 +131,7 @@ export function Model101(props) {
         </group>
         <group
           name="Cylinder006"
-          position={[-8.466, 1.016, 1.05]}
+          position={[-8.466, 0.964, 1.05]}
           scale={0.138}
         >
           <mesh
@@ -162,7 +169,7 @@ export function Model101(props) {
             material={materials.Pins}
           />
         </group>
-        <group name="Cylinder008" position={[-6.62, 0.56, 6.406]} scale={0.11}>
+        <group name="Cylinder008" position={[-6.62, 0.834, 6.406]} scale={0.11}>
           <mesh
             name="Cylinder008_1"
             castShadow
@@ -274,7 +281,7 @@ export function Model101(props) {
             material={materials.Pins}
           />
         </group>
-        <group name="Cylinder014" position={[6.95, 0.632, 5.147]} scale={0.11}>
+        <group name="Cylinder014" position={[6.95, 1.288, 5.147]} scale={0.11}>
           <mesh
             name="Cylinder014_1"
             castShadow
@@ -330,6 +337,66 @@ export function Model101(props) {
             material={materials.Pins}
           />
         </group>
+        <group
+          name="Cylinder017"
+          position={[-2.193, 1.016, -5.115]}
+          scale={0.11}
+        >
+          <mesh
+            name="Cylinder017_1"
+            castShadow
+            receiveShadow
+            geometry={nodes.Cylinder017_1.geometry}
+            material={materials.Tronc}
+          />
+          <mesh
+            name="Cylinder017_2"
+            castShadow
+            receiveShadow
+            geometry={nodes.Cylinder017_2.geometry}
+            material={materials.Pins}
+          />
+        </group>
+        <group
+          name="Cylinder018"
+          position={[-1.899, 0.838, -4.425]}
+          scale={0.076}
+        >
+          <mesh
+            name="Cylinder018_1"
+            castShadow
+            receiveShadow
+            geometry={nodes.Cylinder018_1.geometry}
+            material={materials.Tronc}
+          />
+          <mesh
+            name="Cylinder018_2"
+            castShadow
+            receiveShadow
+            geometry={nodes.Cylinder018_2.geometry}
+            material={materials.Pins}
+          />
+        </group>
+        <group
+          name="Cylinder019"
+          position={[-1.415, 0.933, -4.792]}
+          scale={0.1}
+        >
+          <mesh
+            name="Cylinder019_1"
+            castShadow
+            receiveShadow
+            geometry={nodes.Cylinder019_1.geometry}
+            material={materials.Tronc}
+          />
+          <mesh
+            name="Cylinder019_2"
+            castShadow
+            receiveShadow
+            geometry={nodes.Cylinder019_2.geometry}
+            material={materials.Pins}
+          />
+        </group>
         <mesh
           name="Icosphere"
           castShadow
@@ -366,7 +433,7 @@ export function Model101(props) {
           receiveShadow
           geometry={nodes.Icosphere003.geometry}
           material={materials.Rock1}
-          position={[-5.485, 0.834, 5.595]}
+          position={[-5.485, 1.013, 5.595]}
           rotation={[-1.869, -1.532, -2.168]}
           scale={[0.271, 0.167, 0.253]}
         />
@@ -416,8 +483,8 @@ export function Model101(props) {
           receiveShadow
           geometry={nodes.Icosphere008.geometry}
           material={materials.Rock1}
-          position={[7.127, 1.199, -6.475]}
-          rotation={[Math.PI, -0.529, Math.PI]}
+          position={[7.127, 1.997, -6.475]}
+          rotation={[2.877, -0.516, -2.896]}
           scale={[0.777, 0.261, 0.396]}
         />
         <mesh
@@ -426,8 +493,8 @@ export function Model101(props) {
           receiveShadow
           geometry={nodes.Icosphere009.geometry}
           material={materials.Rock1}
-          position={[7.328, 1.046, -6.084]}
-          rotation={[-3.104, -0.155, 2.849]}
+          position={[6.621, 2.37, -6.084]}
+          rotation={[2.996, -0.067, 1.468]}
           scale={[0.553, 0.203, 0.308]}
         />
         <mesh
@@ -436,7 +503,7 @@ export function Model101(props) {
           receiveShadow
           geometry={nodes.Icosphere010.geometry}
           material={materials.Rock1}
-          position={[6.642, 1.117, -6.89]}
+          position={[6.642, 2.075, -6.89]}
           rotation={[-3.103, 0.189, 2.836]}
           scale={[0.413, 0.139, 0.211]}
         />
@@ -507,55 +574,26 @@ export function Model101(props) {
           geometry={nodes.Icosphere017.geometry}
           material={materials.Rock1}
           position={[7.322, 1.069, 7.363]}
-          rotation={[-0.09, -1.142, -0.381]}
+          rotation={[-0.039, -0.239, -0.308]}
           scale={[0.541, 0.195, 0.296]}
+        />
+        <mesh
+          name="Plane"
+          castShadow
+          receiveShadow
+          geometry={nodes.Plane.geometry}
+          material={materials.Water}
+          position={[-3.295, 0.845, -3.341]}
         />
         <mesh
           name="Crane"
           castShadow
           receiveShadow
           geometry={nodes.Crane.geometry}
-          material={materials.Bone}
-          position={[0.325, 4.642, -6.746]}
-          rotation={[-0.248, 0, 0]}
+          material={materials.Rock2}
+          position={[6.895, 3.775, 3.121]}
+          rotation={[-Math.PI / 2, -1.322, -Math.PI / 2]}
         />
-        <group name="Terrain" position={[0, 1.016, 0]}>
-          <mesh
-            name="Cube"
-            castShadow
-            receiveShadow
-            geometry={nodes.Cube.geometry}
-            material={materials.Roche}
-          />
-          <mesh
-            name="Cube_1"
-            castShadow
-            receiveShadow
-            geometry={nodes.Cube_1.geometry}
-            material={materials.HerbeMorte}
-          />
-          <mesh
-            name="Cube_2"
-            castShadow
-            receiveShadow
-            geometry={nodes.Cube_2.geometry}
-            material={materials.HerbeVerte}
-          />
-          <mesh
-            name="Cube_3"
-            castShadow
-            receiveShadow
-            geometry={nodes.Cube_3.geometry}
-            material={materials.Sable}
-          />
-          <mesh
-            name="Cube_4"
-            castShadow
-            receiveShadow
-            geometry={nodes.Cube_4.geometry}
-            material={materials.Rock1}
-          />
-        </group>
       </group>
     </group>
   );

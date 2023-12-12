@@ -1,5 +1,5 @@
 import { OutputContainer } from 'components/OutputContainer';
-import { Suspense, useRef } from 'react';
+import { Suspense, useRef, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { Model101 } from './Model101';
 import { OrbitControls, PerspectiveCamera, Stage } from '@react-three/drei';
@@ -15,20 +15,20 @@ function Loader() {
   );
 }
 
-const Sphere = () => {
+const Box = ({ position }: { position: [number, number, number] }) => {
+  const [hovered, hover] = useState(false);
+  const [clicked, click] = useState(false);
   return (
-    <mesh visible position={[1, 2, 3]} rotation={[Math.PI / 2, 0, 0]}>
-      <sphereGeometry args={[1, 16, 16]} />
-      <meshStandardMaterial color='blue' transparent />
-    </mesh>
-  );
-};
-
-const Box = () => {
-  return (
-    <mesh visible position={[5, 2, 1]} rotation={[Math.PI / 2, 0, 0]}>
+    <mesh
+      onPointerOver={(event) => hover(true)}
+      onPointerOut={(event) => hover(false)}
+      onClick={(event) => click(!clicked)}
+      visible={!clicked}
+      position={position}
+      rotation={[Math.PI / 2, 0, 0]}
+    >
       <boxGeometry args={[1, 1, 1]} />
-      <meshStandardMaterial color='blue' transparent />
+      <meshStandardMaterial color={hovered ? 'yellow' : 'blue'} transparent />
     </mesh>
   );
 };
@@ -45,8 +45,11 @@ export const Land = () => {
           environment='dawn'
         >
           <Model101 />
-          <Sphere />
-          <Box />
+          <Box position={[5, 2, 1]} />
+          <Box position={[1, 1.5, 3]} />
+          <Box position={[-6, 1.5, 5]} />
+          <Box position={[-6, 2.3, -7]} />
+          <Box position={[3, 1.5, -8]} />
         </Stage>
       </Suspense>
       <OrbitControls ref={ref} autoRotate />
