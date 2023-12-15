@@ -1,12 +1,12 @@
 {
     "configurations": {
-        "default": {
+        "devnet": {
             "proxy": "https://devnet-api.multiversx.com",
             "chainID": "D"
         }
     },
-    "contract":{
-        "deploy":{
+    "contract": {
+        "deploy": {
             "verbose": true,
             "bytecode": "output/shadowlands.wasm",
             "recall-nonce": true,
@@ -14,7 +14,7 @@
             "pem": "../../wallet/wallet-owner.pem",
             "gas-limit": 59999999,
             "arguments": [
-                "str:DEVSHALAN-933f80-01",
+                "str:DEVSHALAN-933f80",
                 "0",
                 "str:DEVDUST-d62981",
                 "10000000000000000000",
@@ -23,7 +23,7 @@
             "send": true,
             "outfile": "deploy-devnet.interaction.json"
         },
-        "upgrade":{
+        "upgrade": {
             "verbose": true,
             "bytecode": "output/multiple_nft_staking.wasm",
             "recall-nonce": true,
@@ -31,7 +31,7 @@
             "pem": "../../wallet/wallet-owner.pem",
             "gas-limit": 59999999,
             "arguments": [
-                "str:DEVSHALAN-933f80-01",
+                "str:DEVSHALAN-933f80",
                 "0",
                 "str:DEVDUST-d62981",
                 "10000000000000000000",
@@ -40,5 +40,6 @@
             "send": true,
             "outfile": "deploy-devnet.interaction.json"
         }
-     }
+    },
+    "active": "devnet"
 }
