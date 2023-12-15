@@ -10,5 +10,7 @@ export const environment = EnvironmentsEnum.devnet;
 
 // Shadow Lands
 export const mvxApiUrl = 'https://devnet-api.multiversx.com';
-export const nftsCollectionId = 'DUSTYBONES-c1fc90';
-export const dustTokenId = 'DEADBROS-388e63';
+export const sftLandsId = 'DEVSHALAN-933f80-01';
+export const sftCryptId = 'DEVSHALAN-933f80-02';
+export const sftHauntedHouseId = 'DEVSHALAN-933f80-04';
+export const dustTokenId = 'DEVDUST-d62981';

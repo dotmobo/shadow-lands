@@ -4,19 +4,26 @@ import { FormatAmount } from 'components/sdkDappComponents';
 import { useGetAccountInfo, useGetNetworkConfig } from 'hooks';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { dustTokenId, mvxApiUrl, nftsCollectionId } from 'config';
+import {
+  dustTokenId,
+  mvxApiUrl,
+  sftCryptId,
+  sftHauntedHouseId,
+  sftLandsId
+} from 'config';
 import { orderBy } from 'lodash';
 
-interface Bones {
+interface Sft {
   identifier: string;
   url: string;
   name: string;
   metadata: any;
   collection: string;
   nonce: number;
+  balance: number;
 }
 
-interface Dust {
+interface Token {
   name: string;
   balance: number;
   decimals: number;
@@ -25,8 +32,10 @@ interface Dust {
 export const Account = () => {
   const { network } = useGetNetworkConfig();
   const { address, account } = useGetAccountInfo();
-  const [bones, setBonesList] = useState<Bones[]>();
-  const [dust, setDustToken] = useState<Dust | null>();
+  const [lands, setLandsList] = useState<Sft[]>();
+  const [crypts, setCryptsList] = useState<Sft[]>();
+  const [hauntedHouses, setHauntedHousesList] = useState<Sft[]>();
+  const [dust, setDustToken] = useState<Token | null>();
 
   useEffect(() => {
     // Use [] as second argument in useEffect for not rendering each time
@@ -46,10 +55,36 @@ export const Account = () => {
     // Use [] as second argument in useEffect for not rendering each time
     axios
       .get<any>(
-        `${mvxApiUrl}/accounts/${address}/nfts?size=666&collections=${nftsCollectionId}`
+        `${mvxApiUrl}/accounts/${address}/nfts?size=25&identifiers=${sftLandsId}`
       )
       .then((response) => {
-        setBonesList(
+        setLandsList(
+          orderBy(response.data, ['collection', 'nonce'], ['desc', 'asc'])
+        );
+      });
+  }, []);
+
+  useEffect(() => {
+    // Use [] as second argument in useEffect for not rendering each time
+    axios
+      .get<any>(
+        `${mvxApiUrl}/accounts/${address}/nfts?size=25&identifiers=${sftCryptId}`
+      )
+      .then((response) => {
+        setCryptsList(
+          orderBy(response.data, ['collection', 'nonce'], ['desc', 'asc'])
+        );
+      });
+  }, []);
+
+  useEffect(() => {
+    // Use [] as second argument in useEffect for not rendering each time
+    axios
+      .get<any>(
+        `${mvxApiUrl}/accounts/${address}/nfts?size=25&identifiers=${sftHauntedHouseId}`
+      )
+      .then((response) => {
+        setHauntedHousesList(
           orderBy(response.data, ['collection', 'nonce'], ['desc', 'asc'])
         );
       });
@@ -57,22 +92,25 @@ export const Account = () => {
 
   return (
     <OutputContainer>
-      {dust !== undefined && bones !== undefined && bones.length > 0 && (
-        <div className='flex flex-col text-black' data-testid='topInfo'>
-          <p>
-            <Label>Numbers of Dusty Bones: </Label> {bones.length}
-          </p>
-
-          <p>
-            <Label>Balance of $DUST: </Label>
-            <FormatAmount
-              value={dust?.balance ?? 0}
-              egldLabel='$DUST'
-              data-testid='balance'
-            />
-          </p>
-        </div>
-      )}
+      <div className='flex flex-col text-black' data-testid='topInfo'>
+        <p>
+          <Label>Lands: </Label> {lands?.[0]?.balance ?? 0}
+        </p>
+        <p>
+          <Label>Crypts: </Label> {crypts?.[0]?.balance ?? 0}
+        </p>
+        <p>
+          <Label>Haunted Houses: </Label> {hauntedHouses?.[0].balance ?? 0}
+        </p>
+        <p>
+          <Label>$DUST: </Label>
+          <FormatAmount
+            value={dust?.balance ?? 0}
+            egldLabel='$DUST'
+            data-testid='balance'
+          />
+        </p>
+      </div>
     </OutputContainer>
   );
 };

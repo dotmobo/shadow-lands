@@ -2,13 +2,13 @@ import { useEffect, useState } from 'react';
 import { AuthRedirectWrapper, PageWrapper } from 'wrappers';
 import { useGetAccountInfo, useGetNetworkConfig } from 'hooks';
 import axios from 'axios';
-import { mvxApiUrl, nftsCollectionId } from 'config';
+import { mvxApiUrl, sftLandsId } from 'config';
 import { orderBy } from 'lodash';
 import { Card } from 'components';
 import { Account } from './widgets/Account';
 import { Land } from './widgets/Land';
 
-interface Bones {
+interface Land {
   identifier: string;
   url: string;
   name: string;
@@ -29,7 +29,7 @@ const WIDGETS: WidgetsType[] = [
   {
     title: 'Shadow Lands',
     widget: Account,
-    description: 'Gavediggers who take care of your land',
+    description: 'Balance of your wallet',
     reference: 'https://dusty-bones.netlify.app/'
   }
   // {
@@ -44,16 +44,16 @@ export const Game = () => {
   const { network } = useGetNetworkConfig();
   const { address, account } = useGetAccountInfo();
 
-  const [bones, setBonesList] = useState<Bones[]>();
+  const [lands, setLandsList] = useState<Land[]>();
 
   useEffect(() => {
     // Use [] as second argument in useEffect for not rendering each time
     axios
       .get<any>(
-        `${mvxApiUrl}/accounts/${address}/nfts?size=666&collections=${nftsCollectionId}`
+        `${mvxApiUrl}/accounts/${address}/nfts?size=666&collections=${sftLandsId}`
       )
       .then((response) => {
-        setBonesList(
+        setLandsList(
           orderBy(response.data, ['collection', 'nonce'], ['desc', 'asc'])
         );
       });
@@ -64,49 +64,31 @@ export const Game = () => {
       <PageWrapper>
         <div className='flex flex-col-reverse sm:flex-row items-center h-full w-full'>
           <div className='flex items-start sm:items-center h-full sm:w-1/2 sm:bg-center bg-slate-900'>
-            {bones !== undefined && bones.length > 0 && <Land />}
+            <Land />
           </div>
           <div className='flex items-start sm:items-center h-full sm:w-1/2 sm:bg-center'>
-            {bones !== undefined && bones.length === 0 && (
-              <div className='flex flex-col gap-4'>
-                <div>
-                  No{' '}
-                  <a
-                    target='_blank'
-                    href='https://www.frameit.gg/marketplace/DUSTYBONES-c1fc90'
-                    className='text-blue-600'
+            <div className='flex flex-col gap-6 max-w-3xl w-full'>
+              {WIDGETS.map((element) => {
+                const {
+                  title,
+                  widget: MxWidget,
+                  description,
+                  props = {},
+                  reference
+                } = element;
+
+                return (
+                  <Card
+                    key={title}
+                    title={title}
+                    description={description}
+                    reference={reference}
                   >
-                    Dusty Bones
-                  </a>{' '}
-                  NFTs found in your wallet !
-                </div>
-              </div>
-            )}
-
-            {bones !== undefined && bones.length > 0 && (
-              <div className='flex flex-col gap-6 max-w-3xl w-full'>
-                {WIDGETS.map((element) => {
-                  const {
-                    title,
-                    widget: MxWidget,
-                    description,
-                    props = {},
-                    reference
-                  } = element;
-
-                  return (
-                    <Card
-                      key={title}
-                      title={title}
-                      description={description}
-                      reference={reference}
-                    >
-                      <MxWidget {...props} />
-                    </Card>
-                  );
-                })}
-              </div>
-            )}
+                    <MxWidget {...props} />
+                  </Card>
+                );
+              })}
+            </div>
           </div>
         </div>
       </PageWrapper>
