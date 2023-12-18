@@ -100,7 +100,7 @@ export const Account = () => {
           <Label>Crypts: </Label> {crypts?.[0]?.balance ?? 0}
         </p>
         <p>
-          <Label>Haunted Houses: </Label> {hauntedHouses?.[0].balance ?? 0}
+          <Label>Haunted Houses: </Label> {hauntedHouses?.[0]?.balance ?? 0}
         </p>
         <p>
           <Label>$DUST: </Label>
