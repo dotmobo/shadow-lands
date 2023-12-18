@@ -2,7 +2,12 @@ import { OutputContainer } from 'components/OutputContainer';
 import { Suspense, useEffect, useRef, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { Model101 } from './Model101';
-import { OrbitControls, PerspectiveCamera, Stage } from '@react-three/drei';
+import {
+  OrbitControls,
+  PerspectiveCamera,
+  Stage,
+  Text
+} from '@react-three/drei';
 import { Html } from '@react-three/drei';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -38,7 +43,6 @@ export const Land = ({ sfts }) => {
   const [hovered, hover] = useState(false);
 
   const [hovered1, hover1] = useState(false);
-  
 
   function strtoHex(str: string) {
     let result = '';
@@ -102,6 +106,24 @@ export const Land = ({ sfts }) => {
 
   return (
     <Canvas shadows dpr={[1, 2]}>
+
+        <Text
+        color='white'
+        anchorX='center'
+        anchorY='middle'
+        position={[0, 10, 0]}
+        font="https://fonts.gstatic.com/s/materialicons/v70/flUhRq6tzZclQEJ-Vdg-IuiaDsNa.woff"
+      >
+        agriculture
+      </Text>
+      <Text
+        color='white'
+        anchorX='center'
+        anchorY='middle'
+        position={[0, 9, 0]}
+      >
+        {10*sfts.length} $DUST/Day
+      </Text>
       <Suspense fallback={<Loader />}>
         <Stage
           controls={ref}
