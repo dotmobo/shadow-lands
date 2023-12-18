@@ -25,7 +25,7 @@
         },
         "upgrade": {
             "verbose": true,
-            "bytecode": "output/multiple_nft_staking.wasm",
+            "bytecode": "output/shadowlands.wasm",
             "recall-nonce": true,
             "metadata-payable": true,
             "pem": "../../wallet/wallet-owner.pem",

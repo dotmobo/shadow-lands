@@ -1,8 +1,8 @@
 #![no_std]
 
 multiversx_sc::imports!();
-use multiversx_sc::types::heap::Vec;
 
+use core::ops::Deref;
 mod stake_info;
 use stake_info::StakeInfo;
 
@@ -45,8 +45,7 @@ pub trait NftStaking {
     #[payable("*")]
     #[endpoint]
     fn stake(&self) -> SCResult<()> {
-        let payments: ManagedVec<EsdtTokenPayment<Self::Api>> =
-            (*self.call_value().all_esdt_transfers()).clone();
+        let payments: ManagedVec<EsdtTokenPayment<Self::Api>> = self.call_value().all_esdt_transfers().deref().clone();
 
         require!(self.staking_status().get(), "The staking is stopped");
 
@@ -65,7 +64,7 @@ pub trait NftStaking {
         let unstake_time = cur_time + (self.minimum_staking_days().get() * 86400);
 
         if self.staking_info(&caller).is_empty() {
-            let mut vec_nonce: Vec<u64> = Vec::new();
+            let mut vec_nonce: ManagedVec<u64> = ManagedVec::new();
             for payment in &payments {
                 vec_nonce.push(payment.token_nonce);
             }
@@ -81,7 +80,7 @@ pub trait NftStaking {
         } else {
             let mut stake_info = self.staking_info(&caller).get();
             for payment in &payments {
-                let mut vec_nonce: Vec<u64> = stake_info.nft_nonce.clone();
+                let mut vec_nonce: ManagedVec<u64> = stake_info.nft_nonce.clone();
                 vec_nonce.push(payment.token_nonce);
                 stake_info.nft_nonce = vec_nonce;
             }
@@ -113,7 +112,7 @@ pub trait NftStaking {
         let amount = BigUint::from(1u32);
 
         // for each nft nonce, send nft back to caller
-        for n in nft_nonce {
+        for n in nft_nonce.iter() {
             self.send().direct(
                 &caller,
                 &nft_identifier,
@@ -266,10 +265,10 @@ pub trait NftStaking {
     }
 
     #[view(getNftNonce)]
-    fn get_nft_nonce(&self, address: &ManagedAddress) -> Vec<u64> {
+    fn get_nft_nonce(&self, address: &ManagedAddress) -> ManagedVec<u64> {
         require!(!self.staking_info(&address).is_empty(), "You didn't stake!");
         let stake_info = self.staking_info(&address).get();
-        let nft_nonce: Vec<u64> = stake_info.nft_nonce;
+        let nft_nonce: ManagedVec<u64> = stake_info.nft_nonce;
         return nft_nonce;
     }
 
