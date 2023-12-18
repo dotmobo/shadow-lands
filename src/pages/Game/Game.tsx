@@ -107,7 +107,7 @@ export const Game = () => {
           <div className='flex items-start sm:items-center h-full sm:w-1/2 sm:bg-center bg-slate-900'>
             {sfts !== undefined &&
               !hasPendingTransactions &&
-              sfts.filter((x) => x === sftLandsNonce).length > 0 && <Land />}
+              sfts.filter((x) => x === sftLandsNonce).length > 0 && <Land sfts={sfts}/>}
           </div>
           <div className='flex items-start sm:items-center h-full sm:w-1/2 sm:bg-center'>
             <div className='flex flex-col gap-6 max-w-3xl w-full'>

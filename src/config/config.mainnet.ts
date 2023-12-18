@@ -14,6 +14,7 @@ export const sftCollectionId = 'DEVSHALAN-933f80';
 export const sftLandsId = 'DEVSHALAN-933f80-01';
 export const sftLandsNonce = 1;
 export const sftCryptId = 'DEVSHALAN-933f80-02';
+export const sftCryptNonce = 2;
 export const sftHauntedHouseId = 'DEVSHALAN-933f80-04';
 export const dustTokenId = 'DEVDUST-d62981';
 export const contractGameAddress =
