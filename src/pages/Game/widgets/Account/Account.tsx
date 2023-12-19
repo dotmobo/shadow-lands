@@ -1,13 +1,23 @@
+import { useEffect, useState } from 'react';
+import {
+  faArrowDown,
+  faArrowUp,
+  faCirclePlus,
+  faCircleXmark,
+  faCross,
+  faPlus,
+  faXmark
+} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Address } from '@multiversx/sdk-core/out';
+import { sendTransactions } from '@multiversx/sdk-dapp/services/transactions/sendTransactions';
+import { refreshAccount } from '@multiversx/sdk-dapp/utils/account/refreshAccount';
+import axios from 'axios';
+import { orderBy } from 'lodash';
+import { Button } from 'components';
 import { Label } from 'components/Label';
 import { OutputContainer } from 'components/OutputContainer';
 import { FormatAmount } from 'components/sdkDappComponents';
-import {
-  useGetAccountInfo,
-  useGetNetworkConfig,
-  useGetPendingTransactions
-} from 'hooks';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
 import {
   contractGameAddress,
   dustTokenId,
@@ -18,23 +28,13 @@ import {
   sftLandsId,
   sftLandsNonce
 } from 'config';
-import { orderBy } from 'lodash';
-import { Button } from 'components';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  faArrowDown,
-  faArrowUp,
-  faCirclePlus,
-  faCircleXmark,
-  faCross,
-  faPlus,
-  faXmark
-} from '@fortawesome/free-solid-svg-icons';
-import { sendTransactions } from '@multiversx/sdk-dapp/services/transactions/sendTransactions';
-import { refreshAccount } from '@multiversx/sdk-dapp/utils/account/refreshAccount';
-import { Address } from '@multiversx/sdk-core/out';
-import { numtoHex, strtoHex } from 'pages/Game/utils';
+  useGetAccountInfo,
+  useGetNetworkConfig,
+  useGetPendingTransactions
+} from 'hooks';
 import { Sft, Token } from 'pages/Game/models';
+import { numtoHex, strtoHex } from 'pages/Game/utils';
 
 export const Account = ({ sfts = [] }) => {
   const { network } = useGetNetworkConfig();
@@ -127,9 +127,10 @@ export const Account = ({ sfts = [] }) => {
     const { sessionId /*, error*/ } = await sendTransactions({
       transactions: stakeTransaction,
       transactionsDisplayInfo: {
-        processingMessage: 'Processing stake transaction',
-        errorMessage: 'An error has occured during stake',
-        successMessage: 'Stake transaction successful'
+        processingMessage: 'Adding the land.',
+        errorMessage:
+          'The land could not be added. Are you sure you have an SFT?',
+        successMessage: 'The land has been successfully added.'
       },
       redirectAfterSign: false
     });
@@ -150,9 +151,9 @@ export const Account = ({ sfts = [] }) => {
     const { sessionId /*, error*/ } = await sendTransactions({
       transactions: unstakeTransaction,
       transactionsDisplayInfo: {
-        processingMessage: 'Processing unstake transaction',
-        errorMessage: 'An error has occured during unstake',
-        successMessage: 'Unstake transaction successful'
+        processingMessage: 'Destroying the land.',
+        errorMessage: 'Impossible to destroy the land.',
+        successMessage: 'The land has been successfully destroyed.'
       },
       redirectAfterSign: false
     });

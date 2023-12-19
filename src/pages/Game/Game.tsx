@@ -1,14 +1,4 @@
 import { useEffect, useState } from 'react';
-import { AuthRedirectWrapper, PageWrapper } from 'wrappers';
-import {
-  useGetAccountInfo,
-  useGetNetworkConfig,
-  useGetPendingTransactions
-} from 'hooks';
-import { contractGameAddress, sftLandsNonce } from 'config';
-import { Card } from 'components';
-import { Account } from './widgets/Account';
-import { Map } from './Map';
 import {
   Address,
   AddressValue,
@@ -16,7 +6,17 @@ import {
   Query
 } from '@multiversx/sdk-core/out';
 import { ProxyNetworkProvider } from '@multiversx/sdk-network-providers/out';
+import { Card } from 'components';
+import { contractGameAddress, sftLandsNonce } from 'config';
+import {
+  useGetAccountInfo,
+  useGetNetworkConfig,
+  useGetPendingTransactions
+} from 'hooks';
+import { AuthRedirectWrapper, PageWrapper } from 'wrappers';
+import { Map } from './Map';
 import { WidgetsType } from './models';
+import { Account } from './widgets/Account';
 import { Production } from './widgets/Production/Production';
 
 const WIDGETS: WidgetsType[] = [

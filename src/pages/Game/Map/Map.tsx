@@ -1,24 +1,24 @@
 import { Suspense, useEffect, useRef, useState } from 'react';
-import { Canvas } from '@react-three/fiber';
-import { Land } from './Land';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Address } from '@multiversx/sdk-core/out';
+import { useGetAccountInfo } from '@multiversx/sdk-dapp/hooks/account/useGetAccountInfo';
+import { useGetNetworkConfig } from '@multiversx/sdk-dapp/hooks/useGetNetworkConfig';
+import { sendTransactions } from '@multiversx/sdk-dapp/services/transactions/sendTransactions';
+import { refreshAccount } from '@multiversx/sdk-dapp/utils/account/refreshAccount';
+import { Html } from '@react-three/drei';
 import {
   OrbitControls,
   PerspectiveCamera,
   Stage,
   Text
 } from '@react-three/drei';
-import { Html } from '@react-three/drei';
-import { faSpinner } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Canvas } from '@react-three/fiber';
+import { contractGameAddress, sftCollectionId } from 'config';
+import { sftCryptNonce } from 'config/config.devnet';
 import { CryptEmpty } from './CryptEmpty';
 import { CryptStandard } from './CryptStandard';
-import { sftCryptNonce } from 'config/config.devnet';
-import { useGetNetworkConfig } from '@multiversx/sdk-dapp/hooks/useGetNetworkConfig';
-import { useGetAccountInfo } from '@multiversx/sdk-dapp/hooks/account/useGetAccountInfo';
-import { contractGameAddress, sftCollectionId } from 'config';
-import { Address } from '@multiversx/sdk-core/out';
-import { refreshAccount } from '@multiversx/sdk-dapp/utils/account/refreshAccount';
-import { sendTransactions } from '@multiversx/sdk-dapp/services/transactions/sendTransactions';
+import { Land } from './Land';
 import { numtoHex, strtoHex } from '../utils';
 
 function Loader() {
@@ -68,9 +68,9 @@ export const Map = ({ sfts }) => {
     const { sessionId /*, error*/ } = await sendTransactions({
       transactions: stakeTransaction,
       transactionsDisplayInfo: {
-        processingMessage: 'Processing stake transaction',
-        errorMessage: 'An error has occured during stake',
-        successMessage: 'Stake transaction successful'
+        processingMessage: `Adding the type ${nonce} building to the current map.`,
+        errorMessage: `The type ${nonce} building could not be added. Are you sure you have an SFT?`,
+        successMessage: `The type ${nonce} building has been successfully added.`
       },
       redirectAfterSign: false
     });
@@ -85,13 +85,12 @@ export const Map = ({ sfts }) => {
 
   return (
     <Canvas shadows dpr={[1, 2]}>
-
-        <Text
+      <Text
         color='white'
         anchorX='center'
         anchorY='middle'
         position={[0, 10, 0]}
-        font="https://fonts.gstatic.com/s/materialicons/v70/flUhRq6tzZclQEJ-Vdg-IuiaDsNa.woff"
+        font='https://fonts.gstatic.com/s/materialicons/v70/flUhRq6tzZclQEJ-Vdg-IuiaDsNa.woff'
       >
         agriculture
       </Text>
@@ -101,7 +100,7 @@ export const Map = ({ sfts }) => {
         anchorY='middle'
         position={[0, 9, 0]}
       >
-        {10*sfts.length} $DUST/Day
+        {10 * sfts.length} $DUST/Day
       </Text>
       <Suspense fallback={<Loader />}>
         <Stage

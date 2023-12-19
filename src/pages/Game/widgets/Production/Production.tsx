@@ -1,13 +1,27 @@
+import { useEffect, useState } from 'react';
+import {
+  faArrowDown,
+  faArrowUp,
+  faMoneyBill,
+  faTruckLoading,
+  faTruckPickup
+} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  Address,
+  AddressValue,
+  ContractFunction,
+  Query
+} from '@multiversx/sdk-core/out';
+import { sendTransactions } from '@multiversx/sdk-dapp/services/transactions/sendTransactions';
+import { refreshAccount } from '@multiversx/sdk-dapp/utils/account/refreshAccount';
+import { ProxyNetworkProvider } from '@multiversx/sdk-network-providers/out';
+import axios from 'axios';
+import { orderBy } from 'lodash';
+import { Button } from 'components';
 import { Label } from 'components/Label';
 import { OutputContainer } from 'components/OutputContainer';
 import { FormatAmount } from 'components/sdkDappComponents';
-import {
-  useGetAccountInfo,
-  useGetNetworkConfig,
-  useGetPendingTransactions
-} from 'hooks';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
 import {
   contractGameAddress,
   dustTokenId,
@@ -18,20 +32,12 @@ import {
   sftLandsId,
   sftLandsNonce
 } from 'config';
-import { orderBy } from 'lodash';
-import { Button } from 'components';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowDown, faArrowUp, faMoneyBill, faTruckLoading, faTruckPickup } from '@fortawesome/free-solid-svg-icons';
-import { sendTransactions } from '@multiversx/sdk-dapp/services/transactions/sendTransactions';
-import { refreshAccount } from '@multiversx/sdk-dapp/utils/account/refreshAccount';
 import {
-  Address,
-  AddressValue,
-  ContractFunction,
-  Query
-} from '@multiversx/sdk-core/out';
+  useGetAccountInfo,
+  useGetNetworkConfig,
+  useGetPendingTransactions
+} from 'hooks';
 import { Sft, Token } from 'pages/Game/models';
-import { ProxyNetworkProvider } from '@multiversx/sdk-network-providers/out';
 
 export const Production = ({ sfts = [] }) => {
   const { network } = useGetNetworkConfig();
@@ -89,9 +95,9 @@ export const Production = ({ sfts = [] }) => {
     const { sessionId /*, error*/ } = await sendTransactions({
       transactions: claimTransaction,
       transactionsDisplayInfo: {
-        processingMessage: 'Processing claim transaction',
-        errorMessage: 'An error has occured during claim',
-        successMessage: 'Claim transaction successful'
+        processingMessage: 'Claiming rewards',
+        errorMessage: 'Claiming rewards failed',
+        successMessage: 'Claiming rewards succeeded'
       },
       redirectAfterSign: false
     });
