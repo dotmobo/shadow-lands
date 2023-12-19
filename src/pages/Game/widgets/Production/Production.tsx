@@ -21,7 +21,7 @@ import {
 import { orderBy } from 'lodash';
 import { Button } from 'components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowDown, faArrowUp } from '@fortawesome/free-solid-svg-icons';
+import { faArrowDown, faArrowUp, faMoneyBill, faTruckLoading, faTruckPickup } from '@fortawesome/free-solid-svg-icons';
 import { sendTransactions } from '@multiversx/sdk-dapp/services/transactions/sendTransactions';
 import { refreshAccount } from '@multiversx/sdk-dapp/utils/account/refreshAccount';
 import {
@@ -118,7 +118,7 @@ export const Production = ({ sfts = [] }) => {
           data-testid='sign-auto-send'
           onClick={sendClaimTransaction}
         >
-          <FontAwesomeIcon icon={faArrowDown} className='mr-1' />
+          <FontAwesomeIcon icon={faTruckLoading} className='mr-1' />
           Claim
         </Button>
       </div>

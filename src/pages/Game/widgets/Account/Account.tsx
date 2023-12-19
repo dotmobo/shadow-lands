@@ -21,7 +21,15 @@ import {
 import { orderBy } from 'lodash';
 import { Button } from 'components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowDown, faArrowUp } from '@fortawesome/free-solid-svg-icons';
+import {
+  faArrowDown,
+  faArrowUp,
+  faCirclePlus,
+  faCircleXmark,
+  faCross,
+  faPlus,
+  faXmark
+} from '@fortawesome/free-solid-svg-icons';
 import { sendTransactions } from '@multiversx/sdk-dapp/services/transactions/sendTransactions';
 import { refreshAccount } from '@multiversx/sdk-dapp/utils/account/refreshAccount';
 import { Address } from '@multiversx/sdk-core/out';
@@ -186,10 +194,11 @@ export const Account = ({ sfts = [] }) => {
           data-testid='sign-auto-send'
           onClick={sendStakeTransaction}
         >
-          <FontAwesomeIcon icon={faArrowUp} className='mr-1' />
-          Add a land
+          <FontAwesomeIcon icon={faPlus} className='mr-1' />
+          Add the land
         </Button>
         <Button
+          className='inline-block rounded-lg px-3 py-2 text-center hover:no-underline my-0 bg-red-600 text-white hover:bg-red-700 mr-0 disabled:bg-gray-200 disabled:text-black disabled:cursor-not-allowed'
           disabled={
             hasPendingTransactions ||
             sfts.filter((x) => x === sftLandsNonce).length === 0
@@ -197,8 +206,8 @@ export const Account = ({ sfts = [] }) => {
           data-testid='sign-auto-send'
           onClick={sendUnstakeTransaction}
         >
-          <FontAwesomeIcon icon={faArrowDown} className='mr-1' />
-          Remove a land
+          <FontAwesomeIcon icon={faCircleXmark} className='mr-1' />
+          Destroy the land
         </Button>
       </div>
     </OutputContainer>
