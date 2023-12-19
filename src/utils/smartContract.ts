@@ -1,10 +1,10 @@
-import { contractAddress } from 'config';
+import { contractGameAddress } from 'config';
 import json from 'contracts/ping-pong.abi.json';
 import { AbiRegistry, Address, SmartContract } from './sdkDappCore';
 
 const abi = AbiRegistry.create(json);
 
 export const smartContract = new SmartContract({
-  address: new Address(contractAddress),
+  address: new Address(contractGameAddress),
   abi
 });

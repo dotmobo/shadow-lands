@@ -1,10 +1,10 @@
 {
-  "name": "@multiversx/mx-template-dapp",
-  "description": "MultiversX Dapp Template",
+  "name": "@dustybones/shadow-lands",
+  "description": "Shadow Lands game from Dusty Bones.",
   "version": "1.0.0",
-  "author": "MultiversX",
+  "author": "Dusty Bones",
   "license": "GPL-3.0-or-later",
-  "repository": "@multiversx/mx-template-dapp",
+  "repository": "@dotmobo/shadow-lands",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "6.4.0",
     "@fortawesome/free-solid-svg-icons": "6.4.0",

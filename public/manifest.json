@@ -1,7 +1,7 @@
 {
-  "name": "MultiversX dApp Template",
-  "short_name": "MultiversX dApp",
-  "description": "Easily add or update assets for a Token or NFT Collection on the MultiversX Blockchain",
+  "name": "Shadow Lands",
+  "short_name": "Shadow Lands",
+  "description": "Shadow Lands game from Dusty Bones",
   "icons": [
     {
       "src": "apple-touch-icon.png",

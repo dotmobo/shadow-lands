@@ -1,9 +1,6 @@
-# @multiversx/template-dapp
+# @dustybones/shadow-lands
 
-The **MultiversX dApp Template**, built using [React.js](https://reactjs.org/) and [Typescript](https://www.typescriptlang.org/).
-It's a basic implementation of [@multiversx/sdk-dapp](https://www.npmjs.com/package/@multiversx/sdk-dapp), providing the basics for MultiversX authentication and TX signing.
-
-See [Dapp template](https://template-dapp.multiversx.com/) for live demo.
+Shadow Lands game from Dusty Bones.
 
 ## Requirements
 
@@ -50,19 +47,3 @@ yarn build:devnet
 yarn build:testnet
 yarn build:mainnet
 ```
-
-## Roadmap
-
-See the [open issues](https://github.com/multiversx/mx-template-dapp/issues) for a list of proposed features (and known issues).
-
-## Contributing
-
-Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-One can contribute by creating _pull requests_, or by opening _issues_ for discovered bugs or desired features.
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request

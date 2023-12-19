@@ -11,12 +11,7 @@ import {
   // TransactionsTracker
 } from 'components';
 
-import {
-  apiTimeout,
-  walletConnectV2ProjectId,
-  environment,
-  sampleAuthenticatedDomains
-} from 'config';
+import { apiTimeout, walletConnectV2ProjectId, environment } from 'config';
 import { RouteNamesEnum } from 'localConstants';
 import { PageNotFound, Unlock } from 'pages';
 import { routes } from 'routes';
@@ -75,15 +70,15 @@ const AppContent = () => {
 export const App = () => {
   return (
     <AxiosInterceptorContext.Provider>
-      <AxiosInterceptorContext.Interceptor
+      {/* <AxiosInterceptorContext.Interceptor
         authenticatedDomanis={sampleAuthenticatedDomains}
-      >
-        <Router>
-          <BatchTransactionsContextProvider>
-            <AppContent />
-          </BatchTransactionsContextProvider>
-        </Router>
-      </AxiosInterceptorContext.Interceptor>
+      > */}
+      <Router>
+        <BatchTransactionsContextProvider>
+          <AppContent />
+        </BatchTransactionsContextProvider>
+      </Router>
+      {/* </AxiosInterceptorContext.Interceptor> */}
     </AxiosInterceptorContext.Provider>
   );
 };
