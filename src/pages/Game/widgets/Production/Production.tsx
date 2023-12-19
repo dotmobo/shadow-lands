@@ -1,11 +1,5 @@
 import { useEffect, useState } from 'react';
-import {
-  faArrowDown,
-  faArrowUp,
-  faMoneyBill,
-  faTruckLoading,
-  faTruckPickup
-} from '@fortawesome/free-solid-svg-icons';
+import { faTruckLoading } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   Address,
@@ -13,31 +7,18 @@ import {
   ContractFunction,
   Query
 } from '@multiversx/sdk-core/out';
-import { sendTransactions } from '@multiversx/sdk-dapp/services/transactions/sendTransactions';
-import { refreshAccount } from '@multiversx/sdk-dapp/utils/account/refreshAccount';
 import { ProxyNetworkProvider } from '@multiversx/sdk-network-providers/out';
-import axios from 'axios';
-import { orderBy } from 'lodash';
 import { Button } from 'components';
 import { Label } from 'components/Label';
 import { OutputContainer } from 'components/OutputContainer';
 import { FormatAmount } from 'components/sdkDappComponents';
-import {
-  contractGameAddress,
-  dustTokenId,
-  mvxApiUrl,
-  sftCollectionId,
-  sftCryptId,
-  sftHauntedHouseId,
-  sftLandsId,
-  sftLandsNonce
-} from 'config';
+import { contractGameAddress } from 'config';
 import {
   useGetAccountInfo,
   useGetNetworkConfig,
   useGetPendingTransactions
 } from 'hooks';
-import { Sft, Token } from 'pages/Game/models';
+import { useSendShadowLandsTransaction } from 'pages/Game/transactions';
 
 export const Production = ({ sfts = [] }) => {
   const { network } = useGetNetworkConfig();
@@ -46,9 +27,7 @@ export const Production = ({ sfts = [] }) => {
   const [currentRewards, setCurrentRewards] = useState<number>();
 
   const { hasPendingTransactions } = useGetPendingTransactions();
-  const /*transactionSessionId*/ [, setTransactionSessionId] = useState<
-      string | null
-    >(null);
+  const { sendClaimTransaction } = useSendShadowLandsTransaction();
 
   useEffect(() => {
     const query = new Query({
@@ -82,29 +61,6 @@ export const Production = ({ sfts = [] }) => {
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [hasPendingTransactions]);
-
-  const sendClaimTransaction = async () => {
-    const claimTransaction = {
-      value: '0',
-      data: 'claim',
-      receiver: address,
-      gasLimit: 20000000
-    };
-    await refreshAccount();
-
-    const { sessionId /*, error*/ } = await sendTransactions({
-      transactions: claimTransaction,
-      transactionsDisplayInfo: {
-        processingMessage: 'Claiming rewards',
-        errorMessage: 'Claiming rewards failed',
-        successMessage: 'Claiming rewards succeeded'
-      },
-      redirectAfterSign: false
-    });
-    if (sessionId != null) {
-      setTransactionSessionId(sessionId);
-    }
-  };
 
   return (
     <OutputContainer>

@@ -1,17 +1,6 @@
 import { useEffect, useState } from 'react';
-import {
-  faArrowDown,
-  faArrowUp,
-  faCirclePlus,
-  faCircleXmark,
-  faCross,
-  faPlus,
-  faXmark
-} from '@fortawesome/free-solid-svg-icons';
+import { faCircleXmark, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Address } from '@multiversx/sdk-core/out';
-import { sendTransactions } from '@multiversx/sdk-dapp/services/transactions/sendTransactions';
-import { refreshAccount } from '@multiversx/sdk-dapp/utils/account/refreshAccount';
 import axios from 'axios';
 import { orderBy } from 'lodash';
 import { Button } from 'components';
@@ -19,10 +8,8 @@ import { Label } from 'components/Label';
 import { OutputContainer } from 'components/OutputContainer';
 import { FormatAmount } from 'components/sdkDappComponents';
 import {
-  contractGameAddress,
   dustTokenId,
   mvxApiUrl,
-  sftCollectionId,
   sftCryptId,
   sftHauntedHouseId,
   sftLandsId,
@@ -34,7 +21,7 @@ import {
   useGetPendingTransactions
 } from 'hooks';
 import { Sft, Token } from 'pages/Game/models';
-import { numtoHex, strtoHex } from 'pages/Game/utils';
+import { useSendShadowLandsTransaction } from 'pages/Game/transactions';
 
 export const Account = ({ sfts = [], outputCrypts }) => {
   const { network } = useGetNetworkConfig();
@@ -44,9 +31,8 @@ export const Account = ({ sfts = [], outputCrypts }) => {
   const [hauntedHouses, setHauntedHousesList] = useState<Sft[]>();
   const [dust, setDustToken] = useState<Token | null>();
   const { hasPendingTransactions } = useGetPendingTransactions();
-  const /*transactionSessionId*/ [, setTransactionSessionId] = useState<
-      string | null
-    >(null);
+  const { sendStakeLandTransaction, sendUnstakeLandTransaction } =
+    useSendShadowLandsTransaction();
 
   useEffect(() => {
     // Use [] as second argument in useEffect for not rendering each time
@@ -105,67 +91,6 @@ export const Account = ({ sfts = [], outputCrypts }) => {
       });
   }, [hasPendingTransactions]);
 
-  const sendStakeTransaction = async () => {
-    const data =
-      'MultiESDTNFTTransfer@' +
-      new Address(contractGameAddress).hex() +
-      '@' +
-      numtoHex(1) +
-      '@' +
-      strtoHex(sftCollectionId) +
-      '@' +
-      numtoHex(sftLandsNonce) +
-      '@' +
-      numtoHex(1) +
-      '@' +
-      strtoHex('stake');
-
-    const stakeTransaction = {
-      value: '0',
-      data: data,
-      receiver: address,
-      gasLimit: 10000000
-    };
-    await refreshAccount();
-
-    const { sessionId /*, error*/ } = await sendTransactions({
-      transactions: stakeTransaction,
-      transactionsDisplayInfo: {
-        processingMessage: 'Adding the land.',
-        errorMessage:
-          'The land could not be added. Are you sure you have an SFT?',
-        successMessage: 'The land has been successfully added.'
-      },
-      redirectAfterSign: false
-    });
-    if (sessionId != null) {
-      setTransactionSessionId(sessionId);
-    }
-  };
-
-  const sendUnstakeTransaction = async () => {
-    const unstakeTransaction = {
-      value: '0',
-      data: 'unstake',
-      receiver: contractGameAddress,
-      gasLimit: 10000000
-    };
-    await refreshAccount();
-
-    const { sessionId /*, error*/ } = await sendTransactions({
-      transactions: unstakeTransaction,
-      transactionsDisplayInfo: {
-        processingMessage: 'Destroying the land.',
-        errorMessage: 'Impossible to destroy the land.',
-        successMessage: 'The land has been successfully destroyed.'
-      },
-      redirectAfterSign: false
-    });
-    if (sessionId != null) {
-      setTransactionSessionId(sessionId);
-    }
-  };
-
   return (
     <OutputContainer>
       <div className='flex flex-col text-black' data-testid='topInfo'>
@@ -197,7 +122,7 @@ export const Account = ({ sfts = [], outputCrypts }) => {
             lands?.length === 0
           }
           data-testid='sign-auto-send'
-          onClick={sendStakeTransaction}
+          onClick={sendStakeLandTransaction}
         >
           <FontAwesomeIcon icon={faPlus} className='mr-1' />
           Add the land
@@ -209,7 +134,7 @@ export const Account = ({ sfts = [], outputCrypts }) => {
             sfts.filter((x) => x === sftLandsNonce).length === 0
           }
           data-testid='sign-auto-send'
-          onClick={sendUnstakeTransaction}
+          onClick={sendUnstakeLandTransaction}
         >
           <FontAwesomeIcon icon={faCircleXmark} className='mr-1' />
           Destroy the land
