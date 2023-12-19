@@ -84,8 +84,8 @@ export const Game = () => {
   return (
     <AuthRedirectWrapper>
       <PageWrapper>
-        <div className='flex flex-col-reverse sm:flex-row items-center h-full w-full'>
-          <div className='flex items-start sm:items-center h-full sm:w-1/2 sm:bg-center bg-slate-900'>
+        <div className='flex flex-col sm:flex-row items-center h-full w-full'>
+          <div className='flex items-start sm:items-center h-full w-full sm:bg-center bg-slate-900'>
             {sfts !== undefined &&
               !hasPendingTransactions &&
               sfts.filter((x) => x === sftLandsNonce).length > 0 && (
