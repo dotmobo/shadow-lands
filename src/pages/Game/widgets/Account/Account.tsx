@@ -36,7 +36,7 @@ import {
 import { Sft, Token } from 'pages/Game/models';
 import { numtoHex, strtoHex } from 'pages/Game/utils';
 
-export const Account = ({ sfts = [] }) => {
+export const Account = ({ sfts = [], outputCrypts }) => {
   const { network } = useGetNetworkConfig();
   const { address, account } = useGetAccountInfo();
   const [lands, setLandsList] = useState<Sft[]>();
@@ -82,9 +82,13 @@ export const Account = ({ sfts = [] }) => {
         `${mvxApiUrl}/accounts/${address}/nfts?size=25&identifiers=${sftCryptId}`
       )
       .then((response) => {
-        setCryptsList(
-          orderBy(response.data, ['collection', 'nonce'], ['desc', 'asc'])
+        const res = orderBy(
+          response.data,
+          ['collection', 'nonce'],
+          ['desc', 'asc']
         );
+        setCryptsList(res);
+        outputCrypts(res);
       });
   }, [hasPendingTransactions]);
 

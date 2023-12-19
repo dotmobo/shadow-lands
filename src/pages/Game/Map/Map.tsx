@@ -29,7 +29,7 @@ function Loader() {
   );
 }
 
-export const Map = ({ sfts }) => {
+export const Map = ({ sfts, walletCrypts }) => {
   const { network } = useGetNetworkConfig();
   const { address, account } = useGetAccountInfo();
   const /*transactionSessionId*/ [, setTransactionSessionId] = useState<
@@ -118,6 +118,7 @@ export const Map = ({ sfts }) => {
             <CryptStandard position={[3, 1.2, -2.5]} />
           ) : (
             sfts !== undefined &&
+            walletCrypts.length > 0 &&
             sfts.filter((x) => x === sftCryptNonce).length === 0 && (
               <CryptEmpty
                 onClick={(event) => {

@@ -15,7 +15,7 @@ import {
 } from 'hooks';
 import { AuthRedirectWrapper, PageWrapper } from 'wrappers';
 import { Map } from './Map';
-import { WidgetsType } from './models';
+import { Sft, WidgetsType } from './models';
 import { Account } from './widgets/Account';
 import { Production } from './widgets/Production/Production';
 
@@ -37,6 +37,8 @@ const WIDGETS: WidgetsType[] = [
 export const Game = () => {
   const { network } = useGetNetworkConfig();
   const { address, account } = useGetAccountInfo();
+
+  const [crypts, setCryptsList] = useState<Sft[]>([]);
 
   const { hasPendingTransactions } = useGetPendingTransactions();
   const /*transactionSessionId*/ [, setTransactionSessionId] = useState<
@@ -89,7 +91,7 @@ export const Game = () => {
             {sfts !== undefined &&
               !hasPendingTransactions &&
               sfts.filter((x) => x === sftLandsNonce).length > 0 && (
-                <Map sfts={sfts} />
+                <Map sfts={sfts} walletCrypts={crypts} />
               )}
           </div>
           <div className='flex items-start sm:items-center h-full sm:w-1/2 sm:bg-center'>
@@ -104,6 +106,7 @@ export const Game = () => {
                 } = element;
 
                 props['sfts'] = sfts;
+                props['outputCrypts'] = setCryptsList;
 
                 return (
                   <Card

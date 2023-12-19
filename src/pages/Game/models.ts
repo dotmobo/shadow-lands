@@ -11,7 +11,7 @@ export type WidgetsType = {
   title: string;
   widget: (props: any) => JSX.Element;
   description?: string;
-  props?: { receiver?: string; sfts?: number[] };
+  props?: { receiver?: string; sfts?: number[]; outputCrypts?: any };
   reference: string;
 };
 
