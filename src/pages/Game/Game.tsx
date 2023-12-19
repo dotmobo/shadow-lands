@@ -5,15 +5,7 @@ import {
   useGetNetworkConfig,
   useGetPendingTransactions
 } from 'hooks';
-import axios from 'axios';
-import {
-  contractGameAddress,
-  mvxApiUrl,
-  sftCollectionId,
-  sftLandsId,
-  sftLandsNonce
-} from 'config';
-import { orderBy } from 'lodash';
+import { contractGameAddress, sftLandsNonce } from 'config';
 import { Card } from 'components';
 import { Account } from './widgets/Account';
 import { Map } from './Map';
@@ -24,31 +16,20 @@ import {
   Query
 } from '@multiversx/sdk-core/out';
 import { ProxyNetworkProvider } from '@multiversx/sdk-network-providers/out';
-import { sendTransactions } from '@multiversx/sdk-dapp/services/transactions/sendTransactions';
-import { refreshAccount } from '@multiversx/sdk-dapp/utils/account/refreshAccount';
-
-interface Sft {
-  identifier: string;
-  url: string;
-  name: string;
-  metadata: any;
-  collection: string;
-  nonce: number;
-}
-
-type WidgetsType = {
-  title: string;
-  widget: (props: any) => JSX.Element;
-  description?: string;
-  props?: { receiver?: string; sfts?: number[] };
-  reference: string;
-};
+import { WidgetsType } from './models';
+import { Production } from './widgets/Production/Production';
 
 const WIDGETS: WidgetsType[] = [
   {
-    title: 'Shadow Lands',
+    title: 'Wallet',
     widget: Account,
     description: 'Balance of your wallet',
+    reference: 'https://dusty-bones.netlify.app/'
+  },
+  {
+    title: 'Farm',
+    widget: Production,
+    description: '$DUST producted by your SFTs',
     reference: 'https://dusty-bones.netlify.app/'
   }
 ];
@@ -107,7 +88,9 @@ export const Game = () => {
           <div className='flex items-start sm:items-center h-full sm:w-1/2 sm:bg-center bg-slate-900'>
             {sfts !== undefined &&
               !hasPendingTransactions &&
-              sfts.filter((x) => x === sftLandsNonce).length > 0 && <Map sfts={sfts}/>}
+              sfts.filter((x) => x === sftLandsNonce).length > 0 && (
+                <Map sfts={sfts} />
+              )}
           </div>
           <div className='flex items-start sm:items-center h-full sm:w-1/2 sm:bg-center'>
             <div className='flex flex-col gap-6 max-w-3xl w-full'>

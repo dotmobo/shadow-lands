@@ -25,22 +25,8 @@ import { faArrowDown, faArrowUp } from '@fortawesome/free-solid-svg-icons';
 import { sendTransactions } from '@multiversx/sdk-dapp/services/transactions/sendTransactions';
 import { refreshAccount } from '@multiversx/sdk-dapp/utils/account/refreshAccount';
 import { Address } from '@multiversx/sdk-core/out';
-
-interface Sft {
-  identifier: string;
-  url: string;
-  name: string;
-  metadata: any;
-  collection: string;
-  nonce: number;
-  balance: number;
-}
-
-interface Token {
-  name: string;
-  balance: number;
-  decimals: number;
-}
+import { numtoHex, strtoHex } from 'pages/Game/utils';
+import { Sft, Token } from 'pages/Game/models';
 
 export const Account = ({ sfts = [] }) => {
   const { network } = useGetNetworkConfig();
@@ -106,25 +92,6 @@ export const Account = ({ sfts = [] }) => {
         );
       });
   }, [hasPendingTransactions]);
-
-  function strtoHex(str: string) {
-    let result = '';
-    for (let i = 0; i < str.length; i++) {
-      result += str.charCodeAt(i).toString(16);
-    }
-    if (result.length % 2 == 1) {
-      result = '0' + result;
-    }
-    return result;
-  }
-
-  function numtoHex(num: number) {
-    let result = num.toString(16);
-    if (result.length % 2 == 1) {
-      result = '0' + result;
-    }
-    return result;
-  }
 
   const sendStakeTransaction = async () => {
     const data =

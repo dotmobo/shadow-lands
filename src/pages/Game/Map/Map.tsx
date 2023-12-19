@@ -19,6 +19,7 @@ import { contractGameAddress, sftCollectionId } from 'config';
 import { Address } from '@multiversx/sdk-core/out';
 import { refreshAccount } from '@multiversx/sdk-dapp/utils/account/refreshAccount';
 import { sendTransactions } from '@multiversx/sdk-dapp/services/transactions/sendTransactions';
+import { numtoHex, strtoHex } from '../utils';
 
 function Loader() {
   return (
@@ -40,25 +41,6 @@ export const Map = ({ sfts }) => {
   const [hovered, hover] = useState(false);
 
   const [hovered1, hover1] = useState(false);
-
-  function strtoHex(str: string) {
-    let result = '';
-    for (let i = 0; i < str.length; i++) {
-      result += str.charCodeAt(i).toString(16);
-    }
-    if (result.length % 2 == 1) {
-      result = '0' + result;
-    }
-    return result;
-  }
-
-  function numtoHex(num: number) {
-    let result = num.toString(16);
-    if (result.length % 2 == 1) {
-      result = '0' + result;
-    }
-    return result;
-  }
 
   const sendStakeTransaction = async (nonce: number) => {
     const data =
