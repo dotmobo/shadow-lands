@@ -16,7 +16,7 @@ import {
 import { orderBy } from 'lodash';
 import { Card } from 'components';
 import { Account } from './widgets/Account';
-import { Land } from './widgets/Land';
+import { Map } from './Map';
 import {
   Address,
   AddressValue,
@@ -107,7 +107,7 @@ export const Game = () => {
           <div className='flex items-start sm:items-center h-full sm:w-1/2 sm:bg-center bg-slate-900'>
             {sfts !== undefined &&
               !hasPendingTransactions &&
-              sfts.filter((x) => x === sftLandsNonce).length > 0 && <Land sfts={sfts}/>}
+              sfts.filter((x) => x === sftLandsNonce).length > 0 && <Map sfts={sfts}/>}
           </div>
           <div className='flex items-start sm:items-center h-full sm:w-1/2 sm:bg-center'>
             <div className='flex flex-col gap-6 max-w-3xl w-full'>

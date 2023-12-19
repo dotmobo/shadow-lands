@@ -6,7 +6,7 @@ import React, { useEffect, useRef } from 'react';
 import { useGLTF, useAnimations } from '@react-three/drei';
 import { dir } from 'console';
 
-export function Model101(props) {
+export function Land(props) {
   const group = useRef();
   const { nodes, materials, animations } = useGLTF('/game/Land_1_01_Anim.glb', true);
   const { actions, mixer } = useAnimations(animations, group);

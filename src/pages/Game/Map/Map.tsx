@@ -1,7 +1,6 @@
-import { OutputContainer } from 'components/OutputContainer';
 import { Suspense, useEffect, useRef, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { Model101 } from './Model101';
+import { Land } from './Land';
 import {
   OrbitControls,
   PerspectiveCamera,
@@ -11,8 +10,6 @@ import {
 import { Html } from '@react-three/drei';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Grave } from './Grave';
-import { GraveHp } from './GraveHp';
 import { CryptEmpty } from './CryptEmpty';
 import { CryptStandard } from './CryptStandard';
 import { sftCryptNonce } from 'config/config.devnet';
@@ -31,7 +28,7 @@ function Loader() {
   );
 }
 
-export const Land = ({ sfts }) => {
+export const Map = ({ sfts }) => {
   const { network } = useGetNetworkConfig();
   const { address, account } = useGetAccountInfo();
   const /*transactionSessionId*/ [, setTransactionSessionId] = useState<
@@ -131,7 +128,7 @@ export const Land = ({ sfts }) => {
           intensity={4}
           environment='dawn'
         >
-          <Model101
+          <Land
             onPointerOver={(event) => hover(true)}
             onPointerOut={(event) => hover(false)}
           />
