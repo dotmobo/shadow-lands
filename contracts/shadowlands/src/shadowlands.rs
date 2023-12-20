@@ -81,8 +81,13 @@ pub trait NftStaking {
             self.nbr_of_stakers().set(self.nbr_of_stakers().get() + 1);
         } else {
             let mut stake_info = self.staking_info(&caller).get();
+            // if nonce already exists, return error
             for payment in &payments {
                 let mut vec_nonce: ManagedVec<ManagedVec<u64>> = stake_info.nft_nonce_with_lock_time.clone();
+                // if nonce already exists, return error
+                for n in vec_nonce.iter() {
+                    require!(n.get(0) != payment.token_nonce, "You already staked this nft.");
+                }
                 let mut vec_item: ManagedVec<u64> = ManagedVec::new();
                 vec_item.push(payment.token_nonce);
                 vec_item.push(cur_time);
@@ -248,6 +253,7 @@ pub trait NftStaking {
     }
 
     // Utils
+    #[view(calculateRewards)]
     fn calculate_rewards(&self, nft_nonce_with_lock_time: &ManagedVec<ManagedVec<u64>>, from_time: u64) -> BigUint {
         let mut rewards_amount = BigUint::from(0u32);
         for n in nft_nonce_with_lock_time.iter() {

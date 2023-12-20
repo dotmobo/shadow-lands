@@ -14,4 +14,4 @@ export const sftTavernNonce = 2;
 export const sftHauntedHouseId = 'DEVSHALAN-933f80-04';
 export const dustTokenId = 'DEVDUST-d62981';
 export const contractGameAddress =
-  'erd1qqqqqqqqqqqqqpgqc4s83k0ut7c2p6v3rqlddz4wtz7djhq42krs0m3afj';
+  'erd1qqqqqqqqqqqqqpgqvfh5j05pw23upxz4hmh6fdsrcmvfjjd22krsxc4hy2';

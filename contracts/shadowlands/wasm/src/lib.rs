@@ -5,9 +5,9 @@
 ////////////////////////////////////////////////////
 
 // Init:                                 1
-// Endpoints:                           21
+// Endpoints:                           22
 // Async Callback (empty):               1
-// Total number of exported functions:  23
+// Total number of exported functions:  24
 
 #![no_std]
 
@@ -30,6 +30,7 @@ multiversx_sc_wasm_adapter::endpoints! {
         withdraw => withdraw
         restart_staking => restart_staking
         stop_staking => stop_staking
+        calculateRewards => calculate_rewards
         getCurrentRewards => get_current_rewards
         getNftNonce => get_nft_nonce
         getUnstakeTime => get_unstake_time
