@@ -64,14 +64,16 @@ pub trait NftStaking {
         let unstake_time = cur_time + (self.minimum_staking_days().get() * 86400);
 
         if self.staking_info(&caller).is_empty() {
-            let mut vec_nonce: ManagedVec<u64> = ManagedVec::new();
+            let mut vec_nonce: ManagedVec<ManagedVec<u64>> = ManagedVec::new();
             for payment in &payments {
-                vec_nonce.push(payment.token_nonce);
+                let mut vec_item: ManagedVec<u64> = ManagedVec::new();
+                vec_item.push(payment.token_nonce);
+                vec_item.push(cur_time);
+                vec_nonce.push(vec_item);
             }
             let stake_info = StakeInfo {
                 address: self.blockchain().get_caller(),
-                nft_nonce: vec_nonce,
-                lock_time: cur_time,
+                nft_nonce_with_lock_time: vec_nonce,
                 unstake_time: unstake_time,
             };
             self.staking_info(&self.blockchain().get_caller())
@@ -80,11 +82,13 @@ pub trait NftStaking {
         } else {
             let mut stake_info = self.staking_info(&caller).get();
             for payment in &payments {
-                let mut vec_nonce: ManagedVec<u64> = stake_info.nft_nonce.clone();
-                vec_nonce.push(payment.token_nonce);
-                stake_info.nft_nonce = vec_nonce;
+                let mut vec_nonce: ManagedVec<ManagedVec<u64>> = stake_info.nft_nonce_with_lock_time.clone();
+                let mut vec_item: ManagedVec<u64> = ManagedVec::new();
+                vec_item.push(payment.token_nonce);
+                vec_item.push(cur_time);
+                vec_nonce.push(vec_item);
+                stake_info.nft_nonce_with_lock_time = vec_nonce;
             }
-            stake_info.lock_time = cur_time;
             stake_info.unstake_time = unstake_time;
             self.staking_info(&caller).set(&stake_info);
         }
@@ -106,17 +110,17 @@ pub trait NftStaking {
         );
 
         let nft_identifier = self.nft_identifier().get();
-        let nft_nonce = stake_info.nft_nonce;
-        let nbr_of_nonce: u64 = nft_nonce.len() as u64;
+        let nft_nonce_with_lock_time = stake_info.nft_nonce_with_lock_time;
+        let nbr_of_nonce: u64 = nft_nonce_with_lock_time.len() as u64;
 
         let amount = BigUint::from(1u32);
 
         // for each nft nonce, send nft back to caller
-        for n in nft_nonce.iter() {
+        for n in nft_nonce_with_lock_time.iter() {
             self.send().direct(
                 &caller,
                 &nft_identifier,
-                n,
+                n.get(0),
                 &amount,
             );
         }
@@ -146,7 +150,7 @@ pub trait NftStaking {
         require!(!self.staking_info(&caller).is_empty(), "You didn't stake!");
         let stake_info = self.staking_info(&caller).get();
 
-        let nft_nonce = stake_info.nft_nonce;
+        let nft_nonce_with_lock_time = stake_info.nft_nonce_with_lock_time;
         let unstake_time = stake_info.unstake_time;
         let reward_token_id = self.rewards_token_id().get();
 
@@ -155,11 +159,14 @@ pub trait NftStaking {
         if !self.staking_status().get() {
             from_time = self.staking_end_time().get();
         }
-        let mut staked_days = 0u64;
-        if from_time > stake_info.lock_time {
-            staked_days = (from_time - stake_info.lock_time) / 86400;
+        let mut rewards_amount = BigUint::from(0u32);
+        for n in nft_nonce_with_lock_time.iter() {
+            let mut staked_days = 0u64;
+            if from_time > n.get(1) {
+                staked_days = (from_time - n.get(1)) / 86400;
+            }
+            rewards_amount += self.rewards_token_amount_per_day().get() * staked_days;
         }
-        let rewards_amount = self.rewards_token_amount_per_day().get() * staked_days * nft_nonce.len() as u64;
 
         // check the supply
         require!(
@@ -181,10 +188,17 @@ pub trait NftStaking {
 
         // update staking_info
         self.staking_info(&caller).clear();
+        // replace index 1 value of each item of nft_nonce_with_lock_time with from_time
+        let mut vec_nonce: ManagedVec<ManagedVec<u64>> = ManagedVec::new();
+        for n in nft_nonce_with_lock_time.iter() {
+            let mut vec_item: ManagedVec<u64> = ManagedVec::new();
+            vec_item.push(n.get(0));
+            vec_item.push(from_time);
+            vec_nonce.push(vec_item);
+        }
         let stake_info = StakeInfo {
             address: self.blockchain().get_caller(),
-            nft_nonce: nft_nonce,
-            lock_time: from_time,
+            nft_nonce_with_lock_time: vec_nonce,
             unstake_time: unstake_time,
         };
         self.staking_info(&self.blockchain().get_caller())
@@ -255,11 +269,14 @@ pub trait NftStaking {
         if !self.staking_status().get() {
             from_time = self.staking_end_time().get();
         }
-        let mut staked_days = 0u64;
-        if from_time > stake_info.lock_time {
-            staked_days = (from_time - stake_info.lock_time) / 86400;
+        let mut rewards_amount = BigUint::from(0u32);
+        for n in stake_info.nft_nonce_with_lock_time.iter() {
+            let mut staked_days = 0u64;
+            if from_time > n.get(1) {
+                staked_days = (from_time - n.get(1)) / 86400;
+            }
+            rewards_amount += self.rewards_token_amount_per_day().get() * staked_days;
         }
-        let rewards_amount = self.rewards_token_amount_per_day().get() * staked_days * stake_info.nft_nonce.len() as u64;
 
         return rewards_amount;
     }
@@ -268,17 +285,17 @@ pub trait NftStaking {
     fn get_nft_nonce(&self, address: &ManagedAddress) -> ManagedVec<u64> {
         require!(!self.staking_info(&address).is_empty(), "You didn't stake!");
         let stake_info = self.staking_info(&address).get();
-        let nft_nonce: ManagedVec<u64> = stake_info.nft_nonce;
+        let nft_nonce: ManagedVec<u64> = stake_info.nft_nonce_with_lock_time.iter().map(|x| x.get(0)).collect();
         return nft_nonce;
     }
 
-    #[view(getLockTime)]
-    fn get_lock_time(&self, address: &ManagedAddress) -> u64 {
-        require!(!self.staking_info(&address).is_empty(), "You didn't stake!");
-        let stake_info = self.staking_info(&address).get();
-        let lock_time: u64 = stake_info.lock_time;
-        return lock_time;
-    }
+    // #[view(getLockTime)]
+    // fn get_lock_time(&self, address: &ManagedAddress) -> u64 {
+    //     require!(!self.staking_info(&address).is_empty(), "You didn't stake!");
+    //     let stake_info = self.staking_info(&address).get();
+    //     let lock_time: u64 = stake_info.lock_time;
+    //     return lock_time;
+    // }
 
     #[view(getUnstakeTime)]
     fn get_unstake_time(&self, address: &ManagedAddress) -> u64 {
