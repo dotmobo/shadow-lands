@@ -17,6 +17,8 @@ import { TavernStandard } from './TavernStandard';
 import { Land } from './Land';
 import { useSendShadowLandsTransaction } from '../transactions';
 import { sftBanksNonce } from 'config';
+import { BankEmpty } from './BankEmpty';
+import { BankStandard } from './BankStandard';
 
 function Loader() {
   return (
@@ -94,7 +96,7 @@ export const Map = ({ sfts, walletTaverns, walletBanks, rewardsPerDay }) => {
           {/* Bank */}
           {sfts !== undefined &&
           sfts.filter((x) => x === sftBanksNonce).length > 0 ? (
-            <TavernStandard
+            <BankStandard
               position={[-1, 1, 3]}
               rotation={[0, Math.PI / 2, 0]}
             />
@@ -102,7 +104,7 @@ export const Map = ({ sfts, walletTaverns, walletBanks, rewardsPerDay }) => {
             sfts !== undefined &&
             walletBanks.length > 0 &&
             sfts.filter((x) => x === sftBanksNonce).length === 0 && (
-              <TavernEmpty
+              <BankEmpty
                 onClick={(event) => {
                   hover1(false);
                   sendStakeBuildingTransaction(sftBanksNonce);
