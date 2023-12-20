@@ -16,6 +16,7 @@ import { TavernEmpty } from './TavernEmpty';
 import { TavernStandard } from './TavernStandard';
 import { Land } from './Land';
 import { useSendShadowLandsTransaction } from '../transactions';
+import { sftBanksNonce } from 'config';
 
 function Loader() {
   return (
@@ -25,7 +26,7 @@ function Loader() {
   );
 }
 
-export const Map = ({ sfts, walletTaverns, rewardsPerDay }) => {
+export const Map = ({ sfts, walletTaverns, walletBanks, rewardsPerDay }) => {
   const { network } = useGetNetworkConfig();
   const { address, account } = useGetAccountInfo();
   const { sendStakeBuildingTransaction } = useSendShadowLandsTransaction();
@@ -33,8 +34,8 @@ export const Map = ({ sfts, walletTaverns, rewardsPerDay }) => {
   const ref = useRef();
 
   const [hovered, hover] = useState(false);
-
   const [hovered1, hover1] = useState(false);
+  const [hovered2, hover2] = useState(false);
 
   useEffect(() => {
     document.body.style.cursor = hovered1 ? 'pointer' : 'auto';
@@ -70,6 +71,7 @@ export const Map = ({ sfts, walletTaverns, rewardsPerDay }) => {
             onPointerOver={(event) => hover(true)}
             onPointerOut={(event) => hover(false)}
           />
+          {/* Tavern */}
           {sfts !== undefined &&
           sfts.filter((x) => x === sftTavernNonce).length > 0 ? (
             <TavernStandard position={[3, 1.2, -2.5]} />
@@ -86,6 +88,30 @@ export const Map = ({ sfts, walletTaverns, rewardsPerDay }) => {
                 onPointerOut={(event) => hover1(false)}
                 color={hovered1 ? 'blue' : 'white'}
                 position={[3, 1.2, -2.5]}
+              />
+            )
+          )}
+          {/* Bank */}
+          {sfts !== undefined &&
+          sfts.filter((x) => x === sftBanksNonce).length > 0 ? (
+            <TavernStandard
+              position={[-1, 1, 3]}
+              rotation={[0, Math.PI / 2, 0]}
+            />
+          ) : (
+            sfts !== undefined &&
+            walletBanks.length > 0 &&
+            sfts.filter((x) => x === sftBanksNonce).length === 0 && (
+              <TavernEmpty
+                onClick={(event) => {
+                  hover1(false);
+                  sendStakeBuildingTransaction(sftBanksNonce);
+                }}
+                onPointerOver={(event) => hover2(true)}
+                onPointerOut={(event) => hover2(false)}
+                color={hovered2 ? 'blue' : 'white'}
+                position={[-1, 1, 3]}
+                rotation={[0, Math.PI / 2, 0]}
               />
             )
           )}

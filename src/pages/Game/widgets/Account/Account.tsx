@@ -11,7 +11,7 @@ import {
   dustTokenId,
   mvxApiUrl,
   sftTavernId,
-  sftHauntedHouseId,
+  sftBanksId,
   sftLandsId,
   sftLandsNonce
 } from 'config';
@@ -23,12 +23,12 @@ import {
 import { Sft, Token } from 'pages/Game/models';
 import { useSendShadowLandsTransaction } from 'pages/Game/transactions';
 
-export const Account = ({ sfts = [], outputTaverns }) => {
+export const Account = ({ sfts = [], outputTaverns, outputBanks }) => {
   const { network } = useGetNetworkConfig();
   const { address, account } = useGetAccountInfo();
   const [lands, setLandsList] = useState<Sft[]>();
   const [taverns, setTavernsList] = useState<Sft[]>();
-  const [hauntedHouses, setHauntedHousesList] = useState<Sft[]>();
+  const [banks, setBanksList] = useState<Sft[]>();
   const [dust, setDustToken] = useState<Token | null>();
   const { hasPendingTransactions } = useGetPendingTransactions();
   const { sendStakeLandTransaction, sendUnstakeLandTransaction } =
@@ -82,12 +82,16 @@ export const Account = ({ sfts = [], outputTaverns }) => {
     // Use [] as second argument in useEffect for not rendering each time
     axios
       .get<any>(
-        `${mvxApiUrl}/accounts/${address}/nfts?size=25&identifiers=${sftHauntedHouseId}`
+        `${mvxApiUrl}/accounts/${address}/nfts?size=25&identifiers=${sftBanksId}`
       )
       .then((response) => {
-        setHauntedHousesList(
-          orderBy(response.data, ['collection', 'nonce'], ['desc', 'asc'])
+        const res = orderBy(
+          response.data,
+          ['collection', 'nonce'],
+          ['desc', 'asc']
         );
+        setBanksList(res);
+        outputBanks(res);
       });
   }, [hasPendingTransactions]);
 
@@ -101,7 +105,7 @@ export const Account = ({ sfts = [], outputTaverns }) => {
           <Label>Taverns: </Label> {taverns?.[0]?.balance ?? 0}
         </p>
         <p>
-          <Label>Haunted Houses: </Label> {hauntedHouses?.[0]?.balance ?? 0}
+          <Label>Banks: </Label> {banks?.[0]?.balance ?? 0}
         </p>
         <p>
           <Label>$DUST: </Label>

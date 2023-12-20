@@ -40,6 +40,7 @@ export const Game = () => {
   const { address, account } = useGetAccountInfo();
 
   const [taverns, setTavernsList] = useState<Sft[]>([]);
+  const [banks, setBanksList] = useState<Sft[]>([]);
   const [rewardsTokenAmountPerDay, setRewardsTokenAmountPerDay] =
     useState<number>(0);
   const { getRewardsTokenAmountPerDay, getNftNonce } =
@@ -122,6 +123,7 @@ export const Game = () => {
                 <Map
                   sfts={sfts}
                   walletTaverns={taverns}
+                  walletBanks={banks}
                   rewardsPerDay={rewardsTokenAmountPerDay}
                 />
               )}
@@ -139,6 +141,7 @@ export const Game = () => {
 
                 props['sfts'] = sfts;
                 props['outputTaverns'] = setTavernsList;
+                props['outputBanks'] = setBanksList;
 
                 return (
                   <Card
