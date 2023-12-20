@@ -159,14 +159,7 @@ pub trait NftStaking {
         if !self.staking_status().get() {
             from_time = self.staking_end_time().get();
         }
-        let mut rewards_amount = BigUint::from(0u32);
-        for n in nft_nonce_with_lock_time.iter() {
-            let mut staked_days = 0u64;
-            if from_time > n.get(1) {
-                staked_days = (from_time - n.get(1)) / 86400;
-            }
-            rewards_amount += self.rewards_token_amount_per_day().get() * staked_days;
-        }
+        let rewards_amount = self.calculate_rewards(&nft_nonce_with_lock_time, from_time);
 
         // check the supply
         require!(
@@ -254,6 +247,19 @@ pub trait NftStaking {
         Ok(())
     }
 
+    // Utils
+    fn calculate_rewards(&self, nft_nonce_with_lock_time: &ManagedVec<ManagedVec<u64>>, from_time: u64) -> BigUint {
+        let mut rewards_amount = BigUint::from(0u32);
+        for n in nft_nonce_with_lock_time.iter() {
+            let mut staked_days = 0u64;
+            if from_time > n.get(1) {
+                staked_days = (from_time - n.get(1)) / 86400;
+            }
+            rewards_amount += self.rewards_token_amount_per_day().get() * staked_days;
+        }
+        return rewards_amount;
+    }
+
     // Views and storage
 
     #[view(getCurrentRewards)]
@@ -264,21 +270,12 @@ pub trait NftStaking {
         require!(!self.staking_info(&address).is_empty(), "You didn't stake!");
         let stake_info = self.staking_info(&address).get();
 
-        // calculate rewards
         let mut from_time = cur_time;
         if !self.staking_status().get() {
             from_time = self.staking_end_time().get();
         }
-        let mut rewards_amount = BigUint::from(0u32);
-        for n in stake_info.nft_nonce_with_lock_time.iter() {
-            let mut staked_days = 0u64;
-            if from_time > n.get(1) {
-                staked_days = (from_time - n.get(1)) / 86400;
-            }
-            rewards_amount += self.rewards_token_amount_per_day().get() * staked_days;
-        }
 
-        return rewards_amount;
+        return self.calculate_rewards(&stake_info.nft_nonce_with_lock_time, from_time);
     }
 
     #[view(getNftNonce)]
