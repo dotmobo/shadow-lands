@@ -74,7 +74,7 @@ export const Map = ({ sfts, walletTaverns, walletBanks, rewardsPerDay }) => {
           {/* Tavern */}
           {sfts !== undefined &&
           sfts.filter((x) => x === sftTavernNonce).length > 0 ? (
-            <TavernStandard position={[3, 1.2, -2.5]} />
+            <TavernStandard position={[2.5, 1, -2.5]} />
           ) : (
             sfts !== undefined &&
             walletTaverns.length > 0 &&
@@ -87,7 +87,7 @@ export const Map = ({ sfts, walletTaverns, walletBanks, rewardsPerDay }) => {
                 onPointerOver={(event) => hover1(true)}
                 onPointerOut={(event) => hover1(false)}
                 color={hovered1 ? 'blue' : 'white'}
-                position={[3, 1.2, -2.5]}
+                position={[2.5, 1, -2.5]}
               />
             )
           )}
