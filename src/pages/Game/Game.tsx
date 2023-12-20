@@ -18,6 +18,7 @@ import { Map } from './Map';
 import { Sft, WidgetsType } from './models';
 import { Account } from './widgets/Account';
 import { Production } from './widgets/Production/Production';
+import { useCallShadowLandsQuery } from './queries';
 
 const WIDGETS: WidgetsType[] = [
   {
@@ -41,6 +42,8 @@ export const Game = () => {
   const [crypts, setCryptsList] = useState<Sft[]>([]);
   const [rewardsTokenAmountPerDay, setRewardsTokenAmountPerDay] =
     useState<number>(0);
+  const { getRewardsTokenAmountPerDay, getNftNonce } =
+    useCallShadowLandsQuery();
 
   const { hasPendingTransactions } = useGetPendingTransactions();
   const /*transactionSessionId*/ [, setTransactionSessionId] = useState<
@@ -49,17 +52,13 @@ export const Game = () => {
 
   const [sfts, setSftsList] = useState<number[]>();
 
+  const proxy = new ProxyNetworkProvider(network.apiAddress, {
+    timeout: 3000
+  });
+
   useEffect(() => {
-    const query = new Query({
-      address: new Address(contractGameAddress),
-      func: new ContractFunction('getNftNonce'),
-      args: [new AddressValue(new Address(address))]
-    });
-    const proxy = new ProxyNetworkProvider(network.apiAddress, {
-      timeout: 3000
-    });
     proxy
-      .queryContract(query)
+      .queryContract(getNftNonce)
       .then(({ returnData }) => {
         const [encoded] = returnData;
         switch (encoded) {
@@ -86,16 +85,8 @@ export const Game = () => {
   }, [hasPendingTransactions]);
 
   useEffect(() => {
-    const query = new Query({
-      address: new Address(contractGameAddress),
-      func: new ContractFunction('getRewardsTokenAmountPerDay'),
-      args: []
-    });
-    const proxy = new ProxyNetworkProvider(network.apiAddress, {
-      timeout: 3000
-    });
     proxy
-      .queryContract(query)
+      .queryContract(getRewardsTokenAmountPerDay)
       .then(({ returnData }) => {
         const [encoded] = returnData;
         switch (encoded) {

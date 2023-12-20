@@ -19,27 +19,26 @@ import {
   useGetPendingTransactions
 } from 'hooks';
 import { useSendShadowLandsTransaction } from 'pages/Game/transactions';
+import { useCallShadowLandsQuery } from 'pages/Game/queries';
 
 export const Production = ({ sfts = [] }) => {
   const { network } = useGetNetworkConfig();
   const { address, account } = useGetAccountInfo();
+
+  const { getCurrentRewards } = useCallShadowLandsQuery();
 
   const [currentRewards, setCurrentRewards] = useState<number>();
 
   const { hasPendingTransactions } = useGetPendingTransactions();
   const { sendClaimTransaction } = useSendShadowLandsTransaction();
 
+  const proxy = new ProxyNetworkProvider(network.apiAddress, {
+    timeout: 3000
+  });
+
   useEffect(() => {
-    const query = new Query({
-      address: new Address(contractGameAddress),
-      func: new ContractFunction('getCurrentRewards'),
-      args: [new AddressValue(new Address(address))]
-    });
-    const proxy = new ProxyNetworkProvider(network.apiAddress, {
-      timeout: 3000
-    });
     proxy
-      .queryContract(query)
+      .queryContract(getCurrentRewards)
       .then(({ returnData }) => {
         const [encoded] = returnData;
         switch (encoded) {
