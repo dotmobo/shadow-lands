@@ -12,12 +12,10 @@ import {
 } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 import { sftTavernNonce } from 'config/config.devnet';
-import { TavernEmpty } from './TavernEmpty';
 import { TavernStandard } from './TavernStandard';
 import { Land } from './Land';
 import { useSendShadowLandsTransaction } from '../transactions';
 import { sftBanksNonce } from 'config';
-import { BankEmpty } from './BankEmpty';
 import { BankStandard } from './BankStandard';
 
 function Loader() {
@@ -81,7 +79,7 @@ export const Map = ({ sfts, walletTaverns, walletBanks, rewardsPerDay }) => {
             sfts !== undefined &&
             walletTaverns.length > 0 &&
             sfts.filter((x) => x === sftTavernNonce).length === 0 && (
-              <TavernEmpty
+              <TavernStandard
                 onClick={(event) => {
                   hover1(false);
                   sendStakeBuildingTransaction(sftTavernNonce);
@@ -104,7 +102,7 @@ export const Map = ({ sfts, walletTaverns, walletBanks, rewardsPerDay }) => {
             sfts !== undefined &&
             walletBanks.length > 0 &&
             sfts.filter((x) => x === sftBanksNonce).length === 0 && (
-              <BankEmpty
+              <BankStandard
                 onClick={(event) => {
                   hover1(false);
                   sendStakeBuildingTransaction(sftBanksNonce);

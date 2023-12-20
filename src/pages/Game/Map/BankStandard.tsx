@@ -18,7 +18,11 @@ export function BankStandard({ position, color, rotation, ...props }: any) {
         position={position}
         scale={[0.5, 0.5, 0.5]}
         rotation={rotation}
-      />
+      >
+        {color !== undefined && (
+          <meshStandardMaterial color={color} transparent />
+        )}
+      </mesh>
     </group>
   );
 }
