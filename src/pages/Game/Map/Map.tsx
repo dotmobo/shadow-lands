@@ -25,7 +25,7 @@ function Loader() {
   );
 }
 
-export const Map = ({ sfts, walletCrypts }) => {
+export const Map = ({ sfts, walletCrypts, rewardsPerDay }) => {
   const { network } = useGetNetworkConfig();
   const { address, account } = useGetAccountInfo();
   const { sendStakeBuildingTransaction } = useSendShadowLandsTransaction();
@@ -57,7 +57,7 @@ export const Map = ({ sfts, walletCrypts }) => {
         anchorY='middle'
         position={[0, 9, 0]}
       >
-        {10 * sfts.length} $DUST/Day
+        {rewardsPerDay * sfts.length} $DUST/Day
       </Text>
       <Suspense fallback={<Loader />}>
         <Stage

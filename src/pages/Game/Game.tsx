@@ -39,6 +39,8 @@ export const Game = () => {
   const { address, account } = useGetAccountInfo();
 
   const [crypts, setCryptsList] = useState<Sft[]>([]);
+  const [rewardsTokenAmountPerDay, setRewardsTokenAmountPerDay] =
+    useState<number>(0);
 
   const { hasPendingTransactions } = useGetPendingTransactions();
   const /*transactionSessionId*/ [, setTransactionSessionId] = useState<
@@ -83,6 +85,41 @@ export const Game = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [hasPendingTransactions]);
 
+  useEffect(() => {
+    const query = new Query({
+      address: new Address(contractGameAddress),
+      func: new ContractFunction('getRewardsTokenAmountPerDay'),
+      args: []
+    });
+    const proxy = new ProxyNetworkProvider(network.apiAddress, {
+      timeout: 3000
+    });
+    proxy
+      .queryContract(query)
+      .then(({ returnData }) => {
+        const [encoded] = returnData;
+        switch (encoded) {
+          case undefined:
+            setRewardsTokenAmountPerDay(0);
+            break;
+          case '':
+            setRewardsTokenAmountPerDay(0);
+            break;
+          default: {
+            const decoded = Buffer.from(encoded, 'base64').toString('hex');
+            setRewardsTokenAmountPerDay(
+              parseInt(decoded, 16) / Math.pow(10, 18)
+            );
+            break;
+          }
+        }
+      })
+      .catch((err) => {
+        console.error('Unable to call VM query', err);
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [hasPendingTransactions]);
+
   return (
     <AuthRedirectWrapper>
       <PageWrapper>
@@ -91,7 +128,11 @@ export const Game = () => {
             {sfts !== undefined &&
               !hasPendingTransactions &&
               sfts.filter((x) => x === sftLandsNonce).length > 0 && (
-                <Map sfts={sfts} walletCrypts={crypts} />
+                <Map
+                  sfts={sfts}
+                  walletCrypts={crypts}
+                  rewardsPerDay={rewardsTokenAmountPerDay}
+                />
               )}
           </div>
           <div className='flex items-start sm:items-center h-full sm:w-1/2 sm:bg-center'>
