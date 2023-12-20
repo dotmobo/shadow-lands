@@ -10,7 +10,9 @@ module.exports = {
     backgroundImage: {
       // eslint-disable-next-line quotes
       'mvx-white': "url('../multiversx-white.svg')",
-      'db-logo': "url('../sl.jpg')"
+      'db-logo': "url('../logo.jpg')",
+      'sl-home': "url('../home.jpg')",
+      'sl-logo': "url('../sl.png')",
     }
   },
   plugins: []
