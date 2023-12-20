@@ -30,7 +30,7 @@ const WIDGETS: WidgetsType[] = [
   {
     title: 'Farm',
     widget: Production,
-    description: '$DUST producted by your SFTs',
+    description: '$DUST producted by your land',
     reference: 'https://dusty-bones.netlify.app/'
   }
 ];

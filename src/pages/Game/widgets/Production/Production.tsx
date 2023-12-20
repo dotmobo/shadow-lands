@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { faTruckLoading } from '@fortawesome/free-solid-svg-icons';
+import { faStore, faTruckLoading } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   Address,
@@ -81,6 +81,14 @@ export const Production = ({ sfts = [] }) => {
         >
           <FontAwesomeIcon icon={faTruckLoading} className='mr-1' />
           Claim
+        </Button>
+        <Button
+          onClick={() =>
+            window.open('https://www.frameit.gg/marketplace/DUSTYBONES-c1fc90')
+          }
+        >
+          <FontAwesomeIcon icon={faStore} className='mr-1' />
+          Market
         </Button>
       </div>
     </OutputContainer>
