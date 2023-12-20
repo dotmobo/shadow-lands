@@ -39,7 +39,7 @@ export const Game = () => {
   const { network } = useGetNetworkConfig();
   const { address, account } = useGetAccountInfo();
 
-  const [crypts, setCryptsList] = useState<Sft[]>([]);
+  const [taverns, setTavernsList] = useState<Sft[]>([]);
   const [rewardsTokenAmountPerDay, setRewardsTokenAmountPerDay] =
     useState<number>(0);
   const { getRewardsTokenAmountPerDay, getNftNonce } =
@@ -121,7 +121,7 @@ export const Game = () => {
               sfts.filter((x) => x === sftLandsNonce).length > 0 && (
                 <Map
                   sfts={sfts}
-                  walletCrypts={crypts}
+                  walletTaverns={taverns}
                   rewardsPerDay={rewardsTokenAmountPerDay}
                 />
               )}
@@ -138,7 +138,7 @@ export const Game = () => {
                 } = element;
 
                 props['sfts'] = sfts;
-                props['outputCrypts'] = setCryptsList;
+                props['outputTaverns'] = setTavernsList;
 
                 return (
                   <Card

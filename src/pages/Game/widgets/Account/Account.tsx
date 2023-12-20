@@ -10,7 +10,7 @@ import { FormatAmount } from 'components/sdkDappComponents';
 import {
   dustTokenId,
   mvxApiUrl,
-  sftCryptId,
+  sftTavernId,
   sftHauntedHouseId,
   sftLandsId,
   sftLandsNonce
@@ -23,11 +23,11 @@ import {
 import { Sft, Token } from 'pages/Game/models';
 import { useSendShadowLandsTransaction } from 'pages/Game/transactions';
 
-export const Account = ({ sfts = [], outputCrypts }) => {
+export const Account = ({ sfts = [], outputTaverns }) => {
   const { network } = useGetNetworkConfig();
   const { address, account } = useGetAccountInfo();
   const [lands, setLandsList] = useState<Sft[]>();
-  const [crypts, setCryptsList] = useState<Sft[]>();
+  const [taverns, setTavernsList] = useState<Sft[]>();
   const [hauntedHouses, setHauntedHousesList] = useState<Sft[]>();
   const [dust, setDustToken] = useState<Token | null>();
   const { hasPendingTransactions } = useGetPendingTransactions();
@@ -65,7 +65,7 @@ export const Account = ({ sfts = [], outputCrypts }) => {
     // Use [] as second argument in useEffect for not rendering each time
     axios
       .get<any>(
-        `${mvxApiUrl}/accounts/${address}/nfts?size=25&identifiers=${sftCryptId}`
+        `${mvxApiUrl}/accounts/${address}/nfts?size=25&identifiers=${sftTavernId}`
       )
       .then((response) => {
         const res = orderBy(
@@ -73,8 +73,8 @@ export const Account = ({ sfts = [], outputCrypts }) => {
           ['collection', 'nonce'],
           ['desc', 'asc']
         );
-        setCryptsList(res);
-        outputCrypts(res);
+        setTavernsList(res);
+        outputTaverns(res);
       });
   }, [hasPendingTransactions]);
 
@@ -98,7 +98,7 @@ export const Account = ({ sfts = [], outputCrypts }) => {
           <Label>Lands: </Label> {lands?.[0]?.balance ?? 0}
         </p>
         <p>
-          <Label>Crypts: </Label> {crypts?.[0]?.balance ?? 0}
+          <Label>Taverns: </Label> {taverns?.[0]?.balance ?? 0}
         </p>
         <p>
           <Label>Haunted Houses: </Label> {hauntedHouses?.[0]?.balance ?? 0}

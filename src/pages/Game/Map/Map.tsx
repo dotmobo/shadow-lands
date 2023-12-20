@@ -11,9 +11,9 @@ import {
   Text
 } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
-import { sftCryptNonce } from 'config/config.devnet';
-import { CryptEmpty } from './CryptEmpty';
-import { CryptStandard } from './CryptStandard';
+import { sftTavernNonce } from 'config/config.devnet';
+import { TavernEmpty } from './TavernEmpty';
+import { TavernStandard } from './TavernStandard';
 import { Land } from './Land';
 import { useSendShadowLandsTransaction } from '../transactions';
 
@@ -25,7 +25,7 @@ function Loader() {
   );
 }
 
-export const Map = ({ sfts, walletCrypts, rewardsPerDay }) => {
+export const Map = ({ sfts, walletTaverns, rewardsPerDay }) => {
   const { network } = useGetNetworkConfig();
   const { address, account } = useGetAccountInfo();
   const { sendStakeBuildingTransaction } = useSendShadowLandsTransaction();
@@ -71,16 +71,16 @@ export const Map = ({ sfts, walletCrypts, rewardsPerDay }) => {
             onPointerOut={(event) => hover(false)}
           />
           {sfts !== undefined &&
-          sfts.filter((x) => x === sftCryptNonce).length > 0 ? (
-            <CryptStandard position={[3, 1.2, -2.5]} />
+          sfts.filter((x) => x === sftTavernNonce).length > 0 ? (
+            <TavernStandard position={[3, 1.2, -2.5]} />
           ) : (
             sfts !== undefined &&
-            walletCrypts.length > 0 &&
-            sfts.filter((x) => x === sftCryptNonce).length === 0 && (
-              <CryptEmpty
+            walletTaverns.length > 0 &&
+            sfts.filter((x) => x === sftTavernNonce).length === 0 && (
+              <TavernEmpty
                 onClick={(event) => {
                   hover1(false);
-                  sendStakeBuildingTransaction(sftCryptNonce);
+                  sendStakeBuildingTransaction(sftTavernNonce);
                 }}
                 onPointerOver={(event) => hover1(true)}
                 onPointerOut={(event) => hover1(false)}
