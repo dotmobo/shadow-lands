@@ -64,13 +64,17 @@ export const Production = ({ sfts = [] }) => {
   return (
     <OutputContainer>
       <div className='flex flex-col text-black' data-testid='topInfo'>
-        <p>
+        <p className='flex flex-items-center'>
           <Label>Producted $DUST: </Label>
           <FormatAmount
             value={currentRewards ?? 0}
+            showLabel={false}
             egldLabel='$DUST'
             data-testid='balance'
           />
+          <span>
+            <img src='/dust-logo.png' alt='Dust' className='ml-1 w-5' />
+          </span>
         </p>
       </div>
       <div className='flex text-black gap-2 mt-4' data-testid='topInfo'>

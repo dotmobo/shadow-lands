@@ -107,13 +107,17 @@ export const Account = ({ sfts = [], outputTaverns, outputBanks }) => {
         <p>
           <Label>Banks: </Label> {banks?.[0]?.balance ?? 0}
         </p>
-        <p>
+        <p className='flex items-center'>
           <Label>$DUST: </Label>
           <FormatAmount
             value={dust?.balance ?? 0}
             egldLabel='$DUST'
+            showLabel={false}
             data-testid='balance'
           />
+          <span>
+            <img src='/dust-logo.png' alt='Dust' className='ml-1 w-5' />
+          </span>
         </p>
       </div>
       <div className='flex text-black gap-2 mt-4' data-testid='topInfo'>
