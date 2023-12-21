@@ -12,11 +12,11 @@ import {
 } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 import { sftTavernNonce } from 'config/config.devnet';
-import { TavernStandard } from './TavernStandard';
+import { Tavern } from './Tavern';
 import { Land } from './Land';
 import { useSendShadowLandsTransaction } from '../transactions';
 import { sftBanksNonce } from 'config';
-import { BankStandard } from './BankStandard';
+import { Bank } from './Bank';
 
 function Loader() {
   return (
@@ -74,12 +74,12 @@ export const Map = ({ sfts, walletTaverns, walletBanks, rewardsPerDay }) => {
           {/* Tavern */}
           {sfts !== undefined &&
           sfts.filter((x) => x === sftTavernNonce).length > 0 ? (
-            <TavernStandard position={[2.5, 1, -2.5]} />
+            <Tavern position={[2.5, 1, -2.5]} />
           ) : (
             sfts !== undefined &&
             walletTaverns.length > 0 &&
             sfts.filter((x) => x === sftTavernNonce).length === 0 && (
-              <TavernStandard
+              <Tavern
                 onClick={(event) => {
                   hover1(false);
                   sendStakeBuildingTransaction(sftTavernNonce);
@@ -94,15 +94,12 @@ export const Map = ({ sfts, walletTaverns, walletBanks, rewardsPerDay }) => {
           {/* Bank */}
           {sfts !== undefined &&
           sfts.filter((x) => x === sftBanksNonce).length > 0 ? (
-            <BankStandard
-              position={[-1, 1, 3]}
-              rotation={[0, Math.PI / 2, 0]}
-            />
+            <Bank position={[-1, 1, 3]} rotation={[0, Math.PI / 2, 0]} />
           ) : (
             sfts !== undefined &&
             walletBanks.length > 0 &&
             sfts.filter((x) => x === sftBanksNonce).length === 0 && (
-              <BankStandard
+              <Bank
                 onClick={(event) => {
                   hover1(false);
                   sendStakeBuildingTransaction(sftBanksNonce);
