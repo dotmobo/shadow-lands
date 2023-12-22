@@ -12,7 +12,7 @@ import { Button } from 'components';
 import { Label } from 'components/Label';
 import { OutputContainer } from 'components/OutputContainer';
 import { FormatAmount } from 'components/sdkDappComponents';
-import { contractGameAddress, priceBasicBuilding } from 'config';
+import { contractGameAddress, totalProducted, totalYield } from 'config';
 import {
   useGetAccountInfo,
   useGetNetworkConfig,
@@ -21,7 +21,7 @@ import {
 import { useSendShadowLandsTransaction } from 'pages/Game/transactions';
 import { useCallShadowLandsQuery } from 'pages/Game/queries';
 
-export const Production = ({ sfts = [] }) => {
+export const Production = ({ sfts, rewardPerDay }) => {
   const { network } = useGetNetworkConfig();
   const { address, account } = useGetAccountInfo();
 
@@ -61,6 +61,11 @@ export const Production = ({ sfts = [] }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [hasPendingTransactions]);
 
+  const calculateWidth = (value, max) => {
+    const exponent = 2;
+    return (1 - Math.exp((-value / max) * exponent)) * 100 + '%';
+  };
+
   return (
     <OutputContainer>
       <div className='flex flex-col text-black' data-testid='topInfo'>
@@ -68,18 +73,33 @@ export const Production = ({ sfts = [] }) => {
           <div
             className='bg-green-500 h-2.5 rounded-full'
             style={{
-              width:
-                ((currentRewards ?? 0) /
-                  1000000000000000000 /
-                  priceBasicBuilding) *
-                  100 +
-                '%'
+              width: ((rewardPerDay * sfts.length) / totalYield) * 100 + '%'
             }}
           ></div>
         </div>
 
         <p className='flex flex-items-center'>
-          <Label>Producted $DUST: </Label>
+          <Label>Daily yield: </Label>
+          <span>{rewardPerDay * sfts.length}</span>
+          <span>
+            <img src='/dust-logo.png' alt='Dust' className='ml-1 w-5' />
+          </span>
+        </p>
+
+        <div className='w-full bg-slate-200 rounded-full h-2.5 mb-1 mt-2'>
+          <div
+            className='bg-yellow-500 h-2.5 rounded-full'
+            style={{
+              width: calculateWidth(
+                currentRewards ?? 0,
+                (10 ^ 18) * totalProducted
+              )
+            }}
+          ></div>
+        </div>
+
+        <p className='flex flex-items-center'>
+          <Label>Claimable tokens: </Label>
           <FormatAmount
             value={currentRewards ?? 0}
             showLabel={false}

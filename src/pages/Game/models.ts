@@ -14,6 +14,7 @@ export type WidgetsType = {
   props?: {
     receiver?: string;
     sfts?: number[];
+    rewardPerDay?: number;
     outputTaverns?: any;
     outputBanks?: any;
   };

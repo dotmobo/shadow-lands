@@ -130,30 +130,32 @@ export const Game = () => {
           </div>
           <div className='flex items-start sm:items-center h-full w-full sm:w-1/2 sm:bg-center bg-slate-900 pr-4 pl-4'>
             <div className='flex flex-col gap-6 max-w-3xl w-full'>
-              {WIDGETS.map((element) => {
-                const {
-                  title,
-                  widget: MxWidget,
-                  description,
-                  props = {},
-                  reference
-                } = element;
+              {sfts !== undefined &&
+                WIDGETS.map((element) => {
+                  const {
+                    title,
+                    widget: MxWidget,
+                    description,
+                    props = {},
+                    reference
+                  } = element;
 
-                props['sfts'] = sfts;
-                props['outputTaverns'] = setTavernsList;
-                props['outputBanks'] = setBanksList;
+                  props['sfts'] = sfts;
+                  props['rewardPerDay'] = rewardsTokenAmountPerDay;
+                  props['outputTaverns'] = setTavernsList;
+                  props['outputBanks'] = setBanksList;
 
-                return (
-                  <Card
-                    key={title}
-                    title={title}
-                    description={description}
-                    reference={reference}
-                  >
-                    <MxWidget {...props} />
-                  </Card>
-                );
-              })}
+                  return (
+                    <Card
+                      key={title}
+                      title={title}
+                      description={description}
+                      reference={reference}
+                    >
+                      <MxWidget {...props} />
+                    </Card>
+                  );
+                })}
             </div>
           </div>
         </div>
