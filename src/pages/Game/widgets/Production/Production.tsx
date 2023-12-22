@@ -92,7 +92,7 @@ export const Production = ({ sfts, rewardPerDay }) => {
             style={{
               width: calculateWidth(
                 currentRewards ?? 0,
-                (10 ^ 18) * totalProducted
+                Math.pow(10, 18) * totalProducted
               )
             }}
           ></div>
