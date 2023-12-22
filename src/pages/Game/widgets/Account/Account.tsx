@@ -113,6 +113,7 @@ export const Account = ({ sfts = [], outputTaverns, outputBanks }) => {
             value={dust?.balance ?? 0}
             egldLabel='$DUST'
             showLabel={false}
+            digits={0}
             data-testid='balance'
           />
           <span>

@@ -78,7 +78,7 @@ export const useSendShadowLandsTransaction = () => {
     const claimTransaction = {
       value: '0',
       data: 'claim',
-      receiver: address,
+      receiver: contractGameAddress,
       gasLimit: 20000000
     };
     await refreshAccount();

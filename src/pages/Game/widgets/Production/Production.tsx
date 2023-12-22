@@ -70,6 +70,7 @@ export const Production = ({ sfts = [] }) => {
             value={currentRewards ?? 0}
             showLabel={false}
             egldLabel='$DUST'
+            digits={0}
             data-testid='balance'
           />
           <span>
