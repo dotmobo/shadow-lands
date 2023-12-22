@@ -16,3 +16,4 @@ export const sftBanksNonce = 4;
 export const dustTokenId = 'DEVDUST-d62981';
 export const contractGameAddress =
   'erd1qqqqqqqqqqqqqpgqvfh5j05pw23upxz4hmh6fdsrcmvfjjd22krsxc4hy2';
+export const priceBasicBuilding = 2500;

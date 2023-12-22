@@ -12,7 +12,7 @@ import { Button } from 'components';
 import { Label } from 'components/Label';
 import { OutputContainer } from 'components/OutputContainer';
 import { FormatAmount } from 'components/sdkDappComponents';
-import { contractGameAddress } from 'config';
+import { contractGameAddress, priceBasicBuilding } from 'config';
 import {
   useGetAccountInfo,
   useGetNetworkConfig,
@@ -64,6 +64,20 @@ export const Production = ({ sfts = [] }) => {
   return (
     <OutputContainer>
       <div className='flex flex-col text-black' data-testid='topInfo'>
+        <div className='w-full bg-slate-200 rounded-full h-2.5 mb-1'>
+          <div
+            className='bg-green-500 h-2.5 rounded-full'
+            style={{
+              width:
+                ((currentRewards ?? 0) /
+                  1000000000000000000 /
+                  priceBasicBuilding) *
+                  100 +
+                '%'
+            }}
+          ></div>
+        </div>
+
         <p className='flex flex-items-center'>
           <Label>Producted $DUST: </Label>
           <FormatAmount
