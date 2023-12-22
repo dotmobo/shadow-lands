@@ -116,7 +116,7 @@ export const Game = () => {
     <AuthRedirectWrapper>
       <PageWrapper>
         <div className='flex flex-col sm:flex-row items-center h-full w-full'>
-          <div className='flex items-start sm:items-center h-full w-full sm:bg-center bg-slate-900'>
+          <div className='flex items-start sm:items-center h-screen sm:h-full w-full sm:bg-center bg-slate-900'>
             {sfts !== undefined &&
               !hasPendingTransactions &&
               sfts.filter((x) => x === sftLandsNonce).length > 0 && (
@@ -128,7 +128,7 @@ export const Game = () => {
                 />
               )}
           </div>
-          <div className='flex items-start sm:items-center h-full sm:w-1/2 sm:bg-center'>
+          <div className='flex items-start sm:items-center h-full w-full sm:w-1/2 sm:bg-center bg-slate-900 pr-4 pl-4'>
             <div className='flex flex-col gap-6 max-w-3xl w-full'>
               {WIDGETS.map((element) => {
                 const {
