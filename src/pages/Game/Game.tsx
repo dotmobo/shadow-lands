@@ -7,7 +7,12 @@ import {
 } from '@multiversx/sdk-core/out';
 import { ProxyNetworkProvider } from '@multiversx/sdk-network-providers/out';
 import { Card } from 'components';
-import { contractGameAddress, sftLandsNonce } from 'config';
+import {
+  contractGameAddress,
+  sftBanksNonce,
+  sftLandsNonce,
+  sftTavernNonce
+} from 'config';
 import {
   useGetAccountInfo,
   useGetNetworkConfig,
@@ -19,6 +24,12 @@ import { Sft, WidgetsType } from './models';
 import { Account } from './widgets/Account';
 import { Production } from './widgets/Production/Production';
 import { useCallShadowLandsQuery } from './queries';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faBeer,
+  faBuildingColumns,
+  faTree,
+} from '@fortawesome/free-solid-svg-icons';
 
 const WIDGETS: WidgetsType[] = [
   {
@@ -116,16 +127,32 @@ export const Game = () => {
     <AuthRedirectWrapper>
       <PageWrapper>
         <div className='flex flex-col sm:flex-row items-center h-full w-full'>
-          <div className='flex items-start sm:items-center h-screen sm:h-full w-full sm:bg-center bg-slate-900'>
+          <div className='flex flex-col items-start sm:items-center h-screen sm:h-full w-full sm:bg-center bg-slate-900'>
             {sfts !== undefined &&
               !hasPendingTransactions &&
               sfts.filter((x) => x === sftLandsNonce).length > 0 && (
-                <Map
-                  sfts={sfts}
-                  walletTaverns={taverns}
-                  walletBanks={banks}
-                  rewardsPerDay={rewardsTokenAmountPerDay}
-                />
+                <>
+                  <div className='flex w-full mt-4 justify-center gap-5 text-slate-300'>
+                    <span title='Land'>
+                      <FontAwesomeIcon icon={faTree} size='sm' />{' '}
+                      {sfts.filter((x) => x === sftLandsNonce).length} / 1
+                    </span>
+                    <span title='Tavern'>
+                      <FontAwesomeIcon icon={faBeer} size='sm' />{' '}
+                      {sfts.filter((x) => x === sftTavernNonce).length} / 1
+                    </span>
+                    <span title='Bank'>
+                      <FontAwesomeIcon icon={faBuildingColumns} size='sm' />{' '}
+                      {sfts.filter((x) => x === sftBanksNonce).length} / 1
+                    </span>
+                  </div>
+                  <Map
+                    sfts={sfts}
+                    walletTaverns={taverns}
+                    walletBanks={banks}
+                    rewardsPerDay={rewardsTokenAmountPerDay}
+                  />
+                </>
               )}
           </div>
           <div className='flex items-start sm:items-center h-full w-full sm:w-1/2 sm:bg-center bg-slate-900 pr-4 pl-4'>
