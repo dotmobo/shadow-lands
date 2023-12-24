@@ -129,7 +129,6 @@ export const Game = () => {
         <div className='flex flex-col sm:flex-row items-center h-full w-full'>
           <div className='flex flex-col items-start sm:items-center h-screen sm:h-full w-full sm:bg-center bg-slate-900'>
             {sfts !== undefined &&
-              !hasPendingTransactions &&
               sfts.filter((x) => x === sftLandsNonce).length > 0 && (
                 <>
                   <div className='flex w-full mt-4 justify-center gap-5 text-slate-300'>
