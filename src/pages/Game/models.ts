@@ -17,6 +17,7 @@ export type WidgetsType = {
     rewardPerDay?: number;
     outputTaverns?: any;
     outputBanks?: any;
+    outputHauntedHouses?: any;
   };
   reference: string;
 };

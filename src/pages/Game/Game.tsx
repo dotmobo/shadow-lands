@@ -10,6 +10,7 @@ import { Card } from 'components';
 import {
   contractGameAddress,
   sftBanksNonce,
+  sftHauntedHouseNonce,
   sftLandsNonce,
   sftTavernNonce
 } from 'config';
@@ -28,7 +29,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faBeer,
   faBuildingColumns,
-  faTree,
+  faHouse,
+  faTree
 } from '@fortawesome/free-solid-svg-icons';
 
 const WIDGETS: WidgetsType[] = [
@@ -52,6 +54,7 @@ export const Game = () => {
 
   const [taverns, setTavernsList] = useState<Sft[]>([]);
   const [banks, setBanksList] = useState<Sft[]>([]);
+  const [hauntedHouses, setHauntedHousesList] = useState<Sft[]>([]);
   const [rewardsTokenAmountPerDay, setRewardsTokenAmountPerDay] =
     useState<number>(0);
   const { getRewardsTokenAmountPerDay, getNftNonce } =
@@ -144,11 +147,17 @@ export const Game = () => {
                       <FontAwesomeIcon icon={faBuildingColumns} size='sm' />{' '}
                       {sfts.filter((x) => x === sftBanksNonce).length} / 1
                     </span>
+                    <span title='Haunted House'>
+                      <FontAwesomeIcon icon={faHouse} size='sm' />{' '}
+                      {sfts.filter((x) => x === sftHauntedHouseNonce).length} /
+                      1
+                    </span>
                   </div>
                   <Map
                     sfts={sfts}
                     walletTaverns={taverns}
                     walletBanks={banks}
+                    walletHauntedHouses={hauntedHouses}
                     rewardsPerDay={rewardsTokenAmountPerDay}
                   />
                 </>
@@ -170,6 +179,7 @@ export const Game = () => {
                   props['rewardPerDay'] = rewardsTokenAmountPerDay;
                   props['outputTaverns'] = setTavernsList;
                   props['outputBanks'] = setBanksList;
+                  props['outputHauntedHouses'] = setHauntedHousesList;
 
                   return (
                     <Card

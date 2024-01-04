@@ -13,7 +13,8 @@ import {
   sftTavernId,
   sftBanksId,
   sftLandsId,
-  sftLandsNonce
+  sftLandsNonce,
+  sftHauntedHouseId
 } from 'config';
 import {
   useGetAccountInfo,
@@ -23,12 +24,13 @@ import {
 import { Sft, Token } from 'pages/Game/models';
 import { useSendShadowLandsTransaction } from 'pages/Game/transactions';
 
-export const Account = ({ sfts = [], outputTaverns, outputBanks }) => {
+export const Account = ({ sfts = [], outputTaverns, outputBanks, outputHauntedHouses }) => {
   const { network } = useGetNetworkConfig();
   const { address, account } = useGetAccountInfo();
   const [lands, setLandsList] = useState<Sft[]>();
   const [taverns, setTavernsList] = useState<Sft[]>();
   const [banks, setBanksList] = useState<Sft[]>();
+  const [hauntedHouses, setHauntedHousesList] = useState<Sft[]>();
   const [dust, setDustToken] = useState<Token | null>();
   const { hasPendingTransactions } = useGetPendingTransactions();
   const { sendStakeLandTransaction, sendUnstakeLandTransaction } =
@@ -95,6 +97,23 @@ export const Account = ({ sfts = [], outputTaverns, outputBanks }) => {
       });
   }, [hasPendingTransactions]);
 
+  useEffect(() => {
+    // Use [] as second argument in useEffect for not rendering each time
+    axios
+      .get<any>(
+        `${mvxApiUrl}/accounts/${address}/nfts?size=25&identifiers=${sftHauntedHouseId}`
+      )
+      .then((response) => {
+        const res = orderBy(
+          response.data,
+          ['collection', 'nonce'],
+          ['desc', 'asc']
+        );
+        setHauntedHousesList(res);
+        outputHauntedHouses(res);
+      });
+  }, [hasPendingTransactions]);
+
   return (
     <OutputContainer>
       <div className='flex flex-col text-black' data-testid='topInfo'>
@@ -106,6 +125,9 @@ export const Account = ({ sfts = [], outputTaverns, outputBanks }) => {
         </p>
         <p>
           <Label>Banks: </Label> {banks?.[0]?.balance ?? 0}
+        </p>
+        <p>
+          <Label>Haunted Houses: </Label> {hauntedHouses?.[0]?.balance ?? 0}
         </p>
         <p className='flex items-center'>
           <Label>$DUST: </Label>

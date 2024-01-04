@@ -15,8 +15,9 @@ import { sftTavernNonce } from 'config/config.devnet';
 import { Tavern } from './Tavern';
 import { Land } from './Land';
 import { useSendShadowLandsTransaction } from '../transactions';
-import { sftBanksNonce } from 'config';
+import { sftBanksNonce, sftHauntedHouseNonce } from 'config';
 import { Bank } from './Bank';
+import { HauntedHouse } from './HauntedHouse';
 
 function Loader() {
   return (
@@ -26,7 +27,7 @@ function Loader() {
   );
 }
 
-export const Map = ({ sfts, walletTaverns, walletBanks, rewardsPerDay }) => {
+export const Map = ({ sfts, walletTaverns, walletBanks, walletHauntedHouses, rewardsPerDay }) => {
   const { network } = useGetNetworkConfig();
   const { address, account } = useGetAccountInfo();
   const { sendStakeBuildingTransaction } = useSendShadowLandsTransaction();
@@ -36,6 +37,7 @@ export const Map = ({ sfts, walletTaverns, walletBanks, rewardsPerDay }) => {
   const [hovered, hover] = useState(false);
   const [hovered1, hover1] = useState(false);
   const [hovered2, hover2] = useState(false);
+  const [hovered3, hover3] = useState(false);
 
   useEffect(() => {
     document.body.style.cursor = hovered1 ? 'pointer' : 'auto';
@@ -109,6 +111,28 @@ export const Map = ({ sfts, walletTaverns, walletBanks, rewardsPerDay }) => {
                 color={hovered2 ? 'blue' : 'white'}
                 position={[-1, 1, 3]}
                 rotation={[0, Math.PI / 2, 0]}
+              />
+            )
+          )}
+          {/* Haunted House */}
+          {sfts !== undefined &&
+          sfts.filter((x) => x === sftHauntedHouseNonce).length > 0 ? (
+            <HauntedHouse position={[-6, 1.2, -3]}
+            rotation={[0, Math.PI / 3, 0]} />
+          ) : (
+            sfts !== undefined &&
+            walletHauntedHouses.length > 0 &&
+            sfts.filter((x) => x === sftHauntedHouseNonce).length === 0 && (
+              <HauntedHouse
+                onClick={(event) => {
+                  hover1(false);
+                  sendStakeBuildingTransaction(sftHauntedHouseNonce);
+                }}
+                onPointerOver={(event) => hover3(true)}
+                onPointerOut={(event) => hover3(false)}
+                color={hovered3 ? 'blue' : 'white'}
+                position={[-6, 1.2, -3]}
+                rotation={[0, Math.PI / 3, 0]}
               />
             )
           )}
