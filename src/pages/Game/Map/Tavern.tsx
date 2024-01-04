@@ -9,6 +9,7 @@ export function Tavern({ position, color, rotation, ...props }: any) {
   const { nodes, materials } = useGLTF('/game/Tavern.glb');
   return (
     <group {...props} dispose={null}>
+      <spotLight position={position} color={'red'} intensity={Math.PI * 20} />
       <mesh
         name='Crypte'
         castShadow

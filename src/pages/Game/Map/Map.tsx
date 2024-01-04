@@ -66,8 +66,8 @@ export const Map = ({ sfts, walletTaverns, walletBanks, walletHauntedHouses, rew
         <Stage
           controls={ref}
           preset='rembrandt'
-          intensity={4}
-          environment='dawn'
+          intensity={-4}
+          environment='sunset'
         >
           <Land
             onPointerOver={(event) => hover(true)}
