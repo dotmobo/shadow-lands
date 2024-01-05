@@ -9,15 +9,19 @@ export function Crypt({ position, color, rotation, ...props }: any) {
   const { nodes, materials } = useGLTF('/game/Crypt.glb');
   return (
     <group {...props} dispose={null}>
-      <spotLight position={position} color={'red'} intensity={Math.PI * 20} />
+      <spotLight
+        position={[position[0], position[1]+0.2, position[2]]}
+        color={'aqua'}
+        intensity={Math.PI * 10}
+      />
       <mesh
-        name='Crypt'
+        name='Cube001'
         castShadow
         receiveShadow
-        geometry={nodes.Crypt.geometry}
-        material={materials.Crypt}
+        geometry={nodes.Crypte001.geometry}
+        material={materials.Crypt_General}
         position={position}
-        scale={[0.5, 0.5, 0.5]}
+        scale={[0.3, 0.3, 0.3]}
         rotation={rotation}
       >
         {color !== undefined && (

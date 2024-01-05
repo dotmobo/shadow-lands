@@ -15,9 +15,10 @@ import { sftTavernNonce } from 'config/config.devnet';
 import { Tavern } from './Tavern';
 import { Land } from './Land';
 import { useSendShadowLandsTransaction } from '../transactions';
-import { sftBanksNonce, sftHauntedHouseNonce } from 'config';
+import { sftBanksNonce, sftCryptNonce, sftHauntedHouseNonce } from 'config';
 import { Bank } from './Bank';
 import { HauntedHouse } from './HauntedHouse';
+import { Crypt } from './Crypt';
 
 function Loader() {
   return (
@@ -27,7 +28,14 @@ function Loader() {
   );
 }
 
-export const Map = ({ sfts, walletTaverns, walletBanks, walletHauntedHouses, walletCrypts, rewardsPerDay }) => {
+export const Map = ({
+  sfts,
+  walletTaverns,
+  walletBanks,
+  walletHauntedHouses,
+  walletCrypts,
+  rewardsPerDay
+}) => {
   const { network } = useGetNetworkConfig();
   const { address, account } = useGetAccountInfo();
   const { sendStakeBuildingTransaction } = useSendShadowLandsTransaction();
@@ -38,6 +46,7 @@ export const Map = ({ sfts, walletTaverns, walletBanks, walletHauntedHouses, wal
   const [hovered1, hover1] = useState(false);
   const [hovered2, hover2] = useState(false);
   const [hovered3, hover3] = useState(false);
+  const [hovered4, hover4] = useState(false);
 
   useEffect(() => {
     document.body.style.cursor = hovered1 ? 'pointer' : 'auto';
@@ -66,7 +75,7 @@ export const Map = ({ sfts, walletTaverns, walletBanks, walletHauntedHouses, wal
         <Stage
           controls={ref}
           preset='rembrandt'
-          intensity={-4}
+          intensity={-3}
           environment='sunset'
         >
           <Land
@@ -103,7 +112,7 @@ export const Map = ({ sfts, walletTaverns, walletBanks, walletHauntedHouses, wal
             sfts.filter((x) => x === sftBanksNonce).length === 0 && (
               <Bank
                 onClick={(event) => {
-                  hover1(false);
+                  hover2(false);
                   sendStakeBuildingTransaction(sftBanksNonce);
                 }}
                 onPointerOver={(event) => hover2(true)}
@@ -117,15 +126,17 @@ export const Map = ({ sfts, walletTaverns, walletBanks, walletHauntedHouses, wal
           {/* Haunted House */}
           {sfts !== undefined &&
           sfts.filter((x) => x === sftHauntedHouseNonce).length > 0 ? (
-            <HauntedHouse position={[-6, 1.2, -3]}
-            rotation={[0, Math.PI / 3, 0]} />
+            <HauntedHouse
+              position={[-6, 1.2, -3]}
+              rotation={[0, Math.PI / 3, 0]}
+            />
           ) : (
             sfts !== undefined &&
             walletHauntedHouses.length > 0 &&
             sfts.filter((x) => x === sftHauntedHouseNonce).length === 0 && (
               <HauntedHouse
                 onClick={(event) => {
-                  hover1(false);
+                  hover3(false);
                   sendStakeBuildingTransaction(sftHauntedHouseNonce);
                 }}
                 onPointerOver={(event) => hover3(true)}
@@ -133,6 +144,27 @@ export const Map = ({ sfts, walletTaverns, walletBanks, walletHauntedHouses, wal
                 color={hovered3 ? 'blue' : 'white'}
                 position={[-6, 1.2, -3]}
                 rotation={[0, Math.PI / 3, 0]}
+              />
+            )
+          )}
+          {/* Crypt */}
+          {sfts !== undefined &&
+          sfts.filter((x) => x === sftCryptNonce).length > 0 ? (
+            <Crypt position={[-4.7, 1.9, -8]} rotation={[0, Math.PI / 5, 0]} />
+          ) : (
+            sfts !== undefined &&
+            walletCrypts.length > 0 &&
+            sfts.filter((x) => x === sftCryptNonce).length === 0 && (
+              <Crypt
+                onClick={(event) => {
+                  hover4(false);
+                  sendStakeBuildingTransaction(sftCryptNonce);
+                }}
+                onPointerOver={(event) => hover4(true)}
+                onPointerOut={(event) => hover4(false)}
+                color={hovered4 ? 'blue' : 'white'}
+                position={[-4.7, 1.9, -8]}
+                rotation={[0, Math.PI / 5, 0]}
               />
             )
           )}

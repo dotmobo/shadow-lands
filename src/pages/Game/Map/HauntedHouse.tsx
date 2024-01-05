@@ -9,7 +9,11 @@ export function HauntedHouse({ position, color, rotation, ...props }: any) {
   const { nodes, materials } = useGLTF('/game/HauntedHouse.glb');
   return (
     <group {...props} dispose={null}>
-      <spotLight position={position} color={'red'} intensity={Math.PI * 20} />
+      <spotLight
+        position={[position[0], position[1] + 0.2, position[2]]}
+        color={'chartreuse'}
+        intensity={Math.PI * 10}
+      />
       <mesh
         name='Cube001'
         castShadow
