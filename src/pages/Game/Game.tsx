@@ -146,7 +146,7 @@ export const Game = () => {
             {sfts !== undefined &&
               sfts.filter((x) => x === sftLandsNonce).length > 0 && (
                 <>
-                  <div className='flex w-full ml-4 mt-2 text-slate-300'>
+                  <div className='flex w-full ml-2 mt-2 text-slate-300'>
                     <Button
                       aria-label='toggle auto rotate'
                       onClick={() => {
