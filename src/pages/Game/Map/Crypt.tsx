@@ -18,7 +18,7 @@ export function Crypt({ position, color, rotation, ...props }: any) {
         name='Cube001'
         castShadow
         receiveShadow
-        geometry={nodes.Crypte001.geometry}
+        geometry={nodes.Crypte.geometry}
         material={materials.Crypt_General}
         position={position}
         scale={[0.3, 0.3, 0.3]}
