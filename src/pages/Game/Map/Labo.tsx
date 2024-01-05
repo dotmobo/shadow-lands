@@ -6,7 +6,7 @@ import React, { useRef } from 'react';
 import { useGLTF } from '@react-three/drei';
 
 export function Labo({ position, color, rotation, ...props }: any) {
-  const { nodes, materials } = useGLTF('/game/Crypt.glb');
+  const { nodes, materials } = useGLTF('/game/Labo.glb');
   return (
     <group {...props} dispose={null}>
       {color === undefined && (
@@ -20,10 +20,10 @@ export function Labo({ position, color, rotation, ...props }: any) {
         name='Cube001'
         castShadow
         receiveShadow
-        geometry={nodes.Crypte.geometry}
-        material={materials.Crypt_General}
+        geometry={nodes.Labo.geometry}
+        material={materials.Cuivre}
         position={position}
-        scale={[0.3, 0.3, 0.3]}
+        scale={[0.2, 0.2, 0.2]}
         rotation={rotation}
       >
         {color !== undefined && (
@@ -34,4 +34,4 @@ export function Labo({ position, color, rotation, ...props }: any) {
   );
 }
 
-useGLTF.preload('/game/Crypt.glb');
+useGLTF.preload('/game/Labo.glb');

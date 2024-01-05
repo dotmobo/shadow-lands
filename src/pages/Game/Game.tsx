@@ -166,7 +166,7 @@ export const Game = () => {
                       )}
                     </Button>
                   </div>
-                  <div className='flex w-full mt-4 justify-center gap-5 text-slate-300'>
+                  <div className='flex w-full justify-center gap-4 text-slate-300'>
                     <span title='Land'>
                       <FontAwesomeIcon icon={faTree} size='sm' />{' '}
                       {sfts.filter((x) => x === sftLandsNonce).length} / 1
@@ -185,7 +185,7 @@ export const Game = () => {
                       1
                     </span>
                   </div>
-                  <div className='flex w-full mt-4 justify-center gap-5 text-slate-300'>
+                  <div className='flex w-full mt-2 justify-center gap-4 text-slate-300'>
                     <span title='Crypt'>
                       <FontAwesomeIcon icon={faCross} size='sm' />{' '}
                       {sfts.filter((x) => x === sftCryptNonce).length} / 1

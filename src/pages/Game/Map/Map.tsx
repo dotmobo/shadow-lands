@@ -66,7 +66,7 @@ export const Map = ({
 
   return (
     <Canvas shadows dpr={[1, 2]}>
-      <Text
+      {/* <Text
         color='white'
         anchorX='center'
         anchorY='middle'
@@ -82,7 +82,7 @@ export const Map = ({
         position={[0, 9, 0]}
       >
         {rewardsPerDay * sfts.length} $DUST/Day
-      </Text>
+      </Text> */}
       <Suspense fallback={<Loader />}>
         <Stage
           controls={ref}
