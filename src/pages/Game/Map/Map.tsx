@@ -199,7 +199,7 @@ export const Map = ({
           )}
         </Stage>
       </Suspense>
-      <OrbitControls ref={ref} autoRotate={hovered ? false : false} />
+      <OrbitControls ref={ref} autoRotate={hovered ? false : true} />
       <PerspectiveCamera
         makeDefault
         position={[500, 200, 1]}
