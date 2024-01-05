@@ -27,7 +27,7 @@ function Loader() {
   );
 }
 
-export const Map = ({ sfts, walletTaverns, walletBanks, walletHauntedHouses, rewardsPerDay }) => {
+export const Map = ({ sfts, walletTaverns, walletBanks, walletHauntedHouses, walletCrypts, rewardsPerDay }) => {
   const { network } = useGetNetworkConfig();
   const { address, account } = useGetAccountInfo();
   const { sendStakeBuildingTransaction } = useSendShadowLandsTransaction();

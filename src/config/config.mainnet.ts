@@ -15,6 +15,8 @@ export const sftBanksId = 'DEVSHALAN-933f80-04';
 export const sftBanksNonce = 4;
 export const sftHauntedHouseId = 'DEVSHALAN-933f80-05';
 export const sftHauntedHouseNonce = 5;
+export const sftCryptId = 'DEVSHALAN-933f80-06';
+export const sftCryptNonce = 6;
 export const dustTokenId = 'DUST-e7e490';
 export const contractGameAddress =
   'erd1qqqqqqqqqqqqqpgqvfh5j05pw23upxz4hmh6fdsrcmvfjjd22krsxc4hy2';

@@ -14,7 +14,8 @@ import {
   sftBanksId,
   sftLandsId,
   sftLandsNonce,
-  sftHauntedHouseId
+  sftHauntedHouseId,
+  sftCryptId
 } from 'config';
 import {
   useGetAccountInfo,
@@ -24,13 +25,20 @@ import {
 import { Sft, Token } from 'pages/Game/models';
 import { useSendShadowLandsTransaction } from 'pages/Game/transactions';
 
-export const Account = ({ sfts = [], outputTaverns, outputBanks, outputHauntedHouses }) => {
+export const Account = ({
+  sfts = [],
+  outputTaverns,
+  outputBanks,
+  outputHauntedHouses,
+  outputCrypts
+}) => {
   const { network } = useGetNetworkConfig();
   const { address, account } = useGetAccountInfo();
   const [lands, setLandsList] = useState<Sft[]>();
   const [taverns, setTavernsList] = useState<Sft[]>();
   const [banks, setBanksList] = useState<Sft[]>();
   const [hauntedHouses, setHauntedHousesList] = useState<Sft[]>();
+  const [crypts, setCryptsList] = useState<Sft[]>();
   const [dust, setDustToken] = useState<Token | null>();
   const { hasPendingTransactions } = useGetPendingTransactions();
   const { sendStakeLandTransaction, sendUnstakeLandTransaction } =
@@ -114,6 +122,23 @@ export const Account = ({ sfts = [], outputTaverns, outputBanks, outputHauntedHo
       });
   }, [hasPendingTransactions]);
 
+  useEffect(() => {
+    // Use [] as second argument in useEffect for not rendering each time
+    axios
+      .get<any>(
+        `${mvxApiUrl}/accounts/${address}/nfts?size=25&identifiers=${sftCryptId}`
+      )
+      .then((response) => {
+        const res = orderBy(
+          response.data,
+          ['collection', 'nonce'],
+          ['desc', 'asc']
+        );
+        setCryptsList(res);
+        outputCrypts(res);
+      });
+  }, [hasPendingTransactions]);
+
   return (
     <OutputContainer>
       <div className='flex flex-col text-black' data-testid='topInfo'>
@@ -129,7 +154,10 @@ export const Account = ({ sfts = [], outputTaverns, outputBanks, outputHauntedHo
         <p>
           <Label>Haunted Houses: </Label> {hauntedHouses?.[0]?.balance ?? 0}
         </p>
-        <p className='flex items-center'>
+        <p>
+          <Label>Crypts: </Label> {crypts?.[0]?.balance ?? 0}
+        </p>
+        <p className='flex items-center mt-4'>
           <Label>$DUST: </Label>
           <FormatAmount
             value={dust?.balance ?? 0}

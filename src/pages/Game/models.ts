@@ -18,6 +18,7 @@ export type WidgetsType = {
     outputTaverns?: any;
     outputBanks?: any;
     outputHauntedHouses?: any;
+    outputCrypts?: any;
   };
   reference: string;
 };
