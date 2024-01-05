@@ -41,7 +41,8 @@ export const Map = ({
   walletHauntedHouses,
   walletCrypts,
   walletLabos,
-  rewardsPerDay
+  rewardsPerDay,
+  defaultAutoRotate
 }) => {
   const { network } = useGetNetworkConfig();
   const { address, account } = useGetAccountInfo();
@@ -202,7 +203,10 @@ export const Map = ({
           )}
         </Stage>
       </Suspense>
-      <OrbitControls ref={ref} autoRotate={hovered ? false : true} />
+      <OrbitControls
+        ref={ref}
+        autoRotate={hovered ? false : defaultAutoRotate}
+      />
       <PerspectiveCamera
         makeDefault
         position={[500, 200, 1]}

@@ -6,7 +6,7 @@ import {
   Query
 } from '@multiversx/sdk-core/out';
 import { ProxyNetworkProvider } from '@multiversx/sdk-network-providers/out';
-import { Card } from 'components';
+import { Button, Card } from 'components';
 import {
   contractGameAddress,
   sftBanksNonce,
@@ -34,6 +34,9 @@ import {
   faCross,
   faFlaskVial,
   faHouse,
+  faPause,
+  faPlay,
+  faRotate,
   faTree
 } from '@fortawesome/free-solid-svg-icons';
 
@@ -73,6 +76,8 @@ export const Game = () => {
     >(null);
 
   const [sfts, setSftsList] = useState<number[]>();
+
+  const [autoRotate, setAutoRotate] = useState<boolean>(true);
 
   const proxy = new ProxyNetworkProvider(network.apiAddress, {
     timeout: 3000
@@ -141,6 +146,26 @@ export const Game = () => {
             {sfts !== undefined &&
               sfts.filter((x) => x === sftLandsNonce).length > 0 && (
                 <>
+                  <div className='flex w-full ml-4 mt-2 text-slate-300'>
+                    <Button
+                      aria-label='toggle auto rotate'
+                      onClick={() => {
+                        setAutoRotate(!autoRotate);
+                      }}
+                    >
+                      <FontAwesomeIcon
+                        icon={faRotate}
+                        size='sm'
+                        className='mr-1'
+                      />
+                      {autoRotate && (
+                        <FontAwesomeIcon icon={faPause} size='sm' />
+                      )}
+                      {!autoRotate && (
+                        <FontAwesomeIcon icon={faPlay} size='sm' />
+                      )}
+                    </Button>
+                  </div>
                   <div className='flex w-full mt-4 justify-center gap-5 text-slate-300'>
                     <span title='Land'>
                       <FontAwesomeIcon icon={faTree} size='sm' />{' '}
@@ -178,6 +203,7 @@ export const Game = () => {
                     walletCrypts={crypts}
                     walletLabos={labos}
                     rewardsPerDay={rewardsTokenAmountPerDay}
+                    defaultAutoRotate={autoRotate}
                   />
                 </>
               )}
