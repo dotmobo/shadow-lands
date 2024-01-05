@@ -57,7 +57,10 @@ export const Map = ({
   const [hovered5, hover5] = useState(false);
 
   useEffect(() => {
-    document.body.style.cursor = hovered1 ? 'pointer' : 'auto';
+    document.body.style.cursor =
+      hovered1 || hovered2 || hovered3 || hovered4 || hovered5
+        ? 'pointer'
+        : 'auto';
   }, [hovered1, hovered2, hovered3, hovered4, hovered5]);
 
   return (
