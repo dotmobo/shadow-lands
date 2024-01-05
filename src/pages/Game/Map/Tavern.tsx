@@ -27,7 +27,7 @@ export function Tavern({ position, color, rotation, ...props }: any) {
         rotation={rotation}
       >
         {color !== undefined && (
-          <meshStandardMaterial color={color} transparent />
+          <meshStandardMaterial color={color} transparent opacity={0.2} />
         )}
       </mesh>
     </group>
