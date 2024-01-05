@@ -65,20 +65,7 @@ export const Account = ({
     // Use [] as second argument in useEffect for not rendering each time
     axios
       .get<any>(
-        `${mvxApiUrl}/accounts/${address}/nfts?size=25&identifiers=${sftLandsId}`
-      )
-      .then((response) => {
-        setLandsList(
-          orderBy(response.data, ['collection', 'nonce'], ['desc', 'asc'])
-        );
-      });
-  }, [hasPendingTransactions]);
-
-  useEffect(() => {
-    // Use [] as second argument in useEffect for not rendering each time
-    axios
-      .get<any>(
-        `${mvxApiUrl}/accounts/${address}/nfts?size=25&identifiers=${sftTavernId}`
+        `${mvxApiUrl}/accounts/${address}/nfts?size=3330&identifiers=${sftLandsId},${sftTavernId},${sftBanksId},${sftHauntedHouseId},${sftCryptId},${sftLaboId}`
       )
       .then((response) => {
         const res = orderBy(
@@ -86,76 +73,31 @@ export const Account = ({
           ['collection', 'nonce'],
           ['desc', 'asc']
         );
-        setTavernsList(res);
-        outputTaverns(res);
-      });
-  }, [hasPendingTransactions]);
-
-  useEffect(() => {
-    // Use [] as second argument in useEffect for not rendering each time
-    axios
-      .get<any>(
-        `${mvxApiUrl}/accounts/${address}/nfts?size=25&identifiers=${sftBanksId}`
-      )
-      .then((response) => {
-        const res = orderBy(
-          response.data,
-          ['collection', 'nonce'],
-          ['desc', 'asc']
+        // Lands
+        const lands = res.filter((x) => x.identifier === sftLandsId);
+        setLandsList(lands);
+        // Taverns
+        const taverns = res.filter((x) => x.identifier === sftTavernId);
+        setTavernsList(taverns);
+        outputTaverns(taverns);
+        // Banks
+        const banks = res.filter((x) => x.identifier === sftBanksId);
+        setBanksList(banks);
+        outputBanks(banks);
+        // Haunted Houses
+        const hauntedHouses = res.filter(
+          (x) => x.identifier === sftHauntedHouseId
         );
-        setBanksList(res);
-        outputBanks(res);
-      });
-  }, [hasPendingTransactions]);
-
-  useEffect(() => {
-    // Use [] as second argument in useEffect for not rendering each time
-    axios
-      .get<any>(
-        `${mvxApiUrl}/accounts/${address}/nfts?size=25&identifiers=${sftHauntedHouseId}`
-      )
-      .then((response) => {
-        const res = orderBy(
-          response.data,
-          ['collection', 'nonce'],
-          ['desc', 'asc']
-        );
-        setHauntedHousesList(res);
-        outputHauntedHouses(res);
-      });
-  }, [hasPendingTransactions]);
-
-  useEffect(() => {
-    // Use [] as second argument in useEffect for not rendering each time
-    axios
-      .get<any>(
-        `${mvxApiUrl}/accounts/${address}/nfts?size=25&identifiers=${sftCryptId}`
-      )
-      .then((response) => {
-        const res = orderBy(
-          response.data,
-          ['collection', 'nonce'],
-          ['desc', 'asc']
-        );
-        setCryptsList(res);
-        outputCrypts(res);
-      });
-  }, [hasPendingTransactions]);
-
-    useEffect(() => {
-    // Use [] as second argument in useEffect for not rendering each time
-    axios
-      .get<any>(
-        `${mvxApiUrl}/accounts/${address}/nfts?size=25&identifiers=${sftLaboId}`
-      )
-      .then((response) => {
-        const res = orderBy(
-          response.data,
-          ['collection', 'nonce'],
-          ['desc', 'asc']
-        );
-        setLabosList(res);
-        outputLabos(res);
+        setHauntedHousesList(hauntedHouses);
+        outputHauntedHouses(hauntedHouses);
+        // Crypts
+        const crypts = res.filter((x) => x.identifier === sftCryptId);
+        setCryptsList(crypts);
+        outputCrypts(crypts);
+        // Labos
+        const labos = res.filter((x) => x.identifier === sftLaboId);
+        setLabosList(labos);
+        outputLabos(labos);
       });
   }, [hasPendingTransactions]);
 
