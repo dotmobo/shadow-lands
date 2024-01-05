@@ -15,10 +15,16 @@ import { sftTavernNonce } from 'config/config.devnet';
 import { Tavern } from './Tavern';
 import { Land } from './Land';
 import { useSendShadowLandsTransaction } from '../transactions';
-import { sftBanksNonce, sftCryptNonce, sftHauntedHouseNonce } from 'config';
+import {
+  sftBanksNonce,
+  sftCryptNonce,
+  sftHauntedHouseNonce,
+  sftLaboNonce
+} from 'config';
 import { Bank } from './Bank';
 import { HauntedHouse } from './HauntedHouse';
 import { Crypt } from './Crypt';
+import { Labo } from './Labo';
 
 function Loader() {
   return (
@@ -34,6 +40,7 @@ export const Map = ({
   walletBanks,
   walletHauntedHouses,
   walletCrypts,
+  walletLabos,
   rewardsPerDay
 }) => {
   const { network } = useGetNetworkConfig();
@@ -47,10 +54,11 @@ export const Map = ({
   const [hovered2, hover2] = useState(false);
   const [hovered3, hover3] = useState(false);
   const [hovered4, hover4] = useState(false);
+  const [hovered5, hover5] = useState(false);
 
   useEffect(() => {
     document.body.style.cursor = hovered1 ? 'pointer' : 'auto';
-  }, [hovered1]);
+  }, [hovered1, hovered2, hovered3, hovered4, hovered5]);
 
   return (
     <Canvas shadows dpr={[1, 2]}>
@@ -168,9 +176,30 @@ export const Map = ({
               />
             )
           )}
+          {/* Laboratory */}
+          {sfts !== undefined &&
+          sfts.filter((x) => x === sftLaboNonce).length > 0 ? (
+            <Labo position={[-5, 1.5, 8.5]} rotation={[0, Math.PI / 1.2, 0]} />
+          ) : (
+            sfts !== undefined &&
+            walletLabos.length > 0 &&
+            sfts.filter((x) => x === sftLaboNonce).length === 0 && (
+              <Labo
+                onClick={(event) => {
+                  hover5(false);
+                  sendStakeBuildingTransaction(sftLaboNonce);
+                }}
+                onPointerOver={(event) => hover5(true)}
+                onPointerOut={(event) => hover5(false)}
+                color={hovered5 ? 'blue' : 'white'}
+                position={[-5, 1.5, 8.5]}
+                rotation={[0, Math.PI / 1.2, 0]}
+              />
+            )
+          )}
         </Stage>
       </Suspense>
-      <OrbitControls ref={ref} autoRotate={hovered ? false : true} />
+      <OrbitControls ref={ref} autoRotate={hovered ? false : false} />
       <PerspectiveCamera
         makeDefault
         position={[500, 200, 1]}

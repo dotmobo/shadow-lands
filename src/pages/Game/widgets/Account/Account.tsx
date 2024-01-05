@@ -15,7 +15,8 @@ import {
   sftLandsId,
   sftLandsNonce,
   sftHauntedHouseId,
-  sftCryptId
+  sftCryptId,
+  sftLaboId
 } from 'config';
 import {
   useGetAccountInfo,
@@ -30,6 +31,7 @@ export const Account = ({
   outputTaverns,
   outputBanks,
   outputHauntedHouses,
+  outputLabos,
   outputCrypts
 }) => {
   const { network } = useGetNetworkConfig();
@@ -39,6 +41,7 @@ export const Account = ({
   const [banks, setBanksList] = useState<Sft[]>();
   const [hauntedHouses, setHauntedHousesList] = useState<Sft[]>();
   const [crypts, setCryptsList] = useState<Sft[]>();
+  const [labos, setLabosList] = useState<Sft[]>();
   const [dust, setDustToken] = useState<Token | null>();
   const { hasPendingTransactions } = useGetPendingTransactions();
   const { sendStakeLandTransaction, sendUnstakeLandTransaction } =
@@ -139,6 +142,23 @@ export const Account = ({
       });
   }, [hasPendingTransactions]);
 
+    useEffect(() => {
+    // Use [] as second argument in useEffect for not rendering each time
+    axios
+      .get<any>(
+        `${mvxApiUrl}/accounts/${address}/nfts?size=25&identifiers=${sftLaboId}`
+      )
+      .then((response) => {
+        const res = orderBy(
+          response.data,
+          ['collection', 'nonce'],
+          ['desc', 'asc']
+        );
+        setLabosList(res);
+        outputLabos(res);
+      });
+  }, [hasPendingTransactions]);
+
   return (
     <OutputContainer>
       <div className='flex flex-col text-black' data-testid='topInfo'>
@@ -156,6 +176,9 @@ export const Account = ({
         </p>
         <p>
           <Label>Crypts: </Label> {crypts?.[0]?.balance ?? 0}
+        </p>
+        <p>
+          <Label>Laboratory: </Label> {labos?.[0]?.balance ?? 0}
         </p>
         <p className='flex items-center mt-4'>
           <Label>$DUST: </Label>

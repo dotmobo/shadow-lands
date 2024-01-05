@@ -12,6 +12,7 @@ import {
   sftBanksNonce,
   sftCryptNonce,
   sftHauntedHouseNonce,
+  sftLaboNonce,
   sftLandsNonce,
   sftTavernNonce
 } from 'config';
@@ -31,6 +32,7 @@ import {
   faBeer,
   faBuildingColumns,
   faCross,
+  faFlaskVial,
   faHouse,
   faTree
 } from '@fortawesome/free-solid-svg-icons';
@@ -58,6 +60,7 @@ export const Game = () => {
   const [banks, setBanksList] = useState<Sft[]>([]);
   const [hauntedHouses, setHauntedHousesList] = useState<Sft[]>([]);
   const [crypts, setCryptsList] = useState<Sft[]>([]);
+  const [labos, setLabosList] = useState<Sft[]>([]);
 
   const [rewardsTokenAmountPerDay, setRewardsTokenAmountPerDay] =
     useState<number>(0);
@@ -162,6 +165,10 @@ export const Game = () => {
                       <FontAwesomeIcon icon={faCross} size='sm' />{' '}
                       {sfts.filter((x) => x === sftCryptNonce).length} / 1
                     </span>
+                    <span title='Laboratory'>
+                      <FontAwesomeIcon icon={faFlaskVial} size='sm' />{' '}
+                      {sfts.filter((x) => x === sftLaboNonce).length} / 1
+                    </span>
                   </div>
                   <Map
                     sfts={sfts}
@@ -169,6 +176,7 @@ export const Game = () => {
                     walletBanks={banks}
                     walletHauntedHouses={hauntedHouses}
                     walletCrypts={crypts}
+                    walletLabos={labos}
                     rewardsPerDay={rewardsTokenAmountPerDay}
                   />
                 </>
@@ -192,6 +200,7 @@ export const Game = () => {
                   props['outputBanks'] = setBanksList;
                   props['outputHauntedHouses'] = setHauntedHousesList;
                   props['outputCrypts'] = setCryptsList;
+                  props['outputLabos'] = setLabosList;
 
                   return (
                     <Card
