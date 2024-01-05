@@ -9,7 +9,13 @@ export function Bank({ position, color, rotation, ...props }: any) {
   const { nodes, materials } = useGLTF('/game/Bank.glb');
   return (
     <group {...props} dispose={null}>
-      <spotLight position={[position[0], position[1]+0.2, position[2]]} color={'gold'} intensity={Math.PI * 10} />
+      {color === undefined && (
+        <spotLight
+          position={[position[0], position[1] + 0.2, position[2]]}
+          color={'gold'}
+          intensity={Math.PI * 10}
+        />
+      )}
       <mesh
         name='Bank512'
         castShadow
