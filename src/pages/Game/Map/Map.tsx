@@ -97,7 +97,7 @@ export const Map = ({
           {/* Tavern */}
           {sfts !== undefined &&
           sfts.filter((x) => x === sftTavernNonce).length > 0 ? (
-            <Tavern position={[2.5, 1, -2.5]} />
+            <Tavern position={[4.435, 1.067, 5.3641 ]} rotation={[0, -2.2521728667735, 0]}/>
           ) : (
             sfts !== undefined &&
             walletTaverns.length > 0 &&
@@ -110,14 +110,14 @@ export const Map = ({
                 onPointerOver={(event) => hover1(true)}
                 onPointerOut={(event) => hover1(false)}
                 color={hovered1 ? 'blue' : 'white'}
-                position={[2.5, 1, -2.5]}
+                position={[4.435, 1.067, 5.3641 ]} rotation={[0, -2.2521728667735, 0]}
               />
             )
           )}
           {/* Bank */}
           {sfts !== undefined &&
           sfts.filter((x) => x === sftBanksNonce).length > 0 ? (
-            <Bank position={[-1, 1, 3]} rotation={[0, Math.PI / 2, 0]} />
+            <Bank position={[-3.0777, 1.0154, -3.8426]} rotation={[0, 0.2688036, 0]} />
           ) : (
             sfts !== undefined &&
             walletBanks.length > 0 &&
@@ -130,8 +130,8 @@ export const Map = ({
                 onPointerOver={(event) => hover2(true)}
                 onPointerOut={(event) => hover2(false)}
                 color={hovered2 ? 'blue' : 'white'}
-                position={[-1, 1, 3]}
-                rotation={[0, Math.PI / 2, 0]}
+                position={[-3.0777, 1.0154, -3.8426]}
+                rotation={[0, 0.2688036, 0]}
               />
             )
           )}
@@ -139,8 +139,8 @@ export const Map = ({
           {sfts !== undefined &&
           sfts.filter((x) => x === sftHauntedHouseNonce).length > 0 ? (
             <HauntedHouse
-              position={[-6, 1.2, -3]}
-              rotation={[0, Math.PI / 3, 0]}
+              position={[5.5994, 1.6568, -1.1516]}
+              rotation={[0, -1.5338651598227, 0]}
             />
           ) : (
             sfts !== undefined &&
@@ -154,15 +154,15 @@ export const Map = ({
                 onPointerOver={(event) => hover3(true)}
                 onPointerOut={(event) => hover3(false)}
                 color={hovered3 ? 'blue' : 'white'}
-                position={[-6, 1.2, -3]}
-                rotation={[0, Math.PI / 3, 0]}
+                position={[5.5994, 1.6568, -1.1516]}
+                rotation={[0, -1.5338651598227, 0]}
               />
             )
           )}
           {/* Crypt */}
           {sfts !== undefined &&
           sfts.filter((x) => x === sftCryptNonce).length > 0 ? (
-            <Crypt position={[-4.7, 1.9, -8]} rotation={[0, Math.PI / 5, 0]} />
+            <Crypt position={[1.8028, 1.378, -5.3541]} rotation={[0, -0.4952958, 0]} />
           ) : (
             sfts !== undefined &&
             walletCrypts.length > 0 &&
@@ -175,15 +175,15 @@ export const Map = ({
                 onPointerOver={(event) => hover4(true)}
                 onPointerOut={(event) => hover4(false)}
                 color={hovered4 ? 'blue' : 'white'}
-                position={[-4.7, 1.9, -8]}
-                rotation={[0, Math.PI / 5, 0]}
+                position={[1.8028, 1.378, -5.3541]}
+                rotation={[0, -0.4952958, 0]}
               />
             )
           )}
           {/* Laboratory */}
           {sfts !== undefined &&
           sfts.filter((x) => x === sftLaboNonce).length > 0 ? (
-            <Labo position={[-5, 1.5, 8.5]} rotation={[0, Math.PI / 1.2, 0]} />
+            <Labo position={[-4.6456, 1.0172, 0.69635]} rotation={[0, 1.5538236, 0]} />
           ) : (
             sfts !== undefined &&
             walletLabos.length > 0 &&
@@ -196,8 +196,8 @@ export const Map = ({
                 onPointerOver={(event) => hover5(true)}
                 onPointerOut={(event) => hover5(false)}
                 color={hovered5 ? 'blue' : 'white'}
-                position={[-5, 1.5, 8.5]}
-                rotation={[0, Math.PI / 1.2, 0]}
+                position={[-4.6456, 1.0172, 0.69635]}
+                rotation={[0, 1.5538236, 0]}
               />
             )
           )}

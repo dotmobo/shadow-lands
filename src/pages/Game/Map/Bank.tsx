@@ -11,9 +11,9 @@ export function Bank({ position, color, rotation, ...props }: any) {
     <group {...props} dispose={null}>
       {color === undefined && (
         <spotLight
-          position={[position[0], position[1] + 0.2, position[2]]}
-          color={'gold'}
-          intensity={Math.PI * 10}
+          position={[position[0], position[1] + 0.2, position[2]+0.3]}
+          color={'red'}
+          intensity={Math.PI * 2}
         />
       )}
       <mesh
@@ -23,7 +23,7 @@ export function Bank({ position, color, rotation, ...props }: any) {
         geometry={nodes.Bank512.geometry}
         material={materials.BankGeneral}
         position={position}
-        scale={[0.5, 0.5, 0.5]}
+        scale={[0.4, 0.4, 0.4]}
         rotation={rotation}
       >
         {color !== undefined && (

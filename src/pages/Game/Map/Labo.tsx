@@ -11,9 +11,9 @@ export function Labo({ position, color, rotation, ...props }: any) {
     <group {...props} dispose={null}>
       {color === undefined && (
         <spotLight
-          position={[position[0], position[1] + 0.2, position[2]]}
-          color={'orange'}
-          intensity={Math.PI * 10}
+          position={[position[0] + 0.8, position[1] + 0.2, position[2]]}
+          color={'chartreuse'}
+          intensity={Math.PI * 2}
         />
       )}
       <mesh

@@ -11,9 +11,9 @@ export function Tavern({ position, color, rotation, ...props }: any) {
     <group {...props} dispose={null}>
       {color === undefined && (
         <spotLight
-          position={[position[0], position[1] + 0.2, position[2]]}
+          position={[position[0]+0.3, position[1] + 0.2, position[2]]}
           color={'red'}
-          intensity={Math.PI * 10}
+          intensity={Math.PI * 2}
         />
       )}
       <mesh

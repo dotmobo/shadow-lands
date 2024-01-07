@@ -11,9 +11,9 @@ export function HauntedHouse({ position, color, rotation, ...props }: any) {
     <group {...props} dispose={null}>
       {color === undefined && (
         <spotLight
-          position={[position[0], position[1] + 0.2, position[2]]}
+          position={[position[0]-0.3, position[1] + 0.2, position[2]]}
           color={'chartreuse'}
-          intensity={Math.PI * 10}
+          intensity={Math.PI * 2}
         />
       )}
       <mesh
@@ -23,7 +23,7 @@ export function HauntedHouse({ position, color, rotation, ...props }: any) {
         geometry={nodes.Cube001.geometry}
         material={materials.HauntedGlobal}
         position={position}
-        scale={[0.3, 0.3, 0.3]}
+        scale={[0.211, 0.211, 0.211]}
         rotation={rotation}
       >
         {color !== undefined && (
