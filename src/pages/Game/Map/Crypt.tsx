@@ -35,7 +35,11 @@ export function Crypt({ position, color, rotation, ...props }: any) {
           receiveShadow
           geometry={nodes.Crypte.geometry}
           material={materials.Etage}
-        />
+        >
+          {color !== undefined && (
+            <meshStandardMaterial color={color} transparent opacity={0.2} />
+          )}
+        </mesh>
         <mesh
           name='Colonnes'
           castShadow
@@ -44,51 +48,77 @@ export function Crypt({ position, color, rotation, ...props }: any) {
           material={materials.Colonnes}
           position={[1.555, 2.791, 1.147]}
           scale={0.804}
-        />
+        >
+          {color !== undefined && (
+            <meshStandardMaterial color={color} transparent opacity={0.2} />
+          )}
+        </mesh>
         <mesh
           name='Crypte013'
           castShadow
           receiveShadow
           geometry={nodes.Crypte013.geometry}
           material={materials.Toit}
-        />
+        >
+          {color !== undefined && (
+            <meshStandardMaterial color={color} transparent opacity={0.2} />
+          )}
+        </mesh>
         <mesh
           name='Crypte001'
           castShadow
           receiveShadow
           geometry={nodes.Crypte001.geometry}
           material={materials.Base}
-        />
+        >
+          {color !== undefined && (
+            <meshStandardMaterial color={color} transparent opacity={0.2} />
+          )}
+        </mesh>
         <mesh
           name='Crypte002'
           castShadow
           receiveShadow
           geometry={nodes.Crypte002.geometry}
           material={materials.Vitraux}
-        />
+        >
+          {color !== undefined && (
+            <meshStandardMaterial color={color} transparent opacity={0.2} />
+          )}
+        </mesh>
         <mesh
           name='Crypte003'
           castShadow
           receiveShadow
           geometry={nodes.Crypte003.geometry}
           material={materials.Vitres}
-        />
+        >
+          {color !== undefined && (
+            <meshStandardMaterial color={color} transparent opacity={0.2} />
+          )}
+        </mesh>
         <mesh
           name='Crypte004'
           castShadow
           receiveShadow
           geometry={nodes.Crypte004.geometry}
           material={materials.Porte}
-        />
-        <group name='Armature' position={[-2.235, 9.392, 0.013]}>
-          <skinnedMesh
-            name='Cube'
-            geometry={nodes.Cube.geometry}
-            material={materials.Corbeau}
-            skeleton={nodes.Cube.skeleton}
-          />
-          <primitive object={nodes.Bone} />
-        </group>
+        >
+          {color !== undefined && (
+            <meshStandardMaterial color={color} transparent opacity={0.2} />
+          )}
+        </mesh>
+        {color === undefined && (
+          <group name='Armature' position={[-2.235, 9.392, 0.013]}>
+            <skinnedMesh
+              name='Cube'
+              geometry={nodes.Cube.geometry}
+              material={materials.Corbeau}
+              skeleton={nodes.Cube.skeleton}
+            />
+            <primitive object={nodes.Bone} />
+          </group>
+        )}
       </group>
     </group>
   );
