@@ -1,11 +1,11 @@
-#![no_std]
+#![no_std]  
 
 multiversx_sc::imports!();
 
 #[multiversx_sc::contract]
 pub trait Market {
     #[init]
-    fn init(&self, token_id: TokenIdentifier, price: BigUint, nft_identifier: TokenIdentifier) {
+    fn init(&self, token_id: EgldOrEsdtTokenIdentifier, price: BigUint, nft_identifier: EgldOrEsdtTokenIdentifier) {
         self.token_id().set(&token_id);
         self.price().set(&price);
         self.nft_identifier().set(&nft_identifier);
@@ -19,9 +19,9 @@ pub trait Market {
     #[endpoint]
     fn buy(
         &self,
-        #[payment_token] payment_token: TokenIdentifier,
+        #[payment_token] payment_token: EgldOrEsdtTokenIdentifier,
         #[payment_amount] payment_amount: BigUint,
-        nft_identifier: TokenIdentifier,
+        nft_identifier: EgldOrEsdtTokenIdentifier,
         nft_nonce: u64,
     ) -> SCResult<()> {
         require!(
@@ -42,7 +42,7 @@ pub trait Market {
         let caller = self.blockchain().get_caller();
 
         let amount = BigUint::from(1u32);
-        self.send().direct(&caller, &nft_identifier, nft_nonce, &amount , b"purchase successful");
+        self.send().direct(&caller, &nft_identifier, nft_nonce, &amount);
 
         // Add the amount to the bank
         let bank = self.bank().get();
@@ -62,7 +62,7 @@ pub trait Market {
         let bank = self.bank().get();
 
         self.send()
-            .direct(&caller, &token_id, 0, &bank, b"withdraw successful");
+            .direct(&caller, &token_id, 0, &bank);
 
         // reset the bank
         self.bank().set(BigUint::from(0u32));
@@ -81,7 +81,7 @@ pub trait Market {
 
     #[only_owner]
     #[endpoint]
-    fn change_nft_identifier(&self, nft_identifier: TokenIdentifier) -> SCResult<()> {
+    fn change_nft_identifier(&self, nft_identifier: EgldOrEsdtTokenIdentifier) -> SCResult<()> {
 
         self.nft_identifier().set(&nft_identifier);
 
@@ -95,11 +95,11 @@ pub trait Market {
 
     #[view(getTokenId)]
     #[storage_mapper("token_id")]
-    fn token_id(&self) -> SingleValueMapper<TokenIdentifier>;
+    fn token_id(&self) -> SingleValueMapper<EgldOrEsdtTokenIdentifier>;
 
     #[view(getNftIdentifier)]
     #[storage_mapper("nft_identifier")]
-    fn nft_identifier(&self) -> SingleValueMapper<TokenIdentifier>;
+    fn nft_identifier(&self) -> SingleValueMapper<EgldOrEsdtTokenIdentifier>;
 
     #[view(getPrice)]
     #[storage_mapper("price")]
