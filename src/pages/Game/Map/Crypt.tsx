@@ -11,7 +11,9 @@ export function Crypt({ position, color, rotation, ...props }: any) {
   const { actions } = useAnimations(animations, group);
 
   useEffect(() => {
-    actions.ArmatureAction.play();
+    if (color === undefined) {
+      actions.ArmatureAction.play();
+    }
   }, [group]);
 
   return (
