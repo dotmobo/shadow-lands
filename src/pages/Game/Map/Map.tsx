@@ -211,7 +211,7 @@ export const Map = ({
         makeDefault
         position={[500, 200, 1]}
         fov={50}
-        zoom={25}
+        zoom={30}
       />
     </Canvas>
   );
