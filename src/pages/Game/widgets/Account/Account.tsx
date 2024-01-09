@@ -129,21 +129,31 @@ export const Account = ({
       <div className='flex flex-row'>
         <div className='flex flex-col text-black'>
           <span className='mb-2'>
+            <FontAwesomeIcon icon={faTree} size='sm' className='mr-1' />
             <Label>Lands: </Label> {lands?.[0]?.balance ?? 0}
           </span>
           <span className='mb-2'>
+            <FontAwesomeIcon icon={faBeer} size='sm' className='mr-1' />
             <Label>Taverns: </Label> {taverns?.[0]?.balance ?? 0}
           </span>
           <span className='mb-2'>
+            <FontAwesomeIcon
+              icon={faBuildingColumns}
+              size='sm'
+              className='mr-1'
+            />
             <Label>Banks: </Label> {banks?.[0]?.balance ?? 0}
           </span>
           <span className='mb-2'>
+            <FontAwesomeIcon icon={faHouse} size='sm' className='mr-1' />
             <Label>Houses: </Label> {hauntedHouses?.[0]?.balance ?? 0}
           </span>
           <span className='mb-2'>
+            <FontAwesomeIcon icon={faCross} size='sm' className='mr-1' />
             <Label>Crypts: </Label> {crypts?.[0]?.balance ?? 0}
           </span>
           <span className='mb-2'>
+            <FontAwesomeIcon icon={faFlaskVial} size='sm' className='mr-1' />
             <Label>Labos: </Label> {labos?.[0]?.balance ?? 0}
           </span>
         </div>
