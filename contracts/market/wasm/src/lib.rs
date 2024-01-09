@@ -5,9 +5,9 @@
 ////////////////////////////////////////////////////
 
 // Init:                                 1
-// Endpoints:                            8
+// Endpoints:                            9
 // Async Callback (empty):               1
-// Total number of exported functions:  10
+// Total number of exported functions:  11
 
 #![no_std]
 
@@ -29,7 +29,8 @@ multiversx_sc_wasm_adapter::endpoints! {
         getBank => bank
         getTokenId => token_id
         getNftIdentifier => nft_identifier
-        getPrice => price
+        getPriceLand => price_land
+        getPriceBuilding => price_building
     )
 }
 

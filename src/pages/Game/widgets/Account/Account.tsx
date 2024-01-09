@@ -1,5 +1,11 @@
 import { useEffect, useState } from 'react';
-import { faCircleXmark, faPlus } from '@fortawesome/free-solid-svg-icons';
+import {
+  faCartShopping,
+  faCircleXmark,
+  faPlus,
+  faShop,
+  faStore
+} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
 import { orderBy } from 'lodash';
@@ -16,7 +22,15 @@ import {
   sftLandsNonce,
   sftHauntedHouseId,
   sftCryptId,
-  sftLaboId
+  sftLaboId,
+  sftCollectionId,
+  priceLand,
+  sftTavernNonce,
+  priceBuilding,
+  sftBanksNonce,
+  sftHauntedHouseNonce,
+  sftCryptNonce,
+  sftLaboNonce
 } from 'config';
 import {
   useGetAccountInfo,
@@ -44,8 +58,11 @@ export const Account = ({
   const [labos, setLabosList] = useState<Sft[]>();
   const [dust, setDustToken] = useState<Token | null>();
   const { hasPendingTransactions } = useGetPendingTransactions();
-  const { sendStakeLandTransaction, sendUnstakeLandTransaction } =
-    useSendShadowLandsTransaction();
+  const {
+    sendStakeLandTransaction,
+    sendUnstakeLandTransaction,
+    sendBuyItemTransaction
+  } = useSendShadowLandsTransaction();
 
   useEffect(() => {
     // Use [] as second argument in useEffect for not rendering each time
@@ -104,24 +121,216 @@ export const Account = ({
   return (
     <OutputContainer>
       <div className='flex flex-col text-black' data-testid='topInfo'>
-        <p>
-          <Label>Lands: </Label> {lands?.[0]?.balance ?? 0}
-        </p>
-        <p>
-          <Label>Taverns: </Label> {taverns?.[0]?.balance ?? 0}
-        </p>
-        <p>
-          <Label>Banks: </Label> {banks?.[0]?.balance ?? 0}
-        </p>
-        <p>
-          <Label>Haunted Houses: </Label> {hauntedHouses?.[0]?.balance ?? 0}
-        </p>
-        <p>
-          <Label>Crypts: </Label> {crypts?.[0]?.balance ?? 0}
-        </p>
-        <p>
-          <Label>Laboratory: </Label> {labos?.[0]?.balance ?? 0}
-        </p>
+        <div className='flex mb-1'>
+          <span>
+            <Label>Lands: </Label> {lands?.[0]?.balance ?? 0}
+          </span>
+          <span className='ml-2 mr-2'>|</span>
+          <span className='flex'>
+            {priceLand}
+            <span>
+              <img src='/dust-logo.png' alt='Dust' className='ml-1 w-5' />
+            </span>
+          </span>
+          <span className='ml-2'>
+            <Button
+              className='inline-block rounded-lg px-3 py-0.5 text-center hover:no-underline my-0 bg-blue-600 text-white hover:bg-blue-700 mr-0 disabled:bg-gray-200 disabled:text-black disabled:cursor-not-allowed'
+              aria-label='Buy a land'
+              disabled={
+                hasPendingTransactions ||
+                sfts === undefined ||
+                lands === undefined
+              }
+              onClick={() =>
+                sendBuyItemTransaction(
+                  {
+                    collection: sftCollectionId,
+                    nonce: sftLandsNonce
+                  },
+                  priceLand * Math.pow(10, 18)
+                )
+              }
+            >
+              <FontAwesomeIcon icon={faCartShopping} size='sm' className='mr-1' />
+              Buy
+            </Button>
+          </span>
+        </div>
+        <div className='flex mb-1'>
+          <span>
+            <Label>Taverns: </Label> {taverns?.[0]?.balance ?? 0}
+          </span>
+          <span className='ml-2 mr-2'>|</span>
+          <span className='flex'>
+            {priceBuilding}
+            <span>
+              <img src='/dust-logo.png' alt='Dust' className='ml-1 w-5' />
+            </span>
+          </span>
+          <span className='ml-2'>
+            <Button
+              className='inline-block rounded-lg px-3 py-0.5 text-center hover:no-underline my-0 bg-blue-600 text-white hover:bg-blue-700 mr-0 disabled:bg-gray-200 disabled:text-black disabled:cursor-not-allowed'
+              aria-label='Buy a land'
+              disabled={
+                hasPendingTransactions ||
+                sfts === undefined ||
+                lands === undefined
+              }
+              onClick={() =>
+                sendBuyItemTransaction(
+                  {
+                    collection: sftCollectionId,
+                    nonce: sftTavernNonce
+                  },
+                  priceBuilding * Math.pow(10, 18)
+                )
+              }
+            >
+              <FontAwesomeIcon icon={faCartShopping} size='sm' className='mr-1' />
+              Buy
+            </Button>
+          </span>
+        </div>
+        <div className='flex mb-1'>
+          <span>
+            <Label>Banks: </Label> {banks?.[0]?.balance ?? 0}
+          </span>
+          <span className='ml-2 mr-2'>|</span>
+          <span className='flex'>
+            {priceBuilding}
+            <span>
+              <img src='/dust-logo.png' alt='Dust' className='ml-1 w-5' />
+            </span>
+          </span>
+          <span className='ml-2'>
+            <Button
+              className='inline-block rounded-lg px-3 py-0.5 text-center hover:no-underline my-0 bg-blue-600 text-white hover:bg-blue-700 mr-0 disabled:bg-gray-200 disabled:text-black disabled:cursor-not-allowed'
+              aria-label='Buy a land'
+              disabled={
+                hasPendingTransactions ||
+                sfts === undefined ||
+                lands === undefined
+              }
+              onClick={() =>
+                sendBuyItemTransaction(
+                  {
+                    collection: sftCollectionId,
+                    nonce: sftBanksNonce
+                  },
+                  priceBuilding * Math.pow(10, 18)
+                )
+              }
+            >
+              <FontAwesomeIcon icon={faCartShopping} size='sm' className='mr-1' />
+              Buy
+            </Button>
+          </span>
+        </div>
+        <div className='flex mb-1'>
+          <span>
+            <Label>Houses: </Label> {hauntedHouses?.[0]?.balance ?? 0}
+          </span>
+          <span className='ml-2 mr-2'>|</span>
+          <span className='flex'>
+            {priceBuilding}
+            <span>
+              <img src='/dust-logo.png' alt='Dust' className='ml-1 w-5' />
+            </span>
+          </span>
+          <span className='ml-2'>
+            <Button
+              className='inline-block rounded-lg px-3 py-0.5 text-center hover:no-underline my-0 bg-blue-600 text-white hover:bg-blue-700 mr-0 disabled:bg-gray-200 disabled:text-black disabled:cursor-not-allowed'
+              aria-label='Buy a land'
+              disabled={
+                hasPendingTransactions ||
+                sfts === undefined ||
+                lands === undefined
+              }
+              onClick={() =>
+                sendBuyItemTransaction(
+                  {
+                    collection: sftCollectionId,
+                    nonce: sftHauntedHouseNonce
+                  },
+                  priceBuilding * Math.pow(10, 18)
+                )
+              }
+            >
+              <FontAwesomeIcon icon={faCartShopping} size='sm' className='mr-1' />
+              Buy
+            </Button>
+          </span>
+        </div>
+        <div className='flex mb-1'>
+          <span>
+            <Label>Crypts: </Label> {crypts?.[0]?.balance ?? 0}
+          </span>
+          <span className='ml-2 mr-2'>|</span>
+          <span className='flex'>
+            {priceBuilding}
+            <span>
+              <img src='/dust-logo.png' alt='Dust' className='ml-1 w-5' />
+            </span>
+          </span>
+          <span className='ml-2'>
+            <Button
+              className='inline-block rounded-lg px-3 py-0.5 text-center hover:no-underline my-0 bg-blue-600 text-white hover:bg-blue-700 mr-0 disabled:bg-gray-200 disabled:text-black disabled:cursor-not-allowed'
+              aria-label='Buy a land'
+              disabled={
+                hasPendingTransactions ||
+                sfts === undefined ||
+                lands === undefined
+              }
+              onClick={() =>
+                sendBuyItemTransaction(
+                  {
+                    collection: sftCollectionId,
+                    nonce: sftCryptNonce
+                  },
+                  priceBuilding * Math.pow(10, 18)
+                )
+              }
+            >
+              <FontAwesomeIcon icon={faCartShopping} size='sm' className='mr-1' />
+              Buy
+            </Button>
+          </span>
+        </div>
+        <div className='flex mb-1'>
+          <span>
+            <Label>Labos: </Label> {labos?.[0]?.balance ?? 0}
+          </span>
+          <span className='ml-2 mr-2'>|</span>
+          <span className='flex'>
+            {priceBuilding}
+            <span>
+              <img src='/dust-logo.png' alt='Dust' className='ml-1 w-5' />
+            </span>
+          </span>
+          <span className='ml-2'>
+            <Button
+              className='inline-block rounded-lg px-3 py-0.5 text-center hover:no-underline my-0 bg-blue-600 text-white hover:bg-blue-700 mr-0 disabled:bg-gray-200 disabled:text-black disabled:cursor-not-allowed'
+              aria-label='Buy a land'
+              disabled={
+                hasPendingTransactions ||
+                sfts === undefined ||
+                lands === undefined
+              }
+              onClick={() =>
+                sendBuyItemTransaction(
+                  {
+                    collection: sftCollectionId,
+                    nonce: sftLaboNonce
+                  },
+                  priceBuilding * Math.pow(10, 18)
+                )
+              }
+            >
+              <FontAwesomeIcon icon={faCartShopping} size='sm' className='mr-1' />
+              Buy
+            </Button>
+          </span>
+        </div>
         <p className='flex items-center mt-4'>
           <Label>$DUST: </Label>
           <FormatAmount

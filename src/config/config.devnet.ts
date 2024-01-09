@@ -22,5 +22,12 @@ export const sftLaboNonce = 7;
 export const dustTokenId = 'DEVDUST-d62981';
 export const contractGameAddress =
   'erd1qqqqqqqqqqqqqpgqvfh5j05pw23upxz4hmh6fdsrcmvfjjd22krsxc4hy2';
+export const contractMarketAddress =
+  'erd1qqqqqqqqqqqqqpgqsp7wpnxv8lpn6hg4fhhp3vqkwmst5ljm2krs2fxjrk';
 export const totalYield = 60;
 export const totalProducted = 10000;
+
+// Price
+export const priceLand = 150;
+export const priceBuilding = 100;
+

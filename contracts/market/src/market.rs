@@ -5,9 +5,10 @@ multiversx_sc::imports!();
 #[multiversx_sc::contract]
 pub trait Market {
     #[init]
-    fn init(&self, token_id: EgldOrEsdtTokenIdentifier, price: BigUint, nft_identifier: EgldOrEsdtTokenIdentifier) {
+    fn init(&self, token_id: EgldOrEsdtTokenIdentifier, price_land: BigUint, price_building: BigUint, nft_identifier: EgldOrEsdtTokenIdentifier) {
         self.token_id().set(&token_id);
-        self.price().set(&price);
+        self.price_land().set(&price_land);
+        self.price_building().set(&price_building);
         self.nft_identifier().set(&nft_identifier);
         if self.bank().is_empty() {
             self.bank().set(BigUint::from(0u32));
@@ -29,10 +30,18 @@ pub trait Market {
             "Invalid payment token"
         );
 
-        require!(
-            payment_amount == self.price().get(),
-            "Invalid payment amount"
-        );
+        // Land or building
+        if nft_nonce == 1 {
+            require!(
+                payment_amount == self.price_land().get(),
+                "Invalid payment amount"
+            );
+        } else {
+            require!(
+                payment_amount == self.price_building().get(),
+                "Invalid payment amount"
+            );
+        }
 
         require!(
             nft_identifier == self.nft_identifier().get(),
@@ -72,9 +81,10 @@ pub trait Market {
 
     #[only_owner]
     #[endpoint]
-    fn change_price(&self, price: BigUint) -> SCResult<()> {
+    fn change_price(&self, price_land: BigUint, price_building: BigUint) -> SCResult<()> {
 
-        self.price().set(&price);
+        self.price_land().set(&price_land);
+        self.price_building().set(&price_building);
 
         Ok(())
     }
@@ -101,7 +111,14 @@ pub trait Market {
     #[storage_mapper("nft_identifier")]
     fn nft_identifier(&self) -> SingleValueMapper<EgldOrEsdtTokenIdentifier>;
 
-    #[view(getPrice)]
-    #[storage_mapper("price")]
-    fn price(&self) -> SingleValueMapper<BigUint>;
+    #[view(getPriceLand)]
+    #[storage_mapper("price_land")]
+    fn price_land(&self) -> SingleValueMapper<BigUint>;
+
+    #[view(getPriceBuilding)]
+    #[storage_mapper("price_building")]
+    fn price_building(&self) -> SingleValueMapper<BigUint>;
+
+
+
 }

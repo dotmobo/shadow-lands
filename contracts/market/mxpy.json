@@ -14,9 +14,10 @@
             "pem": "../../wallet/wallet-owner.pem",
             "gas-limit": 59999999,
             "arguments": [
-                "str:DEVSHALAN-933f80",
+                "str:DEVDUST-d62981",
+                "150000000000000000000",
                 "100000000000000000000",
-                "str:DEVDUST-d62981"
+                "str:DEVSHALAN-933f80"
             ],
             "send": true,
             "outfile": "deploy-devnet.interaction.json"
@@ -29,9 +30,10 @@
             "pem": "../../wallet/wallet-owner.pem",
             "gas-limit": 59999999,
             "arguments": [
-                "str:DEVSHALAN-933f80",
+                "str:DEVDUST-d62981",
+                "150000000000000000000",
                 "100000000000000000000",
-                "str:DEVDUST-d62981"
+                "str:DEVSHALAN-933f80"
             ],
             "send": true,
             "outfile": "deploy-devnet.interaction.json"

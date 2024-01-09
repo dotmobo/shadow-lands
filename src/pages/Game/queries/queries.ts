@@ -1,13 +1,11 @@
 import { useState } from 'react';
-import { contractGameAddress, sftCollectionId, sftLandsNonce } from 'config';
-import { refreshAccount, sendTransactions } from 'helpers';
+import { contractGameAddress, contractMarketAddress } from 'config';
 import {
   Address,
   AddressValue,
   ContractFunction,
   Query
 } from '@multiversx/sdk-core/out';
-import { numtoHex, strtoHex } from '../utils';
 import { useGetNetworkConfig } from '@multiversx/sdk-dapp/hooks/useGetNetworkConfig';
 import { useGetAccountInfo } from '@multiversx/sdk-dapp/hooks/account/useGetAccountInfo';
 
@@ -33,9 +31,23 @@ export const useCallShadowLandsQuery = () => {
     args: [new AddressValue(new Address(address))]
   });
 
+  const getPriceLand = new Query({
+    address: new Address(contractMarketAddress),
+    func: new ContractFunction('getPriceLand'),
+    args: []
+  });
+
+  const getPriceBuilding = new Query({
+    address: new Address(contractMarketAddress),
+    func: new ContractFunction('getPriceBuilding'),
+    args: []
+  });
+
   return {
     getRewardsTokenAmountPerDay,
     getNftNonce,
-    getCurrentRewards
+    getCurrentRewards,
+    getPriceLand,
+    getPriceBuilding
   };
 };

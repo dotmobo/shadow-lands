@@ -1,10 +1,10 @@
 export interface Sft {
-  identifier: string;
-  url: string;
-  name: string;
-  metadata: any;
   collection: string;
   nonce: number;
+  identifier?: string;
+  url?: string;
+  name?: string;
+  metadata?: any;
 }
 
 export type WidgetsType = {
