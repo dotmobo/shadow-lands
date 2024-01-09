@@ -1,8 +1,8 @@
 {
     "configurations": {
-        "mainnet": {
-            "proxy": "https://api.multiversx.com",
-            "chainID": "1"
+        "devnet": {
+            "proxy": "https://devnet-api.multiversx.com",
+            "chainID": "D"
         }
     },
     "contract": {
@@ -14,13 +14,13 @@
             "pem": "../../wallet/wallet-owner.pem",
             "gas-limit": 59999999,
             "arguments": [
-                "str:DUST-e7e490",
+                "str:DEVDUST-d62981",
                 "150000000000000000000",
                 "100000000000000000000",
                 "str:DEVSHALAN-933f80"
             ],
             "send": true,
-            "outfile": "deploy.interaction.json"
+            "outfile": "deploy-devnet.interaction.json"
         },
         "upgrade": {
             "verbose": true,
@@ -30,14 +30,14 @@
             "pem": "../../wallet/wallet-owner.pem",
             "gas-limit": 59999999,
             "arguments": [
-                "str:DUST-e7e490",
+                "str:DEVDUST-d62981",
                 "150000000000000000000",
                 "100000000000000000000",
                 "str:DEVSHALAN-933f80"
             ],
             "send": true,
-            "outfile": "deploy.interaction.json"
+            "outfile": "deploy-devnet.interaction.json"
         }
     },
-    "active": "mainnet"
+    "active": "devnet"
 }

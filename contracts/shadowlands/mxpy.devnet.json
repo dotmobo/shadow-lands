@@ -1,8 +1,8 @@
 {
     "configurations": {
-        "mainnet": {
-            "proxy": "https://api.multiversx.com",
-            "chainID": "1"
+        "devnet": {
+            "proxy": "https://devnet-api.multiversx.com",
+            "chainID": "D"
         }
     },
     "contract": {
@@ -16,12 +16,12 @@
             "arguments": [
                 "str:DEVSHALAN-933f80",
                 "0",
-                "str:DUST-e7e490",
-                "5000000000000000000",
-                "600000000000000000000000000"
+                "str:DEVDUST-d62981",
+                "10000000000000000000",
+                "1000000000000000000000000"
             ],
             "send": true,
-            "outfile": "deploy.interaction.json"
+            "outfile": "deploy-devnet.interaction.json"
         },
         "upgrade": {
             "verbose": true,
@@ -33,13 +33,13 @@
             "arguments": [
                 "str:DEVSHALAN-933f80",
                 "0",
-                "str:DUST-e7e490",
-                "5000000000000000000",
-                "600000000000000000000000000"
+                "str:DEVDUST-d62981",
+                "10000000000000000000",
+                "1000000000000000000000000"
             ],
             "send": true,
-            "outfile": "deploy.interaction.json"
+            "outfile": "deploy-devnet.interaction.json"
         }
     },
-    "active": "mainnet"
+    "active": "devnet"
 }
