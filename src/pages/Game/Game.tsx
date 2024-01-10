@@ -6,7 +6,7 @@ import {
   Query
 } from '@multiversx/sdk-core/out';
 import { ProxyNetworkProvider } from '@multiversx/sdk-network-providers/out';
-import { Button, Card } from 'components';
+import { Button, Card, MxLink } from 'components';
 import {
   contractGameAddress,
   sftBanksNonce,
@@ -36,9 +36,11 @@ import {
   faHouse,
   faPause,
   faPlay,
+  faQuestion,
   faRotate,
   faTree
 } from '@fortawesome/free-solid-svg-icons';
+import { RouteNamesEnum } from 'localConstants';
 
 const WIDGETS: WidgetsType[] = [
   {
@@ -165,6 +167,9 @@ export const Game = () => {
                         <FontAwesomeIcon icon={faPlay} size='sm' />
                       )}
                     </Button>
+                    <MxLink to={RouteNamesEnum.help}>
+                      <FontAwesomeIcon icon={faQuestion} size='sm' />
+                    </MxLink>
                   </div>
                   <div className='flex w-full justify-center gap-4 text-slate-300'>
                     <span title='Land'>
