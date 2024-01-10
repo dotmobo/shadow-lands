@@ -37,6 +37,7 @@ import {
   faPause,
   faPlay,
   faQuestion,
+  faRankingStar,
   faRotate,
   faTree
 } from '@fortawesome/free-solid-svg-icons';
@@ -169,6 +170,9 @@ export const Game = () => {
                     </Button>
                     <MxLink to={RouteNamesEnum.help}>
                       <FontAwesomeIcon icon={faQuestion} size='sm' />
+                    </MxLink>
+                    <MxLink to={RouteNamesEnum.leaderboard}>
+                      <FontAwesomeIcon icon={faRankingStar} size='sm' />
                     </MxLink>
                   </div>
                   <div className='flex w-full justify-center gap-4 text-slate-300'>

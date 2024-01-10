@@ -30,3 +30,14 @@ export const totalProducted = 5000;
 // Price
 export const priceLand = 150;
 export const priceBuilding = 100;
+
+// Leaderboard
+export const ignoredAddresses = [
+  'erd1qqqqqqqqqqqqqpgq6px7uzxhcsagfkguf269kj937dg766282krscvp908',
+  'erd1qqqqqqqqqqqqqpgqc4s83k0ut7c2p6v3rqlddz4wtz7djhq42krs0m3afj',
+  'erd1qqqqqqqqqqqqqpgqw02egr4v4wwmaxw7t98ekpyyde4l0g6l3u4s07nfsa',
+  'erd1hkr89plnuz6drjpy9x3w0hxmdd54n5n9d7s03gxz8yyrva4c3u4sw80sme',
+  'erd1nz9e2kj2szyhaddpskyg3gyje373fhhun077gxscgv82ze0wy8qsqa9mfy',
+  'erd19calhqrx9t9g5r46ftarljj0tgaunuc6t02zl03043wgt6tvversqx08hh',
+  'erd1tzq44fl4a6yl8l7zgrvv7kpgvscq9xu05uyu6fekez9pcclvxs5stp4vgw'
+];

@@ -1,6 +1,7 @@
 import { RouteNamesEnum } from 'localConstants';
 import { Home, Game } from 'pages';
 import { Help } from 'pages/Help/Help';
+import { Leaderboard } from 'pages/Leaderboard';
 import { RouteType } from 'types';
 
 interface RouteWithTitleType extends RouteType {
@@ -22,5 +23,10 @@ export const routes: RouteWithTitleType[] = [
     path: RouteNamesEnum.help,
     title: 'Help',
     component: Help
+  },
+  {
+    path: RouteNamesEnum.leaderboard,
+    title: 'Leaderboard',
+    component: Leaderboard
   }
 ];
