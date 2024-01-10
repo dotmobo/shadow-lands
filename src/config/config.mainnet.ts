@@ -21,9 +21,9 @@ export const sftLaboId = 'SHALAN-55b9a9-06';
 export const sftLaboNonce = 6;
 export const dustTokenId = 'DUST-e7e490';
 export const contractGameAddress =
-  'xxx';
+  'erd1qqqqqqqqqqqqqpgq6px7uzxhcsagfkguf269kj937dg766282krscvp908';
 export const contractMarketAddress =
-  'xxx';
+  'erd1qqqqqqqqqqqqqpgqc4s83k0ut7c2p6v3rqlddz4wtz7djhq42krs0m3afj';
 export const totalYield = 30;
 export const totalProducted = 5000;
 
