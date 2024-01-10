@@ -13,7 +13,7 @@ export const Leaderboard = () => {
   useEffect(() => {
     // Use [] as second argument in useEffect for not rendering each time
     axios
-      .get<any>(`${mvxApiUrl}/tokens/${dustTokenId}/accounts?size=10`)
+      .get<any>(`${mvxApiUrl}/tokens/${dustTokenId}/accounts?size=100`)
       .then((response) => {
         setLeaderboard(
           response.data.filter(
