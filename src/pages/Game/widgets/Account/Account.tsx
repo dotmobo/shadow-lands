@@ -344,20 +344,34 @@ export const Account = ({
         </div>
       </div>
 
-      <div className='flex flex-col text-black'>
-        <p className='flex items-center mt-4'>
-          <Label>$DUST: </Label>
-          <FormatAmount
-            value={dust?.balance ?? 0}
-            egldLabel='$DUST'
-            showLabel={false}
-            digits={0}
-            data-testid='balance'
-          />
-          <span>
-            <img src='/dust-logo.png' alt='Dust' className='ml-1 w-5' />
-          </span>
-        </p>
+      <div className='flex flex-row mt-4'>
+        <div className='flex flex-col text-black w-3/5'>
+          <p className='flex items-center'>
+            <Label>$DUST: </Label>
+            <FormatAmount
+              value={dust?.balance ?? 0}
+              egldLabel='$DUST'
+              showLabel={false}
+              digits={0}
+              data-testid='balance'
+            />
+            <span>
+              <img src='/dust-logo.png' alt='Dust' className='ml-1 w-5' />
+            </span>
+          </p>
+        </div>
+        <div className='flex flex-col text-black ml-auto w-2/5'>
+          <Button
+            onClick={() =>
+              window.open(
+                'https://www.frameit.gg/marketplace/SHALAN-55b9a9/items'
+              )
+            }
+          >
+            <FontAwesomeIcon icon={faStore} className='mr-1' />
+            External Market
+          </Button>
+        </div>
       </div>
       <div className='flex text-black gap-2 mt-4' data-testid='topInfo'>
         <Button

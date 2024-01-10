@@ -121,14 +121,6 @@ export const Production = ({ sfts, rewardPerDay }) => {
           <FontAwesomeIcon icon={faTruckLoading} className='mr-1' />
           Claim
         </Button>
-        {/* <Button
-          onClick={() =>
-            window.open('https://www.frameit.gg/marketplace/DUSTYBONES-c1fc90')
-          }
-        >
-          <FontAwesomeIcon icon={faStore} className='mr-1' />
-          Market
-        </Button> */}
       </div>
     </OutputContainer>
   );
