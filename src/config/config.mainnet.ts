@@ -33,12 +33,12 @@ export const priceBuilding = 100;
 
 // Leaderboard
 export const ignoredAddresses = [
-  'erd1qqqqqqqqqqqqqpgq6px7uzxhcsagfkguf269kj937dg766282krscvp908',
-  'erd1qqqqqqqqqqqqqpgqc4s83k0ut7c2p6v3rqlddz4wtz7djhq42krs0m3afj',
-  'erd1qqqqqqqqqqqqqpgqw02egr4v4wwmaxw7t98ekpyyde4l0g6l3u4s07nfsa',
-  'erd1hkr89plnuz6drjpy9x3w0hxmdd54n5n9d7s03gxz8yyrva4c3u4sw80sme',
-  'erd1nz9e2kj2szyhaddpskyg3gyje373fhhun077gxscgv82ze0wy8qsqa9mfy',
-  'erd19calhqrx9t9g5r46ftarljj0tgaunuc6t02zl03043wgt6tvversqx08hh',
-  'erd1tzq44fl4a6yl8l7zgrvv7kpgvscq9xu05uyu6fekez9pcclvxs5stp4vgw',
-  'erd1upk2p7pak0g85mu258vyvtx0857gdzvnmc0hswm32e9a8d352krsfh8cvj'
+  'erd1qqqqqqqqqqqqqpgq6px7uzxhcsagfkguf269kj937dg766282krscvp908', // SC Game
+  'erd1qqqqqqqqqqqqqpgqc4s83k0ut7c2p6v3rqlddz4wtz7djhq42krs0m3afj', // SC Market
+  'erd1qqqqqqqqqqqqqpgqw02egr4v4wwmaxw7t98ekpyyde4l0g6l3u4s07nfsa', // Team xSafe
+  'erd1hkr89plnuz6drjpy9x3w0hxmdd54n5n9d7s03gxz8yyrva4c3u4sw80sme', // NFT owner
+  'erd1nz9e2kj2szyhaddpskyg3gyje373fhhun077gxscgv82ze0wy8qsqa9mfy', // Team member
+  'erd19calhqrx9t9g5r46ftarljj0tgaunuc6t02zl03043wgt6tvversqx08hh', // Team member
+  'erd1tzq44fl4a6yl8l7zgrvv7kpgvscq9xu05uyu6fekez9pcclvxs5stp4vgw', // Team member
+  'erd1upk2p7pak0g85mu258vyvtx0857gdzvnmc0hswm32e9a8d352krsfh8cvj' // SC owner
 ];
