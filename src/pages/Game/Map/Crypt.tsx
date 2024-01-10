@@ -21,7 +21,7 @@ export function Crypt({ position, color, rotation, ...props }: any) {
       {color === undefined && (
         <spotLight
           position={[position[0] - 0.8, position[1] + 0.2, position[2] + 1]}
-          color={'chartreuse'}
+          color={'gold'}
           intensity={Math.PI * 2}
         />
       )}

@@ -21,7 +21,7 @@ export function HauntedHouse({ position, color, rotation, ...props }: any) {
       {color === undefined && (
         <spotLight
           position={[position[0] - 0.3, position[1] + 0.2, position[2]]}
-          color={'chartreuse'}
+          color={'purple'}
           intensity={Math.PI * 2}
         />
       )}
