@@ -16,9 +16,11 @@ export const Leaderboard = () => {
       .get<any>(`${mvxApiUrl}/tokens/${dustTokenId}/accounts?size=100`)
       .then((response) => {
         setLeaderboard(
-          response.data.filter(
-            (item: any) => ignoredAddresses.includes(item.address) === false
-          )
+          response.data
+            .filter(
+              (item: any) => ignoredAddresses.includes(item.address) === false
+            )
+            .slice(0, 10)
         );
       })
       .catch((error) => {
@@ -32,7 +34,7 @@ export const Leaderboard = () => {
     <AuthRedirectWrapper requireAuth={true}>
       <PageWrapper>
         <div className='flex flex-col items-center h-full w-full bg-slate-900 text-slate-400'>
-          <h1 className='text-4xl sm:text-4xl font-bold mt-4 mb-8'>
+          <h1 className='text-4xl sm:text-4xl font-bold mt-4 mb-8 ml-2 mr-2'>
             Leaderboard Top 10
           </h1>
           <ul className='list-decimal ml-8 mb-8'>
@@ -59,14 +61,16 @@ export const Leaderboard = () => {
               </li>
             ))}
           </ul>
-          <MxLink to={RouteNamesEnum.game}>
-            <FontAwesomeIcon
-              icon={faCircleArrowLeft}
-              size='sm'
-              className='mr-2'
-            />
-            Return to the game
-          </MxLink>
+          <span className='mb-2'>
+            <MxLink to={RouteNamesEnum.game}>
+              <FontAwesomeIcon
+                icon={faCircleArrowLeft}
+                size='sm'
+                className='mr-2'
+              />
+              Return to the game
+            </MxLink>
+          </span>
         </div>
       </PageWrapper>
     </AuthRedirectWrapper>

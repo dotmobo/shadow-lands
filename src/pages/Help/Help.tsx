@@ -8,7 +8,7 @@ export const Help = () => {
   return (
     <AuthRedirectWrapper requireAuth={true}>
       <PageWrapper>
-        <div className='flex flex-col items-center h-full w-full bg-slate-900 text-slate-400 mb-2'>
+        <div className='flex flex-col items-center h-full w-full bg-slate-900 text-slate-400'>
           <h1 className='text-4xl sm:text-4xl font-bold mt-4 mb-8'>
             How to play ?
           </h1>
@@ -48,15 +48,16 @@ export const Help = () => {
               EGLD.
             </li>
           </ul>
-
-          <MxLink to={RouteNamesEnum.game}>
-            <FontAwesomeIcon
-              icon={faCircleArrowLeft}
-              size='sm'
-              className='mr-2'
-            />
-            Return to the game
-          </MxLink>
+          <span className='mb-2'>
+            <MxLink to={RouteNamesEnum.game}>
+              <FontAwesomeIcon
+                icon={faCircleArrowLeft}
+                size='sm'
+                className='mr-2'
+              />
+              Return to the game
+            </MxLink>
+          </span>
         </div>
       </PageWrapper>
     </AuthRedirectWrapper>
