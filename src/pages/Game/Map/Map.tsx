@@ -87,7 +87,7 @@ export const Map = ({
         <Stage
           controls={ref}
           preset='rembrandt'
-          intensity={-3}
+          intensity={-2}
           environment='sunset'
         >
           <Land
@@ -206,6 +206,9 @@ export const Map = ({
       <OrbitControls
         ref={ref}
         autoRotate={hovered ? false : defaultAutoRotate}
+        rotateSpeed={0.3}
+        zoomSpeed={0.8}
+        autoRotateSpeed={1.5}
       />
       <PerspectiveCamera
         makeDefault
