@@ -41,12 +41,15 @@ export const Leaderboard = () => {
             {leaderboard.map((item: any, index) => (
               <li key={index} className='mb-2'>
                 <span className='flex flex-items-center'>
-                  <span>
+                  <a
+                    className='text-slate-400 hover:text-slate-100'
+                    href={`https://explorer.multiversx.com/accounts/${item.address}`}
+                  >
                     {item.address.substring(0, 6) +
                       '...' +
                       item.address.substring(item.address.length - 6)}
                     &nbsp;:&nbsp;
-                  </span>
+                  </a>
                   <FormatAmount
                     value={item.balance ?? 0}
                     showLabel={false}
