@@ -45,6 +45,8 @@ import {
 } from 'hooks';
 import { Sft, Token } from 'pages/Game/models';
 import { useSendShadowLandsTransaction } from 'pages/Game/transactions';
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 
 export const Account = ({
   sfts = [],
@@ -380,7 +382,25 @@ export const Account = ({
             sfts.filter((x) => x === sftLandsNonce).length === 0
           }
           data-testid='sign-auto-send'
-          onClick={sendUnstakeLandTransaction}
+          onClick={() => {
+            confirmAlert({
+              title: 'Destroy the land',
+              message:
+                "Are you sure to withdraw the land and all buildings ? You won't be able to claim your $DUST rewards after that.",
+              buttons: [
+                {
+                  label: 'Yes',
+                  onClick: () => sendUnstakeLandTransaction()
+                },
+                {
+                  label: 'No',
+                  onClick: () => {
+                    return;
+                  }
+                }
+              ]
+            });
+          }}
         >
           <FontAwesomeIcon icon={faCircleXmark} className='mr-1' />
           Destroy the land
