@@ -209,6 +209,11 @@ export const Map = ({
         rotateSpeed={0.3}
         zoomSpeed={0.8}
         autoRotateSpeed={1.5}
+        maxDistance={1000}
+        minDistance={50}
+        panSpeed={0.3}
+        keyPanSpeed={2}
+        enablePan={false}
       />
       <PerspectiveCamera
         makeDefault
