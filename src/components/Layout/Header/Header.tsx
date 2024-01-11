@@ -20,7 +20,7 @@ export const Header = () => {
         className='flex items-center justify-between'
         to={isLoggedIn ? RouteNamesEnum.game : RouteNamesEnum.home}
       >
-        <img src='/sl-simple.png' alt='Shadow Lands' className='w-full h-9' />
+        <img src='/sl-simple.png' alt='Shadow Lands' className='h-9' />
       </MxLink>
 
       <nav className='h-full w-full text-sm sm:relative sm:left-auto sm:top-auto sm:flex sm:w-auto sm:flex-row sm:justify-end sm:bg-transparent'>
