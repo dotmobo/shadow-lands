@@ -127,7 +127,7 @@ export const Account = ({
   return (
     <OutputContainer>
       <div className='flex flex-row'>
-        <div className='flex flex-col text-black'>
+        <div className='flex flex-col text-black w-1/2'>
           <span className='mb-2'>
             <FontAwesomeIcon icon={faTree} size='sm' className='mr-1' />
             <Label>Lands: </Label> {lands?.[0]?.balance ?? 0}
@@ -343,7 +343,7 @@ export const Account = ({
           </span>
         </div>
       </div>
-      <div className='flex flex-col text-black'>
+      <div className='flex flex-col text-black mt-4'>
         <p className='flex items-center'>
           <Label>$DUST: </Label>
           <FormatAmount
