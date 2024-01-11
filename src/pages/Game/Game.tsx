@@ -146,64 +146,59 @@ export const Game = () => {
       <PageWrapper>
         <div className='flex flex-col sm:flex-row items-center h-full w-full'>
           <div className='flex flex-col items-start sm:items-center h-screen sm:h-full w-full sm:bg-center bg-slate-900'>
-            {sfts !== undefined &&
-              sfts.filter((x) => x === sftLandsNonce).length > 0 && (
-                <>
-                  <div className='flex w-full ml-2 mt-2 mb-2 text-slate-300'>
-                    <Button
-                      aria-label='toggle auto rotate'
-                      onClick={() => {
-                        setAutoRotate(!autoRotate);
-                      }}
-                    >
-                      <FontAwesomeIcon
-                        icon={faRotate}
-                        size='sm'
-                        className='mr-1'
-                      />
-                      {autoRotate && (
-                        <FontAwesomeIcon icon={faPause} size='sm' />
-                      )}
-                      {!autoRotate && (
-                        <FontAwesomeIcon icon={faPlay} size='sm' />
-                      )}
-                    </Button>
-                    <MxLink to={RouteNamesEnum.help}>
-                      <FontAwesomeIcon icon={faQuestion} size='sm' />
-                    </MxLink>
-                    <MxLink to={RouteNamesEnum.leaderboard}>
-                      <FontAwesomeIcon icon={faRankingStar} size='sm' />
-                    </MxLink>
-                  </div>
-                  <div className='flex w-full justify-center gap-4 text-slate-300'>
-                    <span title='Land'>
-                      <FontAwesomeIcon icon={faTree} size='sm' />{' '}
-                      {sfts.filter((x) => x === sftLandsNonce).length} / 1
-                    </span>
-                    <span title='Tavern'>
-                      <FontAwesomeIcon icon={faBeer} size='sm' />{' '}
-                      {sfts.filter((x) => x === sftTavernNonce).length} / 1
-                    </span>
-                    <span title='Bank'>
-                      <FontAwesomeIcon icon={faBuildingColumns} size='sm' />{' '}
-                      {sfts.filter((x) => x === sftBanksNonce).length} / 1
-                    </span>
-                    <span title='Haunted House'>
-                      <FontAwesomeIcon icon={faHouse} size='sm' />{' '}
-                      {sfts.filter((x) => x === sftHauntedHouseNonce).length} /
-                      1
-                    </span>
-                  </div>
-                  <div className='flex w-full mt-2 justify-center gap-4 text-slate-300'>
-                    <span title='Crypt'>
-                      <FontAwesomeIcon icon={faCross} size='sm' />{' '}
-                      {sfts.filter((x) => x === sftCryptNonce).length} / 1
-                    </span>
-                    <span title='Laboratory'>
-                      <FontAwesomeIcon icon={faFlaskVial} size='sm' />{' '}
-                      {sfts.filter((x) => x === sftLaboNonce).length} / 1
-                    </span>
-                  </div>
+            {sfts !== undefined && (
+              <>
+                <div className='flex w-full ml-2 mt-2 mb-2 text-slate-300'>
+                  <Button
+                    aria-label='toggle auto rotate'
+                    onClick={() => {
+                      setAutoRotate(!autoRotate);
+                    }}
+                  >
+                    <FontAwesomeIcon
+                      icon={faRotate}
+                      size='sm'
+                      className='mr-1'
+                    />
+                    {autoRotate && <FontAwesomeIcon icon={faPause} size='sm' />}
+                    {!autoRotate && <FontAwesomeIcon icon={faPlay} size='sm' />}
+                  </Button>
+                  <MxLink to={RouteNamesEnum.help}>
+                    <FontAwesomeIcon icon={faQuestion} size='sm' />
+                  </MxLink>
+                  <MxLink to={RouteNamesEnum.leaderboard}>
+                    <FontAwesomeIcon icon={faRankingStar} size='sm' />
+                  </MxLink>
+                </div>
+                <div className='flex w-full justify-center gap-4 text-slate-300'>
+                  <span title='Land'>
+                    <FontAwesomeIcon icon={faTree} size='sm' />{' '}
+                    {sfts.filter((x) => x === sftLandsNonce).length} / 1
+                  </span>
+                  <span title='Tavern'>
+                    <FontAwesomeIcon icon={faBeer} size='sm' />{' '}
+                    {sfts.filter((x) => x === sftTavernNonce).length} / 1
+                  </span>
+                  <span title='Bank'>
+                    <FontAwesomeIcon icon={faBuildingColumns} size='sm' />{' '}
+                    {sfts.filter((x) => x === sftBanksNonce).length} / 1
+                  </span>
+                  <span title='Haunted House'>
+                    <FontAwesomeIcon icon={faHouse} size='sm' />{' '}
+                    {sfts.filter((x) => x === sftHauntedHouseNonce).length} / 1
+                  </span>
+                </div>
+                <div className='flex w-full mt-2 justify-center gap-4 text-slate-300'>
+                  <span title='Crypt'>
+                    <FontAwesomeIcon icon={faCross} size='sm' />{' '}
+                    {sfts.filter((x) => x === sftCryptNonce).length} / 1
+                  </span>
+                  <span title='Laboratory'>
+                    <FontAwesomeIcon icon={faFlaskVial} size='sm' />{' '}
+                    {sfts.filter((x) => x === sftLaboNonce).length} / 1
+                  </span>
+                </div>
+                {sfts.filter((x) => x === sftLandsNonce).length > 0 && (
                   <Map
                     sfts={sfts}
                     walletTaverns={taverns}
@@ -214,8 +209,9 @@ export const Game = () => {
                     rewardsPerDay={rewardsTokenAmountPerDay}
                     defaultAutoRotate={autoRotate}
                   />
-                </>
-              )}
+                )}
+              </>
+            )}
           </div>
           <div className='flex items-start sm:items-center h-full w-full sm:w-1/2 sm:bg-center bg-slate-900 pr-4 pl-4'>
             <div className='flex flex-col gap-6 max-w-3xl w-full'>
