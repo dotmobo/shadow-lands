@@ -2,7 +2,7 @@ import { faCircleArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
 import { FormatAmount, MxLink } from 'components';
-import { dustTokenId, ignoredAddresses, mvxApiUrl } from 'config';
+import { dustTokenId, ignoredAddresses, mvxApiUrl, mvxExplorerUrl } from 'config';
 import { RouteNamesEnum } from 'localConstants';
 import { useEffect, useState } from 'react';
 import { AuthRedirectWrapper, PageWrapper } from 'wrappers';
@@ -44,7 +44,7 @@ export const Leaderboard = () => {
                   <a
                     target='_blank'
                     className='text-slate-400 hover:text-slate-100'
-                    href={`https://explorer.multiversx.com/accounts/${item.address}`}
+                    href={`${mvxExplorerUrl}/accounts/${item.address}`}
                   >
                     {item.address.substring(0, 6) +
                       '...' +

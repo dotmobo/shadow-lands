@@ -1,6 +1,11 @@
 import { faCircleArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { MxLink } from 'components';
+import {
+  contractGameAddress,
+  contractMarketAddress,
+  mvxExplorerUrl
+} from 'config';
 import { RouteNamesEnum } from 'localConstants';
 import { AuthRedirectWrapper, PageWrapper } from 'wrappers';
 
@@ -46,6 +51,37 @@ export const Help = () => {
             <li>
               <b>External Market</b>: Buy a land or a building like a tavern in
               EGLD.
+            </li>
+          </ul>
+          <h2 className='text-2xl sm:text-2xl font-bold mb-8'>
+            Smart Contracts
+          </h2>
+          <ul className='list-disc ml-8 mb-8 mr-2'>
+            <li>
+              Game&nbsp;:&nbsp;
+              <a
+                href={mvxExplorerUrl + '/accounts/' + contractGameAddress}
+                target='_blank'
+                className='text-slate-400 hover:text-slate-100'
+              >
+                {contractGameAddress.substring(0, 6) +
+                  '...' +
+                  contractGameAddress.substring(contractGameAddress.length - 6)}
+              </a>
+            </li>
+            <li>
+              Internal Market&nbsp;:&nbsp;
+              <a
+                href={mvxExplorerUrl + '/accounts/' + contractMarketAddress}
+                target='_blank'
+                className='text-slate-400 hover:text-slate-100'
+              >
+                {contractMarketAddress.substring(0, 6) +
+                  '...' +
+                  contractMarketAddress.substring(
+                    contractMarketAddress.length - 6
+                  )}
+              </a>
             </li>
           </ul>
           <span className='mb-2'>

@@ -6,6 +6,7 @@ export const environment = EnvironmentsEnum.devnet;
 
 // Shadow Lands
 export const mvxApiUrl = 'https://devnet-api.multiversx.com';
+export const mvxExplorerUrl = 'https://devnet-explorer.multiversx.com';
 export const sftCollectionId = 'DEVSHALAN-933f80';
 export const sftLandsId = 'DEVSHALAN-933f80-01';
 export const sftLandsNonce = 1;

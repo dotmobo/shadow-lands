@@ -6,6 +6,7 @@ export const environment = EnvironmentsEnum.mainnet;
 
 // Shadow Lands
 export const mvxApiUrl = 'https://api.multiversx.com';
+export const mvxExplorerUrl = 'https://explorer.multiversx.com';
 export const sftCollectionId = 'SHALAN-55b9a9';
 export const sftLandsId = 'SHALAN-55b9a9-01';
 export const sftLandsNonce = 1;
