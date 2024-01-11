@@ -175,15 +175,32 @@ export const Account = ({
                   sfts === undefined ||
                   lands === undefined
                 }
-                onClick={() =>
-                  sendBuyItemTransaction(
-                    {
-                      collection: sftCollectionId,
-                      nonce: sftLandsNonce
-                    },
-                    priceLand * Math.pow(10, 18)
-                  )
-                }
+                onClick={() => {
+                  confirmAlert({
+                    title: 'Buy 1 land',
+                    message:
+                      'Are you sure you want to buy 1 land for 150 $DUST ?',
+                    buttons: [
+                      {
+                        label: 'Yes',
+                        onClick: () =>
+                          sendBuyItemTransaction(
+                            {
+                              collection: sftCollectionId,
+                              nonce: sftLandsNonce
+                            },
+                            priceLand * Math.pow(10, 18)
+                          )
+                      },
+                      {
+                        label: 'No',
+                        onClick: () => {
+                          return;
+                        }
+                      }
+                    ]
+                  });
+                }}
               >
                 <FontAwesomeIcon icon={faTree} size='sm' className='mr-1' />
                 Buy 1 land
@@ -204,15 +221,32 @@ export const Account = ({
                   sfts === undefined ||
                   lands === undefined
                 }
-                onClick={() =>
-                  sendBuyItemTransaction(
-                    {
-                      collection: sftCollectionId,
-                      nonce: sftTavernNonce
-                    },
-                    priceBuilding * Math.pow(10, 18)
-                  )
-                }
+                onClick={() => {
+                  confirmAlert({
+                    title: 'Buy 1 tavern',
+                    message:
+                      'Are you sure you want to buy 1 tavern for 100 $DUST ?',
+                    buttons: [
+                      {
+                        label: 'Yes',
+                        onClick: () =>
+                          sendBuyItemTransaction(
+                            {
+                              collection: sftCollectionId,
+                              nonce: sftTavernNonce
+                            },
+                            priceBuilding * Math.pow(10, 18)
+                          )
+                      },
+                      {
+                        label: 'No',
+                        onClick: () => {
+                          return;
+                        }
+                      }
+                    ]
+                  });
+                }}
               >
                 <FontAwesomeIcon icon={faBeer} size='sm' className='mr-1' />
                 Buy 1 tavern
@@ -233,15 +267,32 @@ export const Account = ({
                   sfts === undefined ||
                   lands === undefined
                 }
-                onClick={() =>
-                  sendBuyItemTransaction(
-                    {
-                      collection: sftCollectionId,
-                      nonce: sftBanksNonce
-                    },
-                    priceBuilding * Math.pow(10, 18)
-                  )
-                }
+                onClick={() => {
+                  confirmAlert({
+                    title: 'Buy 1 bank',
+                    message:
+                      'Are you sure you want to buy 1 bank for 100 $DUST ?',
+                    buttons: [
+                      {
+                        label: 'Yes',
+                        onClick: () =>
+                          sendBuyItemTransaction(
+                            {
+                              collection: sftCollectionId,
+                              nonce: sftBanksNonce
+                            },
+                            priceBuilding * Math.pow(10, 18)
+                          )
+                      },
+                      {
+                        label: 'No',
+                        onClick: () => {
+                          return;
+                        }
+                      }
+                    ]
+                  });
+                }}
               >
                 <FontAwesomeIcon
                   icon={faBuildingColumns}
@@ -266,15 +317,32 @@ export const Account = ({
                   sfts === undefined ||
                   lands === undefined
                 }
-                onClick={() =>
-                  sendBuyItemTransaction(
-                    {
-                      collection: sftCollectionId,
-                      nonce: sftHauntedHouseNonce
-                    },
-                    priceBuilding * Math.pow(10, 18)
-                  )
-                }
+                onClick={() => {
+                  confirmAlert({
+                    title: 'Buy 1 haunted house',
+                    message:
+                      'Are you sure you want to buy 1 haunted house for 100 $DUST ?',
+                    buttons: [
+                      {
+                        label: 'Yes',
+                        onClick: () =>
+                          sendBuyItemTransaction(
+                            {
+                              collection: sftCollectionId,
+                              nonce: sftHauntedHouseNonce
+                            },
+                            priceBuilding * Math.pow(10, 18)
+                          )
+                      },
+                      {
+                        label: 'No',
+                        onClick: () => {
+                          return;
+                        }
+                      }
+                    ]
+                  });
+                }}
               >
                 <FontAwesomeIcon icon={faHouse} size='sm' className='mr-1' />
                 Buy 1 house
@@ -295,15 +363,32 @@ export const Account = ({
                   sfts === undefined ||
                   lands === undefined
                 }
-                onClick={() =>
-                  sendBuyItemTransaction(
-                    {
-                      collection: sftCollectionId,
-                      nonce: sftCryptNonce
-                    },
-                    priceBuilding * Math.pow(10, 18)
-                  )
-                }
+                onClick={() => {
+                  confirmAlert({
+                    title: 'Buy 1 crypt',
+                    message:
+                      'Are you sure you want to buy 1 crypt for 100 $DUST ?',
+                    buttons: [
+                      {
+                        label: 'Yes',
+                        onClick: () =>
+                          sendBuyItemTransaction(
+                            {
+                              collection: sftCollectionId,
+                              nonce: sftCryptNonce
+                            },
+                            priceBuilding * Math.pow(10, 18)
+                          )
+                      },
+                      {
+                        label: 'No',
+                        onClick: () => {
+                          return;
+                        }
+                      }
+                    ]
+                  });
+                }}
               >
                 <FontAwesomeIcon icon={faCross} size='sm' className='mr-1' />
                 Buy 1 crypt
@@ -324,15 +409,32 @@ export const Account = ({
                   sfts === undefined ||
                   lands === undefined
                 }
-                onClick={() =>
-                  sendBuyItemTransaction(
-                    {
-                      collection: sftCollectionId,
-                      nonce: sftLaboNonce
-                    },
-                    priceBuilding * Math.pow(10, 18)
-                  )
-                }
+                onClick={() => {
+                  confirmAlert({
+                    title: 'Buy 1 labo',
+                    message:
+                      'Are you sure you want to buy 1 labo for 100 $DUST ?',
+                    buttons: [
+                      {
+                        label: 'Yes',
+                        onClick: () =>
+                          sendBuyItemTransaction(
+                            {
+                              collection: sftCollectionId,
+                              nonce: sftLaboNonce
+                            },
+                            priceBuilding * Math.pow(10, 18)
+                          )
+                      },
+                      {
+                        label: 'No',
+                        onClick: () => {
+                          return;
+                        }
+                      }
+                    ]
+                  });
+                }}
               >
                 <FontAwesomeIcon
                   icon={faFlaskVial}
@@ -386,7 +488,7 @@ export const Account = ({
             confirmAlert({
               title: 'Destroy the land',
               message:
-                "Are you sure to withdraw the land and all buildings ? You won't be able to claim your $DUST rewards after that.",
+                "Are you sure you want to withdraw the land and all buildings? You won't be able to claim your $DUST rewards after that.",
               buttons: [
                 {
                   label: 'Yes',
