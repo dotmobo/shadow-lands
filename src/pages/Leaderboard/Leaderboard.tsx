@@ -42,6 +42,7 @@ export const Leaderboard = () => {
               <li key={index} className='mb-2'>
                 <span className='flex flex-items-center'>
                   <a
+                    target='_blank'
                     className='text-slate-400 hover:text-slate-100'
                     href={`https://explorer.multiversx.com/accounts/${item.address}`}
                   >
