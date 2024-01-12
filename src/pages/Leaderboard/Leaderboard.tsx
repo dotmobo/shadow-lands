@@ -2,7 +2,12 @@ import { faCircleArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
 import { FormatAmount, MxLink } from 'components';
-import { dustTokenId, ignoredAddresses, mvxApiUrl, mvxExplorerUrl } from 'config';
+import {
+  dustTokenId,
+  ignoredAddresses,
+  mvxApiUrl,
+  mvxExplorerUrl
+} from 'config';
 import { RouteNamesEnum } from 'localConstants';
 import { useEffect, useState } from 'react';
 import { AuthRedirectWrapper, PageWrapper } from 'wrappers';
@@ -18,7 +23,9 @@ export const Leaderboard = () => {
         setLeaderboard(
           response.data
             .filter(
-              (item: any) => ignoredAddresses.includes(item.address) === false
+              (item: any) =>
+                ignoredAddresses.includes(item.address) === false &&
+                item.address.startsWith('erd1qqqqqq') === false
             )
             .slice(0, 10)
         );
