@@ -33,7 +33,7 @@ export const Production = ({ sfts, rewardPerDay }) => {
   const { sendClaimTransaction } = useSendShadowLandsTransaction();
 
   const proxy = new ProxyNetworkProvider(network.apiAddress, {
-    timeout: 3000
+    timeout: 5000
   });
 
   useEffect(() => {
