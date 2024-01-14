@@ -297,7 +297,7 @@ export const Account = ({
                               collection: sftCollectionId,
                               nonce: sftTavernR1Nonce
                             },
-                            priceBuilding * Math.pow(10, 18)
+                            priceBuildingR1 * Math.pow(10, 18)
                           )
                       },
                       {
