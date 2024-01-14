@@ -14,7 +14,8 @@ import {
   sftHauntedHouseNonce,
   sftLaboNonce,
   sftLandsNonce,
-  sftTavernNonce
+  sftTavernNonce,
+  sftTavernR1Nonce
 } from 'config';
 import {
   useGetAccountInfo,
@@ -179,7 +180,13 @@ export const Game = () => {
                   </span>
                   <span title='Tavern'>
                     <FontAwesomeIcon icon={faBeer} size='sm' />{' '}
-                    {sfts.filter((x) => x === sftTavernNonce).length} / 1
+                    {sfts.filter((x) => x === sftTavernNonce).length}
+                    {sfts.filter((x) => x === sftTavernR1Nonce).length > 0 && (
+                      <span className='text-sm'>&nbsp;+1</span>
+                    )}
+                    {sfts.filter((x) => x === sftTavernR1Nonce).length ===
+                      0 && <span className='text-sm'>&nbsp;+0</span>}
+                    &nbsp;/&nbsp;1
                   </span>
                   <span title='Bank'>
                     <FontAwesomeIcon icon={faBuildingColumns} size='sm' />{' '}
