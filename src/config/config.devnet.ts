@@ -8,6 +8,7 @@ export const environment = EnvironmentsEnum.devnet;
 export const mvxApiUrl = 'https://devnet-api.multiversx.com';
 export const mvxExplorerUrl = 'https://devnet-explorer.multiversx.com';
 export const sftCollectionId = 'DEVSHALAN-933f80';
+// Buildings
 export const sftLandsId = 'DEVSHALAN-933f80-01';
 export const sftLandsNonce = 1;
 export const sftTavernId = 'DEVSHALAN-933f80-02';
@@ -20,6 +21,10 @@ export const sftCryptId = 'DEVSHALAN-933f80-06';
 export const sftCryptNonce = 6;
 export const sftLaboId = 'DEVSHALAN-933f80-07';
 export const sftLaboNonce = 7;
+// Upgrade +1
+export const sftTavernR1Id = 'DEVSHALAN-933f80-08';
+export const sftTavernR1Nonce = 8;
+// Dust and SC
 export const dustTokenId = 'DEVDUST-d62981';
 export const contractGameAddress =
   'erd1qqqqqqqqqqqqqpgqvfh5j05pw23upxz4hmh6fdsrcmvfjjd22krsxc4hy2';
@@ -31,6 +36,7 @@ export const totalProducted = 10000;
 // Price
 export const priceLand = 150;
 export const priceBuilding = 100;
+export const priceBuildingR1 = 400;
 
 // Leaderboard
 export const ignoredAddresses = [

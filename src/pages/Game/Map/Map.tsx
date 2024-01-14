@@ -19,12 +19,15 @@ import {
   sftBanksNonce,
   sftCryptNonce,
   sftHauntedHouseNonce,
-  sftLaboNonce
+  sftLaboNonce,
+  sftTavernR1Id,
+  sftTavernR1Nonce
 } from 'config';
 import { Bank } from './Bank';
 import { HauntedHouse } from './HauntedHouse';
 import { Crypt } from './Crypt';
 import { Labo } from './Labo';
+import { TavernR1 } from './TavernR1';
 
 function Loader() {
   return (
@@ -41,6 +44,7 @@ export const Map = ({
   walletHauntedHouses,
   walletCrypts,
   walletLabos,
+  walletTavernsR1,
   rewardsPerDay,
   defaultAutoRotate
 }) => {
@@ -94,14 +98,49 @@ export const Map = ({
             onPointerOver={(event) => hover(true)}
             onPointerOut={(event) => hover(false)}
           />
+
+          {/* Tavern +1 */}
+          {sfts !== undefined &&
+          sfts.filter((x) => x === sftTavernNonce).length > 0 &&
+          sfts.filter((x) => x === sftTavernR1Nonce).length > 0 ? (
+            <TavernR1
+              position={[4.435, 1.067, 5.3641]}
+              rotation={[0, -2.2521728667735, 0]}
+            />
+          ) : (
+            sfts !== undefined &&
+            walletTavernsR1.length > 0 &&
+            sfts.filter((x) => x === sftTavernNonce).length > 0 &&
+            sfts.filter((x) => x === sftTavernR1Id).length === 0 && (
+              <Tavern
+                onClick={(event) => {
+                  hover1(false);
+                  sendStakeBuildingTransaction(sftTavernR1Nonce);
+                }}
+                onPointerOver={(event) => hover1(true)}
+                onPointerOut={(event) => hover1(false)}
+                color={hovered1 ? 'blue' : undefined}
+                position={[4.435, 1.067, 5.3641]}
+                rotation={[0, -2.2521728667735, 0]}
+              />
+            )
+          )}
+
           {/* Tavern */}
           {sfts !== undefined &&
-          sfts.filter((x) => x === sftTavernNonce).length > 0 ? (
-            <Tavern position={[4.435, 1.067, 5.3641 ]} rotation={[0, -2.2521728667735, 0]}/>
+          walletTavernsR1.length === 0 &&
+          sfts.filter((x) => x === sftTavernNonce).length > 0 &&
+          sfts.filter((x) => x === sftTavernR1Id).length === 0 ? (
+            <Tavern
+              position={[4.435, 1.067, 5.3641]}
+              rotation={[0, -2.2521728667735, 0]}
+            />
           ) : (
             sfts !== undefined &&
             walletTaverns.length > 0 &&
-            sfts.filter((x) => x === sftTavernNonce).length === 0 && (
+            walletTavernsR1.length === 0 &&
+            sfts.filter((x) => x === sftTavernNonce).length === 0 &&
+            sfts.filter((x) => x === sftTavernR1Id).length === 0 && (
               <Tavern
                 onClick={(event) => {
                   hover1(false);
@@ -110,14 +149,19 @@ export const Map = ({
                 onPointerOver={(event) => hover1(true)}
                 onPointerOut={(event) => hover1(false)}
                 color={hovered1 ? 'blue' : 'white'}
-                position={[4.435, 1.067, 5.3641 ]} rotation={[0, -2.2521728667735, 0]}
+                position={[4.435, 1.067, 5.3641]}
+                rotation={[0, -2.2521728667735, 0]}
               />
             )
           )}
+
           {/* Bank */}
           {sfts !== undefined &&
           sfts.filter((x) => x === sftBanksNonce).length > 0 ? (
-            <Bank position={[-3.0777, 1.0154, -3.8426]} rotation={[0, 0.2688036, 0]} />
+            <Bank
+              position={[-3.0777, 1.0154, -3.8426]}
+              rotation={[0, 0.2688036, 0]}
+            />
           ) : (
             sfts !== undefined &&
             walletBanks.length > 0 &&
@@ -162,7 +206,10 @@ export const Map = ({
           {/* Crypt */}
           {sfts !== undefined &&
           sfts.filter((x) => x === sftCryptNonce).length > 0 ? (
-            <Crypt position={[1.8028, 1.378, -5.3541]} rotation={[0, -0.4952958, 0]} />
+            <Crypt
+              position={[1.8028, 1.378, -5.3541]}
+              rotation={[0, -0.4952958, 0]}
+            />
           ) : (
             sfts !== undefined &&
             walletCrypts.length > 0 &&
@@ -183,7 +230,10 @@ export const Map = ({
           {/* Laboratory */}
           {sfts !== undefined &&
           sfts.filter((x) => x === sftLaboNonce).length > 0 ? (
-            <Labo position={[-4.6456, 1.0172, 0.69635]} rotation={[0, 1.5538236, 0]} />
+            <Labo
+              position={[-4.6456, 1.0172, 0.69635]}
+              rotation={[0, 1.5538236, 0]}
+            />
           ) : (
             sfts !== undefined &&
             walletLabos.length > 0 &&

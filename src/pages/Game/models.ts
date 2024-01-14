@@ -20,6 +20,7 @@ export type WidgetsType = {
     outputHauntedHouses?: any;
     outputCrypts?: any;
     outputLabos?: any;
+    outputTavernsR1?: any;
   };
   reference: string;
 };

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import {
+  faArrowUp,
   faBeer,
   faBuildingColumns,
   faCartShopping,
@@ -36,7 +37,10 @@ import {
   sftBanksNonce,
   sftHauntedHouseNonce,
   sftCryptNonce,
-  sftLaboNonce
+  sftLaboNonce,
+  sftTavernR1Id,
+  priceBuildingR1,
+  sftTavernR1Nonce
 } from 'config';
 import {
   useGetAccountInfo,
@@ -54,7 +58,8 @@ export const Account = ({
   outputBanks,
   outputHauntedHouses,
   outputLabos,
-  outputCrypts
+  outputCrypts,
+  outputTavernsR1
 }) => {
   const { network } = useGetNetworkConfig();
   const { address, account } = useGetAccountInfo();
@@ -64,6 +69,9 @@ export const Account = ({
   const [hauntedHouses, setHauntedHousesList] = useState<Sft[]>();
   const [crypts, setCryptsList] = useState<Sft[]>();
   const [labos, setLabosList] = useState<Sft[]>();
+
+  const [tavernsR1, setTavernsR1] = useState<Sft[]>();
+
   const [dust, setDustToken] = useState<Token | null>();
   const { hasPendingTransactions } = useGetPendingTransactions();
   const {
@@ -90,7 +98,7 @@ export const Account = ({
     // Use [] as second argument in useEffect for not rendering each time
     axios
       .get<any>(
-        `${mvxApiUrl}/accounts/${address}/nfts?size=3330&identifiers=${sftLandsId},${sftTavernId},${sftBanksId},${sftHauntedHouseId},${sftCryptId},${sftLaboId}`
+        `${mvxApiUrl}/accounts/${address}/nfts?size=3330&identifiers=${sftLandsId},${sftTavernId},${sftBanksId},${sftHauntedHouseId},${sftCryptId},${sftLaboId},${sftTavernR1Id}`
       )
       .then((response) => {
         const res = orderBy(
@@ -123,6 +131,10 @@ export const Account = ({
         const labos = res.filter((x) => x.identifier === sftLaboId);
         setLabosList(labos);
         outputLabos(labos);
+        // Taverns R1
+        const tavernsR1 = res.filter((x) => x.identifier === sftTavernR1Id);
+        setTavernsR1(tavernsR1);
+        outputTavernsR1(tavernsR1);
       });
   }, [hasPendingTransactions]);
 
@@ -130,15 +142,19 @@ export const Account = ({
     <OutputContainer>
       <div className='flex flex-row'>
         <div className='flex flex-col text-black w-1/2'>
-          <span className='mb-2'>
+          <span className='mb-1'>
             <FontAwesomeIcon icon={faTree} size='sm' className='mr-1' />
             <Label>Lands: </Label> {lands?.[0]?.balance ?? 0}
           </span>
-          <span className='mb-2'>
+          <span className='mb-0'>
             <FontAwesomeIcon icon={faBeer} size='sm' className='mr-1' />
             <Label>Taverns: </Label> {taverns?.[0]?.balance ?? 0}
           </span>
-          <span className='mb-2'>
+          <span className='ml-4 mb-1'>
+            <FontAwesomeIcon icon={faArrowUp} size='sm' className='mr-1' />
+            <Label>+1: </Label> {tavernsR1?.[0]?.balance ?? 0}
+          </span>
+          <span className='mb-1'>
             <FontAwesomeIcon
               icon={faBuildingColumns}
               size='sm'
@@ -146,15 +162,15 @@ export const Account = ({
             />
             <Label>Banks: </Label> {banks?.[0]?.balance ?? 0}
           </span>
-          <span className='mb-2'>
+          <span className='mb-1'>
             <FontAwesomeIcon icon={faHouse} size='sm' className='mr-1' />
             <Label>Houses: </Label> {hauntedHouses?.[0]?.balance ?? 0}
           </span>
-          <span className='mb-2'>
+          <span className='mb-1'>
             <FontAwesomeIcon icon={faCross} size='sm' className='mr-1' />
             <Label>Crypts: </Label> {crypts?.[0]?.balance ?? 0}
           </span>
-          <span className='mb-2'>
+          <span className='mb-1'>
             <FontAwesomeIcon icon={faFlaskVial} size='sm' className='mr-1' />
             <Label>Labos: </Label> {labos?.[0]?.balance ?? 0}
           </span>
@@ -250,6 +266,52 @@ export const Account = ({
               >
                 <FontAwesomeIcon icon={faBeer} size='sm' className='mr-1' />
                 Buy 1 tavern
+              </Button>
+            </span>
+          </span>
+          <span className='flex mb-1'>
+            {priceBuildingR1}
+            <span>
+              <img src='/dust-logo.png' alt='Dust' className='ml-1 w-5' />
+            </span>
+            <span className='ml-2'>
+              <Button
+                className='inline-block rounded-lg px-3 py-0.5 text-center hover:no-underline my-0 bg-blue-600 text-white hover:bg-blue-700 mr-0 disabled:bg-gray-200 disabled:text-black disabled:cursor-not-allowed'
+                aria-label='Buy a tavern +1'
+                disabled={
+                  hasPendingTransactions ||
+                  sfts === undefined ||
+                  lands === undefined
+                }
+                onClick={() => {
+                  confirmAlert({
+                    title: 'Buy 1 tavern +1',
+                    message:
+                      'Are you sure you want to buy 1 tavern +1 for 400 $DUST ?',
+                    buttons: [
+                      {
+                        label: 'Yes',
+                        onClick: () =>
+                          sendBuyItemTransaction(
+                            {
+                              collection: sftCollectionId,
+                              nonce: sftTavernR1Nonce
+                            },
+                            priceBuilding * Math.pow(10, 18)
+                          )
+                      },
+                      {
+                        label: 'No',
+                        onClick: () => {
+                          return;
+                        }
+                      }
+                    ]
+                  });
+                }}
+              >
+                <FontAwesomeIcon icon={faBeer} size='sm' className='mr-1' />
+                Buy 1 tavern +1
               </Button>
             </span>
           </span>

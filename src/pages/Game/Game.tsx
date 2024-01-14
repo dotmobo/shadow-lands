@@ -68,6 +68,8 @@ export const Game = () => {
   const [crypts, setCryptsList] = useState<Sft[]>([]);
   const [labos, setLabosList] = useState<Sft[]>([]);
 
+  const [tavernsR1, setTavernsR1List] = useState<Sft[]>([]);
+
   const [rewardsTokenAmountPerDay, setRewardsTokenAmountPerDay] =
     useState<number>(0);
   const { getRewardsTokenAmountPerDay, getNftNonce } =
@@ -206,6 +208,7 @@ export const Game = () => {
                     walletHauntedHouses={hauntedHouses}
                     walletCrypts={crypts}
                     walletLabos={labos}
+                    walletTavernsR1={tavernsR1}
                     rewardsPerDay={rewardsTokenAmountPerDay}
                     defaultAutoRotate={autoRotate}
                   />
@@ -232,6 +235,7 @@ export const Game = () => {
                   props['outputHauntedHouses'] = setHauntedHousesList;
                   props['outputCrypts'] = setCryptsList;
                   props['outputLabos'] = setLabosList;
+                  props['outputTavernsR1'] = setTavernsR1List;
 
                   return (
                     <Card
