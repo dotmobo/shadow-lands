@@ -5,9 +5,9 @@
 ////////////////////////////////////////////////////
 
 // Init:                                 1
-// Endpoints:                            9
+// Endpoints:                           11
 // Async Callback (empty):               1
-// Total number of exported functions:  11
+// Total number of exported functions:  13
 
 #![no_std]
 
@@ -22,6 +22,7 @@ multiversx_sc_wasm_adapter::endpoints! {
     market
     (
         init => init
+        upgrade => upgrade
         buy => buy
         withdraw => withdraw
         change_price => change_price
@@ -31,6 +32,7 @@ multiversx_sc_wasm_adapter::endpoints! {
         getNftIdentifier => nft_identifier
         getPriceLand => price_land
         getPriceBuilding => price_building
+        getPriceUpgradeRank1 => price_upgrade_rank1
     )
 }
 

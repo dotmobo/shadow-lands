@@ -4,16 +4,24 @@ multiversx_sc::imports!();
 
 #[multiversx_sc::contract]
 pub trait Market {
+
     #[init]
     fn init(&self, token_id: EgldOrEsdtTokenIdentifier, price_land: BigUint, price_building: BigUint, price_upgrade_rank1: BigUint, nft_identifier: EgldOrEsdtTokenIdentifier) {
+        self.token_id().set_if_empty(&token_id);
+        self.price_land().set_if_empty(&price_land);
+        self.price_building().set_if_empty(&price_building);
+        self.price_upgrade_rank1().set_if_empty(&price_upgrade_rank1);
+        self.nft_identifier().set_if_empty(&nft_identifier);
+        self.bank().set_if_empty(BigUint::from(0u32));
+    }
+
+    #[upgrade]
+    fn upgrade(&self, token_id: EgldOrEsdtTokenIdentifier, price_land: BigUint, price_building: BigUint, price_upgrade_rank1: BigUint, nft_identifier: EgldOrEsdtTokenIdentifier) {
         self.token_id().set(&token_id);
         self.price_land().set(&price_land);
         self.price_building().set(&price_building);
         self.price_upgrade_rank1().set(&price_upgrade_rank1);
         self.nft_identifier().set(&nft_identifier);
-        if self.bank().is_empty() {
-            self.bank().set(BigUint::from(0u32));
-        }
     }
 
 
@@ -37,7 +45,7 @@ pub trait Market {
                 payment_amount == self.price_land().get(),
                 "Invalid payment amount"
             );
-        } else if nft_nonce > 1 && nft_nonce < 7 {
+        } else if nft_nonce > 1 && nft_nonce < 8 {
             require!(
                 payment_amount == self.price_building().get(),
                 "Invalid payment amount"
