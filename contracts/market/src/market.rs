@@ -5,10 +5,11 @@ multiversx_sc::imports!();
 #[multiversx_sc::contract]
 pub trait Market {
     #[init]
-    fn init(&self, token_id: EgldOrEsdtTokenIdentifier, price_land: BigUint, price_building: BigUint, nft_identifier: EgldOrEsdtTokenIdentifier) {
+    fn init(&self, token_id: EgldOrEsdtTokenIdentifier, price_land: BigUint, price_building: BigUint, price_upgrade_rank1: BigUint, nft_identifier: EgldOrEsdtTokenIdentifier) {
         self.token_id().set(&token_id);
         self.price_land().set(&price_land);
         self.price_building().set(&price_building);
+        self.price_upgrade_rank1().set(&price_upgrade_rank1);
         self.nft_identifier().set(&nft_identifier);
         if self.bank().is_empty() {
             self.bank().set(BigUint::from(0u32));
@@ -36,9 +37,14 @@ pub trait Market {
                 payment_amount == self.price_land().get(),
                 "Invalid payment amount"
             );
-        } else {
+        } else if nft_nonce > 1 && nft_nonce < 7 {
             require!(
                 payment_amount == self.price_building().get(),
+                "Invalid payment amount"
+            );
+        } else {
+            require!(
+                payment_amount == self.price_upgrade_rank1().get(),
                 "Invalid payment amount"
             );
         }
@@ -81,10 +87,11 @@ pub trait Market {
 
     #[only_owner]
     #[endpoint]
-    fn change_price(&self, price_land: BigUint, price_building: BigUint) -> SCResult<()> {
+    fn change_price(&self, price_land: BigUint, price_building: BigUint, price_upgrade_rank1: BigUint) -> SCResult<()> {
 
         self.price_land().set(&price_land);
         self.price_building().set(&price_building);
+        self.price_upgrade_rank1().set(&price_upgrade_rank1);
 
         Ok(())
     }
@@ -118,6 +125,10 @@ pub trait Market {
     #[view(getPriceBuilding)]
     #[storage_mapper("price_building")]
     fn price_building(&self) -> SingleValueMapper<BigUint>;
+
+    #[view(getPriceUpgradeRank1)]
+    #[storage_mapper("price_upgrade_rank1")]
+    fn price_upgrade_rank1(&self) -> SingleValueMapper<BigUint>;
 
 
 
