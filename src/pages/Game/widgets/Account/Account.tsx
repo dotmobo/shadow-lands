@@ -509,7 +509,7 @@ export const Account = ({
           </span>
         </div>
       </div>
-      <div className='flex flex-col text-black mt-4'>
+      <div className='flex flex-col text-black mt-2'>
         <p className='flex items-center'>
           <Label>$DUST: </Label>
           <FormatAmount
