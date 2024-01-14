@@ -45,7 +45,7 @@ pub trait Market {
                 payment_amount == self.price_land().get(),
                 "Invalid payment amount"
             );
-        } else if nft_nonce > 1 && nft_nonce < 8 {
+        } else if nft_nonce > 1 && nft_nonce < 7 {
             require!(
                 payment_amount == self.price_building().get(),
                 "Invalid payment amount"
