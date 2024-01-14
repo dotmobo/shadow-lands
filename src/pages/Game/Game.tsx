@@ -182,10 +182,10 @@ export const Game = () => {
                     <FontAwesomeIcon icon={faBeer} size='sm' />{' '}
                     {sfts.filter((x) => x === sftTavernNonce).length}
                     {sfts.filter((x) => x === sftTavernR1Nonce).length > 0 && (
-                      <span className='text-sm'>&nbsp;+1</span>
+                      <span className='text-sm'>&nbsp;(+1)</span>
                     )}
                     {sfts.filter((x) => x === sftTavernR1Nonce).length ===
-                      0 && <span className='text-sm'>&nbsp;+0</span>}
+                      0 && <span className='text-sm'>&nbsp;(+0)</span>}
                     &nbsp;/&nbsp;1
                   </span>
                   <span title='Bank'>

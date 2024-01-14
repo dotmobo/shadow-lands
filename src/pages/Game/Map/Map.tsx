@@ -99,7 +99,7 @@ export const Map = ({
             onPointerOut={(event) => hover(false)}
           />
 
-          {/* Tavern +1 */}
+          {/* Tavern */}
           {sfts !== undefined &&
           sfts.filter((x) => x === sftTavernNonce).length > 0 &&
           sfts.filter((x) => x === sftTavernR1Nonce).length > 0 ? (
@@ -107,53 +107,45 @@ export const Map = ({
               position={[4.435, 1.067, 5.3641]}
               rotation={[0, -2.2521728667735, 0]}
             />
-          ) : (
-            sfts !== undefined &&
+          ) : sfts !== undefined &&
             walletTavernsR1.length > 0 &&
             sfts.filter((x) => x === sftTavernNonce).length > 0 &&
-            sfts.filter((x) => x === sftTavernR1Id).length === 0 && (
-              <Tavern
-                onClick={(event) => {
-                  hover1(false);
-                  sendStakeBuildingTransaction(sftTavernR1Nonce);
-                }}
-                onPointerOver={(event) => hover1(true)}
-                onPointerOut={(event) => hover1(false)}
-                color={hovered1 ? 'blue' : undefined}
-                position={[4.435, 1.067, 5.3641]}
-                rotation={[0, -2.2521728667735, 0]}
-              />
-            )
-          )}
-
-          {/* Tavern */}
-          {sfts !== undefined &&
-          walletTavernsR1.length === 0 &&
-          sfts.filter((x) => x === sftTavernNonce).length > 0 &&
-          sfts.filter((x) => x === sftTavernR1Id).length === 0 ? (
+            sfts.filter((x) => x === sftTavernR1Id).length === 0 ? (
+            <Tavern
+              onClick={(event) => {
+                hover1(false);
+                sendStakeBuildingTransaction(sftTavernR1Nonce);
+              }}
+              onPointerOver={(event) => hover1(true)}
+              onPointerOut={(event) => hover1(false)}
+              color={hovered1 ? 'blue' : undefined}
+              position={[4.435, 1.067, 5.3641]}
+              rotation={[0, -2.2521728667735, 0]}
+            />
+          ) : sfts !== undefined &&
+            walletTavernsR1.length === 0 &&
+            sfts.filter((x) => x === sftTavernNonce).length > 0 &&
+            sfts.filter((x) => x === sftTavernR1Id).length === 0 ? (
             <Tavern
               position={[4.435, 1.067, 5.3641]}
               rotation={[0, -2.2521728667735, 0]}
             />
-          ) : (
-            sfts !== undefined &&
+          ) : sfts !== undefined &&
             walletTaverns.length > 0 &&
-            walletTavernsR1.length === 0 &&
             sfts.filter((x) => x === sftTavernNonce).length === 0 &&
-            sfts.filter((x) => x === sftTavernR1Id).length === 0 && (
-              <Tavern
-                onClick={(event) => {
-                  hover1(false);
-                  sendStakeBuildingTransaction(sftTavernNonce);
-                }}
-                onPointerOver={(event) => hover1(true)}
-                onPointerOut={(event) => hover1(false)}
-                color={hovered1 ? 'blue' : 'white'}
-                position={[4.435, 1.067, 5.3641]}
-                rotation={[0, -2.2521728667735, 0]}
-              />
-            )
-          )}
+            sfts.filter((x) => x === sftTavernR1Id).length === 0 ? (
+            <Tavern
+              onClick={(event) => {
+                hover1(false);
+                sendStakeBuildingTransaction(sftTavernNonce);
+              }}
+              onPointerOver={(event) => hover1(true)}
+              onPointerOut={(event) => hover1(false)}
+              color={hovered1 ? 'blue' : 'white'}
+              position={[4.435, 1.067, 5.3641]}
+              rotation={[0, -2.2521728667735, 0]}
+            />
+          ) : null}
 
           {/* Bank */}
           {sfts !== undefined &&
