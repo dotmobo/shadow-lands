@@ -86,7 +86,7 @@ export const Game = () => {
   const [autoRotate, setAutoRotate] = useState<boolean>(true);
 
   const proxy = new ProxyNetworkProvider(network.apiAddress, {
-    timeout: 3000
+    timeout: 5000
   });
 
   useEffect(() => {
