@@ -41,7 +41,8 @@ import {
   sftTavernR1Id,
   priceBuildingR1,
   sftTavernR1Nonce,
-  sftBankR1Id
+  sftBankR1Id,
+  sftBankR1Nonce
 } from 'config';
 import {
   useGetAccountInfo,
@@ -372,6 +373,56 @@ export const Account = ({
                   className='mr-1'
                 />
                 Buy 1 bank
+              </Button>
+            </span>
+          </span>
+          <span className='flex mb-1'>
+            {priceBuildingR1}
+            <span>
+              <img src='/dust-logo.png' alt='Dust' className='ml-1 w-5' />
+            </span>
+            <span className='ml-2'>
+              <Button
+                className='inline-block rounded-lg px-3 py-0.5 text-center hover:no-underline my-0 bg-blue-600 text-white hover:bg-blue-700 mr-0 disabled:bg-gray-200 disabled:text-black disabled:cursor-not-allowed'
+                aria-label='Buy a bank +1'
+                disabled={
+                  hasPendingTransactions ||
+                  sfts === undefined ||
+                  lands === undefined
+                }
+                onClick={() => {
+                  confirmAlert({
+                    title: 'Buy 1 bank +1',
+                    message:
+                      'Are you sure you want to buy 1 bank +1 for 400 $DUST ?',
+                    buttons: [
+                      {
+                        label: 'Yes',
+                        onClick: () =>
+                          sendBuyItemTransaction(
+                            {
+                              collection: sftCollectionId,
+                              nonce: sftBankR1Nonce
+                            },
+                            priceBuildingR1 * Math.pow(10, 18)
+                          )
+                      },
+                      {
+                        label: 'No',
+                        onClick: () => {
+                          return;
+                        }
+                      }
+                    ]
+                  });
+                }}
+              >
+                <FontAwesomeIcon
+                  icon={faBuildingColumns}
+                  size='sm'
+                  className='mr-1'
+                />
+                Buy 1 bank +1
               </Button>
             </span>
           </span>
