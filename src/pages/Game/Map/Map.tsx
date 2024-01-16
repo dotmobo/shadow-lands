@@ -16,6 +16,7 @@ import { Tavern } from './Tavern';
 import { Land } from './Land';
 import { useSendShadowLandsTransaction } from '../transactions';
 import {
+  sftBankR1Nonce,
   sftBanksNonce,
   sftCryptNonce,
   sftHauntedHouseNonce,
@@ -70,23 +71,6 @@ export const Map = ({
 
   return (
     <Canvas shadows dpr={[1, 2]}>
-      {/* <Text
-        color='white'
-        anchorX='center'
-        anchorY='middle'
-        position={[0, 10, 0]}
-        font='https://fonts.gstatic.com/s/materialicons/v70/flUhRq6tzZclQEJ-Vdg-IuiaDsNa.woff'
-      >
-        agriculture
-      </Text>
-      <Text
-        color='white'
-        anchorX='center'
-        anchorY='middle'
-        position={[0, 9, 0]}
-      >
-        {rewardsPerDay * sfts.length} $DUST/Day
-      </Text> */}
       <Suspense fallback={<Loader />}>
         <Stage
           controls={ref}
@@ -149,28 +133,52 @@ export const Map = ({
 
           {/* Bank */}
           {sfts !== undefined &&
-          sfts.filter((x) => x === sftBanksNonce).length > 0 ? (
+          sfts.filter((x) => x === sftBanksNonce).length > 0 &&
+          sfts.filter((x) => x === sftBankR1Nonce).length > 0 ? (
+            <BankR1
+              position={[-3.0777, 1.0154, -3.8426]}
+              rotation={[0, 0.2688036, 0]}
+            />
+          ) : sfts !== undefined &&
+            walletTavernsR1.length > 0 &&
+            sfts.filter((x) => x === sftBanksNonce).length > 0 &&
+            sfts.filter((x) => x === sftBankR1Nonce).length === 0 ? (
+            <Bank
+              onClick={(event) => {
+                hover2(false);
+                sendStakeBuildingTransaction(sftBankR1Nonce);
+              }}
+              onPointerOver={(event) => hover2(true)}
+              onPointerOut={(event) => hover2(false)}
+              color={hovered2 ? 'blue' : undefined}
+              position={[-3.0777, 1.0154, -3.8426]}
+              rotation={[0, 0.2688036, 0]}
+            />
+          ) : sfts !== undefined &&
+            walletTavernsR1.length === 0 &&
+            sfts.filter((x) => x === sftBanksNonce).length > 0 &&
+            sfts.filter((x) => x === sftBankR1Nonce).length === 0 ? (
             <Bank
               position={[-3.0777, 1.0154, -3.8426]}
               rotation={[0, 0.2688036, 0]}
             />
-          ) : (
-            sfts !== undefined &&
-            walletBanks.length > 0 &&
-            sfts.filter((x) => x === sftBanksNonce).length === 0 && (
-              <Bank
-                onClick={(event) => {
-                  hover2(false);
-                  sendStakeBuildingTransaction(sftBanksNonce);
-                }}
-                onPointerOver={(event) => hover2(true)}
-                onPointerOut={(event) => hover2(false)}
-                color={hovered2 ? 'blue' : 'white'}
-                position={[-3.0777, 1.0154, -3.8426]}
-                rotation={[0, 0.2688036, 0]}
-              />
-            )
-          )}
+          ) : sfts !== undefined &&
+            walletTaverns.length > 0 &&
+            sfts.filter((x) => x === sftBanksNonce).length === 0 &&
+            sfts.filter((x) => x === sftBankR1Nonce).length === 0 ? (
+            <Bank
+              onClick={(event) => {
+                hover2(false);
+                sendStakeBuildingTransaction(sftBanksNonce);
+              }}
+              onPointerOver={(event) => hover2(true)}
+              onPointerOut={(event) => hover2(false)}
+              color={hovered2 ? 'blue' : 'white'}
+              position={[-3.0777, 1.0154, -3.8426]}
+              rotation={[0, 0.2688036, 0]}
+            />
+          ) : null}
+
           {/* Haunted House */}
           {sfts !== undefined &&
           sfts.filter((x) => x === sftHauntedHouseNonce).length > 0 ? (

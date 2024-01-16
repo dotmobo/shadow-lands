@@ -40,7 +40,8 @@ import {
   sftLaboNonce,
   sftTavernR1Id,
   priceBuildingR1,
-  sftTavernR1Nonce
+  sftTavernR1Nonce,
+  sftBankR1Id
 } from 'config';
 import {
   useGetAccountInfo,
@@ -59,7 +60,8 @@ export const Account = ({
   outputHauntedHouses,
   outputLabos,
   outputCrypts,
-  outputTavernsR1
+  outputTavernsR1,
+  outputBanksR1,
 }) => {
   const { network } = useGetNetworkConfig();
   const { address, account } = useGetAccountInfo();
@@ -71,6 +73,7 @@ export const Account = ({
   const [labos, setLabosList] = useState<Sft[]>();
 
   const [tavernsR1, setTavernsR1] = useState<Sft[]>();
+  const [banksR1, setBanksR1] = useState<Sft[]>();
 
   const [dust, setDustToken] = useState<Token | null>();
   const { hasPendingTransactions } = useGetPendingTransactions();
@@ -135,6 +138,9 @@ export const Account = ({
         const tavernsR1 = res.filter((x) => x.identifier === sftTavernR1Id);
         setTavernsR1(tavernsR1);
         outputTavernsR1(tavernsR1);
+        // Banks R1
+        const banksR1 = res.filter((x) => x.identifier === sftBankR1Id);
+        setBanksR1(banksR1);
       });
   }, [hasPendingTransactions]);
 
@@ -154,13 +160,17 @@ export const Account = ({
             <FontAwesomeIcon icon={faArrowUp} size='sm' className='mr-1' />
             <Label>+1: </Label> {tavernsR1?.[0]?.balance ?? 0}
           </span>
-          <span className='mb-1'>
+          <span className='mb-0'>
             <FontAwesomeIcon
               icon={faBuildingColumns}
               size='sm'
               className='mr-1'
             />
             <Label>Banks: </Label> {banks?.[0]?.balance ?? 0}
+          </span>
+          <span className='ml-4 mb-1'>
+            <FontAwesomeIcon icon={faArrowUp} size='sm' className='mr-1' />
+            <Label>+1: </Label> {banksR1?.[0]?.balance ?? 0}
           </span>
           <span className='mb-1'>
             <FontAwesomeIcon icon={faHouse} size='sm' className='mr-1' />
