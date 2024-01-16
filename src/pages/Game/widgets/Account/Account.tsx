@@ -102,7 +102,7 @@ export const Account = ({
     // Use [] as second argument in useEffect for not rendering each time
     axios
       .get<any>(
-        `${mvxApiUrl}/accounts/${address}/nfts?size=3330&identifiers=${sftLandsId},${sftTavernId},${sftBanksId},${sftHauntedHouseId},${sftCryptId},${sftLaboId},${sftTavernR1Id}`
+        `${mvxApiUrl}/accounts/${address}/nfts?size=3330&identifiers=${sftLandsId},${sftTavernId},${sftBanksId},${sftHauntedHouseId},${sftCryptId},${sftLaboId},${sftTavernR1Id},${sftBankR1Id}`
       )
       .then((response) => {
         const res = orderBy(
