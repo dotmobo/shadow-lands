@@ -110,7 +110,7 @@ export const Map = ({
           ) : sfts !== undefined &&
             walletTavernsR1.length > 0 &&
             sfts.filter((x) => x === sftTavernNonce).length > 0 &&
-            sfts.filter((x) => x === sftTavernR1Id).length === 0 ? (
+            sfts.filter((x) => x === sftTavernR1Nonce).length === 0 ? (
             <Tavern
               onClick={(event) => {
                 hover1(false);
@@ -125,7 +125,7 @@ export const Map = ({
           ) : sfts !== undefined &&
             walletTavernsR1.length === 0 &&
             sfts.filter((x) => x === sftTavernNonce).length > 0 &&
-            sfts.filter((x) => x === sftTavernR1Id).length === 0 ? (
+            sfts.filter((x) => x === sftTavernR1Nonce).length === 0 ? (
             <Tavern
               position={[4.435, 1.067, 5.3641]}
               rotation={[0, -2.2521728667735, 0]}
@@ -133,7 +133,7 @@ export const Map = ({
           ) : sfts !== undefined &&
             walletTaverns.length > 0 &&
             sfts.filter((x) => x === sftTavernNonce).length === 0 &&
-            sfts.filter((x) => x === sftTavernR1Id).length === 0 ? (
+            sfts.filter((x) => x === sftTavernR1Nonce).length === 0 ? (
             <Tavern
               onClick={(event) => {
                 hover1(false);
