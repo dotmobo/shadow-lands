@@ -21,7 +21,6 @@ import {
   sftCryptNonce,
   sftHauntedHouseNonce,
   sftLaboNonce,
-  sftTavernR1Id,
   sftTavernR1Nonce
 } from 'config';
 import { Bank } from './Bank';
@@ -29,6 +28,7 @@ import { HauntedHouse } from './HauntedHouse';
 import { Crypt } from './Crypt';
 import { Labo } from './Labo';
 import { TavernR1 } from './TavernR1';
+import { BankR1 } from './BankR1';
 
 function Loader() {
   return (
@@ -46,6 +46,7 @@ export const Map = ({
   walletCrypts,
   walletLabos,
   walletTavernsR1,
+  walletBanksR1,
   rewardsPerDay,
   defaultAutoRotate
 }) => {
@@ -140,7 +141,7 @@ export const Map = ({
               rotation={[0, 0.2688036, 0]}
             />
           ) : sfts !== undefined &&
-            walletTavernsR1.length > 0 &&
+            walletBanksR1.length > 0 &&
             sfts.filter((x) => x === sftBanksNonce).length > 0 &&
             sfts.filter((x) => x === sftBankR1Nonce).length === 0 ? (
             <Bank
@@ -155,7 +156,7 @@ export const Map = ({
               rotation={[0, 0.2688036, 0]}
             />
           ) : sfts !== undefined &&
-            walletTavernsR1.length === 0 &&
+            walletBanksR1.length === 0 &&
             sfts.filter((x) => x === sftBanksNonce).length > 0 &&
             sfts.filter((x) => x === sftBankR1Nonce).length === 0 ? (
             <Bank
@@ -163,7 +164,7 @@ export const Map = ({
               rotation={[0, 0.2688036, 0]}
             />
           ) : sfts !== undefined &&
-            walletTaverns.length > 0 &&
+            walletBanks.length > 0 &&
             sfts.filter((x) => x === sftBanksNonce).length === 0 &&
             sfts.filter((x) => x === sftBankR1Nonce).length === 0 ? (
             <Bank
