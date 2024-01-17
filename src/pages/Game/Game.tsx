@@ -44,6 +44,7 @@ import {
   faTree
 } from '@fortawesome/free-solid-svg-icons';
 import { RouteNamesEnum } from 'localConstants';
+import LecteurAudio from 'components/LecteurAudio/LecteurAudio';
 
 const WIDGETS: WidgetsType[] = [
   {
@@ -154,6 +155,9 @@ export const Game = () => {
             {sfts !== undefined && (
               <>
                 <div className='flex w-full ml-2 mt-2 mb-2 text-slate-300'>
+                  <span className='mr-2'>
+                    <LecteurAudio src='/music.mp3' />
+                  </span>
                   <Button
                     aria-label='toggle auto rotate'
                     onClick={() => {
