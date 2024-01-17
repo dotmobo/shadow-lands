@@ -9,6 +9,7 @@ import { ProxyNetworkProvider } from '@multiversx/sdk-network-providers/out';
 import { Button, Card, MxLink } from 'components';
 import {
   contractGameAddress,
+  sftBankR1Nonce,
   sftBanksNonce,
   sftCryptNonce,
   sftHauntedHouseNonce,
@@ -70,6 +71,7 @@ export const Game = () => {
   const [labos, setLabosList] = useState<Sft[]>([]);
 
   const [tavernsR1, setTavernsR1List] = useState<Sft[]>([]);
+  const [banksR1, setBanksR1List] = useState<Sft[]>([]);
 
   const [rewardsTokenAmountPerDay, setRewardsTokenAmountPerDay] =
     useState<number>(0);
@@ -190,14 +192,21 @@ export const Game = () => {
                   </span>
                   <span title='Bank'>
                     <FontAwesomeIcon icon={faBuildingColumns} size='sm' />{' '}
-                    {sfts.filter((x) => x === sftBanksNonce).length} / 1
+                    {sfts.filter((x) => x === sftBanksNonce).length}
+                    {sfts.filter((x) => x === sftBankR1Nonce).length > 0 && (
+                      <span className='text-sm'>&nbsp;(+1)</span>
+                    )}
+                    {sfts.filter((x) => x === sftBankR1Nonce).length === 0 && (
+                      <span className='text-sm'>&nbsp;(+0)</span>
+                    )}
+                    &nbsp;/&nbsp;1
                   </span>
+                </div>
+                <div className='flex w-full mt-2 justify-center gap-4 text-slate-300'>
                   <span title='Haunted House'>
                     <FontAwesomeIcon icon={faHouse} size='sm' />{' '}
                     {sfts.filter((x) => x === sftHauntedHouseNonce).length} / 1
                   </span>
-                </div>
-                <div className='flex w-full mt-2 justify-center gap-4 text-slate-300'>
                   <span title='Crypt'>
                     <FontAwesomeIcon icon={faCross} size='sm' />{' '}
                     {sfts.filter((x) => x === sftCryptNonce).length} / 1
@@ -216,6 +225,7 @@ export const Game = () => {
                     walletCrypts={crypts}
                     walletLabos={labos}
                     walletTavernsR1={tavernsR1}
+                    walletBanksR1={banksR1}
                     rewardsPerDay={rewardsTokenAmountPerDay}
                     defaultAutoRotate={autoRotate}
                   />
@@ -243,6 +253,7 @@ export const Game = () => {
                   props['outputCrypts'] = setCryptsList;
                   props['outputLabos'] = setLabosList;
                   props['outputTavernsR1'] = setTavernsR1List;
+                  props['outputBanksR1'] = setBanksR1List;
 
                   return (
                     <Card
