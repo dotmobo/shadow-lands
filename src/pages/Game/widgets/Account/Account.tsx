@@ -142,6 +142,7 @@ export const Account = ({
         // Banks R1
         const banksR1 = res.filter((x) => x.identifier === sftBankR1Id);
         setBanksR1(banksR1);
+        outputBanksR1(banksR1);
       });
   }, [hasPendingTransactions]);
 
