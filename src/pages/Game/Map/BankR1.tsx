@@ -65,7 +65,7 @@ export function BankR1({ position, color, rotation, ...props }: any) {
             castShadow
             receiveShadow
             geometry={nodes.Cube008_3.geometry}
-            material={materials.BankSoubassement}
+            material={materials.Lumiere}
           >
             {color !== undefined && (
               <meshStandardMaterial color={color} transparent opacity={0.2} />
@@ -76,7 +76,7 @@ export function BankR1({ position, color, rotation, ...props }: any) {
             castShadow
             receiveShadow
             geometry={nodes.Cube008_4.geometry}
-            material={materials.Lumiere}
+            material={materials.BankToit}
           >
             {color !== undefined && (
               <meshStandardMaterial color={color} transparent opacity={0.2} />
@@ -87,17 +87,6 @@ export function BankR1({ position, color, rotation, ...props }: any) {
             castShadow
             receiveShadow
             geometry={nodes.Cube008_5.geometry}
-            material={materials.BankToit}
-          >
-            {color !== undefined && (
-              <meshStandardMaterial color={color} transparent opacity={0.2} />
-            )}
-          </mesh>
-          <mesh
-            name='Cube008_6'
-            castShadow
-            receiveShadow
-            geometry={nodes.Cube008_6.geometry}
             material={materials.Palette}
           >
             {color !== undefined && (
