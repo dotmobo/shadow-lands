@@ -48,7 +48,7 @@ import LecteurAudio from 'components/LecteurAudio/LecteurAudio';
 
 const WIDGETS: WidgetsType[] = [
   {
-    title: 'Wallet',
+    title: 'Wallet & Market',
     widget: Account,
     description: 'Balance of your wallet',
     reference: 'https://dusty-bones.netlify.app/'

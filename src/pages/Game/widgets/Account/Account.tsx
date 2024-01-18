@@ -149,8 +149,8 @@ export const Account = ({
   return (
     <OutputContainer>
       <div className='flex flex-row'>
-        <div className='flex flex-col text-black w-1/2'>
-          <span className='mb-1'>
+        <div className='flex flex-col text-black w-1/2 border-r'>
+          <span className='mb-2'>
             <FontAwesomeIcon icon={faTree} size='sm' className='mr-1' />
             <Label>Lands: </Label> {lands?.[0]?.balance ?? 0}
           </span>
@@ -158,7 +158,7 @@ export const Account = ({
             <FontAwesomeIcon icon={faBeer} size='sm' className='mr-1' />
             <Label>Taverns: </Label> {taverns?.[0]?.balance ?? 0}
           </span>
-          <span className='ml-4 mb-1'>
+          <span className='ml-4 mb-2'>
             <FontAwesomeIcon icon={faArrowUp} size='sm' className='mr-1' />
             <Label>+1: </Label> {tavernsR1?.[0]?.balance ?? 0}
           </span>
@@ -170,15 +170,15 @@ export const Account = ({
             />
             <Label>Banks: </Label> {banks?.[0]?.balance ?? 0}
           </span>
-          <span className='ml-4 mb-1'>
+          <span className='ml-4 mb-2'>
             <FontAwesomeIcon icon={faArrowUp} size='sm' className='mr-1' />
             <Label>+1: </Label> {banksR1?.[0]?.balance ?? 0}
           </span>
-          <span className='mb-1'>
+          <span className='mb-2'>
             <FontAwesomeIcon icon={faHouse} size='sm' className='mr-1' />
             <Label>Houses: </Label> {hauntedHouses?.[0]?.balance ?? 0}
           </span>
-          <span className='mb-1'>
+          <span className='mb-2'>
             <FontAwesomeIcon icon={faCross} size='sm' className='mr-1' />
             <Label>Crypts: </Label> {crypts?.[0]?.balance ?? 0}
           </span>
