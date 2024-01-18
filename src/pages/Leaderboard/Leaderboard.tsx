@@ -1,5 +1,6 @@
 import { faCircleArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useGetPendingTransactions } from '@multiversx/sdk-dapp/hooks/transactions/useGetPendingTransactions';
 import axios from 'axios';
 import { FormatAmount, Loader, MxLink } from 'components';
 import {
@@ -14,6 +15,7 @@ import { useEffect, useState } from 'react';
 import { AuthRedirectWrapper, PageWrapper } from 'wrappers';
 
 export const Leaderboard = () => {
+  const { hasPendingTransactions } = useGetPendingTransactions();
   const [leaderboard, setLeaderboard] = useState<any>();
   const [claimers, setClaimers] = useState<string[]>();
 
@@ -35,7 +37,7 @@ export const Leaderboard = () => {
           setLeaderboard([]);
         }
       });
-  }, []);
+  }, [hasPendingTransactions]);
 
   useEffect(() => {
     const previousMonth = Math.floor(
@@ -65,7 +67,7 @@ export const Leaderboard = () => {
           setClaimers([]);
         }
       });
-  }, []);
+  }, [hasPendingTransactions]);
 
   return (
     <AuthRedirectWrapper requireAuth={true}>

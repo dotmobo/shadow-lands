@@ -32,6 +32,7 @@ import { useCallShadowLandsQuery } from './queries';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faBeer,
+  faBook,
   faBuildingColumns,
   faCross,
   faFlaskVial,
@@ -177,6 +178,9 @@ export const Game = () => {
                   </MxLink>
                   <MxLink to={RouteNamesEnum.leaderboard}>
                     <FontAwesomeIcon icon={faRankingStar} size='sm' />
+                  </MxLink>
+                  <MxLink to={RouteNamesEnum.cards}>
+                    <FontAwesomeIcon icon={faBook} size='sm' />
                   </MxLink>
                 </div>
                 <div className='flex w-full justify-center gap-4 text-slate-300'>

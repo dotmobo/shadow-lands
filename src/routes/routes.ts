@@ -1,5 +1,6 @@
 import { RouteNamesEnum } from 'localConstants';
 import { Home, Game } from 'pages';
+import { Cards } from 'pages/Cards/Cards';
 import { Help } from 'pages/Help/Help';
 import { Leaderboard } from 'pages/Leaderboard';
 import { RouteType } from 'types';
@@ -28,5 +29,10 @@ export const routes: RouteWithTitleType[] = [
     path: RouteNamesEnum.leaderboard,
     title: 'Leaderboard',
     component: Leaderboard
+  },
+  {
+    path: RouteNamesEnum.cards,
+    title: 'Cards',
+    component: Cards
   }
 ];
