@@ -112,7 +112,7 @@ export const Cards = () => {
                           src={
                             sfts.includes(item.nonce)
                               ? item.url
-                              : '/public/empty-card.jpeg'
+                              : '/empty-card.jpeg'
                           }
                           alt={item.name}
                           className='max-w-full'
