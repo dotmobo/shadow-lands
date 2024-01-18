@@ -94,7 +94,6 @@ export const Cards = () => {
             </div>
           )}
           {sfts !== undefined &&
-            sfts.length > 0 &&
             collection !== undefined &&
             collection.length > 0 && (
               <ul className='ml-4 mr-4 mb-8 flex flex-row flex-wrap'>
