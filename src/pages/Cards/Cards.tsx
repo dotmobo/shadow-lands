@@ -105,6 +105,9 @@ export const Cards = () => {
                       key={index}
                       className='mb-2 w-1/2 sm:w-1/4 flex-shrink-0 p-4'
                     >
+                      <span className='text-sm whitespace-nowrap'>
+                        {item.name}
+                      </span>
                       <div className='border border-dashed border-white'>
                         <img
                           src={
