@@ -99,17 +99,23 @@ export const Cards = () => {
             collection.length > 0 && (
               <ul className='ml-4 mr-4 mb-8 flex flex-row flex-wrap'>
                 {collection
-                  .filter((item: any) => sfts.includes(item.nonce))
+                  .sort((a: any, b: any) => a.nonce - b.nonce)
                   .map((item: any, index: number) => (
                     <li
                       key={index}
                       className='mb-2 w-1/2 sm:w-1/4 flex-shrink-0 p-4'
                     >
-                      <img
-                        src={item.url}
-                        alt={item.name}
-                        className='max-w-full'
-                      />
+                      <div className='border border-dashed border-white'>
+                        <img
+                          src={
+                            sfts.includes(item.nonce)
+                              ? item.url
+                              : '/public/empty-card.jpeg'
+                          }
+                          alt={item.name}
+                          className='max-w-full'
+                        />
+                      </div>
                     </li>
                   ))}
               </ul>
