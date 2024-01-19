@@ -20,6 +20,7 @@ import {
   sftBanksNonce,
   sftCryptNonce,
   sftHauntedHouseNonce,
+  sftHauntedHouseR1Nonce,
   sftLaboNonce,
   sftTavernR1Nonce
 } from 'config';
@@ -29,6 +30,7 @@ import { Crypt } from './Crypt';
 import { Labo } from './Labo';
 import { TavernR1 } from './TavernR1';
 import { BankR1 } from './BankR1';
+import { HauntedHouseR1 } from './HauntedHouseR1';
 
 function Loader() {
   return (
@@ -47,6 +49,7 @@ export const Map = ({
   walletLabos,
   walletTavernsR1,
   walletBanksR1,
+  walletHauntedHousesR1,
   rewardsPerDay,
   defaultAutoRotate
 }) => {
@@ -182,28 +185,52 @@ export const Map = ({
 
           {/* Haunted House */}
           {sfts !== undefined &&
-          sfts.filter((x) => x === sftHauntedHouseNonce).length > 0 ? (
-            <HauntedHouse
-              position={[5.5994, 1.6568, -1.1516]}
-              rotation={[0, -1.5338651598227, 0]}
+          sfts.filter((x) => x === sftHauntedHouseNonce).length > 0 &&
+          sfts.filter((x) => x === sftHauntedHouseR1Nonce).length > 0 ? (
+            <HauntedHouseR1
+              position={[-3.0777, 1.0154, -3.8426]}
+              rotation={[0, 0.2688036, 0]}
             />
-          ) : (
-            sfts !== undefined &&
+          ) : sfts !== undefined &&
+            walletHauntedHousesR1.length > 0 &&
+            sfts.filter((x) => x === sftHauntedHouseNonce).length > 0 &&
+            sfts.filter((x) => x === sftHauntedHouseR1Nonce).length === 0 ? (
+            <HauntedHouse
+              onClick={(event) => {
+                hover3(false);
+                sendStakeBuildingTransaction(sftHauntedHouseR1Nonce);
+              }}
+              onPointerOver={(event) => hover3(true)}
+              onPointerOut={(event) => hover3(false)}
+              color={hovered3 ? 'blue' : undefined}
+              position={[-3.0777, 1.0154, -3.8426]}
+              rotation={[0, 0.2688036, 0]}
+            />
+          ) : sfts !== undefined &&
+            walletHauntedHousesR1.length === 0 &&
+            sfts.filter((x) => x === sftHauntedHouseNonce).length > 0 &&
+            sfts.filter((x) => x === sftHauntedHouseR1Nonce).length === 0 ? (
+            <HauntedHouse
+              position={[-3.0777, 1.0154, -3.8426]}
+              rotation={[0, 0.2688036, 0]}
+            />
+          ) : sfts !== undefined &&
             walletHauntedHouses.length > 0 &&
-            sfts.filter((x) => x === sftHauntedHouseNonce).length === 0 && (
-              <HauntedHouse
-                onClick={(event) => {
-                  hover3(false);
-                  sendStakeBuildingTransaction(sftHauntedHouseNonce);
-                }}
-                onPointerOver={(event) => hover3(true)}
-                onPointerOut={(event) => hover3(false)}
-                color={hovered3 ? 'blue' : 'white'}
-                position={[5.5994, 1.6568, -1.1516]}
-                rotation={[0, -1.5338651598227, 0]}
-              />
-            )
-          )}
+            sfts.filter((x) => x === sftHauntedHouseNonce).length === 0 &&
+            sfts.filter((x) => x === sftHauntedHouseR1Nonce).length === 0 ? (
+            <HauntedHouse
+              onClick={(event) => {
+                hover3(false);
+                sendStakeBuildingTransaction(sftHauntedHouseNonce);
+              }}
+              onPointerOver={(event) => hover3(true)}
+              onPointerOut={(event) => hover3(false)}
+              color={hovered3 ? 'blue' : 'white'}
+              position={[-3.0777, 1.0154, -3.8426]}
+              rotation={[0, 0.2688036, 0]}
+            />
+          ) : null}
+
           {/* Crypt */}
           {sfts !== undefined &&
           sfts.filter((x) => x === sftCryptNonce).length > 0 ? (

@@ -13,6 +13,7 @@ import {
   sftBanksNonce,
   sftCryptNonce,
   sftHauntedHouseNonce,
+  sftHauntedHouseR1Nonce,
   sftLaboNonce,
   sftLandsNonce,
   sftTavernNonce,
@@ -74,6 +75,7 @@ export const Game = () => {
 
   const [tavernsR1, setTavernsR1List] = useState<Sft[]>([]);
   const [banksR1, setBanksR1List] = useState<Sft[]>([]);
+  const [hauntedHousesR1, setHauntedHousesR1List] = useState<Sft[]>([]);
 
   const [rewardsTokenAmountPerDay, setRewardsTokenAmountPerDay] =
     useState<number>(0);
@@ -213,7 +215,12 @@ export const Game = () => {
                 <div className='flex w-full mt-2 justify-center gap-4 text-slate-300'>
                   <span title='Haunted House'>
                     <FontAwesomeIcon icon={faHouse} size='sm' />{' '}
-                    {sfts.filter((x) => x === sftHauntedHouseNonce).length} / 1
+                    {sfts.filter((x) => x === sftHauntedHouseNonce).length}
+                    {sfts.filter((x) => x === sftHauntedHouseR1Nonce).length >
+                      0 && <span className='text-sm'>&nbsp;(+1)</span>}
+                    {sfts.filter((x) => x === sftHauntedHouseR1Nonce).length ===
+                      0 && <span className='text-sm'>&nbsp;(+0)</span>}
+                    &nbsp;/&nbsp;1
                   </span>
                   <span title='Crypt'>
                     <FontAwesomeIcon icon={faCross} size='sm' />{' '}
@@ -234,6 +241,7 @@ export const Game = () => {
                     walletLabos={labos}
                     walletTavernsR1={tavernsR1}
                     walletBanksR1={banksR1}
+                    walletHauntedHousesR1={hauntedHousesR1}
                     rewardsPerDay={rewardsTokenAmountPerDay}
                     defaultAutoRotate={autoRotate}
                   />
@@ -262,6 +270,7 @@ export const Game = () => {
                   props['outputLabos'] = setLabosList;
                   props['outputTavernsR1'] = setTavernsR1List;
                   props['outputBanksR1'] = setBanksR1List;
+                  props['outputHauntedHousesR1'] = setHauntedHousesR1List;
 
                   return (
                     <Card
