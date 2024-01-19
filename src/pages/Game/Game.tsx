@@ -53,13 +53,11 @@ const WIDGETS: WidgetsType[] = [
     title: 'Wallet & Market',
     widget: Account,
     description: 'Balance of your wallet',
-    reference: 'https://dusty-bones.netlify.app/'
   },
   {
     title: 'Farm',
     widget: Production,
     description: '$DUST producted by your land',
-    reference: 'https://dusty-bones.netlify.app/'
   }
 ];
 
@@ -257,8 +255,7 @@ export const Game = () => {
                     title,
                     widget: MxWidget,
                     description,
-                    props = {},
-                    reference
+                    props = {}
                   } = element;
 
                   props['sfts'] = sfts;
@@ -273,12 +270,7 @@ export const Game = () => {
                   props['outputHauntedHousesR1'] = setHauntedHousesR1List;
 
                   return (
-                    <Card
-                      key={title}
-                      title={title}
-                      description={description}
-                      reference={reference}
-                    >
+                    <Card key={title} title={title} description={description}>
                       <MxWidget {...props} />
                     </Card>
                   );

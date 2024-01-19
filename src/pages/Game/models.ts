@@ -24,7 +24,6 @@ export type WidgetsType = {
     outputBanksR1?: any;
     outputHauntedHousesR1?: any;
   };
-  reference: string;
 };
 
 export interface Token {
