@@ -26,7 +26,7 @@ export const sftTavernR1Id = 'SHALAN-55b9a9-07';
 export const sftTavernR1Nonce = 7;
 export const sftBankR1Id = 'SHALAN-55b9a9-08';
 export const sftBankR1Nonce = 8;
-export const sftHauntedHouseR1Id = 'DEVSHALAN-933f80-09';
+export const sftHauntedHouseR1Id = 'SHALAN-55b9a9-09';
 export const sftHauntedHouseR1Nonce = 9;
 // Dust and SC
 export const dustTokenId = 'DUST-e7e490';
