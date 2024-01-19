@@ -258,7 +258,7 @@ export const Game = () => {
             )}
           </div>
           <div className='flex items-start sm:items-center h-full w-full sm:w-1/2 sm:bg-center bg-slate-900 pr-4 pl-4'>
-            <div className='flex flex-col gap-6 max-w-3xl w-full'>
+            <div className='flex flex-col gap-3 max-w-3xl w-full'>
               {sfts !== undefined &&
                 WIDGETS.map((element) => {
                   const {
