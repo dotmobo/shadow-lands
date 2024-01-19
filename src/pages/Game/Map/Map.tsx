@@ -188,8 +188,8 @@ export const Map = ({
           sfts.filter((x) => x === sftHauntedHouseNonce).length > 0 &&
           sfts.filter((x) => x === sftHauntedHouseR1Nonce).length > 0 ? (
             <HauntedHouseR1
-              position={[-3.0777, 1.0154, -3.8426]}
-              rotation={[0, 0.2688036, 0]}
+              position={[5.5994, 1.6568, -1.1516]}
+              rotation={[0, -1.5338651598227, 0]}
             />
           ) : sfts !== undefined &&
             walletHauntedHousesR1.length > 0 &&
@@ -203,16 +203,16 @@ export const Map = ({
               onPointerOver={(event) => hover3(true)}
               onPointerOut={(event) => hover3(false)}
               color={hovered3 ? 'blue' : undefined}
-              position={[-3.0777, 1.0154, -3.8426]}
-              rotation={[0, 0.2688036, 0]}
+              position={[5.5994, 1.6568, -1.1516]}
+              rotation={[0, -1.5338651598227, 0]}
             />
           ) : sfts !== undefined &&
             walletHauntedHousesR1.length === 0 &&
             sfts.filter((x) => x === sftHauntedHouseNonce).length > 0 &&
             sfts.filter((x) => x === sftHauntedHouseR1Nonce).length === 0 ? (
             <HauntedHouse
-              position={[-3.0777, 1.0154, -3.8426]}
-              rotation={[0, 0.2688036, 0]}
+              position={[5.5994, 1.6568, -1.1516]}
+              rotation={[0, -1.5338651598227, 0]}
             />
           ) : sfts !== undefined &&
             walletHauntedHouses.length > 0 &&
@@ -226,8 +226,8 @@ export const Map = ({
               onPointerOver={(event) => hover3(true)}
               onPointerOut={(event) => hover3(false)}
               color={hovered3 ? 'blue' : 'white'}
-              position={[-3.0777, 1.0154, -3.8426]}
-              rotation={[0, 0.2688036, 0]}
+              position={[5.5994, 1.6568, -1.1516]}
+              rotation={[0, -1.5338651598227, 0]}
             />
           ) : null}
 
