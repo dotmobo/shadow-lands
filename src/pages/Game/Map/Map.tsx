@@ -23,7 +23,8 @@ import {
   sftHauntedHouseR1Nonce,
   sftLaboNonce,
   sftTavernR1Nonce,
-  sftCryptR1Nonce
+  sftCryptR1Nonce,
+  sftLaboR1Nonce
 } from 'config';
 import { Bank } from './Bank';
 import { HauntedHouse } from './HauntedHouse';
@@ -33,6 +34,7 @@ import { TavernR1 } from './TavernR1';
 import { BankR1 } from './BankR1';
 import { HauntedHouseR1 } from './HauntedHouseR1';
 import { CryptR1 } from './CryptR1';
+import { LaboR1 } from './LaboR1';
 
 function Loader() {
   return (
@@ -53,6 +55,7 @@ export const Map = ({
   walletBanksR1,
   walletHauntedHousesR1,
   walletCryptsR1,
+  walletLabosR1,
   rewardsPerDay,
   defaultAutoRotate
 }) => {
@@ -115,6 +118,16 @@ export const Map = ({
   const isNotStakedCrypt =
     sfts.filter((x) => x === sftCryptNonce).length === 0 &&
     sfts.filter((x) => x === sftCryptR1Nonce).length === 0;
+
+  const isStakedLaboR1 =
+    sfts.filter((x) => x === sftLaboNonce).length > 0 &&
+    sfts.filter((x) => x === sftLaboR1Nonce).length > 0;
+  const isStakedLabo =
+    sfts.filter((x) => x === sftLaboNonce).length > 0 &&
+    sfts.filter((x) => x === sftLaboR1Nonce).length === 0;
+  const isNotStakedLabo =
+    sfts.filter((x) => x === sftLaboNonce).length === 0 &&
+    sfts.filter((x) => x === sftLaboR1Nonce).length === 0;
 
   return (
     <Canvas shadows dpr={[1, 2]}>
@@ -240,22 +253,31 @@ export const Map = ({
             ) : null}
 
             {/* Laboratory */}
-            {sfts.filter((x) => x === sftLaboNonce).length > 0 ? (
+            {isStakedLaboR1 ? (
+              <LaboR1 />
+            ) : walletLabosR1.length > 0 && isStakedLabo ? (
+              <Labo
+                onClick={(event) => {
+                  hover5(false);
+                  sendStakeBuildingTransaction(sftLaboR1Nonce);
+                }}
+                onPointerOver={(event) => hover5(true)}
+                onPointerOut={(event) => hover5(false)}
+                color={hovered5 ? 'blue' : undefined}
+              />
+            ) : walletLabosR1.length === 0 && isStakedLabo ? (
               <Labo />
-            ) : (
-              walletLabos.length > 0 &&
-              sfts.filter((x) => x === sftLaboNonce).length === 0 && (
-                <Labo
-                  onClick={(event) => {
-                    hover5(false);
-                    sendStakeBuildingTransaction(sftLaboNonce);
-                  }}
-                  onPointerOver={(event) => hover5(true)}
-                  onPointerOut={(event) => hover5(false)}
-                  color={hovered5 ? 'blue' : 'white'}
-                />
-              )
-            )}
+            ) : walletLabos.length > 0 && isNotStakedLabo ? (
+              <Labo
+                onClick={(event) => {
+                  hover5(false);
+                  sendStakeBuildingTransaction(sftLaboNonce);
+                }}
+                onPointerOver={(event) => hover5(true)}
+                onPointerOut={(event) => hover5(false)}
+                color={hovered5 ? 'blue' : 'white'}
+              />
+            ) : null}
           </Stage>
         )}
       </Suspense>

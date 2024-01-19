@@ -16,6 +16,7 @@ import {
   sftHauntedHouseNonce,
   sftHauntedHouseR1Nonce,
   sftLaboNonce,
+  sftLaboR1Nonce,
   sftLandsNonce,
   sftTavernNonce,
   sftTavernR1Nonce
@@ -76,6 +77,7 @@ export const Game = () => {
   const [banksR1, setBanksR1List] = useState<Sft[]>([]);
   const [hauntedHousesR1, setHauntedHousesR1List] = useState<Sft[]>([]);
   const [cryptsR1, setCryptsR1List] = useState<Sft[]>([]);
+  const [labosR1, setLabosR1List] = useState<Sft[]>([]);
 
   const [rewardsTokenAmountPerDay, setRewardsTokenAmountPerDay] =
     useState<number>(0);
@@ -235,7 +237,13 @@ export const Game = () => {
                   </span>
                   <span title='Laboratory'>
                     <FontAwesomeIcon icon={faFlaskVial} size='sm' />{' '}
-                    {sfts.filter((x) => x === sftLaboNonce).length} / 1
+                    {sfts.filter((x) => x === sftLaboNonce).length}
+                    {sfts.filter((x) => x === sftLaboR1Nonce).length > 0 && (
+                      <span className='text-sm'>&nbsp;(+1)</span>
+                    )}
+                    {sfts.filter((x) => x === sftLaboR1Nonce).length === 0 && (
+                      <span className='text-sm'>&nbsp;(+0)</span>
+                    )}
                   </span>
                 </div>
                 {sfts.filter((x) => x === sftLandsNonce).length > 0 && (
@@ -250,6 +258,7 @@ export const Game = () => {
                     walletBanksR1={banksR1}
                     walletHauntedHousesR1={hauntedHousesR1}
                     walletCryptsR1={cryptsR1}
+                    walletLabosR1={labosR1}
                     rewardsPerDay={rewardsTokenAmountPerDay}
                     defaultAutoRotate={autoRotate}
                   />
@@ -258,7 +267,7 @@ export const Game = () => {
             )}
           </div>
           <div className='flex items-start sm:items-center h-full w-full sm:w-1/2 sm:bg-center bg-slate-900 pr-4 pl-4'>
-            <div className='flex flex-col gap-3 max-w-3xl w-full'>
+            <div className='flex flex-col gap-2 max-w-3xl w-full'>
               {sfts !== undefined &&
                 WIDGETS.map((element) => {
                   const {
@@ -279,6 +288,7 @@ export const Game = () => {
                   props['outputBanksR1'] = setBanksR1List;
                   props['outputHauntedHousesR1'] = setHauntedHousesR1List;
                   props['outputCryptsR1'] = setCryptsR1List;
+                  props['outputLabosR1'] = setLabosR1List;
 
                   return (
                     <Card key={title} title={title} description={description}>

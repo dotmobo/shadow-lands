@@ -15,7 +15,7 @@ export const Card = (props: CardType) => {
       data-testid={props['data-testid']}
     >
       <h2 className='flex text-xl font-medium group'>{title}</h2>
-      {description && <p className='text-gray-400 mb-4'>{description}</p>}
+      {description && <p className='text-gray-400 mb-2'>{description}</p>}
       {children}
     </div>
   );

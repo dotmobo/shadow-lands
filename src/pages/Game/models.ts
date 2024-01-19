@@ -24,6 +24,7 @@ export type WidgetsType = {
     outputBanksR1?: any;
     outputHauntedHousesR1?: any;
     outputCryptsR1?: any;
+    outputLabosR1?: any;
   };
 };
 
