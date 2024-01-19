@@ -22,7 +22,8 @@ import {
   sftHauntedHouseNonce,
   sftHauntedHouseR1Nonce,
   sftLaboNonce,
-  sftTavernR1Nonce
+  sftTavernR1Nonce,
+  sftCryptR1Nonce
 } from 'config';
 import { Bank } from './Bank';
 import { HauntedHouse } from './HauntedHouse';
@@ -31,6 +32,7 @@ import { Labo } from './Labo';
 import { TavernR1 } from './TavernR1';
 import { BankR1 } from './BankR1';
 import { HauntedHouseR1 } from './HauntedHouseR1';
+import { CryptR1 } from './CryptR1';
 
 function Loader() {
   return (
@@ -50,6 +52,7 @@ export const Map = ({
   walletTavernsR1,
   walletBanksR1,
   walletHauntedHousesR1,
+  walletCryptsR1,
   rewardsPerDay,
   defaultAutoRotate
 }) => {
@@ -102,6 +105,16 @@ export const Map = ({
   const isNotStakedHauntedHouse =
     sfts.filter((x) => x === sftHauntedHouseNonce).length === 0 &&
     sfts.filter((x) => x === sftHauntedHouseR1Nonce).length === 0;
+
+  const isStakedCryptR1 =
+    sfts.filter((x) => x === sftCryptNonce).length > 0 &&
+    sfts.filter((x) => x === sftCryptR1Nonce).length > 0;
+  const isStakedCrypt =
+    sfts.filter((x) => x === sftCryptNonce).length > 0 &&
+    sfts.filter((x) => x === sftCryptR1Nonce).length === 0;
+  const isNotStakedCrypt =
+    sfts.filter((x) => x === sftCryptNonce).length === 0 &&
+    sfts.filter((x) => x === sftCryptR1Nonce).length === 0;
 
   return (
     <Canvas shadows dpr={[1, 2]}>
@@ -200,22 +213,32 @@ export const Map = ({
             ) : null}
 
             {/* Crypt */}
-            {sfts.filter((x) => x === sftCryptNonce).length > 0 ? (
+            {isStakedCryptR1 ? (
+              <CryptR1 />
+            ) : walletCryptsR1.length > 0 && isStakedCrypt ? (
+              <Crypt
+                onClick={(event) => {
+                  hover4(false);
+                  sendStakeBuildingTransaction(sftCryptR1Nonce);
+                }}
+                onPointerOver={(event) => hover4(true)}
+                onPointerOut={(event) => hover4(false)}
+                color={hovered4 ? 'blue' : undefined}
+              />
+            ) : walletCryptsR1.length === 0 && isStakedCrypt ? (
               <Crypt />
-            ) : (
-              walletCrypts.length > 0 &&
-              sfts.filter((x) => x === sftCryptNonce).length === 0 && (
-                <Crypt
-                  onClick={(event) => {
-                    hover4(false);
-                    sendStakeBuildingTransaction(sftCryptNonce);
-                  }}
-                  onPointerOver={(event) => hover4(true)}
-                  onPointerOut={(event) => hover4(false)}
-                  color={hovered4 ? 'blue' : 'white'}
-                />
-              )
-            )}
+            ) : walletCrypts.length > 0 && isNotStakedCrypt ? (
+              <Crypt
+                onClick={(event) => {
+                  hover4(false);
+                  sendStakeBuildingTransaction(sftCryptNonce);
+                }}
+                onPointerOver={(event) => hover4(true)}
+                onPointerOut={(event) => hover4(false)}
+                color={hovered4 ? 'blue' : 'white'}
+              />
+            ) : null}
+
             {/* Laboratory */}
             {sfts.filter((x) => x === sftLaboNonce).length > 0 ? (
               <Labo />

@@ -12,6 +12,7 @@ import {
   sftBankR1Nonce,
   sftBanksNonce,
   sftCryptNonce,
+  sftCryptR1Nonce,
   sftHauntedHouseNonce,
   sftHauntedHouseR1Nonce,
   sftLaboNonce,
@@ -52,12 +53,12 @@ const WIDGETS: WidgetsType[] = [
   {
     title: 'Wallet & Market',
     widget: Account,
-    description: 'Balance of your wallet',
+    description: 'Balance of your wallet'
   },
   {
     title: 'Farm',
     widget: Production,
-    description: '$DUST producted by your land',
+    description: '$DUST producted by your land'
   }
 ];
 
@@ -74,6 +75,7 @@ export const Game = () => {
   const [tavernsR1, setTavernsR1List] = useState<Sft[]>([]);
   const [banksR1, setBanksR1List] = useState<Sft[]>([]);
   const [hauntedHousesR1, setHauntedHousesR1List] = useState<Sft[]>([]);
+  const [cryptsR1, setCryptsR1List] = useState<Sft[]>([]);
 
   const [rewardsTokenAmountPerDay, setRewardsTokenAmountPerDay] =
     useState<number>(0);
@@ -222,7 +224,14 @@ export const Game = () => {
                   </span>
                   <span title='Crypt'>
                     <FontAwesomeIcon icon={faCross} size='sm' />{' '}
-                    {sfts.filter((x) => x === sftCryptNonce).length} / 1
+                    {sfts.filter((x) => x === sftCryptNonce).length}
+                    {sfts.filter((x) => x === sftCryptR1Nonce).length > 0 && (
+                      <span className='text-sm'>&nbsp;(+1)</span>
+                    )}
+                    {sfts.filter((x) => x === sftCryptR1Nonce).length === 0 && (
+                      <span className='text-sm'>&nbsp;(+0)</span>
+                    )}
+                    &nbsp;/&nbsp;1
                   </span>
                   <span title='Laboratory'>
                     <FontAwesomeIcon icon={faFlaskVial} size='sm' />{' '}
@@ -240,6 +249,7 @@ export const Game = () => {
                     walletTavernsR1={tavernsR1}
                     walletBanksR1={banksR1}
                     walletHauntedHousesR1={hauntedHousesR1}
+                    walletCryptsR1={cryptsR1}
                     rewardsPerDay={rewardsTokenAmountPerDay}
                     defaultAutoRotate={autoRotate}
                   />
@@ -268,6 +278,7 @@ export const Game = () => {
                   props['outputTavernsR1'] = setTavernsR1List;
                   props['outputBanksR1'] = setBanksR1List;
                   props['outputHauntedHousesR1'] = setHauntedHousesR1List;
+                  props['outputCryptsR1'] = setCryptsR1List;
 
                   return (
                     <Card key={title} title={title} description={description}>

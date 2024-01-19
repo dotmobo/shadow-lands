@@ -42,7 +42,9 @@ import {
   sftBankR1Id,
   sftBankR1Nonce,
   sftHauntedHouseR1Id,
-  sftHauntedHouseR1Nonce
+  sftHauntedHouseR1Nonce,
+  sftCryptR1Nonce,
+  sftCryptR1Id
 } from 'config';
 import {
   useGetAccountInfo,
@@ -63,7 +65,8 @@ export const Account = ({
   outputCrypts,
   outputTavernsR1,
   outputBanksR1,
-  outputHauntedHousesR1
+  outputHauntedHousesR1,
+  outputCryptsR1,
 }) => {
   const { network } = useGetNetworkConfig();
   const { address, account } = useGetAccountInfo();
@@ -77,6 +80,7 @@ export const Account = ({
   const [tavernsR1, setTavernsR1] = useState<Sft[]>();
   const [banksR1, setBanksR1] = useState<Sft[]>();
   const [hauntedHousesR1, setHauntedHousesR1] = useState<Sft[]>();
+  const [cryptsR1, setCryptsR1] = useState<Sft[]>();
 
   const [dust, setDustToken] = useState<Token | null>();
   const { hasPendingTransactions } = useGetPendingTransactions();
@@ -104,7 +108,7 @@ export const Account = ({
     // Use [] as second argument in useEffect for not rendering each time
     axios
       .get<any>(
-        `${mvxApiUrl}/accounts/${address}/nfts?size=3330&identifiers=${sftLandsId},${sftTavernId},${sftBanksId},${sftHauntedHouseId},${sftCryptId},${sftLaboId},${sftTavernR1Id},${sftBankR1Id},${sftHauntedHouseR1Id}`
+        `${mvxApiUrl}/accounts/${address}/nfts?size=3330&identifiers=${sftLandsId},${sftTavernId},${sftBanksId},${sftHauntedHouseId},${sftCryptId},${sftLaboId},${sftTavernR1Id},${sftBankR1Id},${sftHauntedHouseR1Id},${sftCryptR1Id}`
       )
       .then((response) => {
         const res = orderBy(
@@ -151,6 +155,10 @@ export const Account = ({
         );
         setHauntedHousesR1(hauntedHousesR1);
         outputHauntedHousesR1(hauntedHousesR1);
+        // Crypts R1
+        const cryptsR1 = res.filter((x) => x.identifier === sftCryptR1Id);
+        setCryptsR1(cryptsR1);
+        outputCryptsR1(cryptsR1);
       });
   }, [hasPendingTransactions]);
 
@@ -190,9 +198,13 @@ export const Account = ({
             <FontAwesomeIcon icon={faArrowUp} size='sm' className='mr-1' />
             <Label>+1: </Label> {hauntedHousesR1?.[0]?.balance ?? 0}
           </span>
-          <span className='mb-2'>
+          <span className='mb-0'>
             <FontAwesomeIcon icon={faCross} size='sm' className='mr-1' />
             <Label>Crypts: </Label> {crypts?.[0]?.balance ?? 0}
+          </span>
+          <span className='ml-4 mb-2'>
+            <FontAwesomeIcon icon={faArrowUp} size='sm' className='mr-1' />
+            <Label>+1: </Label> {cryptsR1?.[0]?.balance ?? 0}
           </span>
           <span className='mb-1'>
             <FontAwesomeIcon icon={faFlaskVial} size='sm' className='mr-1' />
@@ -570,6 +582,52 @@ export const Account = ({
               >
                 <FontAwesomeIcon icon={faCross} size='sm' className='mr-1' />
                 Buy 1 crypt
+              </Button>
+            </span>
+          </span>
+          <span className='flex mb-1'>
+            {priceBuildingR1}
+            <span>
+              <img src='/dust-logo.png' alt='Dust' className='ml-1 w-5' />
+            </span>
+            <span className='ml-2'>
+              <Button
+                className='inline-block rounded-lg px-3 py-0.5 text-center hover:no-underline my-0 bg-blue-600 text-white hover:bg-blue-700 mr-0 disabled:bg-gray-200 disabled:text-black disabled:cursor-not-allowed'
+                aria-label='Buy a crypt +1'
+                disabled={
+                  hasPendingTransactions ||
+                  sfts === undefined ||
+                  lands === undefined
+                }
+                onClick={() => {
+                  confirmAlert({
+                    title: 'Buy 1 crypt +1',
+                    message:
+                      'Are you sure you want to buy 1 crypt +1 for 400 $DUST ?',
+                    buttons: [
+                      {
+                        label: 'Yes',
+                        onClick: () =>
+                          sendBuyItemTransaction(
+                            {
+                              collection: sftCollectionId,
+                              nonce: sftCryptR1Nonce
+                            },
+                            priceBuildingR1 * Math.pow(10, 18)
+                          )
+                      },
+                      {
+                        label: 'No',
+                        onClick: () => {
+                          return;
+                        }
+                      }
+                    ]
+                  });
+                }}
+              >
+                <FontAwesomeIcon icon={faArrowUp} size='sm' className='mr-1' />
+                Buy 1 crypt +1
               </Button>
             </span>
           </span>
