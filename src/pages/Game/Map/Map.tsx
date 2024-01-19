@@ -73,173 +73,168 @@ export const Map = ({
         : 'auto';
   }, [hovered1, hovered2, hovered3, hovered4, hovered5]);
 
+  const isStakedTavernR1 =
+    sfts.filter((x) => x === sftTavernNonce).length > 0 &&
+    sfts.filter((x) => x === sftTavernR1Nonce).length > 0;
+  const isStakedTavern =
+    sfts.filter((x) => x === sftTavernNonce).length > 0 &&
+    sfts.filter((x) => x === sftTavernR1Nonce).length === 0;
+  const isNotStakedTavern =
+    sfts.filter((x) => x === sftTavernNonce).length === 0 &&
+    sfts.filter((x) => x === sftTavernR1Nonce).length === 0;
+
+  const isStakedBankR1 =
+    sfts.filter((x) => x === sftBanksNonce).length > 0 &&
+    sfts.filter((x) => x === sftBankR1Nonce).length > 0;
+  const isStakedBank =
+    sfts.filter((x) => x === sftBanksNonce).length > 0 &&
+    sfts.filter((x) => x === sftBankR1Nonce).length === 0;
+  const isNotStakedBank =
+    sfts.filter((x) => x === sftBanksNonce).length === 0 &&
+    sfts.filter((x) => x === sftBankR1Nonce).length === 0;
+
+  const isStakedHauntedHouseR1 =
+    sfts.filter((x) => x === sftHauntedHouseNonce).length > 0 &&
+    sfts.filter((x) => x === sftHauntedHouseR1Nonce).length > 0;
+  const isStakedHauntedHouse =
+    sfts.filter((x) => x === sftHauntedHouseNonce).length > 0 &&
+    sfts.filter((x) => x === sftHauntedHouseR1Nonce).length === 0;
+  const isNotStakedHauntedHouse =
+    sfts.filter((x) => x === sftHauntedHouseNonce).length === 0 &&
+    sfts.filter((x) => x === sftHauntedHouseR1Nonce).length === 0;
+
   return (
     <Canvas shadows dpr={[1, 2]}>
       <Suspense fallback={<Loader />}>
-        <Stage
-          controls={ref}
-          preset='rembrandt'
-          intensity={-2}
-          environment='sunset'
-        >
-          <Land
-            onPointerOver={(event) => hover(true)}
-            onPointerOut={(event) => hover(false)}
-          />
+        {sfts !== undefined && (
+          <Stage
+            controls={ref}
+            preset='rembrandt'
+            intensity={-2}
+            environment='sunset'
+          >
+            <Land
+              onPointerOver={(event) => hover(true)}
+              onPointerOut={(event) => hover(false)}
+            />
 
-          {/* Tavern */}
-          {sfts !== undefined &&
-          sfts.filter((x) => x === sftTavernNonce).length > 0 &&
-          sfts.filter((x) => x === sftTavernR1Nonce).length > 0 ? (
-            <TavernR1 />
-          ) : sfts !== undefined &&
-            walletTavernsR1.length > 0 &&
-            sfts.filter((x) => x === sftTavernNonce).length > 0 &&
-            sfts.filter((x) => x === sftTavernR1Nonce).length === 0 ? (
-            <Tavern
-              onClick={(event) => {
-                hover1(false);
-                sendStakeBuildingTransaction(sftTavernR1Nonce);
-              }}
-              onPointerOver={(event) => hover1(true)}
-              onPointerOut={(event) => hover1(false)}
-              color={hovered1 ? 'blue' : undefined}
-            />
-          ) : sfts !== undefined &&
-            walletTavernsR1.length === 0 &&
-            sfts.filter((x) => x === sftTavernNonce).length > 0 &&
-            sfts.filter((x) => x === sftTavernR1Nonce).length === 0 ? (
-            <Tavern />
-          ) : sfts !== undefined &&
-            walletTaverns.length > 0 &&
-            sfts.filter((x) => x === sftTavernNonce).length === 0 &&
-            sfts.filter((x) => x === sftTavernR1Nonce).length === 0 ? (
-            <Tavern
-              onClick={(event) => {
-                hover1(false);
-                sendStakeBuildingTransaction(sftTavernNonce);
-              }}
-              onPointerOver={(event) => hover1(true)}
-              onPointerOut={(event) => hover1(false)}
-              color={hovered1 ? 'blue' : 'white'}
-            />
-          ) : null}
-
-          {/* Bank */}
-          {sfts !== undefined &&
-          sfts.filter((x) => x === sftBanksNonce).length > 0 &&
-          sfts.filter((x) => x === sftBankR1Nonce).length > 0 ? (
-            <BankR1 />
-          ) : sfts !== undefined &&
-            walletBanksR1.length > 0 &&
-            sfts.filter((x) => x === sftBanksNonce).length > 0 &&
-            sfts.filter((x) => x === sftBankR1Nonce).length === 0 ? (
-            <Bank
-              onClick={(event) => {
-                hover2(false);
-                sendStakeBuildingTransaction(sftBankR1Nonce);
-              }}
-              onPointerOver={(event) => hover2(true)}
-              onPointerOut={(event) => hover2(false)}
-              color={hovered2 ? 'blue' : undefined}
-            />
-          ) : sfts !== undefined &&
-            walletBanksR1.length === 0 &&
-            sfts.filter((x) => x === sftBanksNonce).length > 0 &&
-            sfts.filter((x) => x === sftBankR1Nonce).length === 0 ? (
-            <Bank />
-          ) : sfts !== undefined &&
-            walletBanks.length > 0 &&
-            sfts.filter((x) => x === sftBanksNonce).length === 0 &&
-            sfts.filter((x) => x === sftBankR1Nonce).length === 0 ? (
-            <Bank
-              onClick={(event) => {
-                hover2(false);
-                sendStakeBuildingTransaction(sftBanksNonce);
-              }}
-              onPointerOver={(event) => hover2(true)}
-              onPointerOut={(event) => hover2(false)}
-              color={hovered2 ? 'blue' : 'white'}
-            />
-          ) : null}
-
-          {/* Haunted House */}
-          {sfts !== undefined &&
-          sfts.filter((x) => x === sftHauntedHouseNonce).length > 0 &&
-          sfts.filter((x) => x === sftHauntedHouseR1Nonce).length > 0 ? (
-            <HauntedHouseR1 />
-          ) : sfts !== undefined &&
-            walletHauntedHousesR1.length > 0 &&
-            sfts.filter((x) => x === sftHauntedHouseNonce).length > 0 &&
-            sfts.filter((x) => x === sftHauntedHouseR1Nonce).length === 0 ? (
-            <HauntedHouse
-              onClick={(event) => {
-                hover3(false);
-                sendStakeBuildingTransaction(sftHauntedHouseR1Nonce);
-              }}
-              onPointerOver={(event) => hover3(true)}
-              onPointerOut={(event) => hover3(false)}
-              color={hovered3 ? 'blue' : undefined}
-            />
-          ) : sfts !== undefined &&
-            walletHauntedHousesR1.length === 0 &&
-            sfts.filter((x) => x === sftHauntedHouseNonce).length > 0 &&
-            sfts.filter((x) => x === sftHauntedHouseR1Nonce).length === 0 ? (
-            <HauntedHouse />
-          ) : sfts !== undefined &&
-            walletHauntedHouses.length > 0 &&
-            sfts.filter((x) => x === sftHauntedHouseNonce).length === 0 &&
-            sfts.filter((x) => x === sftHauntedHouseR1Nonce).length === 0 ? (
-            <HauntedHouse
-              onClick={(event) => {
-                hover3(false);
-                sendStakeBuildingTransaction(sftHauntedHouseNonce);
-              }}
-              onPointerOver={(event) => hover3(true)}
-              onPointerOut={(event) => hover3(false)}
-              color={hovered3 ? 'blue' : 'white'}
-            />
-          ) : null}
-
-          {/* Crypt */}
-          {sfts !== undefined &&
-          sfts.filter((x) => x === sftCryptNonce).length > 0 ? (
-            <Crypt />
-          ) : (
-            sfts !== undefined &&
-            walletCrypts.length > 0 &&
-            sfts.filter((x) => x === sftCryptNonce).length === 0 && (
-              <Crypt
+            {/* Tavern */}
+            {isStakedTavernR1 ? (
+              <TavernR1 />
+            ) : walletTavernsR1.length > 0 && isStakedTavern ? (
+              <Tavern
                 onClick={(event) => {
-                  hover4(false);
-                  sendStakeBuildingTransaction(sftCryptNonce);
+                  hover1(false);
+                  sendStakeBuildingTransaction(sftTavernR1Nonce);
                 }}
-                onPointerOver={(event) => hover4(true)}
-                onPointerOut={(event) => hover4(false)}
-                color={hovered4 ? 'blue' : 'white'}
+                onPointerOver={(event) => hover1(true)}
+                onPointerOut={(event) => hover1(false)}
+                color={hovered1 ? 'blue' : undefined}
               />
-            )
-          )}
-          {/* Laboratory */}
-          {sfts !== undefined &&
-          sfts.filter((x) => x === sftLaboNonce).length > 0 ? (
-            <Labo />
-          ) : (
-            sfts !== undefined &&
-            walletLabos.length > 0 &&
-            sfts.filter((x) => x === sftLaboNonce).length === 0 && (
-              <Labo
+            ) : walletTavernsR1.length === 0 && isStakedTavern ? (
+              <Tavern />
+            ) : walletTaverns.length > 0 && isNotStakedTavern ? (
+              <Tavern
                 onClick={(event) => {
-                  hover5(false);
-                  sendStakeBuildingTransaction(sftLaboNonce);
+                  hover1(false);
+                  sendStakeBuildingTransaction(sftTavernNonce);
                 }}
-                onPointerOver={(event) => hover5(true)}
-                onPointerOut={(event) => hover5(false)}
-                color={hovered5 ? 'blue' : 'white'}
+                onPointerOver={(event) => hover1(true)}
+                onPointerOut={(event) => hover1(false)}
+                color={hovered1 ? 'blue' : 'white'}
               />
-            )
-          )}
-        </Stage>
+            ) : null}
+
+            {/* Bank */}
+            {isStakedBankR1 ? (
+              <BankR1 />
+            ) : walletBanksR1.length > 0 && isStakedBank ? (
+              <Bank
+                onClick={(event) => {
+                  hover2(false);
+                  sendStakeBuildingTransaction(sftBankR1Nonce);
+                }}
+                onPointerOver={(event) => hover2(true)}
+                onPointerOut={(event) => hover2(false)}
+                color={hovered2 ? 'blue' : undefined}
+              />
+            ) : walletBanksR1.length === 0 && isStakedBank ? (
+              <Bank />
+            ) : walletBanks.length > 0 && isNotStakedBank ? (
+              <Bank
+                onClick={(event) => {
+                  hover2(false);
+                  sendStakeBuildingTransaction(sftBanksNonce);
+                }}
+                onPointerOver={(event) => hover2(true)}
+                onPointerOut={(event) => hover2(false)}
+                color={hovered2 ? 'blue' : 'white'}
+              />
+            ) : null}
+
+            {/* Haunted House */}
+            {isStakedHauntedHouseR1 ? (
+              <HauntedHouseR1 />
+            ) : walletHauntedHousesR1.length > 0 && isStakedHauntedHouse ? (
+              <HauntedHouse
+                onClick={(event) => {
+                  hover3(false);
+                  sendStakeBuildingTransaction(sftHauntedHouseR1Nonce);
+                }}
+                onPointerOver={(event) => hover3(true)}
+                onPointerOut={(event) => hover3(false)}
+                color={hovered3 ? 'blue' : undefined}
+              />
+            ) : walletHauntedHousesR1.length === 0 && isStakedHauntedHouse ? (
+              <HauntedHouse />
+            ) : walletHauntedHouses.length > 0 && isNotStakedHauntedHouse ? (
+              <HauntedHouse
+                onClick={(event) => {
+                  hover3(false);
+                  sendStakeBuildingTransaction(sftHauntedHouseNonce);
+                }}
+                onPointerOver={(event) => hover3(true)}
+                onPointerOut={(event) => hover3(false)}
+                color={hovered3 ? 'blue' : 'white'}
+              />
+            ) : null}
+
+            {/* Crypt */}
+            {sfts.filter((x) => x === sftCryptNonce).length > 0 ? (
+              <Crypt />
+            ) : (
+              walletCrypts.length > 0 &&
+              sfts.filter((x) => x === sftCryptNonce).length === 0 && (
+                <Crypt
+                  onClick={(event) => {
+                    hover4(false);
+                    sendStakeBuildingTransaction(sftCryptNonce);
+                  }}
+                  onPointerOver={(event) => hover4(true)}
+                  onPointerOut={(event) => hover4(false)}
+                  color={hovered4 ? 'blue' : 'white'}
+                />
+              )
+            )}
+            {/* Laboratory */}
+            {sfts.filter((x) => x === sftLaboNonce).length > 0 ? (
+              <Labo />
+            ) : (
+              walletLabos.length > 0 &&
+              sfts.filter((x) => x === sftLaboNonce).length === 0 && (
+                <Labo
+                  onClick={(event) => {
+                    hover5(false);
+                    sendStakeBuildingTransaction(sftLaboNonce);
+                  }}
+                  onPointerOver={(event) => hover5(true)}
+                  onPointerOut={(event) => hover5(false)}
+                  color={hovered5 ? 'blue' : 'white'}
+                />
+              )
+            )}
+          </Stage>
+        )}
       </Suspense>
       <OrbitControls
         ref={ref}
