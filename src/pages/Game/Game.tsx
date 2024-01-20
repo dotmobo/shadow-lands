@@ -155,8 +155,8 @@ export const Game = () => {
   return (
     <AuthRedirectWrapper>
       <PageWrapper>
-        <div className='flex flex-col sm:flex-row items-center h-full w-full'>
-          <div className='flex flex-col items-start sm:items-center h-screen sm:h-full w-full sm:bg-center bg-slate-900'>
+        <div className='flex flex-col lg:flex-row items-center h-full w-full'>
+          <div className='flex flex-col items-start lg:items-center h-screen lg:h-full w-full lg:bg-center bg-slate-900'>
             {sfts !== undefined && (
               <>
                 <div className='flex w-full ml-2 mt-2 mb-2 text-slate-300'>
@@ -266,7 +266,7 @@ export const Game = () => {
               </>
             )}
           </div>
-          <div className='flex items-start sm:items-center h-full w-full sm:w-1/2 sm:bg-center bg-slate-900 pr-4 pl-4'>
+          <div className='flex items-start lg:items-center h-full w-full lg:w-1/2 lg:bg-center bg-slate-900 pr-4 pl-4'>
             <div className='flex flex-col gap-2 max-w-3xl w-full'>
               {sfts !== undefined &&
                 WIDGETS.map((element) => {
