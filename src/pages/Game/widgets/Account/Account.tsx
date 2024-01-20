@@ -273,7 +273,7 @@ export const Account = ({
         <hr className='mt-2 mb-2' />
 
         <div className='flex flex-col text-black'>
-          <span className='flex flex-row w-1/2 mb-1'>
+          <span className='flex flex-row md:w-1/2 mb-1'>
             {priceLand}
             <span>
               <img src='/dust-logo.png' alt='Dust' className='ml-1 w-5' />
@@ -319,8 +319,8 @@ export const Account = ({
               </Button>
             </span>
           </span>
-          <span className='flex flex-row bg-slate-200 mb-1'>
-            <span className='flex w-1/2'>
+          <span className='flex flex-col md:flex-row bg-slate-200 mb-1'>
+            <span className='flex md:w-1/2'>
               {priceBuilding}
               <span>
                 <img src='/dust-logo.png' alt='Dust' className='ml-1 w-5' />
@@ -366,7 +366,7 @@ export const Account = ({
                 </Button>
               </span>
             </span>
-            <span className='flex w-1/2 ml-2'>
+            <span className='flex md:w-1/2 md:ml-2 mt-1 md:mt-0'>
               {priceBuildingR1}
               <span>
                 <img src='/dust-logo.png' alt='Dust' className='ml-1 w-5' />
@@ -417,8 +417,8 @@ export const Account = ({
               </span>
             </span>
           </span>
-          <span className='flex flex-row mb-1'>
-            <span className='flex w-1/2 '>
+          <span className='flex flex-col md:flex-row mb-1'>
+            <span className='flex md:w-1/2 '>
               {priceBuilding}
               <span>
                 <img src='/dust-logo.png' alt='Dust' className='ml-1 w-5' />
@@ -468,7 +468,7 @@ export const Account = ({
                 </Button>
               </span>
             </span>
-            <span className='flex w-1/2 ml-2'>
+            <span className='flex md:w-1/2 md:ml-2 mt-1 md:mt-0'>
               {priceBuildingR1}
               <span>
                 <img src='/dust-logo.png' alt='Dust' className='ml-1 w-5' />
@@ -519,8 +519,8 @@ export const Account = ({
               </span>
             </span>
           </span>
-          <span className='flex flex-row bg-slate-200 mb-1'>
-            <span className='flex w-1/2 '>
+          <span className='flex flex-col md:flex-row bg-slate-200 mb-1'>
+            <span className='flex md:w-1/2 '>
               {priceBuilding}
               <span>
                 <img src='/dust-logo.png' alt='Dust' className='ml-1 w-5' />
@@ -566,7 +566,7 @@ export const Account = ({
                 </Button>
               </span>
             </span>
-            <span className='flex w-1/2 ml-2'>
+            <span className='flex md:w-1/2 md:ml-2 mt-1 md:mt-0'>
               {priceBuildingR1}
               <span>
                 <img src='/dust-logo.png' alt='Dust' className='ml-1 w-5' />
@@ -617,8 +617,8 @@ export const Account = ({
               </span>
             </span>
           </span>
-          <span className='flex flex-row mb-1'>
-            <span className='flex w-1/2'>
+          <span className='flex flex-col md:flex-row mb-1'>
+            <span className='flex md:w-1/2'>
               {priceBuilding}
               <span>
                 <img src='/dust-logo.png' alt='Dust' className='ml-1 w-5' />
@@ -664,7 +664,7 @@ export const Account = ({
                 </Button>
               </span>
             </span>
-            <span className='flex w-1/2 ml-2'>
+            <span className='flex md:w-1/2 md:ml-2 mt-1 md:mt-0'>
               {priceBuildingR1}
               <span>
                 <img src='/dust-logo.png' alt='Dust' className='ml-1 w-5' />
@@ -715,8 +715,8 @@ export const Account = ({
               </span>
             </span>
           </span>
-          <span className='flex flex-row- bg-slate-200'>
-            <span className='flex mb-1 w-1/2'>
+          <span className='flex flex-col md:flex-row bg-slate-200'>
+            <span className='flex md:w-1/2'>
               {priceBuilding}
               <span>
                 <img src='/dust-logo.png' alt='Dust' className='ml-1 w-5' />
@@ -766,7 +766,7 @@ export const Account = ({
                 </Button>
               </span>
             </span>
-            <span className='flex w-1/2 ml-2'>
+            <span className='flex md:w-1/2 md:ml-2 mt-1 md:mt-0 mb-1'>
               {priceBuildingR1}
               <span>
                 <img src='/dust-logo.png' alt='Dust' className='ml-1 w-5' />
