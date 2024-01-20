@@ -172,60 +172,92 @@ export const Account = ({
 
   return (
     <OutputContainer>
-      <div className='flex flex-row'>
-        <div className='flex flex-col text-black w-1/2 border-r'>
-          <span className='mb-2'>
+      <div className='flex flex-col'>
+        <div className='flex flex-col text-black'>
+          <p className='flex items-center whitespace-nowrap'>
+            <Label>$DUST: </Label>
+            <FormatAmount
+              value={dust?.balance ?? 0}
+              egldLabel='$DUST'
+              showLabel={false}
+              digits={0}
+              data-testid='balance'
+            />
+            <span>
+              <img src='/dust-logo.png' alt='Dust' className='ml-1 w-5' />
+            </span>
+          </p>
+        </div>
+
+        <hr className='mt-2 mb-2' />
+
+        <div className='flex flex-row text-black gap-8'>
+          <span className='whitespace-nowrap w-1/3'>
             <FontAwesomeIcon icon={faTree} size='sm' className='mr-1' />
             <Label>Lands: </Label> {lands?.[0]?.balance ?? 0}
           </span>
-          <span className='mb-0'>
-            <FontAwesomeIcon icon={faBeer} size='sm' className='mr-1' />
-            <Label>Taverns: </Label> {taverns?.[0]?.balance ?? 0}
+          <span className='flex flex-col w-1/3'>
+            <span className='whitespace-nowrap'>
+              <FontAwesomeIcon icon={faBeer} size='sm' className='mr-1' />
+              <Label>Taverns: </Label> {taverns?.[0]?.balance ?? 0}
+            </span>
+            <span className='whitespace-nowrap'>
+              <FontAwesomeIcon icon={faArrowUp} size='sm' className='mr-1' />
+              <Label>+1: </Label> {tavernsR1?.[0]?.balance ?? 0}
+            </span>
           </span>
-          <span className='ml-4 mb-2'>
-            <FontAwesomeIcon icon={faArrowUp} size='sm' className='mr-1' />
-            <Label>+1: </Label> {tavernsR1?.[0]?.balance ?? 0}
+          <span className='flex flex-col w-1/3'>
+            <span className='whitespace-nowrap'>
+              <FontAwesomeIcon
+                icon={faBuildingColumns}
+                size='sm'
+                className='mr-1'
+              />
+              <Label>Banks: </Label> {banks?.[0]?.balance ?? 0}
+            </span>
+            <span className='whitespace-nowrap'>
+              <FontAwesomeIcon icon={faArrowUp} size='sm' className='mr-1' />
+              <Label>+1: </Label> {banksR1?.[0]?.balance ?? 0}
+            </span>
           </span>
-          <span className='mb-0'>
-            <FontAwesomeIcon
-              icon={faBuildingColumns}
-              size='sm'
-              className='mr-1'
-            />
-            <Label>Banks: </Label> {banks?.[0]?.balance ?? 0}
+        </div>
+        <div className='flex flex-row text-black gap-8 mt-2'>
+          <span className='flex flex-col w-1/3'>
+            <span className='whitespace-nowrap'>
+              <FontAwesomeIcon icon={faHouse} size='sm' className='mr-1' />
+              <Label>Houses: </Label> {hauntedHouses?.[0]?.balance ?? 0}
+            </span>
+            <span className='whitespace-nowrap'>
+              <FontAwesomeIcon icon={faArrowUp} size='sm' className='mr-1' />
+              <Label>+1: </Label> {hauntedHousesR1?.[0]?.balance ?? 0}
+            </span>
           </span>
-          <span className='ml-4 mb-2'>
-            <FontAwesomeIcon icon={faArrowUp} size='sm' className='mr-1' />
-            <Label>+1: </Label> {banksR1?.[0]?.balance ?? 0}
+          <span className='flex flex-col w-1/3'>
+            <span className='whitespace-nowrap'>
+              <FontAwesomeIcon icon={faCross} size='sm' className='mr-1' />
+              <Label>Crypts: </Label> {crypts?.[0]?.balance ?? 0}
+            </span>
+            <span className='whitespace-nowrap'>
+              <FontAwesomeIcon icon={faArrowUp} size='sm' className='mr-1' />
+              <Label>+1: </Label> {cryptsR1?.[0]?.balance ?? 0}
+            </span>
           </span>
-          <span className='mb-0'>
-            <FontAwesomeIcon icon={faHouse} size='sm' className='mr-1' />
-            <Label>Houses: </Label> {hauntedHouses?.[0]?.balance ?? 0}
-          </span>
-          <span className='ml-4 mb-2'>
-            <FontAwesomeIcon icon={faArrowUp} size='sm' className='mr-1' />
-            <Label>+1: </Label> {hauntedHousesR1?.[0]?.balance ?? 0}
-          </span>
-          <span className='mb-0'>
-            <FontAwesomeIcon icon={faCross} size='sm' className='mr-1' />
-            <Label>Crypts: </Label> {crypts?.[0]?.balance ?? 0}
-          </span>
-          <span className='ml-4 mb-2'>
-            <FontAwesomeIcon icon={faArrowUp} size='sm' className='mr-1' />
-            <Label>+1: </Label> {cryptsR1?.[0]?.balance ?? 0}
-          </span>
-          <span className='mb-0'>
-            <FontAwesomeIcon icon={faFlaskVial} size='sm' className='mr-1' />
-            <Label>Labos: </Label> {labos?.[0]?.balance ?? 0}
-          </span>
-          <span className='ml-4 mb-2'>
-            <FontAwesomeIcon icon={faArrowUp} size='sm' className='mr-1' />
-            <Label>+1: </Label> {labosR1?.[0]?.balance ?? 0}
+          <span className='flex flex-col w-1/3'>
+            <span className='whitespace-nowrap'>
+              <FontAwesomeIcon icon={faFlaskVial} size='sm' className='mr-1' />
+              <Label>Labos: </Label> {labos?.[0]?.balance ?? 0}
+            </span>
+            <span className='whitespace-nowrap'>
+              <FontAwesomeIcon icon={faArrowUp} size='sm' className='mr-1' />
+              <Label>+1: </Label> {labosR1?.[0]?.balance ?? 0}
+            </span>
           </span>
         </div>
 
-        <div className='flex flex-col text-black ml-auto'>
-          <span className='flex mb-1'>
+        <hr className='mt-2 mb-2' />
+
+        <div className='flex flex-col text-black gap-1'>
+          <span className='flex flex-row w-1/2'>
             {priceLand}
             <span>
               <img src='/dust-logo.png' alt='Dust' className='ml-1 w-5' />
@@ -271,491 +303,507 @@ export const Account = ({
               </Button>
             </span>
           </span>
-          <span className='flex mb-1'>
-            {priceBuilding}
-            <span>
-              <img src='/dust-logo.png' alt='Dust' className='ml-1 w-5' />
-            </span>
-            <span className='ml-2'>
-              <Button
-                className='inline-block rounded-lg px-3 py-0.5 text-center hover:no-underline my-0 bg-blue-600 text-white hover:bg-blue-700 mr-0 disabled:bg-gray-200 disabled:text-black disabled:cursor-not-allowed'
-                aria-label='Buy a tavern'
-                disabled={
-                  hasPendingTransactions ||
-                  sfts === undefined ||
-                  lands === undefined
-                }
-                onClick={() => {
-                  confirmAlert({
-                    title: 'Buy 1 tavern',
-                    message:
-                      'Are you sure you want to buy 1 tavern for 100 $DUST ?',
-                    buttons: [
-                      {
-                        label: 'Yes',
-                        onClick: () =>
-                          sendBuyItemTransaction(
-                            {
-                              collection: sftCollectionId,
-                              nonce: sftTavernNonce
-                            },
-                            priceBuilding * Math.pow(10, 18)
-                          )
-                      },
-                      {
-                        label: 'No',
-                        onClick: () => {
-                          return;
+          <span className='flex flex-row bg-slate-200'>
+            <span className='flex w-1/2'>
+              {priceBuilding}
+              <span>
+                <img src='/dust-logo.png' alt='Dust' className='ml-1 w-5' />
+              </span>
+              <span className='ml-2'>
+                <Button
+                  className='inline-block rounded-lg px-3 py-0.5 text-center hover:no-underline my-0 bg-blue-600 text-white hover:bg-blue-700 mr-0 disabled:bg-gray-200 disabled:text-black disabled:cursor-not-allowed'
+                  aria-label='Buy a tavern'
+                  disabled={
+                    hasPendingTransactions ||
+                    sfts === undefined ||
+                    lands === undefined
+                  }
+                  onClick={() => {
+                    confirmAlert({
+                      title: 'Buy 1 tavern',
+                      message:
+                        'Are you sure you want to buy 1 tavern for 100 $DUST ?',
+                      buttons: [
+                        {
+                          label: 'Yes',
+                          onClick: () =>
+                            sendBuyItemTransaction(
+                              {
+                                collection: sftCollectionId,
+                                nonce: sftTavernNonce
+                              },
+                              priceBuilding * Math.pow(10, 18)
+                            )
+                        },
+                        {
+                          label: 'No',
+                          onClick: () => {
+                            return;
+                          }
                         }
-                      }
-                    ]
-                  });
-                }}
-              >
-                <FontAwesomeIcon icon={faBeer} size='sm' className='mr-1' />
-                Buy 1 tavern
-              </Button>
+                      ]
+                    });
+                  }}
+                >
+                  <FontAwesomeIcon icon={faBeer} size='sm' className='mr-1' />
+                  Buy 1 tavern
+                </Button>
+              </span>
+            </span>
+            <span className='flex w-1/2 ml-2'>
+              {priceBuildingR1}
+              <span>
+                <img src='/dust-logo.png' alt='Dust' className='ml-1 w-5' />
+              </span>
+              <span className='ml-2'>
+                <Button
+                  className='inline-block rounded-lg px-3 py-0.5 text-center hover:no-underline my-0 bg-blue-600 text-white hover:bg-blue-700 mr-0 disabled:bg-gray-200 disabled:text-black disabled:cursor-not-allowed'
+                  aria-label='Buy a tavern +1'
+                  disabled={
+                    hasPendingTransactions ||
+                    sfts === undefined ||
+                    lands === undefined
+                  }
+                  onClick={() => {
+                    confirmAlert({
+                      title: 'Buy 1 tavern +1',
+                      message:
+                        'Are you sure you want to buy 1 tavern +1 for 400 $DUST ?',
+                      buttons: [
+                        {
+                          label: 'Yes',
+                          onClick: () =>
+                            sendBuyItemTransaction(
+                              {
+                                collection: sftCollectionId,
+                                nonce: sftTavernR1Nonce
+                              },
+                              priceBuildingR1 * Math.pow(10, 18)
+                            )
+                        },
+                        {
+                          label: 'No',
+                          onClick: () => {
+                            return;
+                          }
+                        }
+                      ]
+                    });
+                  }}
+                >
+                  <FontAwesomeIcon
+                    icon={faArrowUp}
+                    size='sm'
+                    className='mr-1'
+                  />
+                  Buy 1 tavern +1
+                </Button>
+              </span>
             </span>
           </span>
-          <span className='flex mb-1'>
-            {priceBuildingR1}
-            <span>
-              <img src='/dust-logo.png' alt='Dust' className='ml-1 w-5' />
-            </span>
-            <span className='ml-2'>
-              <Button
-                className='inline-block rounded-lg px-3 py-0.5 text-center hover:no-underline my-0 bg-blue-600 text-white hover:bg-blue-700 mr-0 disabled:bg-gray-200 disabled:text-black disabled:cursor-not-allowed'
-                aria-label='Buy a tavern +1'
-                disabled={
-                  hasPendingTransactions ||
-                  sfts === undefined ||
-                  lands === undefined
-                }
-                onClick={() => {
-                  confirmAlert({
-                    title: 'Buy 1 tavern +1',
-                    message:
-                      'Are you sure you want to buy 1 tavern +1 for 400 $DUST ?',
-                    buttons: [
-                      {
-                        label: 'Yes',
-                        onClick: () =>
-                          sendBuyItemTransaction(
-                            {
-                              collection: sftCollectionId,
-                              nonce: sftTavernR1Nonce
-                            },
-                            priceBuildingR1 * Math.pow(10, 18)
-                          )
-                      },
-                      {
-                        label: 'No',
-                        onClick: () => {
-                          return;
+          <span className='flex flex-row'>
+            <span className='flex w-1/2 '>
+              {priceBuilding}
+              <span>
+                <img src='/dust-logo.png' alt='Dust' className='ml-1 w-5' />
+              </span>
+              <span className='ml-2'>
+                <Button
+                  className='inline-block rounded-lg px-3 py-0.5 text-center hover:no-underline my-0 bg-blue-600 text-white hover:bg-blue-700 mr-0 disabled:bg-gray-200 disabled:text-black disabled:cursor-not-allowed'
+                  aria-label='Buy a bank'
+                  disabled={
+                    hasPendingTransactions ||
+                    sfts === undefined ||
+                    lands === undefined
+                  }
+                  onClick={() => {
+                    confirmAlert({
+                      title: 'Buy 1 bank',
+                      message:
+                        'Are you sure you want to buy 1 bank for 100 $DUST ?',
+                      buttons: [
+                        {
+                          label: 'Yes',
+                          onClick: () =>
+                            sendBuyItemTransaction(
+                              {
+                                collection: sftCollectionId,
+                                nonce: sftBanksNonce
+                              },
+                              priceBuilding * Math.pow(10, 18)
+                            )
+                        },
+                        {
+                          label: 'No',
+                          onClick: () => {
+                            return;
+                          }
                         }
-                      }
-                    ]
-                  });
-                }}
-              >
-                <FontAwesomeIcon icon={faArrowUp} size='sm' className='mr-1' />
-                Buy 1 tavern +1
-              </Button>
+                      ]
+                    });
+                  }}
+                >
+                  <FontAwesomeIcon
+                    icon={faBuildingColumns}
+                    size='sm'
+                    className='mr-1'
+                  />
+                  Buy 1 bank
+                </Button>
+              </span>
+            </span>
+            <span className='flex w-1/2 ml-2'>
+              {priceBuildingR1}
+              <span>
+                <img src='/dust-logo.png' alt='Dust' className='ml-1 w-5' />
+              </span>
+              <span className='ml-2'>
+                <Button
+                  className='inline-block rounded-lg px-3 py-0.5 text-center hover:no-underline my-0 bg-blue-600 text-white hover:bg-blue-700 mr-0 disabled:bg-gray-200 disabled:text-black disabled:cursor-not-allowed'
+                  aria-label='Buy a bank +1'
+                  disabled={
+                    hasPendingTransactions ||
+                    sfts === undefined ||
+                    lands === undefined
+                  }
+                  onClick={() => {
+                    confirmAlert({
+                      title: 'Buy 1 bank +1',
+                      message:
+                        'Are you sure you want to buy 1 bank +1 for 400 $DUST ?',
+                      buttons: [
+                        {
+                          label: 'Yes',
+                          onClick: () =>
+                            sendBuyItemTransaction(
+                              {
+                                collection: sftCollectionId,
+                                nonce: sftBankR1Nonce
+                              },
+                              priceBuildingR1 * Math.pow(10, 18)
+                            )
+                        },
+                        {
+                          label: 'No',
+                          onClick: () => {
+                            return;
+                          }
+                        }
+                      ]
+                    });
+                  }}
+                >
+                  <FontAwesomeIcon
+                    icon={faArrowUp}
+                    size='sm'
+                    className='mr-1'
+                  />
+                  Buy 1 bank +1
+                </Button>
+              </span>
             </span>
           </span>
-          <span className='flex mb-1'>
-            {priceBuilding}
-            <span>
-              <img src='/dust-logo.png' alt='Dust' className='ml-1 w-5' />
-            </span>
-            <span className='ml-2'>
-              <Button
-                className='inline-block rounded-lg px-3 py-0.5 text-center hover:no-underline my-0 bg-blue-600 text-white hover:bg-blue-700 mr-0 disabled:bg-gray-200 disabled:text-black disabled:cursor-not-allowed'
-                aria-label='Buy a bank'
-                disabled={
-                  hasPendingTransactions ||
-                  sfts === undefined ||
-                  lands === undefined
-                }
-                onClick={() => {
-                  confirmAlert({
-                    title: 'Buy 1 bank',
-                    message:
-                      'Are you sure you want to buy 1 bank for 100 $DUST ?',
-                    buttons: [
-                      {
-                        label: 'Yes',
-                        onClick: () =>
-                          sendBuyItemTransaction(
-                            {
-                              collection: sftCollectionId,
-                              nonce: sftBanksNonce
-                            },
-                            priceBuilding * Math.pow(10, 18)
-                          )
-                      },
-                      {
-                        label: 'No',
-                        onClick: () => {
-                          return;
+          <span className='flex flex-row bg-slate-200'>
+            <span className='flex w-1/2 '>
+              {priceBuilding}
+              <span>
+                <img src='/dust-logo.png' alt='Dust' className='ml-1 w-5' />
+              </span>
+              <span className='ml-2'>
+                <Button
+                  className='inline-block rounded-lg px-3 py-0.5 text-center hover:no-underline my-0 bg-blue-600 text-white hover:bg-blue-700 mr-0 disabled:bg-gray-200 disabled:text-black disabled:cursor-not-allowed'
+                  aria-label='Buy a haunted house'
+                  disabled={
+                    hasPendingTransactions ||
+                    sfts === undefined ||
+                    lands === undefined
+                  }
+                  onClick={() => {
+                    confirmAlert({
+                      title: 'Buy 1 haunted house',
+                      message:
+                        'Are you sure you want to buy 1 haunted house for 100 $DUST ?',
+                      buttons: [
+                        {
+                          label: 'Yes',
+                          onClick: () =>
+                            sendBuyItemTransaction(
+                              {
+                                collection: sftCollectionId,
+                                nonce: sftHauntedHouseNonce
+                              },
+                              priceBuilding * Math.pow(10, 18)
+                            )
+                        },
+                        {
+                          label: 'No',
+                          onClick: () => {
+                            return;
+                          }
                         }
-                      }
-                    ]
-                  });
-                }}
-              >
-                <FontAwesomeIcon
-                  icon={faBuildingColumns}
-                  size='sm'
-                  className='mr-1'
-                />
-                Buy 1 bank
-              </Button>
+                      ]
+                    });
+                  }}
+                >
+                  <FontAwesomeIcon icon={faHouse} size='sm' className='mr-1' />
+                  Buy 1 house
+                </Button>
+              </span>
+            </span>
+            <span className='flex w-1/2 ml-2'>
+              {priceBuildingR1}
+              <span>
+                <img src='/dust-logo.png' alt='Dust' className='ml-1 w-5' />
+              </span>
+              <span className='ml-2'>
+                <Button
+                  className='inline-block rounded-lg px-3 py-0.5 text-center hover:no-underline my-0 bg-blue-600 text-white hover:bg-blue-700 mr-0 disabled:bg-gray-200 disabled:text-black disabled:cursor-not-allowed'
+                  aria-label='Buy a haunted house +1'
+                  disabled={
+                    hasPendingTransactions ||
+                    sfts === undefined ||
+                    lands === undefined
+                  }
+                  onClick={() => {
+                    confirmAlert({
+                      title: 'Buy 1 haunted house +1',
+                      message:
+                        'Are you sure you want to buy 1 haunted house +1 for 400 $DUST ?',
+                      buttons: [
+                        {
+                          label: 'Yes',
+                          onClick: () =>
+                            sendBuyItemTransaction(
+                              {
+                                collection: sftCollectionId,
+                                nonce: sftHauntedHouseR1Nonce
+                              },
+                              priceBuildingR1 * Math.pow(10, 18)
+                            )
+                        },
+                        {
+                          label: 'No',
+                          onClick: () => {
+                            return;
+                          }
+                        }
+                      ]
+                    });
+                  }}
+                >
+                  <FontAwesomeIcon
+                    icon={faArrowUp}
+                    size='sm'
+                    className='mr-1'
+                  />
+                  Buy 1 house +1
+                </Button>
+              </span>
             </span>
           </span>
-          <span className='flex mb-1'>
-            {priceBuildingR1}
-            <span>
-              <img src='/dust-logo.png' alt='Dust' className='ml-1 w-5' />
-            </span>
-            <span className='ml-2'>
-              <Button
-                className='inline-block rounded-lg px-3 py-0.5 text-center hover:no-underline my-0 bg-blue-600 text-white hover:bg-blue-700 mr-0 disabled:bg-gray-200 disabled:text-black disabled:cursor-not-allowed'
-                aria-label='Buy a bank +1'
-                disabled={
-                  hasPendingTransactions ||
-                  sfts === undefined ||
-                  lands === undefined
-                }
-                onClick={() => {
-                  confirmAlert({
-                    title: 'Buy 1 bank +1',
-                    message:
-                      'Are you sure you want to buy 1 bank +1 for 400 $DUST ?',
-                    buttons: [
-                      {
-                        label: 'Yes',
-                        onClick: () =>
-                          sendBuyItemTransaction(
-                            {
-                              collection: sftCollectionId,
-                              nonce: sftBankR1Nonce
-                            },
-                            priceBuildingR1 * Math.pow(10, 18)
-                          )
-                      },
-                      {
-                        label: 'No',
-                        onClick: () => {
-                          return;
+          <span className='flex flex-row'>
+            <span className='flex w-1/2'>
+              {priceBuilding}
+              <span>
+                <img src='/dust-logo.png' alt='Dust' className='ml-1 w-5' />
+              </span>
+              <span className='ml-2'>
+                <Button
+                  className='inline-block rounded-lg px-3 py-0.5 text-center hover:no-underline my-0 bg-blue-600 text-white hover:bg-blue-700 mr-0 disabled:bg-gray-200 disabled:text-black disabled:cursor-not-allowed'
+                  aria-label='Buy a crypt'
+                  disabled={
+                    hasPendingTransactions ||
+                    sfts === undefined ||
+                    lands === undefined
+                  }
+                  onClick={() => {
+                    confirmAlert({
+                      title: 'Buy 1 crypt',
+                      message:
+                        'Are you sure you want to buy 1 crypt for 100 $DUST ?',
+                      buttons: [
+                        {
+                          label: 'Yes',
+                          onClick: () =>
+                            sendBuyItemTransaction(
+                              {
+                                collection: sftCollectionId,
+                                nonce: sftCryptNonce
+                              },
+                              priceBuilding * Math.pow(10, 18)
+                            )
+                        },
+                        {
+                          label: 'No',
+                          onClick: () => {
+                            return;
+                          }
                         }
-                      }
-                    ]
-                  });
-                }}
-              >
-                <FontAwesomeIcon icon={faArrowUp} size='sm' className='mr-1' />
-                Buy 1 bank +1
-              </Button>
+                      ]
+                    });
+                  }}
+                >
+                  <FontAwesomeIcon icon={faCross} size='sm' className='mr-1' />
+                  Buy 1 crypt
+                </Button>
+              </span>
+            </span>
+            <span className='flex w-1/2 ml-2'>
+              {priceBuildingR1}
+              <span>
+                <img src='/dust-logo.png' alt='Dust' className='ml-1 w-5' />
+              </span>
+              <span className='ml-2'>
+                <Button
+                  className='inline-block rounded-lg px-3 py-0.5 text-center hover:no-underline my-0 bg-blue-600 text-white hover:bg-blue-700 mr-0 disabled:bg-gray-200 disabled:text-black disabled:cursor-not-allowed'
+                  aria-label='Buy a crypt +1'
+                  disabled={
+                    hasPendingTransactions ||
+                    sfts === undefined ||
+                    lands === undefined
+                  }
+                  onClick={() => {
+                    confirmAlert({
+                      title: 'Buy 1 crypt +1',
+                      message:
+                        'Are you sure you want to buy 1 crypt +1 for 400 $DUST ?',
+                      buttons: [
+                        {
+                          label: 'Yes',
+                          onClick: () =>
+                            sendBuyItemTransaction(
+                              {
+                                collection: sftCollectionId,
+                                nonce: sftCryptR1Nonce
+                              },
+                              priceBuildingR1 * Math.pow(10, 18)
+                            )
+                        },
+                        {
+                          label: 'No',
+                          onClick: () => {
+                            return;
+                          }
+                        }
+                      ]
+                    });
+                  }}
+                >
+                  <FontAwesomeIcon
+                    icon={faArrowUp}
+                    size='sm'
+                    className='mr-1'
+                  />
+                  Buy 1 crypt +1
+                </Button>
+              </span>
             </span>
           </span>
-          <span className='flex mb-1'>
-            {priceBuilding}
-            <span>
-              <img src='/dust-logo.png' alt='Dust' className='ml-1 w-5' />
-            </span>
-            <span className='ml-2'>
-              <Button
-                className='inline-block rounded-lg px-3 py-0.5 text-center hover:no-underline my-0 bg-blue-600 text-white hover:bg-blue-700 mr-0 disabled:bg-gray-200 disabled:text-black disabled:cursor-not-allowed'
-                aria-label='Buy a haunted house'
-                disabled={
-                  hasPendingTransactions ||
-                  sfts === undefined ||
-                  lands === undefined
-                }
-                onClick={() => {
-                  confirmAlert({
-                    title: 'Buy 1 haunted house',
-                    message:
-                      'Are you sure you want to buy 1 haunted house for 100 $DUST ?',
-                    buttons: [
-                      {
-                        label: 'Yes',
-                        onClick: () =>
-                          sendBuyItemTransaction(
-                            {
-                              collection: sftCollectionId,
-                              nonce: sftHauntedHouseNonce
-                            },
-                            priceBuilding * Math.pow(10, 18)
-                          )
-                      },
-                      {
-                        label: 'No',
-                        onClick: () => {
-                          return;
+          <span className='flex flex-row- bg-slate-200'>
+            <span className='flex mb-1 w-1/2'>
+              {priceBuilding}
+              <span>
+                <img src='/dust-logo.png' alt='Dust' className='ml-1 w-5' />
+              </span>
+              <span className='ml-2'>
+                <Button
+                  className='inline-block rounded-lg px-3 py-0.5 text-center hover:no-underline my-0 bg-blue-600 text-white hover:bg-blue-700 mr-0 disabled:bg-gray-200 disabled:text-black disabled:cursor-not-allowed'
+                  aria-label='Buy a labo'
+                  disabled={
+                    hasPendingTransactions ||
+                    sfts === undefined ||
+                    lands === undefined
+                  }
+                  onClick={() => {
+                    confirmAlert({
+                      title: 'Buy 1 labo',
+                      message:
+                        'Are you sure you want to buy 1 labo for 100 $DUST ?',
+                      buttons: [
+                        {
+                          label: 'Yes',
+                          onClick: () =>
+                            sendBuyItemTransaction(
+                              {
+                                collection: sftCollectionId,
+                                nonce: sftLaboNonce
+                              },
+                              priceBuilding * Math.pow(10, 18)
+                            )
+                        },
+                        {
+                          label: 'No',
+                          onClick: () => {
+                            return;
+                          }
                         }
-                      }
-                    ]
-                  });
-                }}
-              >
-                <FontAwesomeIcon icon={faHouse} size='sm' className='mr-1' />
-                Buy 1 house
-              </Button>
+                      ]
+                    });
+                  }}
+                >
+                  <FontAwesomeIcon
+                    icon={faFlaskVial}
+                    size='sm'
+                    className='mr-1'
+                  />
+                  Buy 1 labo
+                </Button>
+              </span>
             </span>
-          </span>
-          <span className='flex mb-1'>
-            {priceBuildingR1}
-            <span>
-              <img src='/dust-logo.png' alt='Dust' className='ml-1 w-5' />
-            </span>
-            <span className='ml-2'>
-              <Button
-                className='inline-block rounded-lg px-3 py-0.5 text-center hover:no-underline my-0 bg-blue-600 text-white hover:bg-blue-700 mr-0 disabled:bg-gray-200 disabled:text-black disabled:cursor-not-allowed'
-                aria-label='Buy a haunted house +1'
-                disabled={
-                  hasPendingTransactions ||
-                  sfts === undefined ||
-                  lands === undefined
-                }
-                onClick={() => {
-                  confirmAlert({
-                    title: 'Buy 1 haunted house +1',
-                    message:
-                      'Are you sure you want to buy 1 haunted house +1 for 400 $DUST ?',
-                    buttons: [
-                      {
-                        label: 'Yes',
-                        onClick: () =>
-                          sendBuyItemTransaction(
-                            {
-                              collection: sftCollectionId,
-                              nonce: sftHauntedHouseR1Nonce
-                            },
-                            priceBuildingR1 * Math.pow(10, 18)
-                          )
-                      },
-                      {
-                        label: 'No',
-                        onClick: () => {
-                          return;
+            <span className='flex w-1/2 ml-2'>
+              {priceBuildingR1}
+              <span>
+                <img src='/dust-logo.png' alt='Dust' className='ml-1 w-5' />
+              </span>
+              <span className='ml-2'>
+                <Button
+                  className='inline-block rounded-lg px-3 py-0.5 text-center hover:no-underline my-0 bg-blue-600 text-white hover:bg-blue-700 mr-0 disabled:bg-gray-200 disabled:text-black disabled:cursor-not-allowed'
+                  aria-label='Buy a labo +1'
+                  disabled={
+                    hasPendingTransactions ||
+                    sfts === undefined ||
+                    lands === undefined
+                  }
+                  onClick={() => {
+                    confirmAlert({
+                      title: 'Buy 1 labo +1',
+                      message:
+                        'Are you sure you want to buy 1 labo +1 for 400 $DUST ?',
+                      buttons: [
+                        {
+                          label: 'Yes',
+                          onClick: () =>
+                            sendBuyItemTransaction(
+                              {
+                                collection: sftCollectionId,
+                                nonce: sftLaboR1Nonce
+                              },
+                              priceBuildingR1 * Math.pow(10, 18)
+                            )
+                        },
+                        {
+                          label: 'No',
+                          onClick: () => {
+                            return;
+                          }
                         }
-                      }
-                    ]
-                  });
-                }}
-              >
-                <FontAwesomeIcon icon={faArrowUp} size='sm' className='mr-1' />
-                Buy 1 house +1
-              </Button>
-            </span>
-          </span>
-          <span className='flex mb-1'>
-            {priceBuilding}
-            <span>
-              <img src='/dust-logo.png' alt='Dust' className='ml-1 w-5' />
-            </span>
-            <span className='ml-2'>
-              <Button
-                className='inline-block rounded-lg px-3 py-0.5 text-center hover:no-underline my-0 bg-blue-600 text-white hover:bg-blue-700 mr-0 disabled:bg-gray-200 disabled:text-black disabled:cursor-not-allowed'
-                aria-label='Buy a crypt'
-                disabled={
-                  hasPendingTransactions ||
-                  sfts === undefined ||
-                  lands === undefined
-                }
-                onClick={() => {
-                  confirmAlert({
-                    title: 'Buy 1 crypt',
-                    message:
-                      'Are you sure you want to buy 1 crypt for 100 $DUST ?',
-                    buttons: [
-                      {
-                        label: 'Yes',
-                        onClick: () =>
-                          sendBuyItemTransaction(
-                            {
-                              collection: sftCollectionId,
-                              nonce: sftCryptNonce
-                            },
-                            priceBuilding * Math.pow(10, 18)
-                          )
-                      },
-                      {
-                        label: 'No',
-                        onClick: () => {
-                          return;
-                        }
-                      }
-                    ]
-                  });
-                }}
-              >
-                <FontAwesomeIcon icon={faCross} size='sm' className='mr-1' />
-                Buy 1 crypt
-              </Button>
-            </span>
-          </span>
-          <span className='flex mb-1'>
-            {priceBuildingR1}
-            <span>
-              <img src='/dust-logo.png' alt='Dust' className='ml-1 w-5' />
-            </span>
-            <span className='ml-2'>
-              <Button
-                className='inline-block rounded-lg px-3 py-0.5 text-center hover:no-underline my-0 bg-blue-600 text-white hover:bg-blue-700 mr-0 disabled:bg-gray-200 disabled:text-black disabled:cursor-not-allowed'
-                aria-label='Buy a crypt +1'
-                disabled={
-                  hasPendingTransactions ||
-                  sfts === undefined ||
-                  lands === undefined
-                }
-                onClick={() => {
-                  confirmAlert({
-                    title: 'Buy 1 crypt +1',
-                    message:
-                      'Are you sure you want to buy 1 crypt +1 for 400 $DUST ?',
-                    buttons: [
-                      {
-                        label: 'Yes',
-                        onClick: () =>
-                          sendBuyItemTransaction(
-                            {
-                              collection: sftCollectionId,
-                              nonce: sftCryptR1Nonce
-                            },
-                            priceBuildingR1 * Math.pow(10, 18)
-                          )
-                      },
-                      {
-                        label: 'No',
-                        onClick: () => {
-                          return;
-                        }
-                      }
-                    ]
-                  });
-                }}
-              >
-                <FontAwesomeIcon icon={faArrowUp} size='sm' className='mr-1' />
-                Buy 1 crypt +1
-              </Button>
-            </span>
-          </span>
-          <span className='flex mb-1'>
-            {priceBuilding}
-            <span>
-              <img src='/dust-logo.png' alt='Dust' className='ml-1 w-5' />
-            </span>
-            <span className='ml-2'>
-              <Button
-                className='inline-block rounded-lg px-3 py-0.5 text-center hover:no-underline my-0 bg-blue-600 text-white hover:bg-blue-700 mr-0 disabled:bg-gray-200 disabled:text-black disabled:cursor-not-allowed'
-                aria-label='Buy a labo'
-                disabled={
-                  hasPendingTransactions ||
-                  sfts === undefined ||
-                  lands === undefined
-                }
-                onClick={() => {
-                  confirmAlert({
-                    title: 'Buy 1 labo',
-                    message:
-                      'Are you sure you want to buy 1 labo for 100 $DUST ?',
-                    buttons: [
-                      {
-                        label: 'Yes',
-                        onClick: () =>
-                          sendBuyItemTransaction(
-                            {
-                              collection: sftCollectionId,
-                              nonce: sftLaboNonce
-                            },
-                            priceBuilding * Math.pow(10, 18)
-                          )
-                      },
-                      {
-                        label: 'No',
-                        onClick: () => {
-                          return;
-                        }
-                      }
-                    ]
-                  });
-                }}
-              >
-                <FontAwesomeIcon
-                  icon={faFlaskVial}
-                  size='sm'
-                  className='mr-1'
-                />
-                Buy 1 labo
-              </Button>
-            </span>
-          </span>
-          <span className='flex mb-1'>
-            {priceBuildingR1}
-            <span>
-              <img src='/dust-logo.png' alt='Dust' className='ml-1 w-5' />
-            </span>
-            <span className='ml-2'>
-              <Button
-                className='inline-block rounded-lg px-3 py-0.5 text-center hover:no-underline my-0 bg-blue-600 text-white hover:bg-blue-700 mr-0 disabled:bg-gray-200 disabled:text-black disabled:cursor-not-allowed'
-                aria-label='Buy a labo +1'
-                disabled={
-                  hasPendingTransactions ||
-                  sfts === undefined ||
-                  lands === undefined
-                }
-                onClick={() => {
-                  confirmAlert({
-                    title: 'Buy 1 labo +1',
-                    message:
-                      'Are you sure you want to buy 1 labo +1 for 400 $DUST ?',
-                    buttons: [
-                      {
-                        label: 'Yes',
-                        onClick: () =>
-                          sendBuyItemTransaction(
-                            {
-                              collection: sftCollectionId,
-                              nonce: sftLaboR1Nonce
-                            },
-                            priceBuildingR1 * Math.pow(10, 18)
-                          )
-                      },
-                      {
-                        label: 'No',
-                        onClick: () => {
-                          return;
-                        }
-                      }
-                    ]
-                  });
-                }}
-              >
-                <FontAwesomeIcon icon={faArrowUp} size='sm' className='mr-1' />
-                Buy 1 labo +1
-              </Button>
+                      ]
+                    });
+                  }}
+                >
+                  <FontAwesomeIcon
+                    icon={faArrowUp}
+                    size='sm'
+                    className='mr-1'
+                  />
+                  Buy 1 labo +1
+                </Button>
+              </span>
             </span>
           </span>
         </div>
       </div>
-      <div className='flex flex-col text-black mt-2'>
-        <p className='flex items-center'>
-          <Label>$DUST: </Label>
-          <FormatAmount
-            value={dust?.balance ?? 0}
-            egldLabel='$DUST'
-            showLabel={false}
-            digits={0}
-            data-testid='balance'
-          />
-          <span>
-            <img src='/dust-logo.png' alt='Dust' className='ml-1 w-5' />
-          </span>
-        </p>
-      </div>
+
       <div className='flex text-black gap-2 mt-4' data-testid='topInfo'>
         <Button
           disabled={
