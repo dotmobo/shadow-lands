@@ -174,7 +174,7 @@ export const Account = ({
     <OutputContainer>
       <div className='flex flex-col'>
         <div className='flex flex-col text-black'>
-          <p className='flex items-center whitespace-nowrap'>
+          <p className='flex items-center'>
             <Label>$DUST: </Label>
             <FormatAmount
               value={dust?.balance ?? 0}
@@ -191,23 +191,23 @@ export const Account = ({
 
         <hr className='mt-2 mb-2' />
 
-        <div className='flex flex-row text-black gap-8'>
-          <span className='whitespace-nowrap w-1/3'>
+        <div className='flex flex-row text-black'>
+          <span className='w-1/3'>
             <FontAwesomeIcon icon={faTree} size='sm' className='mr-1' />
             <Label>Lands: </Label> {lands?.[0]?.balance ?? 0}
           </span>
           <span className='flex flex-col w-1/3'>
-            <span className='whitespace-nowrap'>
+            <span>
               <FontAwesomeIcon icon={faBeer} size='sm' className='mr-1' />
               <Label>Taverns: </Label> {taverns?.[0]?.balance ?? 0}
             </span>
-            <span className='whitespace-nowrap'>
+            <span>
               <FontAwesomeIcon icon={faArrowUp} size='sm' className='mr-1' />
               <Label>+1: </Label> {tavernsR1?.[0]?.balance ?? 0}
             </span>
           </span>
           <span className='flex flex-col w-1/3'>
-            <span className='whitespace-nowrap'>
+            <span>
               <FontAwesomeIcon
                 icon={faBuildingColumns}
                 size='sm'
@@ -215,39 +215,39 @@ export const Account = ({
               />
               <Label>Banks: </Label> {banks?.[0]?.balance ?? 0}
             </span>
-            <span className='whitespace-nowrap'>
+            <span>
               <FontAwesomeIcon icon={faArrowUp} size='sm' className='mr-1' />
               <Label>+1: </Label> {banksR1?.[0]?.balance ?? 0}
             </span>
           </span>
         </div>
-        <div className='flex flex-row text-black gap-8 mt-2'>
+        <div className='flex flex-row text-black mt-2'>
           <span className='flex flex-col w-1/3'>
-            <span className='whitespace-nowrap'>
+            <span>
               <FontAwesomeIcon icon={faHouse} size='sm' className='mr-1' />
               <Label>Houses: </Label> {hauntedHouses?.[0]?.balance ?? 0}
             </span>
-            <span className='whitespace-nowrap'>
+            <span>
               <FontAwesomeIcon icon={faArrowUp} size='sm' className='mr-1' />
               <Label>+1: </Label> {hauntedHousesR1?.[0]?.balance ?? 0}
             </span>
           </span>
           <span className='flex flex-col w-1/3'>
-            <span className='whitespace-nowrap'>
+            <span>
               <FontAwesomeIcon icon={faCross} size='sm' className='mr-1' />
               <Label>Crypts: </Label> {crypts?.[0]?.balance ?? 0}
             </span>
-            <span className='whitespace-nowrap'>
+            <span>
               <FontAwesomeIcon icon={faArrowUp} size='sm' className='mr-1' />
               <Label>+1: </Label> {cryptsR1?.[0]?.balance ?? 0}
             </span>
           </span>
           <span className='flex flex-col w-1/3'>
-            <span className='whitespace-nowrap'>
+            <span>
               <FontAwesomeIcon icon={faFlaskVial} size='sm' className='mr-1' />
               <Label>Labos: </Label> {labos?.[0]?.balance ?? 0}
             </span>
-            <span className='whitespace-nowrap'>
+            <span>
               <FontAwesomeIcon icon={faArrowUp} size='sm' className='mr-1' />
               <Label>+1: </Label> {labosR1?.[0]?.balance ?? 0}
             </span>
@@ -256,8 +256,8 @@ export const Account = ({
 
         <hr className='mt-2 mb-2' />
 
-        <div className='flex flex-col text-black gap-1'>
-          <span className='flex flex-row w-1/2'>
+        <div className='flex flex-col text-black'>
+          <span className='flex flex-row w-1/2 mb-1'>
             {priceLand}
             <span>
               <img src='/dust-logo.png' alt='Dust' className='ml-1 w-5' />
@@ -303,7 +303,7 @@ export const Account = ({
               </Button>
             </span>
           </span>
-          <span className='flex flex-row bg-slate-200'>
+          <span className='flex flex-row bg-slate-200 mb-1'>
             <span className='flex w-1/2'>
               {priceBuilding}
               <span>
@@ -401,7 +401,7 @@ export const Account = ({
               </span>
             </span>
           </span>
-          <span className='flex flex-row'>
+          <span className='flex flex-row mb-1'>
             <span className='flex w-1/2 '>
               {priceBuilding}
               <span>
@@ -503,7 +503,7 @@ export const Account = ({
               </span>
             </span>
           </span>
-          <span className='flex flex-row bg-slate-200'>
+          <span className='flex flex-row bg-slate-200 mb-1'>
             <span className='flex w-1/2 '>
               {priceBuilding}
               <span>
@@ -601,7 +601,7 @@ export const Account = ({
               </span>
             </span>
           </span>
-          <span className='flex flex-row'>
+          <span className='flex flex-row mb-1'>
             <span className='flex w-1/2'>
               {priceBuilding}
               <span>
@@ -804,62 +804,66 @@ export const Account = ({
         </div>
       </div>
 
-      <div className='flex text-black gap-2 mt-4' data-testid='topInfo'>
-        <Button
-          disabled={
-            hasPendingTransactions ||
-            sfts === undefined ||
-            sfts.filter((x) => x === sftLandsNonce).length > 0 ||
-            lands === undefined ||
-            lands?.length === 0
-          }
-          data-testid='sign-auto-send'
-          onClick={sendStakeLandTransaction}
-        >
-          <FontAwesomeIcon icon={faPlus} className='mr-1' />
-          Add the land
-        </Button>
-        <Button
-          className='inline-block rounded-lg px-3 py-2 text-center hover:no-underline my-0 bg-red-600 text-white hover:bg-red-700 mr-0 disabled:bg-gray-200 disabled:text-black disabled:cursor-not-allowed'
-          disabled={
-            hasPendingTransactions ||
-            sfts.filter((x) => x === sftLandsNonce).length === 0
-          }
-          data-testid='sign-auto-send'
-          onClick={() => {
-            confirmAlert({
-              title: 'Destroy the land',
-              message:
-                "Are you sure you want to withdraw the land and all buildings? You won't be able to claim your $DUST rewards after that.",
-              buttons: [
-                {
-                  label: 'Yes',
-                  onClick: () => sendUnstakeLandTransaction()
-                },
-                {
-                  label: 'No',
-                  onClick: () => {
-                    return;
+      <div className='flex text-black mt-4 gap-1' data-testid='topInfo'>
+        <span className='flex flex-row w-2/3 gap-1'>
+          <Button
+            disabled={
+              hasPendingTransactions ||
+              sfts === undefined ||
+              sfts.filter((x) => x === sftLandsNonce).length > 0 ||
+              lands === undefined ||
+              lands?.length === 0
+            }
+            data-testid='sign-auto-send'
+            onClick={sendStakeLandTransaction}
+          >
+            <FontAwesomeIcon icon={faPlus} className='mr-1' />
+            Add the land
+          </Button>
+          <Button
+            className='inline-block rounded-lg px-3 py-2 text-center hover:no-underline my-0 bg-red-600 text-white hover:bg-red-700 mr-0 disabled:bg-gray-200 disabled:text-black disabled:cursor-not-allowed'
+            disabled={
+              hasPendingTransactions ||
+              sfts.filter((x) => x === sftLandsNonce).length === 0
+            }
+            data-testid='sign-auto-send'
+            onClick={() => {
+              confirmAlert({
+                title: 'Destroy the land',
+                message:
+                  "Are you sure you want to withdraw the land and all buildings? You won't be able to claim your $DUST rewards after that.",
+                buttons: [
+                  {
+                    label: 'Yes',
+                    onClick: () => sendUnstakeLandTransaction()
+                  },
+                  {
+                    label: 'No',
+                    onClick: () => {
+                      return;
+                    }
                   }
-                }
-              ]
-            });
-          }}
-        >
-          <FontAwesomeIcon icon={faCircleXmark} className='mr-1' />
-          Destroy the land
-        </Button>
-        <Button
-          className='ml-8 inline-block rounded-lg px-3 py-2 text-center hover:no-underline my-0 bg-purple-600 text-white hover:bg-purple-700 mr-0 disabled:bg-gray-200 disabled:text-black disabled:cursor-not-allowed'
-          onClick={() =>
-            window.open(
-              'https://www.frameit.gg/marketplace/SHALAN-55b9a9/items'
-            )
-          }
-        >
-          <FontAwesomeIcon icon={faStore} className='mr-1' />
-          External Market
-        </Button>
+                ]
+              });
+            }}
+          >
+            <FontAwesomeIcon icon={faCircleXmark} className='mr-1' />
+            Destroy the land
+          </Button>
+        </span>
+        <span className='flex flex-row w-1/4'>
+          <Button
+            className='inline-block rounded-lg px-3 py-2 text-center hover:no-underline my-0 bg-purple-600 text-white hover:bg-purple-700 mr-0 disabled:bg-gray-200 disabled:text-black disabled:cursor-not-allowed'
+            onClick={() =>
+              window.open(
+                'https://www.frameit.gg/marketplace/SHALAN-55b9a9/items'
+              )
+            }
+          >
+            <FontAwesomeIcon icon={faStore} className='mr-1' />
+            External Market
+          </Button>
+        </span>
       </div>
     </OutputContainer>
   );
