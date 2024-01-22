@@ -867,7 +867,7 @@ export const Account = ({
             Destroy the land
           </Button>
         </span>
-        <span className='flex flex-row w-1/4'>
+        <span className='flex flex-row w-1/3'>
           <Button
             className='inline-block rounded-lg px-3 py-2 text-center hover:no-underline my-0 bg-purple-600 text-white hover:bg-purple-700 mr-0 disabled:bg-gray-200 disabled:text-black disabled:cursor-not-allowed'
             onClick={() =>
