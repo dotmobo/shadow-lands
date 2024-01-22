@@ -3,7 +3,7 @@ import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useGetAccountInfo } from '@multiversx/sdk-dapp/hooks/account/useGetAccountInfo';
 import { useGetNetworkConfig } from '@multiversx/sdk-dapp/hooks/useGetNetworkConfig';
-import { Html } from '@react-three/drei';
+import { FlyControls, Html } from '@react-three/drei';
 import {
   OrbitControls,
   PerspectiveCamera,
@@ -57,7 +57,8 @@ export const Map = ({
   walletCryptsR1,
   walletLabosR1,
   rewardsPerDay,
-  defaultAutoRotate
+  defaultAutoRotate,
+  fpsView
 }) => {
   const { network } = useGetNetworkConfig();
   const { address, account } = useGetAccountInfo();
@@ -281,24 +282,44 @@ export const Map = ({
           </Stage>
         )}
       </Suspense>
-      <OrbitControls
-        ref={ref}
-        autoRotate={hovered ? false : defaultAutoRotate}
-        rotateSpeed={0.3}
-        zoomSpeed={0.8}
-        autoRotateSpeed={1.5}
-        maxDistance={1000}
-        minDistance={50}
-        panSpeed={0.3}
-        keyPanSpeed={2}
-        enablePan={false}
-      />
-      <PerspectiveCamera
-        makeDefault
-        position={[500, 200, 1]}
-        fov={50}
-        zoom={30}
-      />
+      {fpsView === false ? (
+        <>
+          <OrbitControls
+            ref={ref}
+            autoRotate={hovered ? false : defaultAutoRotate}
+            rotateSpeed={0.3}
+            zoomSpeed={0.8}
+            autoRotateSpeed={1.5}
+            maxDistance={1000}
+            minDistance={50}
+            panSpeed={0.3}
+            keyPanSpeed={2}
+            enablePan={false}
+          />
+          <PerspectiveCamera
+            makeDefault
+            position={[500, 200, 1]}
+            fov={50}
+            zoom={30}
+          />
+        </>
+      ) : (
+        <>
+          <FlyControls
+            ref={ref}
+            movementSpeed={1}
+            rollSpeed={1}
+            autoForward={false}
+            dragToLook={true}
+          />
+          <PerspectiveCamera
+            makeDefault
+            position={[0, 1, 2]}
+            fov={50}
+            zoom={1}
+          />
+        </>
+      )}
     </Canvas>
   );
 };
