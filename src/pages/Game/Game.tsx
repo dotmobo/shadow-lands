@@ -38,6 +38,8 @@ import {
   faBook,
   faBuildingColumns,
   faCross,
+  faEye,
+  faEyeSlash,
   faFlaskVial,
   faHouse,
   faPause,
@@ -92,6 +94,7 @@ export const Game = () => {
   const [sfts, setSftsList] = useState<number[]>();
 
   const [autoRotate, setAutoRotate] = useState<boolean>(true);
+  const [fpsView, setFpsView] = useState<boolean>(false);
 
   const proxy = new ProxyNetworkProvider(network.apiAddress, {
     timeout: 5000
@@ -163,28 +166,45 @@ export const Game = () => {
                   <span className='mr-2'>
                     <LecteurAudio src='/music.mp3' />
                   </span>
+                  <span className='mr-2'>
+                    <Button
+                      aria-label='toggle auto rotate'
+                      onClick={() => {
+                        setAutoRotate(!autoRotate);
+                      }}
+                    >
+                      <FontAwesomeIcon
+                        icon={faRotate}
+                        size='sm'
+                        className='mr-1'
+                      />
+                      {autoRotate && (
+                        <FontAwesomeIcon icon={faPause} size='sm' />
+                      )}
+                      {!autoRotate && (
+                        <FontAwesomeIcon icon={faPlay} size='sm' />
+                      )}
+                    </Button>
+                  </span>
                   <Button
-                    aria-label='toggle auto rotate'
+                    aria-label='toggle fps view'
                     onClick={() => {
-                      setAutoRotate(!autoRotate);
+                      setFpsView(!fpsView);
                     }}
                   >
-                    <FontAwesomeIcon
-                      icon={faRotate}
-                      size='sm'
-                      className='mr-1'
-                    />
-                    {autoRotate && <FontAwesomeIcon icon={faPause} size='sm' />}
-                    {!autoRotate && <FontAwesomeIcon icon={faPlay} size='sm' />}
+                    {fpsView && <FontAwesomeIcon icon={faEye} size='sm' />}
+                    {!fpsView && (
+                      <FontAwesomeIcon icon={faEyeSlash} size='sm' />
+                    )}
                   </Button>
-                  <MxLink to={RouteNamesEnum.help}>
-                    <FontAwesomeIcon icon={faQuestion} size='sm' />
+                  <MxLink to={RouteNamesEnum.cards}>
+                    <FontAwesomeIcon icon={faBook} size='sm' />
                   </MxLink>
                   <MxLink to={RouteNamesEnum.leaderboard}>
                     <FontAwesomeIcon icon={faRankingStar} size='sm' />
                   </MxLink>
-                  <MxLink to={RouteNamesEnum.cards}>
-                    <FontAwesomeIcon icon={faBook} size='sm' />
+                  <MxLink to={RouteNamesEnum.help}>
+                    <FontAwesomeIcon icon={faQuestion} size='sm' />
                   </MxLink>
                 </div>
                 <div className='flex w-full justify-center gap-4 text-slate-300'>
@@ -261,6 +281,7 @@ export const Game = () => {
                     walletLabosR1={labosR1}
                     rewardsPerDay={rewardsTokenAmountPerDay}
                     defaultAutoRotate={autoRotate}
+                    fpsView={fpsView}
                   />
                 )}
               </>
