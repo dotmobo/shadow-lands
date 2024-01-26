@@ -7,7 +7,7 @@ export const Footer = () => {
         <a
           target='_blank'
           className='flex items-center text-sm hover:underline'
-          href='https://dusty-bones.netlify.app/'
+          href='https://dustybones.xyz/'
         >
           Made with <HeartIcon className='mx-1 fill-gray-400' /> by the Dusty
           Bones team
