@@ -62,8 +62,12 @@ export const Market = () => {
             Dust Market
           </h1>
           <span className='ml-2 mr-2 mb-8 italic'>
-            Buy some buildings with $DUST to increase your passive income
+            Utilize your diligently acquired Dust to purchase items !
           </span>
+
+          <h2 className='text-2xl sm:text-2xl font-bold mt-4 mb-2 ml-2 mr-2'>
+            Shadow Lands cards
+          </h2>
 
           <div className='flex flex-col text-black bg-slate-200 w-full md:w-3/4 p-2 rounded-xl'>
             <span className='flex flex-row md:w-1/2 mb-1'>
