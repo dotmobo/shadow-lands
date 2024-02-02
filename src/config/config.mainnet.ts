@@ -50,6 +50,7 @@ export const priceBuildingR1 = 400;
 export const ignoredAddresses = [
   'erd1qqqqqqqqqqqqqpgq6px7uzxhcsagfkguf269kj937dg766282krscvp908', // SC Game
   'erd1qqqqqqqqqqqqqpgqc4s83k0ut7c2p6v3rqlddz4wtz7djhq42krs0m3afj', // SC Market
+  'erd1qqqqqqqqqqqqqpgqwyxk57xdunghh8cyefwgdzm38wmrlzf62krsz63ft6', // SC DB Market
   'erd1qqqqqqqqqqqqqpgqw02egr4v4wwmaxw7t98ekpyyde4l0g6l3u4s07nfsa', // Team xSafe
   'erd1hkr89plnuz6drjpy9x3w0hxmdd54n5n9d7s03gxz8yyrva4c3u4sw80sme', // NFT owner
   'erd1nz9e2kj2szyhaddpskyg3gyje373fhhun077gxscgv82ze0wy8qsqa9mfy', // Team member
