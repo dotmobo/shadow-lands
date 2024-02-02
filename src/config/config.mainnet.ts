@@ -58,10 +58,11 @@ export const ignoredAddresses = [
   'erd1upk2p7pak0g85mu258vyvtx0857gdzvnmc0hswm32e9a8d352krsfh8cvj', // SC owner,
   'erd1qqqqqqqqqqqqqpgq5774jcntdqkzv62tlvvhfn2y7eevpty6mvlszk3dla', // One Dex Farm,
   'erd1qqqqqqqqqqqqqpgqqz6vp9y50ep867vnr296mqf3dduh6guvmvlsu3sujc', // One Dex LP,
-  'erd1deaddeaddeaddeaddeaddeaddeaddeaddeaddeaddeaddeaddeaqtv0gag', // Burn address
+  'erd1deaddeaddeaddeaddeaddeaddeaddeaddeaddeaddeaddeaddeaqtv0gag' // Burn address
 ];
 
 // Dusty Bones market
 export const nftCollectionDustyBonesId = 'DUSTYBONES-c1fc90';
 export const priceDustyBone = 2000;
-export const contractMarketDbAddress = '';
+export const contractMarketDbAddress =
+  'erd1qqqqqqqqqqqqqpgqwyxk57xdunghh8cyefwgdzm38wmrlzf62krsz63ft6';
