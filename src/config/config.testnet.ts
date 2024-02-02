@@ -50,6 +50,7 @@ export const priceBuildingR1 = 400;
 export const ignoredAddresses = [
   'erd1qqqqqqqqqqqqqpgqvfh5j05pw23upxz4hmh6fdsrcmvfjjd22krsxc4hy2',
   'erd1qqqqqqqqqqqqqpgqsp7wpnxv8lpn6hg4fhhp3vqkwmst5ljm2krs2fxjrk',
+  'erd1qqqqqqqqqqqqqpgqwulum94ef52emtf3jded3fw3h4g29dyf2krsxp9cdr',
   'erd1qqqqqqqqqqqqqpgqw02egr4v4wwmaxw7t98ekpyyde4l0g6l3u4s07nfsa',
   'erd1hkr89plnuz6drjpy9x3w0hxmdd54n5n9d7s03gxz8yyrva4c3u4sw80sme',
   'erd1nz9e2kj2szyhaddpskyg3gyje373fhhun077gxscgv82ze0wy8qsqa9mfy',
@@ -58,3 +59,9 @@ export const ignoredAddresses = [
   'erd1upk2p7pak0g85mu258vyvtx0857gdzvnmc0hswm32e9a8d352krsfh8cvj',
   'erd1deaddeaddeaddeaddeaddeaddeaddeaddeaddeaddeaddeaddeaqtv0gag'
 ];
+
+// Dusty Bones market
+export const nftCollectionDustyBonesId = 'DBTEST-b2414b';
+export const priceDustyBone = 2000;
+export const contractMarketDbAddress =
+  'erd1qqqqqqqqqqqqqpgqwulum94ef52emtf3jded3fw3h4g29dyf2krsxp9cdr';

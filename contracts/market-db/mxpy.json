@@ -1,0 +1,41 @@
+{
+    "configurations": {
+        "mainnet": {
+            "proxy": "https://api.multiversx.com",
+            "chainID": "1"
+        }
+    },
+    "contract": {
+        "deploy": {
+            "verbose": true,
+            "bytecode": "output/market-db.wasm",
+            "recall-nonce": true,
+            "metadata-payable": true,
+            "pem": "../../wallet/wallet-owner.pem",
+            "gas-limit": 59999999,
+            "arguments": [
+                "str:DUST-e7e490",
+                "2000000000000000000000",
+                "str:DUSTYBONES-c1fc90"
+            ],
+            "send": true,
+            "outfile": "deploy.interaction.json"
+        },
+        "upgrade": {
+            "verbose": true,
+            "bytecode": "output/market-db.wasm",
+            "recall-nonce": true,
+            "metadata-payable": true,
+            "pem": "../../wallet/wallet-owner.pem",
+            "gas-limit": 59999999,
+            "arguments": [
+                "str:DUST-e7e490",
+                "2000000000000000000000",
+                "str:DUSTYBONES-c1fc90"
+            ],
+            "send": true,
+            "outfile": "deploy.interaction.json"
+        }
+    },
+    "active": "mainnet"
+}

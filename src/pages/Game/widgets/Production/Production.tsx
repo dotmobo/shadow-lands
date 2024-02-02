@@ -101,7 +101,7 @@ export const Production = ({ sfts, rewardPerDay }) => {
         <p className='flex flex-items-center'>
           <Label>Claimable tokens: </Label>
           <FormatAmount
-            value={currentRewards ?? 0}
+            value={BigInt(currentRewards ?? 0).toString()}
             showLabel={false}
             egldLabel='$DUST'
             digits={0}
@@ -112,7 +112,7 @@ export const Production = ({ sfts, rewardPerDay }) => {
           </span>
         </p>
       </div>
-      <div className='flex text-black gap-2 mt-4' data-testid='topInfo'>
+      <div className='flex text-black gap-4 mt-4'>
         <Button
           disabled={hasPendingTransactions || !currentRewards}
           data-testid='sign-auto-send'
@@ -122,12 +122,8 @@ export const Production = ({ sfts, rewardPerDay }) => {
           Claim
         </Button>
         <Button
-          className='ml-8 inline-block rounded-lg px-3 py-2 text-center hover:no-underline my-0 bg-purple-600 text-white hover:bg-purple-700 mr-0 disabled:bg-gray-200 disabled:text-black disabled:cursor-not-allowed'
-          onClick={() =>
-            window.open(
-              'https://swap.onedex.app/farm'
-            )
-          }
+          className='inline-block rounded-lg px-3 py-2 text-center hover:no-underline my-0 bg-purple-600 text-white hover:bg-purple-700 mr-0 disabled:bg-gray-200 disabled:text-black disabled:cursor-not-allowed'
+          onClick={() => window.open('https://swap.onedex.app/farm')}
         >
           <FontAwesomeIcon icon={faStore} className='mr-1' />
           External Farm

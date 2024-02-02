@@ -50,6 +50,7 @@ export const priceBuildingR1 = 400;
 export const ignoredAddresses = [
   'erd1qqqqqqqqqqqqqpgq6px7uzxhcsagfkguf269kj937dg766282krscvp908', // SC Game
   'erd1qqqqqqqqqqqqqpgqc4s83k0ut7c2p6v3rqlddz4wtz7djhq42krs0m3afj', // SC Market
+  'erd1qqqqqqqqqqqqqpgqwyxk57xdunghh8cyefwgdzm38wmrlzf62krsz63ft6', // SC DB Market
   'erd1qqqqqqqqqqqqqpgqw02egr4v4wwmaxw7t98ekpyyde4l0g6l3u4s07nfsa', // Team xSafe
   'erd1hkr89plnuz6drjpy9x3w0hxmdd54n5n9d7s03gxz8yyrva4c3u4sw80sme', // NFT owner
   'erd1nz9e2kj2szyhaddpskyg3gyje373fhhun077gxscgv82ze0wy8qsqa9mfy', // Team member
@@ -58,5 +59,11 @@ export const ignoredAddresses = [
   'erd1upk2p7pak0g85mu258vyvtx0857gdzvnmc0hswm32e9a8d352krsfh8cvj', // SC owner,
   'erd1qqqqqqqqqqqqqpgq5774jcntdqkzv62tlvvhfn2y7eevpty6mvlszk3dla', // One Dex Farm,
   'erd1qqqqqqqqqqqqqpgqqz6vp9y50ep867vnr296mqf3dduh6guvmvlsu3sujc', // One Dex LP,
-  'erd1deaddeaddeaddeaddeaddeaddeaddeaddeaddeaddeaddeaddeaqtv0gag', // Burn address
+  'erd1deaddeaddeaddeaddeaddeaddeaddeaddeaddeaddeaddeaddeaqtv0gag' // Burn address
 ];
+
+// Dusty Bones market
+export const nftCollectionDustyBonesId = 'DUSTYBONES-c1fc90';
+export const priceDustyBone = 2000;
+export const contractMarketDbAddress =
+  'erd1qqqqqqqqqqqqqpgqwyxk57xdunghh8cyefwgdzm38wmrlzf62krsz63ft6';

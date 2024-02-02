@@ -2,6 +2,7 @@ import { useState } from 'react';
 import {
   contractGameAddress,
   contractMarketAddress,
+  contractMarketDbAddress,
   dustTokenId,
   sftCollectionId,
   sftLandsNonce
@@ -182,11 +183,53 @@ export const useSendShadowLandsTransaction = () => {
     }
   };
 
+  const sendBuyDustyBonesTransaction = async (sft: Sft, price: number) => {
+    const getBuyItemData = (item: Sft) => {
+      return (
+        'ESDTTransfer@' +
+        strtoHex(dustTokenId) +
+        '@' +
+        largeNumberToHex(
+          !!price
+            ? price.toLocaleString('fullwide', { useGrouping: false })
+            : '0'
+        ) +
+        '@' +
+        strtoHex('buy') +
+        '@' +
+        strtoHex(item.collection) +
+        '@' +
+        numtoHex(item.nonce)
+      );
+    };
+    const buyDustyBonesTransaction = {
+      value: '0',
+      data: getBuyItemData(sft),
+      receiver: contractMarketDbAddress,
+      gasLimit: '5000000'
+    };
+    await refreshAccount();
+
+    const { sessionId /*, error*/ } = await sendTransactions({
+      transactions: buyDustyBonesTransaction,
+      transactionsDisplayInfo: {
+        processingMessage: 'Processing buy item transaction',
+        errorMessage: 'An error has occured during buy item',
+        successMessage: 'Buy item transaction successful'
+      },
+      redirectAfterSign: false
+    });
+    if (sessionId != null) {
+      setTransactionSessionId(sessionId);
+    }
+  };
+
   return {
     sendStakeLandTransaction,
     sendUnstakeLandTransaction,
     sendClaimTransaction,
     sendStakeBuildingTransaction,
-    sendBuyItemTransaction
+    sendBuyItemTransaction,
+    sendBuyDustyBonesTransaction
   };
 };
