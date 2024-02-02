@@ -4,5 +4,6 @@ export enum RouteNamesEnum {
   game = '/game',
   help = '/help',
   leaderboard = '/leaderboard',
-  cards = '/cards'
+  cards = '/cards',
+  market = '/market'
 }

@@ -162,7 +162,7 @@ export const Game = () => {
           <div className='flex flex-col items-start lg:items-center h-screen lg:h-full w-full lg:bg-center bg-slate-900'>
             {sfts !== undefined && (
               <>
-                <div className='flex w-full ml-2 mt-2 mb-2 text-slate-300'>
+                <div className='flex w-full ml-1 mt-2 mb-2 text-slate-300'>
                   <span className='mr-2'>
                     <LecteurAudio src='/music.mp3' />
                   </span>
@@ -197,15 +197,21 @@ export const Game = () => {
                       <FontAwesomeIcon icon={faEyeSlash} size='sm' />
                     )}
                   </Button>
-                  <MxLink to={RouteNamesEnum.cards}>
-                    <FontAwesomeIcon icon={faBook} size='sm' />
-                  </MxLink>
-                  <MxLink to={RouteNamesEnum.leaderboard}>
-                    <FontAwesomeIcon icon={faRankingStar} size='sm' />
-                  </MxLink>
-                  <MxLink to={RouteNamesEnum.help}>
-                    <FontAwesomeIcon icon={faQuestion} size='sm' />
-                  </MxLink>
+                  <span className='ml-2'>
+                    <MxLink to={RouteNamesEnum.cards}>
+                      <FontAwesomeIcon icon={faBook} size='sm' />
+                    </MxLink>
+                  </span>
+                  <span className='ml-2'>
+                    <MxLink to={RouteNamesEnum.leaderboard}>
+                      <FontAwesomeIcon icon={faRankingStar} size='sm' />
+                    </MxLink>
+                  </span>
+                  <span className='ml-2'>
+                    <MxLink to={RouteNamesEnum.help}>
+                      <FontAwesomeIcon icon={faQuestion} size='sm' />
+                    </MxLink>
+                  </span>
                 </div>
                 <div className='flex w-full justify-center gap-4 text-slate-300'>
                   <span title='Land'>
@@ -288,7 +294,7 @@ export const Game = () => {
             )}
           </div>
           <div className='flex items-start lg:items-center h-full w-full lg:w-1/2 lg:bg-center bg-slate-900 pr-4 pl-4'>
-            <div className='flex flex-col gap-2 max-w-3xl w-full'>
+            <div className='flex flex-col gap-4 max-w-3xl w-full'>
               {sfts !== undefined &&
                 WIDGETS.map((element) => {
                   const {

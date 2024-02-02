@@ -3,6 +3,7 @@ import { Home, Game } from 'pages';
 import { Cards } from 'pages/Cards/Cards';
 import { Help } from 'pages/Help/Help';
 import { Leaderboard } from 'pages/Leaderboard';
+import { Market } from 'pages/Market/Market';
 import { RouteType } from 'types';
 
 interface RouteWithTitleType extends RouteType {
@@ -34,5 +35,10 @@ export const routes: RouteWithTitleType[] = [
     path: RouteNamesEnum.cards,
     title: 'Cards',
     component: Cards
+  },
+  {
+    path: RouteNamesEnum.market,
+    title: 'Market',
+    component: Market
   }
 ];
