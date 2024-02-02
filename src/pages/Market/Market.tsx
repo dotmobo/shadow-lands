@@ -1,19 +1,12 @@
 import { faCircleArrowLeft, faSkull } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useGetPendingTransactions } from '@multiversx/sdk-dapp/hooks/transactions/useGetPendingTransactions';
-import { MxLink } from 'components';
+import { Loader, MxLink } from 'components';
 import { RouteNamesEnum } from 'localConstants';
 import { AuthRedirectWrapper, PageWrapper } from 'wrappers';
 import {
-  dustTokenId,
   mvxApiUrl,
-  sftTavernId,
-  sftBanksId,
-  sftLandsId,
   sftLandsNonce,
-  sftHauntedHouseId,
-  sftCryptId,
-  sftLaboId,
   sftCollectionId,
   priceLand,
   sftTavernNonce,
@@ -22,19 +15,15 @@ import {
   sftHauntedHouseNonce,
   sftCryptNonce,
   sftLaboNonce,
-  sftTavernR1Id,
   priceBuildingR1,
   sftTavernR1Nonce,
-  sftBankR1Id,
   sftBankR1Nonce,
-  sftHauntedHouseR1Id,
   sftHauntedHouseR1Nonce,
   sftCryptR1Nonce,
-  sftCryptR1Id,
-  sftLaboR1Id,
   sftLaboR1Nonce,
   priceDustyBone,
-  nftCollectionDustyBonesId
+  nftCollectionDustyBonesId,
+  contractMarketDbAddress
 } from 'config';
 import { Button } from 'components';
 import { confirmAlert } from 'react-confirm-alert';
@@ -43,18 +32,32 @@ import {
   faArrowUp,
   faBeer,
   faBuildingColumns,
-  faCircleXmark,
   faCross,
   faFlaskVial,
   faHouse,
-  faPlus,
-  faStore,
   faTree
 } from '@fortawesome/free-solid-svg-icons';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { Sft } from 'pages/Game/models';
+import { shuffle } from 'lodash';
 
 export const Market = () => {
   const { hasPendingTransactions } = useGetPendingTransactions();
-  const { sendBuyItemTransaction } = useSendShadowLandsTransaction();
+  const { sendBuyItemTransaction, sendBuyDustyBonesTransaction } =
+    useSendShadowLandsTransaction();
+
+  const [dbList, setDbList] = useState<Sft[]>();
+
+  useEffect(() => {
+    axios
+      .get<any>(
+        `${mvxApiUrl}/accounts/${contractMarketDbAddress}/nfts?size=10000&collections=${nftCollectionDustyBonesId}`
+      )
+      .then((response) => {
+        setDbList(shuffle(response.data));
+      });
+  }, [hasPendingTransactions]);
 
   return (
     <AuthRedirectWrapper requireAuth={true}>
@@ -586,50 +589,61 @@ export const Market = () => {
             Dusty Bones
           </h2>
 
-          <div className='flex flex-col text-black bg-slate-200 w-full md:w-3/4 p-2 rounded-xl'>
-            <span className='flex flex-row md:w-1/2 mb-1'>
-              {priceDustyBone}
-              <span>
-                <img src='/dust-logo.png' alt='Dust' className='ml-1 w-5' />
-              </span>
-              <span className='ml-2'>
-                <Button
-                  className='inline-block rounded-lg px-3 py-0.5 text-center hover:no-underline my-0 bg-blue-600 text-white hover:bg-blue-700 mr-0 disabled:bg-gray-200 disabled:text-black disabled:cursor-not-allowed'
-                  aria-label='Buy a dusty bone'
-                  disabled={hasPendingTransactions}
-                  onClick={() => {
-                    confirmAlert({
-                      title: 'Buy 1 dusty bone',
-                      message:
-                        'Are you sure you want to buy 1 dusty bone for 2000 $DUST ?',
-                      buttons: [
-                        {
-                          label: 'Yes',
-                          onClick: () =>
-                            sendBuyItemTransaction(
-                              {
-                                collection: nftCollectionDustyBonesId,
-                                nonce: sftLandsNonce
-                              },
-                              priceDustyBone * Math.pow(10, 18)
-                            )
-                        },
-                        {
-                          label: 'No',
-                          onClick: () => {
-                            return;
+          {(dbList === undefined || dbList.length === 0) && (
+            <div className='flex'>
+              <Loader />
+            </div>
+          )}
+          {dbList !== undefined && dbList.length > 0 && (
+            <div className='flex flex-col text-black bg-slate-200 w-full md:w-3/4 p-2 rounded-xl'>
+              <span className='flex flex-row md:w-1/2 mb-1'>
+                {priceDustyBone}
+                <span>
+                  <img src='/dust-logo.png' alt='Dust' className='ml-1 w-5' />
+                </span>
+                <span className='ml-2'>
+                  <Button
+                    className='inline-block rounded-lg px-3 py-0.5 text-center hover:no-underline my-0 bg-blue-600 text-white hover:bg-blue-700 mr-0 disabled:bg-gray-200 disabled:text-black disabled:cursor-not-allowed'
+                    aria-label='Buy a dusty bone'
+                    disabled={hasPendingTransactions}
+                    onClick={() => {
+                      confirmAlert({
+                        title: 'Buy 1 dusty bone',
+                        message:
+                          'Are you sure you want to buy 1 dusty bone for 2000 $DUST ?',
+                        buttons: [
+                          {
+                            label: 'Yes',
+                            onClick: () =>
+                              sendBuyDustyBonesTransaction(
+                                {
+                                  collection: nftCollectionDustyBonesId,
+                                  nonce: dbList.slice(0, 1)[0].nonce
+                                },
+                                priceDustyBone * Math.pow(10, 18)
+                              )
+                          },
+                          {
+                            label: 'No',
+                            onClick: () => {
+                              return;
+                            }
                           }
-                        }
-                      ]
-                    });
-                  }}
-                >
-                  <FontAwesomeIcon icon={faSkull} size='sm' className='mr-1' />
-                  Buy 1 dusty bone
-                </Button>
+                        ]
+                      });
+                    }}
+                  >
+                    <FontAwesomeIcon
+                      icon={faSkull}
+                      size='sm'
+                      className='mr-1'
+                    />
+                    Buy 1 dusty bone
+                  </Button>
+                </span>
               </span>
-            </span>
-          </div>
+            </div>
+          )}
 
           <span className='mb-2 mt-8'>
             <MxLink to={RouteNamesEnum.game}>
