@@ -59,13 +59,13 @@ export const Market = () => {
       <PageWrapper>
         <div className='flex flex-col items-center h-full w-full bg-slate-900 text-slate-400'>
           <h1 className='text-4xl sm:text-4xl font-bold mt-4 mb-2 ml-2 mr-2'>
-            Internal Market
+            Dust Market
           </h1>
           <span className='ml-2 mr-2 mb-8 italic'>
-            Buy some buildings to increase your passive income
+            Buy some buildings with $DUST to increase your passive income
           </span>
 
-          <div className='flex flex-col text-black bg-slate-200 w-full md:w-3/4 p-2 '>
+          <div className='flex flex-col text-black bg-slate-200 w-full md:w-3/4 p-2 rounded-xl'>
             <span className='flex flex-row md:w-1/2 mb-1'>
               {priceLand}
               <span>
