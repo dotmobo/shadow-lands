@@ -4,6 +4,7 @@ import { MxLink } from 'components';
 import {
   contractGameAddress,
   contractMarketAddress,
+  contractMarketDbAddress,
   mvxExplorerUrl
 } from 'config';
 import { RouteNamesEnum } from 'localConstants';
@@ -70,7 +71,7 @@ export const Help = () => {
               </a>
             </li>
             <li>
-              Internal Market&nbsp;:&nbsp;
+              Dust Market SL&nbsp;:&nbsp;
               <a
                 href={mvxExplorerUrl + '/accounts/' + contractMarketAddress}
                 target='_blank'
@@ -80,6 +81,20 @@ export const Help = () => {
                   '...' +
                   contractMarketAddress.substring(
                     contractMarketAddress.length - 6
+                  )}
+              </a>
+            </li>
+            <li>
+              Dust Market DB&nbsp;:&nbsp;
+              <a
+                href={mvxExplorerUrl + '/accounts/' + contractMarketDbAddress}
+                target='_blank'
+                className='text-slate-400 hover:text-slate-100'
+              >
+                {contractMarketDbAddress.substring(0, 6) +
+                  '...' +
+                  contractMarketDbAddress.substring(
+                    contractMarketDbAddress.length - 6
                   )}
               </a>
             </li>
