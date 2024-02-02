@@ -101,7 +101,7 @@ export const Production = ({ sfts, rewardPerDay }) => {
         <p className='flex flex-items-center'>
           <Label>Claimable tokens: </Label>
           <FormatAmount
-            value={currentRewards ?? 0}
+            value={BigInt(currentRewards ?? 0).toString()}
             showLabel={false}
             egldLabel='$DUST'
             digits={0}
