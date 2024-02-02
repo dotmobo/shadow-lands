@@ -162,11 +162,11 @@ export const Game = () => {
           <div className='flex flex-col items-start lg:items-center h-screen lg:h-full w-full lg:bg-center bg-slate-900'>
             {sfts !== undefined && (
               <>
-                <div className='flex w-full ml-1 mt-2 mb-2 text-slate-300'>
-                  <span className='mr-2'>
+                <div className='flex w-full ml-1.5 mt-2 mb-2 text-slate-300'>
+                  <span className='mr-1.5'>
                     <LecteurAudio src='/music.mp3' />
                   </span>
-                  <span className='mr-2'>
+                  <span className='mr-1.5'>
                     <Button
                       aria-label='toggle auto rotate'
                       onClick={() => {
@@ -176,7 +176,7 @@ export const Game = () => {
                       <FontAwesomeIcon
                         icon={faRotate}
                         size='sm'
-                        className='mr-1'
+                        className='mr-1.5'
                       />
                       {autoRotate && (
                         <FontAwesomeIcon icon={faPause} size='sm' />
@@ -197,17 +197,17 @@ export const Game = () => {
                       <FontAwesomeIcon icon={faEyeSlash} size='sm' />
                     )}
                   </Button>
-                  <span className='ml-2'>
+                  <span className='ml-1.5'>
                     <MxLink to={RouteNamesEnum.cards}>
                       <FontAwesomeIcon icon={faBook} size='sm' />
                     </MxLink>
                   </span>
-                  <span className='ml-2'>
+                  <span className='ml-1.5'>
                     <MxLink to={RouteNamesEnum.leaderboard}>
                       <FontAwesomeIcon icon={faRankingStar} size='sm' />
                     </MxLink>
                   </span>
-                  <span className='ml-2'>
+                  <span className='ml-1.5'>
                     <MxLink to={RouteNamesEnum.help}>
                       <FontAwesomeIcon icon={faQuestion} size='sm' />
                     </MxLink>
