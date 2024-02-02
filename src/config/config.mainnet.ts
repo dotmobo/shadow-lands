@@ -60,3 +60,7 @@ export const ignoredAddresses = [
   'erd1qqqqqqqqqqqqqpgqqz6vp9y50ep867vnr296mqf3dduh6guvmvlsu3sujc', // One Dex LP,
   'erd1deaddeaddeaddeaddeaddeaddeaddeaddeaddeaddeaddeaddeaqtv0gag', // Burn address
 ];
+
+// Dusty Bones market
+export const nftCollectionDustyBonesId = 'DUSTYBONES-c1fc90';
+export const priceDustyBone = 2000;

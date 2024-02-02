@@ -58,3 +58,7 @@ export const ignoredAddresses = [
   'erd1upk2p7pak0g85mu258vyvtx0857gdzvnmc0hswm32e9a8d352krsfh8cvj',
   'erd1deaddeaddeaddeaddeaddeaddeaddeaddeaddeaddeaddeaddeaqtv0gag'
 ];
+
+// Dusty Bones market
+export const nftCollectionDustyBonesId = 'DUSTYBONES-c1fc90';
+export const priceDustyBone = 2000;
