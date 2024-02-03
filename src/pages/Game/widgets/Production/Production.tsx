@@ -1,18 +1,22 @@
 import { useEffect, useState } from 'react';
-import { faStore, faTruckLoading } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  Address,
-  AddressValue,
-  ContractFunction,
-  Query
-} from '@multiversx/sdk-core/out';
+  faStar,
+  faStore,
+  faTruckLoading
+} from '@fortawesome/free-solid-svg-icons';
+import { faStar as faStarRegular } from '@fortawesome/free-regular-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ProxyNetworkProvider } from '@multiversx/sdk-network-providers/out';
 import { Button } from 'components';
 import { Label } from 'components/Label';
 import { OutputContainer } from 'components/OutputContainer';
 import { FormatAmount } from 'components/sdkDappComponents';
-import { contractGameAddress, totalProducted, totalYield } from 'config';
+import {
+  contractGameAddress,
+  mvxApiUrl,
+  totalProducted,
+  totalYield
+} from 'config';
 import {
   useGetAccountInfo,
   useGetNetworkConfig,
@@ -20,6 +24,7 @@ import {
 } from 'hooks';
 import { useSendShadowLandsTransaction } from 'pages/Game/transactions';
 import { useCallShadowLandsQuery } from 'pages/Game/queries';
+import axios from 'axios';
 
 export const Production = ({ sfts, rewardPerDay }) => {
   const { network } = useGetNetworkConfig();
@@ -28,6 +33,15 @@ export const Production = ({ sfts, rewardPerDay }) => {
   const { getCurrentRewards } = useCallShadowLandsQuery();
 
   const [currentRewards, setCurrentRewards] = useState<number>();
+  const [claimStrike, setClaimStrike] = useState<boolean[]>([
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+  ]);
 
   const { hasPendingTransactions } = useGetPendingTransactions();
   const { sendClaimTransaction } = useSendShadowLandsTransaction();
@@ -35,6 +49,45 @@ export const Production = ({ sfts, rewardPerDay }) => {
   const proxy = new ProxyNetworkProvider(network.apiAddress, {
     timeout: 5000
   });
+
+  useEffect(() => {
+    const now = new Date();
+    const dayOfWeek = now.getDay();
+    const daysSinceLastMonday = (dayOfWeek + 6) % 7;
+
+    const lastMonday = new Date(
+      now.getFullYear(),
+      now.getMonth(),
+      now.getDate() - daysSinceLastMonday,
+      0,
+      0,
+      0,
+      0
+    );
+
+    const lastMondayTimestampInSeconds = Math.floor(lastMonday.getTime() / 1000);
+
+    axios
+      .get<any>(
+        `${mvxApiUrl}/accounts/${contractGameAddress}/transactions?size=10000&function=claim&fields=timestamp&sender=${address}&after=${lastMondayTimestampInSeconds}`
+      )
+
+      .then((response) => {
+        const strikes = [false, false, false, false, false, false, false];
+
+        response.data.forEach((tx: any) => {
+          const date = new Date(tx.timestamp * 1000);
+          strikes[(date.getDay() + 6) % 7] = true;
+        });
+
+        setClaimStrike(strikes);
+      })
+      .catch((error) => {
+        if (error.response.status === 404) {
+          setClaimStrike([false, false, false, false, false, false, false]);
+        }
+      });
+  }, [hasPendingTransactions]);
 
   useEffect(() => {
     proxy
@@ -64,6 +117,27 @@ export const Production = ({ sfts, rewardPerDay }) => {
   const calculateWidth = (value, max) => {
     const exponent = 2;
     return (1 - Math.exp((-value / max) * exponent)) * 100 + '%';
+  };
+
+  const dayLabel = (index: number) => {
+    switch (index) {
+      case 0:
+        return 'MON';
+      case 1:
+        return 'TUE';
+      case 2:
+        return 'WED';
+      case 3:
+        return 'THU';
+      case 4:
+        return 'FRI';
+      case 5:
+        return 'SAT';
+      case 6:
+        return 'SUN';
+      default:
+        return '';
+    }
   };
 
   return (
@@ -112,6 +186,23 @@ export const Production = ({ sfts, rewardPerDay }) => {
           </span>
         </p>
       </div>
+
+      <div className='flex mt-4 gap-2 text-gray-600'>
+        {claimStrike.map((strike, index) =>
+          strike === true ? (
+            <div className='flex flex-col' key={index}>
+              <span className='text-xs'>{dayLabel(index)}</span>
+              <FontAwesomeIcon icon={faStar} />
+            </div>
+          ) : (
+            <div className='flex flex-col' key={index}>
+              <span className='text-xs'>{dayLabel(index)}</span>
+              <FontAwesomeIcon icon={faStarRegular} />
+            </div>
+          )
+        )}
+      </div>
+
       <div className='flex text-black gap-4 mt-4'>
         <Button
           disabled={hasPendingTransactions || !currentRewards}
