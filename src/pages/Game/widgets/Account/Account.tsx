@@ -193,20 +193,20 @@ export const Account = ({
         <div className='flex flex-row text-black'>
           <span className='w-1/3'>
             <FontAwesomeIcon icon={faTree} size='sm' className='mr-1' />
-            <label className='text-gray-500 hidden md:inline'>
+            <label className='text-gray-600 hidden md:inline'>
               Lands
             </label>: {lands?.[0]?.balance ?? 0}
           </span>
           <span className='flex flex-col w-1/3'>
             <span>
               <FontAwesomeIcon icon={faBeer} size='sm' className='mr-1' />
-              <label className='text-gray-500 hidden md:inline'>
+              <label className='text-gray-600 hidden md:inline'>
                 Taverns
               </label>: {taverns?.[0]?.balance ?? 0}
             </span>
             <span>
               <FontAwesomeIcon icon={faArrowUp} size='sm' className='mr-1' />
-              <label className='text-gray-500 hidden md:inline'>+1</label>:{' '}
+              <label className='text-gray-600 hidden md:inline'>+1</label>:{' '}
               {tavernsR1?.[0]?.balance ?? 0}
             </span>
           </span>
@@ -217,12 +217,12 @@ export const Account = ({
                 size='sm'
                 className='mr-1'
               />
-              <label className='text-gray-500 hidden md:inline'>Banks</label>:{' '}
+              <label className='text-gray-600 hidden md:inline'>Banks</label>:{' '}
               {banks?.[0]?.balance ?? 0}
             </span>
             <span>
               <FontAwesomeIcon icon={faArrowUp} size='sm' className='mr-1' />
-              <label className='text-gray-500 hidden md:inline'>+1</label>:{' '}
+              <label className='text-gray-600 hidden md:inline'>+1</label>:{' '}
               {banksR1?.[0]?.balance ?? 0}
             </span>
           </span>
@@ -231,39 +231,39 @@ export const Account = ({
           <span className='flex flex-col w-1/3'>
             <span>
               <FontAwesomeIcon icon={faHouse} size='sm' className='mr-1' />
-              <label className='text-gray-500 hidden md:inline'>
+              <label className='text-gray-600 hidden md:inline'>
                 Houses
               </label>: {hauntedHouses?.[0]?.balance ?? 0}
             </span>
             <span>
               <FontAwesomeIcon icon={faArrowUp} size='sm' className='mr-1' />
-              <label className='text-gray-500 hidden md:inline'>+1</label>:{' '}
+              <label className='text-gray-600 hidden md:inline'>+1</label>:{' '}
               {hauntedHousesR1?.[0]?.balance ?? 0}
             </span>
           </span>
           <span className='flex flex-col w-1/3'>
             <span>
               <FontAwesomeIcon icon={faCross} size='sm' className='mr-1' />
-              <label className='text-gray-500 hidden md:inline'>
+              <label className='text-gray-600 hidden md:inline'>
                 Crypts
               </label>: {crypts?.[0]?.balance ?? 0}
             </span>
             <span>
               <FontAwesomeIcon icon={faArrowUp} size='sm' className='mr-1' />
-              <label className='text-gray-500 hidden md:inline'>+1</label>:{' '}
+              <label className='text-gray-600 hidden md:inline'>+1</label>:{' '}
               {cryptsR1?.[0]?.balance ?? 0}
             </span>
           </span>
           <span className='flex flex-col w-1/3'>
             <span>
               <FontAwesomeIcon icon={faFlaskVial} size='sm' className='mr-1' />
-              <label className='text-gray-500 hidden md:inline'>
+              <label className='text-gray-600 hidden md:inline'>
                 Labos
               </label>: {labos?.[0]?.balance ?? 0}
             </span>
             <span>
               <FontAwesomeIcon icon={faArrowUp} size='sm' className='mr-1' />
-              <label className='text-gray-500 hidden md:inline'>+1</label>:{' '}
+              <label className='text-gray-600 hidden md:inline'>+1</label>:{' '}
               {labosR1?.[0]?.balance ?? 0}
             </span>
           </span>
