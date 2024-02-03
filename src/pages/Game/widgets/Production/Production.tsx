@@ -52,25 +52,31 @@ export const Production = ({ sfts, rewardPerDay }) => {
 
   useEffect(() => {
     const now = new Date();
-    const lastMonday = new Date(
-      now - ((now.getDay() + 6) % 7) * 24 * 60 * 60 * 1000
-    );
-    lastMonday.setHours(0, 0, 0, 0);
+    const dayOfWeek = now.getDay();
+    const daysSinceLastMonday = (dayOfWeek + 6) % 7;
 
-    const lastMondayTimestamp = Math.floor(lastMonday.getTime() / 1000);
+    const lastMonday = new Date(
+      now.getFullYear(),
+      now.getMonth(),
+      now.getDate() - daysSinceLastMonday,
+      0,
+      0,
+      0,
+      0
+    );
+
+    const lastMondayTimestampInSeconds = Math.floor(lastMonday.getTime() / 1000);
 
     axios
       .get<any>(
-        `${mvxApiUrl}/accounts/${contractGameAddress}/transactions?size=10000&function=claim&fields=timestamp&sender=${address}&after=${lastMondayTimestamp}`
+        `${mvxApiUrl}/accounts/${contractGameAddress}/transactions?size=10000&function=claim&fields=timestamp&sender=${address}&after=${lastMondayTimestampInSeconds}`
       )
 
       .then((response) => {
         const strikes = [false, false, false, false, false, false, false];
 
-        response.data.map((tx: any) => {
-          // Si c'est un lundi, on met dans strikes[0], etc
+        response.data.forEach((tx: any) => {
           const date = new Date(tx.timestamp * 1000);
-          console.log(date.getDay());
           strikes[(date.getDay() + 6) % 7] = true;
         });
 
