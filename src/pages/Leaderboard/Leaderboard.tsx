@@ -16,6 +16,7 @@ import { AuthRedirectWrapper, PageWrapper } from 'wrappers';
 export const Leaderboard = () => {
   const { hasPendingTransactions } = useGetPendingTransactions();
   const [leaderboard, setLeaderboard] = useState<any>();
+  const CLAIM_TRANSACTION_VALUE = BigInt(15000000000000000000);
 
   useEffect(() => {
     const today = new Date();
@@ -43,8 +44,12 @@ export const Leaderboard = () => {
               (transaction: any) =>
                 transaction.action.arguments.transfers[0].value
             )
-            .map((value: string) => parseInt(value))
-            .reduce((acc: number, value: number) => acc + value, 0);
+            .map((value: string) => BigInt(value))
+            .reduce(
+              (acc: bigint, value: bigint) =>
+                acc + value + CLAIM_TRANSACTION_VALUE,
+              BigInt(0)
+            );
         };
 
         const uniqueReceivers = [
@@ -56,9 +61,9 @@ export const Leaderboard = () => {
         const resultList = uniqueReceivers
           .map((receiver: any) => ({
             address: receiver,
-            balance: calculateTotalForReceiver(receiver).toString()
+            balance: calculateTotalForReceiver(receiver)
           }))
-          .sort((a: any, b: any) => parseInt(b.balance) - parseInt(a.balance));
+          .sort((a: any, b: any) => b.balance - a.balance);
 
         setLeaderboard(resultList);
       })
@@ -72,11 +77,15 @@ export const Leaderboard = () => {
       <PageWrapper>
         <div className='flex flex-col items-center h-full w-full bg-slate-900 text-slate-400'>
           <h1 className='text-4xl sm:text-4xl font-bold mt-4 mb-2 ml-2 mr-2'>
-            Leaderboard {new Date().toLocaleString('en-US', { month: 'long' })} Top 10
+            Leaderboard {new Date().toLocaleString('en-US', { month: 'long' })}{' '}
+            Top 10
           </h1>
-          <span className='ml-2 mr-2 mb-8 italic'>
+          <span className='ml-2 mr-2 mb-2 italic'>
             To stay on the leaderboard, make sure to claim rewards within the
             last month.
+          </span>
+          <span className='ml-2 mr-2 mb-8 italic'>
+            Score = total monthly claimed $DUST + 15 points per claim
           </span>
           {leaderboard === undefined && (
             <div className='flex'>
@@ -105,13 +114,6 @@ export const Leaderboard = () => {
                       digits={0}
                       data-testid='balance'
                     />
-                    <span>
-                      <img
-                        src='/dust-logo.png'
-                        alt='Dust'
-                        className='ml-1 w-5'
-                      />
-                    </span>
                   </span>
                 </li>
               ))}
