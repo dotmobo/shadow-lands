@@ -63,7 +63,7 @@ export const Leaderboard = () => {
             address: receiver,
             balance: calculateTotalForReceiver(receiver)
           }))
-          .sort((a: any, b: any) => b.balance - a.balance);
+          .sort((a: any, b: any) => (b.balance > a.balance ? 1 : -1));
 
         setLeaderboard(resultList);
       })
