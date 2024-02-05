@@ -11,7 +11,7 @@ export const Layout = ({ children }: PropsWithChildren) => {
   return (
     <div className='flex min-h-screen flex-col bg-slate-900'>
       <Header />
-      <main className='flex flex-grow items-stretch justify-center p-6'>
+      <main className='flex flex-grow items-stretch justify-center p-0'>
         <AuthenticatedRoutesWrapper
           routes={routes}
           unlockRoute={`${RouteNamesEnum.unlock}${search}`}

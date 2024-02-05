@@ -11,7 +11,7 @@ export const Card = (props: CardType) => {
 
   return (
     <div
-      className='flex flex-col flex-1 rounded-xl bg-white p-3 justify-center'
+      className='flex flex-col flex-1 rounded-xl bg-slate-300 p-3 justify-center'
       data-testid={props['data-testid']}
     >
       <h2 className='flex text-xl font-medium group'>{title}</h2>
