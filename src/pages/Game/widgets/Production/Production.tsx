@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react';
 import {
   faStar,
   faStore,
-  faTruckLoading
+  faTruckLoading,
+  faCoins
 } from '@fortawesome/free-solid-svg-icons';
 import { faStar as faStarRegular } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -203,7 +204,7 @@ export const Production = ({ sfts, rewardPerDay }) => {
         )}
       </div>
 
-      <div className='flex text-black gap-4 mt-4'>
+      <div className='flex flex-row text-black gap-4 mt-4'>
         <Button
           disabled={hasPendingTransactions || !currentRewards}
           data-testid='sign-auto-send'
@@ -217,7 +218,14 @@ export const Production = ({ sfts, rewardPerDay }) => {
           onClick={() => window.open('https://swap.onedex.app/farm')}
         >
           <FontAwesomeIcon icon={faStore} className='mr-1' />
-          External Farm
+          Farm
+        </Button>
+        <Button
+          className='inline-block rounded-lg px-3 py-2 text-center hover:no-underline my-0 bg-purple-600 text-white hover:bg-purple-700 mr-0 disabled:bg-gray-200 disabled:text-black disabled:cursor-not-allowed'
+          onClick={() => window.open('https://swap.onedex.app/staking')}
+        >
+          <FontAwesomeIcon icon={faCoins} className='mr-1' />
+          Stake
         </Button>
       </div>
     </OutputContainer>
