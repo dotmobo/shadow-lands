@@ -29,25 +29,12 @@ import {
   sftHauntedHouseId,
   sftCryptId,
   sftLaboId,
-  sftCollectionId,
-  priceLand,
-  sftTavernNonce,
-  priceBuilding,
-  sftBanksNonce,
-  sftHauntedHouseNonce,
-  sftCryptNonce,
-  sftLaboNonce,
   sftTavernR1Id,
-  priceBuildingR1,
-  sftTavernR1Nonce,
   sftBankR1Id,
-  sftBankR1Nonce,
   sftHauntedHouseR1Id,
-  sftHauntedHouseR1Nonce,
-  sftCryptR1Nonce,
   sftCryptR1Id,
   sftLaboR1Id,
-  sftLaboR1Nonce
+  sftTavernR2Id
 } from 'config';
 import {
   useGetAccountInfo,
@@ -71,7 +58,8 @@ export const Account = ({
   outputBanksR1,
   outputHauntedHousesR1,
   outputCryptsR1,
-  outputLabosR1
+  outputLabosR1,
+  outputTavernsR2,
 }) => {
   const { network } = useGetNetworkConfig();
   const { address, account } = useGetAccountInfo();
@@ -87,6 +75,8 @@ export const Account = ({
   const [hauntedHousesR1, setHauntedHousesR1] = useState<Sft[]>();
   const [cryptsR1, setCryptsR1] = useState<Sft[]>();
   const [labosR1, setLabosR1] = useState<Sft[]>();
+
+  const [tavernsR2, setTavernsR2] = useState<Sft[]>();
 
   const [dust, setDustToken] = useState<Token | null>();
   const { hasPendingTransactions } = useGetPendingTransactions();
@@ -111,7 +101,7 @@ export const Account = ({
     // Use [] as second argument in useEffect for not rendering each time
     axios
       .get<any>(
-        `${mvxApiUrl}/accounts/${address}/nfts?size=3330&identifiers=${sftLandsId},${sftTavernId},${sftBanksId},${sftHauntedHouseId},${sftCryptId},${sftLaboId},${sftTavernR1Id},${sftBankR1Id},${sftHauntedHouseR1Id},${sftCryptR1Id},${sftLaboR1Id}`
+        `${mvxApiUrl}/accounts/${address}/nfts?size=3330&identifiers=${sftLandsId},${sftTavernId},${sftBanksId},${sftHauntedHouseId},${sftCryptId},${sftLaboId},${sftTavernR1Id},${sftBankR1Id},${sftHauntedHouseR1Id},${sftCryptR1Id},${sftLaboR1Id},${sftTavernR2Id}`
       )
       .then((response) => {
         const res = orderBy(
@@ -166,6 +156,10 @@ export const Account = ({
         const labosR1 = res.filter((x) => x.identifier === sftLaboR1Id);
         setLabosR1(labosR1);
         outputLabosR1(labosR1);
+        // Taverns R2
+        const tavernsR2 = res.filter((x) => x.identifier === sftTavernR2Id);
+        setTavernsR2(tavernsR2);
+        outputTavernsR2(tavernsR2);
       });
   }, [hasPendingTransactions]);
 
@@ -208,6 +202,12 @@ export const Account = ({
               <FontAwesomeIcon icon={faArrowUp} size='sm' className='mr-1' />
               <label className='text-gray-600 hidden md:inline'>+1</label>:{' '}
               {tavernsR1?.[0]?.balance ?? 0}
+            </span>
+            <span>
+              <FontAwesomeIcon icon={faArrowUp} size='sm' className='mr-1' />
+              <FontAwesomeIcon icon={faArrowUp} size='sm' className='mr-1' />
+              <label className='text-gray-600 hidden md:inline'>+2</label>:{' '}
+              {tavernsR2?.[0]?.balance ?? 0}
             </span>
           </span>
           <span className='flex flex-col w-1/3'>

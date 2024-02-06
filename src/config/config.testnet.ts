@@ -32,19 +32,23 @@ export const sftCryptR1Id = 'DEVSHALAN-933f80-0b';
 export const sftCryptR1Nonce = 11;
 export const sftLaboR1Id = 'DEVSHALAN-933f80-0c';
 export const sftLaboR1Nonce = 12;
+// Upgrade +2
+export const sftTavernR2Id = 'DEVSHALAN-933f80-0d';
+export const sftTavernR2Nonce = 13;
 // Dust and SC
 export const dustTokenId = 'DEVDUST-d62981';
 export const contractGameAddress =
   'erd1qqqqqqqqqqqqqpgqvfh5j05pw23upxz4hmh6fdsrcmvfjjd22krsxc4hy2';
 export const contractMarketAddress =
   'erd1qqqqqqqqqqqqqpgqsp7wpnxv8lpn6hg4fhhp3vqkwmst5ljm2krs2fxjrk';
-export const totalYield = 110;
+export const totalYield = 120;
 export const totalProducted = 10000;
 
 // Price
 export const priceLand = 150;
 export const priceBuilding = 100;
 export const priceBuildingR1 = 400;
+export const priceBuildingR2 = 1200;
 
 // Leaderboard
 export const ignoredAddresses = [
