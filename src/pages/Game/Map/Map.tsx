@@ -24,7 +24,8 @@ import {
   sftLaboNonce,
   sftTavernR1Nonce,
   sftCryptR1Nonce,
-  sftLaboR1Nonce
+  sftLaboR1Nonce,
+  sftTavernR2Nonce
 } from 'config';
 import { Bank } from './Bank';
 import { HauntedHouse } from './HauntedHouse';
@@ -35,6 +36,7 @@ import { BankR1 } from './BankR1';
 import { HauntedHouseR1 } from './HauntedHouseR1';
 import { CryptR1 } from './CryptR1';
 import { LaboR1 } from './LaboR1';
+import { TavernR2 } from './TavernR2';
 
 function Loader() {
   return (
@@ -56,6 +58,7 @@ export const Map = ({
   walletHauntedHousesR1,
   walletCryptsR1,
   walletLabosR1,
+  walletTavernsR2,
   rewardsPerDay,
   defaultAutoRotate,
   fpsView
@@ -80,6 +83,10 @@ export const Map = ({
         : 'auto';
   }, [hovered1, hovered2, hovered3, hovered4, hovered5]);
 
+  const isStakedTavernR2 =
+    sfts.filter((x) => x === sftTavernR2Nonce).length > 0 &&
+    sfts.filter((x) => x === sftTavernR1Nonce).length > 0 &&
+    sfts.filter((x) => x === sftTavernNonce).length > 0;
   const isStakedTavernR1 =
     sfts.filter((x) => x === sftTavernNonce).length > 0 &&
     sfts.filter((x) => x === sftTavernR1Nonce).length > 0;
@@ -146,7 +153,19 @@ export const Map = ({
             />
 
             {/* Tavern */}
-            {isStakedTavernR1 ? (
+            {isStakedTavernR2 ? (
+              <TavernR2 />
+            ) : isStakedTavernR1 && walletTavernsR2.length > 0 ? (
+              <TavernR1
+                onClick={(event) => {
+                  hover1(false);
+                  sendStakeBuildingTransaction(sftTavernR2Nonce);
+                }}
+                onPointerOver={(event) => hover1(true)}
+                onPointerOut={(event) => hover1(false)}
+                color={hovered1 ? 'blue' : undefined}
+              />
+            ) : isStakedTavernR1 ? (
               <TavernR1 />
             ) : walletTavernsR1.length > 0 && isStakedTavern ? (
               <Tavern

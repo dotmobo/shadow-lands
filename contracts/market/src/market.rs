@@ -6,21 +6,23 @@ multiversx_sc::imports!();
 pub trait Market {
 
     #[init]
-    fn init(&self, token_id: EgldOrEsdtTokenIdentifier, price_land: BigUint, price_building: BigUint, price_upgrade_rank1: BigUint, nft_identifier: EgldOrEsdtTokenIdentifier) {
+    fn init(&self, token_id: EgldOrEsdtTokenIdentifier, price_land: BigUint, price_building: BigUint, price_upgrade_rank1: BigUint, price_upgrade_rank2: BigUint, nft_identifier: EgldOrEsdtTokenIdentifier) {
         self.token_id().set_if_empty(&token_id);
         self.price_land().set_if_empty(&price_land);
         self.price_building().set_if_empty(&price_building);
         self.price_upgrade_rank1().set_if_empty(&price_upgrade_rank1);
+        self.price_upgrade_rank2().set_if_empty(&price_upgrade_rank2);
         self.nft_identifier().set_if_empty(&nft_identifier);
         self.bank().set_if_empty(BigUint::from(0u32));
     }
 
     #[upgrade]
-    fn upgrade(&self, token_id: EgldOrEsdtTokenIdentifier, price_land: BigUint, price_building: BigUint, price_upgrade_rank1: BigUint, nft_identifier: EgldOrEsdtTokenIdentifier) {
+    fn upgrade(&self, token_id: EgldOrEsdtTokenIdentifier, price_land: BigUint, price_building: BigUint, price_upgrade_rank1: BigUint, price_upgrade_rank2: BigUint, nft_identifier: EgldOrEsdtTokenIdentifier) {
         self.token_id().set(&token_id);
         self.price_land().set(&price_land);
         self.price_building().set(&price_building);
         self.price_upgrade_rank1().set(&price_upgrade_rank1);
+        self.price_upgrade_rank2().set(&price_upgrade_rank2);
         self.nft_identifier().set(&nft_identifier);
     }
 
@@ -50,9 +52,15 @@ pub trait Market {
                 payment_amount == self.price_building().get(),
                 "Invalid payment amount"
             );
-        } else {
+
+        } else if nft_nonce >= 7 && nft_nonce < 12 {
             require!(
                 payment_amount == self.price_upgrade_rank1().get(),
+                "Invalid payment amount"
+            );
+        } else {
+            require!(
+                payment_amount == self.price_upgrade_rank2().get(),
                 "Invalid payment amount"
             );
         }
@@ -95,11 +103,12 @@ pub trait Market {
 
     #[only_owner]
     #[endpoint]
-    fn change_price(&self, price_land: BigUint, price_building: BigUint, price_upgrade_rank1: BigUint) -> SCResult<()> {
+    fn change_price(&self, price_land: BigUint, price_building: BigUint, price_upgrade_rank1: BigUint, price_upgrade_rank2: BigUint) -> SCResult<()> {
 
         self.price_land().set(&price_land);
         self.price_building().set(&price_building);
         self.price_upgrade_rank1().set(&price_upgrade_rank1);
+        self.price_upgrade_rank2().set(&price_upgrade_rank2);
 
         Ok(())
     }
@@ -137,6 +146,10 @@ pub trait Market {
     #[view(getPriceUpgradeRank1)]
     #[storage_mapper("price_upgrade_rank1")]
     fn price_upgrade_rank1(&self) -> SingleValueMapper<BigUint>;
+
+    #[view(getPriceUpgradeRank2)]
+    #[storage_mapper("price_upgrade_rank2")]
+    fn price_upgrade_rank2(&self) -> SingleValueMapper<BigUint>;
 
 
 

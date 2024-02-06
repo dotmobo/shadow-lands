@@ -23,7 +23,9 @@ import {
   sftLaboR1Nonce,
   priceDustyBone,
   nftCollectionDustyBonesId,
-  contractMarketDbAddress
+  contractMarketDbAddress,
+  priceBuildingR2,
+  sftTavernR2Nonce
 } from 'config';
 import { Button } from 'components';
 import { confirmAlert } from 'react-confirm-alert';
@@ -75,7 +77,7 @@ export const Market = () => {
           </h2>
 
           <div className='flex flex-col text-black bg-slate-200 w-full md:w-3/4 p-2 rounded-xl'>
-            <span className='flex flex-row md:w-1/2 mb-1'>
+            <span className='flex flex-row md:w-1/3 mb-1'>
               {priceLand}
               <span>
                 <img src='/dust-logo.png' alt='Dust' className='ml-1 w-5' />
@@ -118,7 +120,7 @@ export const Market = () => {
               </span>
             </span>
             <span className='flex flex-col md:flex-row bg-slate-300 mb-1'>
-              <span className='flex md:w-1/2'>
+              <span className='flex md:w-1/3'>
                 {priceBuilding}
                 <span>
                   <img src='/dust-logo.png' alt='Dust' className='ml-1 w-5' />
@@ -160,7 +162,7 @@ export const Market = () => {
                   </Button>
                 </span>
               </span>
-              <span className='flex md:w-1/2 md:ml-2 mt-1 md:mt-0'>
+              <span className='flex md:w-1/3 md:ml-2 mt-1 md:mt-0'>
                 {priceBuildingR1}
                 <span>
                   <img src='/dust-logo.png' alt='Dust' className='ml-1 w-5' />
@@ -206,9 +208,60 @@ export const Market = () => {
                   </Button>
                 </span>
               </span>
+              <span className='flex md:w-1/3 md:ml-2 mt-1 md:mt-0'>
+                {priceBuildingR2}
+                <span>
+                  <img src='/dust-logo.png' alt='Dust' className='ml-1 w-5' />
+                </span>
+                <span className='ml-2'>
+                  <Button
+                    className='inline-block rounded-lg px-3 py-0.5 text-center hover:no-underline my-0 bg-blue-600 text-white hover:bg-blue-700 mr-0 disabled:bg-gray-200 disabled:text-black disabled:cursor-not-allowed'
+                    aria-label='Buy a tavern +2'
+                    disabled={hasPendingTransactions}
+                    onClick={() => {
+                      confirmAlert({
+                        title: 'Buy 1 tavern +2',
+                        message:
+                          'Are you sure you want to buy 1 tavern +2 for 1200 $DUST ?',
+                        buttons: [
+                          {
+                            label: 'Yes',
+                            onClick: () =>
+                              sendBuyItemTransaction(
+                                {
+                                  collection: sftCollectionId,
+                                  nonce: sftTavernR2Nonce
+                                },
+                                priceBuildingR2 * Math.pow(10, 18)
+                              )
+                          },
+                          {
+                            label: 'No',
+                            onClick: () => {
+                              return;
+                            }
+                          }
+                        ]
+                      });
+                    }}
+                  >
+                    <FontAwesomeIcon
+                      icon={faArrowUp}
+                      size='sm'
+                      className='mr-1'
+                    />
+                    <FontAwesomeIcon
+                      icon={faArrowUp}
+                      size='sm'
+                      className='mr-1'
+                    />
+                    Buy 1 tavern +2
+                  </Button>
+                </span>
+              </span>
             </span>
             <span className='flex flex-col md:flex-row mb-1'>
-              <span className='flex md:w-1/2 '>
+              <span className='flex md:w-1/3 '>
                 {priceBuilding}
                 <span>
                   <img src='/dust-logo.png' alt='Dust' className='ml-1 w-5' />
@@ -254,7 +307,7 @@ export const Market = () => {
                   </Button>
                 </span>
               </span>
-              <span className='flex md:w-1/2 md:ml-2 mt-1 md:mt-0'>
+              <span className='flex md:w-1/3 md:ml-2 mt-1 md:mt-0'>
                 {priceBuildingR1}
                 <span>
                   <img src='/dust-logo.png' alt='Dust' className='ml-1 w-5' />
@@ -302,7 +355,7 @@ export const Market = () => {
               </span>
             </span>
             <span className='flex flex-col md:flex-row bg-slate-300 mb-1'>
-              <span className='flex md:w-1/2 '>
+              <span className='flex md:w-1/3 '>
                 {priceBuilding}
                 <span>
                   <img src='/dust-logo.png' alt='Dust' className='ml-1 w-5' />
@@ -348,7 +401,7 @@ export const Market = () => {
                   </Button>
                 </span>
               </span>
-              <span className='flex md:w-1/2 md:ml-2 mt-1 md:mt-0'>
+              <span className='flex md:w-1/3 md:ml-2 mt-1 md:mt-0'>
                 {priceBuildingR1}
                 <span>
                   <img src='/dust-logo.png' alt='Dust' className='ml-1 w-5' />
@@ -396,7 +449,7 @@ export const Market = () => {
               </span>
             </span>
             <span className='flex flex-col md:flex-row mb-1'>
-              <span className='flex md:w-1/2'>
+              <span className='flex md:w-1/3'>
                 {priceBuilding}
                 <span>
                   <img src='/dust-logo.png' alt='Dust' className='ml-1 w-5' />
@@ -442,7 +495,7 @@ export const Market = () => {
                   </Button>
                 </span>
               </span>
-              <span className='flex md:w-1/2 md:ml-2 mt-1 md:mt-0'>
+              <span className='flex md:w-1/3 md:ml-2 mt-1 md:mt-0'>
                 {priceBuildingR1}
                 <span>
                   <img src='/dust-logo.png' alt='Dust' className='ml-1 w-5' />
@@ -490,7 +543,7 @@ export const Market = () => {
               </span>
             </span>
             <span className='flex flex-col md:flex-row bg-slate-300'>
-              <span className='flex md:w-1/2'>
+              <span className='flex md:w-1/3'>
                 {priceBuilding}
                 <span>
                   <img src='/dust-logo.png' alt='Dust' className='ml-1 w-5' />
@@ -536,7 +589,7 @@ export const Market = () => {
                   </Button>
                 </span>
               </span>
-              <span className='flex md:w-1/2 md:ml-2 mt-1 md:mt-0 mb-1'>
+              <span className='flex md:w-1/3 md:ml-2 mt-1 md:mt-0 mb-1'>
                 {priceBuildingR1}
                 <span>
                   <img src='/dust-logo.png' alt='Dust' className='ml-1 w-5' />
@@ -596,7 +649,7 @@ export const Market = () => {
           )}
           {dbList !== undefined && dbList.length > 0 && (
             <div className='flex flex-col text-black bg-slate-200 w-full md:w-3/4 p-2 rounded-xl'>
-              <span className='flex flex-row md:w-1/2 mb-1'>
+              <span className='flex flex-row md:w-1/3 mb-1'>
                 {priceDustyBone}
                 <span>
                   <img src='/dust-logo.png' alt='Dust' className='ml-1 w-5' />

@@ -19,7 +19,8 @@ import {
   sftLaboR1Nonce,
   sftLandsNonce,
   sftTavernNonce,
-  sftTavernR1Nonce
+  sftTavernR1Nonce,
+  sftTavernR2Nonce
 } from 'config';
 import {
   useGetAccountInfo,
@@ -80,6 +81,8 @@ export const Game = () => {
   const [hauntedHousesR1, setHauntedHousesR1List] = useState<Sft[]>([]);
   const [cryptsR1, setCryptsR1List] = useState<Sft[]>([]);
   const [labosR1, setLabosR1List] = useState<Sft[]>([]);
+
+  const [tavernsR2, setTavernsR2List] = useState<Sft[]>([]);
 
   const [rewardsTokenAmountPerDay, setRewardsTokenAmountPerDay] =
     useState<number>(0);
@@ -221,9 +224,13 @@ export const Game = () => {
                   <span title='Tavern'>
                     <FontAwesomeIcon icon={faBeer} size='sm' />{' '}
                     {sfts.filter((x) => x === sftTavernNonce).length}
-                    {sfts.filter((x) => x === sftTavernR1Nonce).length > 0 && (
-                      <span className='text-sm'>&nbsp;(+1)</span>
-                    )}
+                    {sfts.filter((x) => x === sftTavernR2Nonce).length > 0 &&
+                      sfts.filter((x) => x === sftTavernR1Nonce).length > 0 && (
+                        <span className='text-sm'>&nbsp;(+2)</span>
+                      )}
+                    {sfts.filter((x) => x === sftTavernR1Nonce).length > 0 &&
+                      sfts.filter((x) => x === sftTavernR2Nonce).length ===
+                        0 && <span className='text-sm'>&nbsp;(+1)</span>}
                     {sfts.filter((x) => x === sftTavernR1Nonce).length ===
                       0 && <span className='text-sm'>&nbsp;(+0)</span>}
                     &nbsp;/&nbsp;1
@@ -285,6 +292,7 @@ export const Game = () => {
                     walletHauntedHousesR1={hauntedHousesR1}
                     walletCryptsR1={cryptsR1}
                     walletLabosR1={labosR1}
+                    walletTavernsR2={tavernsR2}
                     rewardsPerDay={rewardsTokenAmountPerDay}
                     defaultAutoRotate={autoRotate}
                     fpsView={fpsView}
@@ -316,6 +324,7 @@ export const Game = () => {
                   props['outputHauntedHousesR1'] = setHauntedHousesR1List;
                   props['outputCryptsR1'] = setCryptsR1List;
                   props['outputLabosR1'] = setLabosR1List;
+                  props['outputTavernsR2'] = setTavernsR2List;
 
                   return (
                     <Card key={title} title={title} description={description}>
