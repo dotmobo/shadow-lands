@@ -14,9 +14,7 @@ export function Crypt({ color, ...props }: any) {
   const rotation = [0, -0.4952958, 0];
 
   useEffect(() => {
-    if (color === undefined) {
-      actions.Action.play();
-    }
+    actions.Action.play();
   }, [group]);
 
   return (
@@ -108,21 +106,23 @@ export function Crypt({ color, ...props }: any) {
             )}
           </mesh>
         </group>
-        {color === undefined && (
-          <group
-            name='Armature001'
-            position={[1.629, 3.762, -3.95]}
-            rotation={[-2.471, -1.35, -2.447]}
+        <group
+          name='Armature001'
+          position={[1.629, 3.762, -3.95]}
+          rotation={[-2.471, -1.35, -2.447]}
+        >
+          <skinnedMesh
+            name='Cube002'
+            geometry={nodes.Cube002.geometry}
+            material={materials.Corbeau}
+            skeleton={nodes.Cube002.skeleton}
           >
-            <skinnedMesh
-              name='Cube002'
-              geometry={nodes.Cube002.geometry}
-              material={materials.Corbeau}
-              skeleton={nodes.Cube002.skeleton}
-            />
-            <primitive object={nodes.Bone} />
-          </group>
-        )}
+            {color !== undefined && (
+              <meshStandardMaterial color={color} transparent opacity={0.2} />
+            )}
+          </skinnedMesh>
+          <primitive object={nodes.Bone} />
+        </group>
       </group>
     </group>
   );

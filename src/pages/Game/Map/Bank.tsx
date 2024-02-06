@@ -14,9 +14,7 @@ export function Bank({ color, ...props }: any) {
   const rotation = [0, 0.2688036, 0];
 
   useEffect(() => {
-    if (color === undefined) {
-      actions.Action.play();
-    }
+    actions.Action.play();
   }, [group]);
 
   return (
@@ -108,21 +106,19 @@ export function Bank({ color, ...props }: any) {
             )}
           </mesh>
         </group>
-        {color === undefined && (
-          <mesh
-            name='Cylinder'
-            castShadow
-            receiveShadow
-            geometry={nodes.Cylinder.geometry}
-            material={materials.Token}
-            position={[-3.857, 2.132, -3.278]}
-            rotation={[Math.PI / 2, 0, 0]}
-          >
-            {color !== undefined && (
-              <meshStandardMaterial color={color} transparent opacity={0.2} />
-            )}
-          </mesh>
-        )}
+        <mesh
+          name='Cylinder'
+          castShadow
+          receiveShadow
+          geometry={nodes.Cylinder.geometry}
+          material={materials.Token}
+          position={[-3.857, 2.132, -3.278]}
+          rotation={[Math.PI / 2, 0, 0]}
+        >
+          {color !== undefined && (
+            <meshStandardMaterial color={color} transparent opacity={0.2} />
+          )}
+        </mesh>
         <mesh
           name='Cylinder001'
           castShadow
