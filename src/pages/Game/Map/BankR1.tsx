@@ -112,21 +112,19 @@ export function BankR1({ color, ...props }: any) {
             )}
           </mesh>
         )}
-        {color === undefined && (
-          <mesh
-            name='Cylinder001'
-            castShadow
-            receiveShadow
-            geometry={nodes.Cylinder001.geometry}
-            material={materials.Token}
-            position={[-1.911, 2.132, -3.805]}
-            rotation={[Math.PI / 2, 0, 1.882]}
-          >
-            {color !== undefined && (
-              <meshStandardMaterial color={color} transparent opacity={0.2} />
-            )}
-          </mesh>
-        )}
+        <mesh
+          name='Cylinder001'
+          castShadow
+          receiveShadow
+          geometry={nodes.Cylinder001.geometry}
+          material={materials.Token}
+          position={[-1.911, 2.132, -3.805]}
+          rotation={[Math.PI / 2, 0, 1.882]}
+        >
+          {color !== undefined && (
+            <meshStandardMaterial color={color} transparent opacity={0.2} />
+          )}
+        </mesh>
       </group>
     </group>
   );

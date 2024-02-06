@@ -119,19 +119,21 @@ export function Tavern({ color, ...props }: any) {
             )}
           </mesh>
         </group>
-        {color === undefined && (
-          <mesh
-            name='Fantom'
-            castShadow
-            receiveShadow
-            geometry={nodes.Fantom.geometry}
-            material={materials.Fantom1}
-            morphTargetDictionary={nodes.Fantom.morphTargetDictionary}
-            morphTargetInfluences={nodes.Fantom.morphTargetInfluences}
-            position={[3.761, 1.489, 4.818]}
-            rotation={[-3.063, -1.519, -3.124]}
-          />
-        )}
+        <mesh
+          name='Fantom'
+          castShadow
+          receiveShadow
+          geometry={nodes.Fantom.geometry}
+          material={materials.Fantom1}
+          morphTargetDictionary={nodes.Fantom.morphTargetDictionary}
+          morphTargetInfluences={nodes.Fantom.morphTargetInfluences}
+          position={[3.761, 1.489, 4.818]}
+          rotation={[-3.063, -1.519, -3.124]}
+        >
+          {color !== undefined && (
+            <meshStandardMaterial color={color} transparent opacity={0.2} />
+          )}
+        </mesh>
       </group>
     </group>
   );
