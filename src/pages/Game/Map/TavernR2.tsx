@@ -117,31 +117,33 @@ export function TavernR2({ color, ...props }: any) {
             )}
           </mesh>
         </group>
-        {color === undefined && (
-          <group
-            name='Armature'
-            position={[3.838, 1.035, 5.343]}
-            rotation={[Math.PI, -0.875, Math.PI]}
-            scale={0.4}
+        <group
+          name='Armature'
+          position={[3.838, 1.035, 5.343]}
+          rotation={[Math.PI, -0.875, Math.PI]}
+          scale={0.4}
+        >
+          <skinnedMesh
+            name='Crâne001'
+            geometry={nodes.Crâne001.geometry}
+            material={materials['Skeleton.001']}
+            skeleton={nodes.Crâne001.skeleton}
           >
-            <skinnedMesh
-              name='Crâne001'
-              geometry={nodes.Crâne001.geometry}
-              material={materials['Skeleton.001']}
-              skeleton={nodes.Crâne001.skeleton}
-            />
-            <primitive object={nodes.mixamorigHips} />
-            <primitive object={nodes.Ctrl_Master} />
-            <primitive object={nodes.Ctrl_ArmPole_IK_Left} />
-            <primitive object={nodes.Ctrl_Hand_IK_Left} />
-            <primitive object={nodes.Ctrl_ArmPole_IK_Right} />
-            <primitive object={nodes.Ctrl_Hand_IK_Right} />
-            <primitive object={nodes.Ctrl_Foot_IK_Left} />
-            <primitive object={nodes.Ctrl_LegPole_IK_Left} />
-            <primitive object={nodes.Ctrl_Foot_IK_Right} />
-            <primitive object={nodes.Ctrl_LegPole_IK_Right} />
-          </group>
-        )}
+            {color !== undefined && (
+              <meshStandardMaterial color={color} transparent opacity={0.2} />
+            )}
+          </skinnedMesh>
+          <primitive object={nodes.mixamorigHips} />
+          <primitive object={nodes.Ctrl_Master} />
+          <primitive object={nodes.Ctrl_ArmPole_IK_Left} />
+          <primitive object={nodes.Ctrl_Hand_IK_Left} />
+          <primitive object={nodes.Ctrl_ArmPole_IK_Right} />
+          <primitive object={nodes.Ctrl_Hand_IK_Right} />
+          <primitive object={nodes.Ctrl_Foot_IK_Left} />
+          <primitive object={nodes.Ctrl_LegPole_IK_Left} />
+          <primitive object={nodes.Ctrl_Foot_IK_Right} />
+          <primitive object={nodes.Ctrl_LegPole_IK_Right} />
+        </group>
       </group>
     </group>
   );
