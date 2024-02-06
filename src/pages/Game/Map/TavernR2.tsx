@@ -123,16 +123,58 @@ export function TavernR2({ color, ...props }: any) {
           rotation={[Math.PI, -0.875, Math.PI]}
           scale={0.4}
         >
-          <skinnedMesh
-            name='Crâne001'
-            geometry={nodes.Crâne001.geometry}
-            material={materials['Skeleton.001']}
-            skeleton={nodes.Crâne001.skeleton}
-          >
-            {color !== undefined && (
-              <meshStandardMaterial color={color} transparent opacity={0.2} />
-            )}
-          </skinnedMesh>
+          <group name='Crâne001'>
+            <skinnedMesh
+              name='Sphere016'
+              geometry={nodes.Sphere016.geometry}
+              material={materials['Skeleton.001']}
+              skeleton={nodes.Sphere016.skeleton}
+            >
+              {color !== undefined && (
+                <meshStandardMaterial color={color} transparent opacity={0.2} />
+              )}
+            </skinnedMesh>
+            <skinnedMesh
+              name='Sphere016_1'
+              geometry={nodes.Sphere016_1.geometry}
+              material={materials.Material}
+              skeleton={nodes.Sphere016_1.skeleton}
+            >
+              {color !== undefined && (
+                <meshStandardMaterial color={color} transparent opacity={0.2} />
+              )}
+            </skinnedMesh>
+            <skinnedMesh
+              name='Sphere016_2'
+              geometry={nodes.Sphere016_2.geometry}
+              material={materials['Material.002']}
+              skeleton={nodes.Sphere016_2.skeleton}
+            >
+              {color !== undefined && (
+                <meshStandardMaterial color={color} transparent opacity={0.2} />
+              )}
+            </skinnedMesh>
+            <skinnedMesh
+              name='Sphere016_3'
+              geometry={nodes.Sphere016_3.geometry}
+              material={materials['Material.001']}
+              skeleton={nodes.Sphere016_3.skeleton}
+            >
+              {color !== undefined && (
+                <meshStandardMaterial color={color} transparent opacity={0.2} />
+              )}
+            </skinnedMesh>
+            <skinnedMesh
+              name='Sphere016_4'
+              geometry={nodes.Sphere016_4.geometry}
+              material={materials.BouteilleEtiquette}
+              skeleton={nodes.Sphere016_4.skeleton}
+            >
+              {color !== undefined && (
+                <meshStandardMaterial color={color} transparent opacity={0.2} />
+              )}
+            </skinnedMesh>
+          </group>
           <primitive object={nodes.mixamorigHips} />
           <primitive object={nodes.Ctrl_Master} />
           <primitive object={nodes.Ctrl_ArmPole_IK_Left} />
