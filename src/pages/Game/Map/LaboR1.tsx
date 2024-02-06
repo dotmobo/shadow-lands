@@ -14,9 +14,7 @@ export function LaboR1({ color, ...props }: any) {
   const rotation = [0, 1.5538236, 0];
 
   useEffect(() => {
-    if (color === undefined) {
-      actions.KeyAction.play();
-    }
+    actions.KeyAction.play();
   }, [group]);
 
   return (

@@ -14,9 +14,7 @@ export function HauntedHouse({ color, ...props }: any) {
   const rotation = [0, -1.5338651598227, 0];
 
   useEffect(() => {
-    if (color === undefined) {
-      actions.Action.play();
-    }
+    actions.Action.play();
   }, [group]);
 
   return (
@@ -91,66 +89,78 @@ export function HauntedHouse({ color, ...props }: any) {
             )}
           </mesh>
         </group>
-        {color === undefined && (
-          <group
-            name='Armature1'
-            position={[5.25, 3.451, -1.178]}
-            rotation={[-3.135, -0.07, -3.139]}
+
+        <group
+          name='Armature1'
+          position={[5.25, 3.451, -1.178]}
+          rotation={[-3.135, -0.07, -3.139]}
+        >
+          <skinnedMesh
+            name='ChauveSouris_1'
+            geometry={nodes.ChauveSouris_1.geometry}
+            material={materials.Palette}
+            skeleton={nodes.ChauveSouris_1.skeleton}
           >
-            <skinnedMesh
-              name='ChauveSouris_1'
-              geometry={nodes.ChauveSouris_1.geometry}
-              material={materials.Palette}
-              skeleton={nodes.ChauveSouris_1.skeleton}
-            />
-            <primitive object={nodes.Bone} />
-          </group>
-        )}
-        {color === undefined && (
-          <group
-            name='Armature002'
-            position={[5.649, 3.588, -2.208]}
-            rotation={[0.025, -0.369, 0.007]}
+            {color !== undefined && (
+              <meshStandardMaterial color={color} transparent opacity={0.2} />
+            )}
+          </skinnedMesh>
+          <primitive object={nodes.Bone} />
+        </group>
+
+        <group
+          name='Armature002'
+          position={[5.649, 3.588, -2.208]}
+          rotation={[0.025, -0.369, 0.007]}
+        >
+          <skinnedMesh
+            name='ChauveSouris_1001'
+            geometry={nodes.ChauveSouris_1001.geometry}
+            material={materials.Palette}
+            skeleton={nodes.ChauveSouris_1001.skeleton}
           >
-            <skinnedMesh
-              name='ChauveSouris_1001'
-              geometry={nodes.ChauveSouris_1001.geometry}
-              material={materials.Palette}
-              skeleton={nodes.ChauveSouris_1001.skeleton}
-            />
-            <primitive object={nodes.Bone_1} />
-          </group>
-        )}
-        {color === undefined && (
-          <group
-            name='Armature003'
-            position={[5.718, 2.913, 0.634]}
-            rotation={[-3.134, -0.818, -3.13]}
+            {color !== undefined && (
+              <meshStandardMaterial color={color} transparent opacity={0.2} />
+            )}
+          </skinnedMesh>
+          <primitive object={nodes.Bone_1} />
+        </group>
+
+        <group
+          name='Armature003'
+          position={[5.718, 2.913, 0.634]}
+          rotation={[-3.134, -0.818, -3.13]}
+        >
+          <skinnedMesh
+            name='ChauveSouris_1002'
+            geometry={nodes.ChauveSouris_1002.geometry}
+            material={materials.Palette}
+            skeleton={nodes.ChauveSouris_1002.skeleton}
           >
-            <skinnedMesh
-              name='ChauveSouris_1002'
-              geometry={nodes.ChauveSouris_1002.geometry}
-              material={materials.Palette}
-              skeleton={nodes.ChauveSouris_1002.skeleton}
-            />
-            <primitive object={nodes.Bone_2} />
-          </group>
-        )}
-        {color === undefined && (
-          <group
-            name='Armature004'
-            position={[5.185, 2.514, -2.605]}
-            rotation={[2.739, 0.538, -1.798]}
+            {color !== undefined && (
+              <meshStandardMaterial color={color} transparent opacity={0.2} />
+            )}
+          </skinnedMesh>
+          <primitive object={nodes.Bone_2} />
+        </group>
+
+        <group
+          name='Armature004'
+          position={[5.185, 2.514, -2.605]}
+          rotation={[2.739, 0.538, -1.798]}
+        >
+          <skinnedMesh
+            name='ChauveSouris_1003'
+            geometry={nodes.ChauveSouris_1003.geometry}
+            material={materials.Palette}
+            skeleton={nodes.ChauveSouris_1003.skeleton}
           >
-            <skinnedMesh
-              name='ChauveSouris_1003'
-              geometry={nodes.ChauveSouris_1003.geometry}
-              material={materials.Palette}
-              skeleton={nodes.ChauveSouris_1003.skeleton}
-            />
-            <primitive object={nodes.Bone_3} />
-          </group>
-        )}
+            {color !== undefined && (
+              <meshStandardMaterial color={color} transparent opacity={0.2} />
+            )}
+          </skinnedMesh>
+          <primitive object={nodes.Bone_3} />
+        </group>
       </group>
     </group>
   );

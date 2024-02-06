@@ -14,9 +14,7 @@ export function TavernR1({ color, ...props }: any) {
   const rotation = [0, -2.2521728667735, 0];
 
   useEffect(() => {
-    if (color === undefined) {
-      actions.Action.play();
-    }
+    actions.Action.play();
   }, [group]);
 
   return (
