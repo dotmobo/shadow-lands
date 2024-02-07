@@ -10,6 +10,7 @@ import { Button, Card, MxLink } from 'components';
 import {
   contractGameAddress,
   sftBankR1Nonce,
+  sftBankR2Nonce,
   sftBanksNonce,
   sftCryptNonce,
   sftCryptR1Nonce,
@@ -83,6 +84,7 @@ export const Game = () => {
   const [labosR1, setLabosR1List] = useState<Sft[]>([]);
 
   const [tavernsR2, setTavernsR2List] = useState<Sft[]>([]);
+  const [banksR2, setBanksR2List] = useState<Sft[]>([]);
 
   const [rewardsTokenAmountPerDay, setRewardsTokenAmountPerDay] =
     useState<number>(0);
@@ -238,9 +240,14 @@ export const Game = () => {
                   <span title='Bank'>
                     <FontAwesomeIcon icon={faBuildingColumns} size='sm' />{' '}
                     {sfts.filter((x) => x === sftBanksNonce).length}
-                    {sfts.filter((x) => x === sftBankR1Nonce).length > 0 && (
-                      <span className='text-sm'>&nbsp;(+1)</span>
-                    )}
+                    {sfts.filter((x) => x === sftBankR2Nonce).length > 0 &&
+                      sfts.filter((x) => x === sftBankR1Nonce).length > 0 && (
+                        <span className='text-sm'>&nbsp;(+2)</span>
+                      )}
+                    {sfts.filter((x) => x === sftBankR1Nonce).length > 0 &&
+                      sfts.filter((x) => x === sftBankR2Nonce).length === 0 && (
+                        <span className='text-sm'>&nbsp;(+1)</span>
+                      )}
                     {sfts.filter((x) => x === sftBankR1Nonce).length === 0 && (
                       <span className='text-sm'>&nbsp;(+0)</span>
                     )}
@@ -293,6 +300,7 @@ export const Game = () => {
                     walletCryptsR1={cryptsR1}
                     walletLabosR1={labosR1}
                     walletTavernsR2={tavernsR2}
+                    walletBanksR2={banksR2}
                     rewardsPerDay={rewardsTokenAmountPerDay}
                     defaultAutoRotate={autoRotate}
                     fpsView={fpsView}
@@ -325,6 +333,7 @@ export const Game = () => {
                   props['outputCryptsR1'] = setCryptsR1List;
                   props['outputLabosR1'] = setLabosR1List;
                   props['outputTavernsR2'] = setTavernsR2List;
+                  props['outputBanksR2'] = setBanksR2List;
 
                   return (
                     <Card key={title} title={title} description={description}>
