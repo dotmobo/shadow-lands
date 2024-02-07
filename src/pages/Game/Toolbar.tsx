@@ -48,7 +48,7 @@ export const Toolbar = ({ sfts }: { sfts: number[] }) => {
           <div className='flex justify-center items-center mr-2'>
             <div
               className={`w-6 h-6 border border-gray-600 flex justify-center items-center ${
-                isLand ? 'bg-green-500' : 'bg-transparent'
+                isLand ? 'bg-green-600' : 'bg-transparent'
               }`}
             >
               <FontAwesomeIcon
@@ -60,7 +60,7 @@ export const Toolbar = ({ sfts }: { sfts: number[] }) => {
           <div className='flex justify-center items-center mr-2'>
             <div
               className={`w-6 h-6 border border-gray-600 flex justify-center items-center ${
-                isTavern ? 'bg-green-500' : 'bg-transparent'
+                isTavern ? 'bg-green-600' : 'bg-transparent'
               }`}
             >
               <FontAwesomeIcon
@@ -72,7 +72,7 @@ export const Toolbar = ({ sfts }: { sfts: number[] }) => {
             </div>
             <div
               className={`w-6 h-6 border border-gray-600 flex justify-center items-center ${
-                isTavernR1 ? 'bg-green-500' : 'bg-transparent'
+                isTavernR1 ? 'bg-green-600' : 'bg-transparent'
               }`}
             >
               <FontAwesomeIcon
@@ -84,7 +84,7 @@ export const Toolbar = ({ sfts }: { sfts: number[] }) => {
             </div>
             <div
               className={`w-6 h-6 border border-gray-600 flex justify-center items-center ${
-                isTavernR2 ? 'bg-green-500' : 'bg-transparent'
+                isTavernR2 ? 'bg-green-600' : 'bg-transparent'
               }`}
             >
               <FontAwesomeIcon
@@ -104,7 +104,7 @@ export const Toolbar = ({ sfts }: { sfts: number[] }) => {
           <div className='flex justify-center items-center mr-2'>
             <div
               className={`w-6 h-6 border border-gray-600 flex justify-center items-center ${
-                isBank ? 'bg-green-500' : 'bg-transparent'
+                isBank ? 'bg-green-600' : 'bg-transparent'
               }`}
             >
               <FontAwesomeIcon
@@ -114,7 +114,7 @@ export const Toolbar = ({ sfts }: { sfts: number[] }) => {
             </div>
             <div
               className={`w-6 h-6 border border-gray-600 flex justify-center items-center ${
-                isBankR1 ? 'bg-green-500' : 'bg-transparent'
+                isBankR1 ? 'bg-green-600' : 'bg-transparent'
               }`}
             >
               <FontAwesomeIcon
@@ -126,7 +126,7 @@ export const Toolbar = ({ sfts }: { sfts: number[] }) => {
             </div>
             <div
               className={`w-6 h-6 border border-gray-600 flex justify-center items-center ${
-                isBankR2 ? 'bg-green-500' : 'bg-transparent'
+                isBankR2 ? 'bg-green-600' : 'bg-transparent'
               }`}
             >
               <FontAwesomeIcon
@@ -148,7 +148,7 @@ export const Toolbar = ({ sfts }: { sfts: number[] }) => {
           <div className='flex justify-center items-center mr-2'>
             <div
               className={`w-6 h-6 border border-gray-600 flex justify-center items-center ${
-                isHauntedHouse ? 'bg-green-500' : 'bg-transparent'
+                isHauntedHouse ? 'bg-green-600' : 'bg-transparent'
               }`}
             >
               <FontAwesomeIcon
@@ -160,7 +160,7 @@ export const Toolbar = ({ sfts }: { sfts: number[] }) => {
             </div>
             <div
               className={`w-6 h-6 border border-gray-600 flex justify-center items-center ${
-                isHauntedHouseR1 ? 'bg-green-500' : 'bg-transparent'
+                isHauntedHouseR1 ? 'bg-green-600' : 'bg-transparent'
               }`}
             >
               <FontAwesomeIcon
@@ -174,7 +174,7 @@ export const Toolbar = ({ sfts }: { sfts: number[] }) => {
           <div className='flex justify-center items-center mr-2'>
             <div
               className={`w-6 h-6 border border-gray-600 flex justify-center items-center ${
-                isCrypt ? 'bg-green-500' : 'bg-transparent'
+                isCrypt ? 'bg-green-600' : 'bg-transparent'
               }`}
             >
               <FontAwesomeIcon
@@ -186,7 +186,7 @@ export const Toolbar = ({ sfts }: { sfts: number[] }) => {
             </div>
             <div
               className={`w-6 h-6 border border-gray-600 flex justify-center items-center ${
-                isCryptR1 ? 'bg-green-500' : 'bg-transparent'
+                isCryptR1 ? 'bg-green-600' : 'bg-transparent'
               }`}
             >
               <FontAwesomeIcon
@@ -200,7 +200,7 @@ export const Toolbar = ({ sfts }: { sfts: number[] }) => {
           <div className='flex justify-center items-center mr-2'>
             <div
               className={`w-6 h-6 border border-gray-600 flex justify-center items-center ${
-                isLabo ? 'bg-green-500' : 'bg-transparent'
+                isLabo ? 'bg-green-600' : 'bg-transparent'
               }`}
             >
               <FontAwesomeIcon
@@ -210,7 +210,7 @@ export const Toolbar = ({ sfts }: { sfts: number[] }) => {
             </div>
             <div
               className={`w-6 h-6 border border-gray-600 flex justify-center items-center ${
-                isLaboR1 ? 'bg-green-500' : 'bg-transparent'
+                isLaboR1 ? 'bg-green-600' : 'bg-transparent'
               }`}
             >
               <FontAwesomeIcon
