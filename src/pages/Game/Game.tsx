@@ -1,27 +1,7 @@
 import { useEffect, useState } from 'react';
-import {
-  Address,
-  AddressValue,
-  ContractFunction,
-  Query
-} from '@multiversx/sdk-core/out';
 import { ProxyNetworkProvider } from '@multiversx/sdk-network-providers/out';
 import { Button, Card, MxLink } from 'components';
-import {
-  contractGameAddress,
-  sftBankR1Nonce,
-  sftBanksNonce,
-  sftCryptNonce,
-  sftCryptR1Nonce,
-  sftHauntedHouseNonce,
-  sftHauntedHouseR1Nonce,
-  sftLaboNonce,
-  sftLaboR1Nonce,
-  sftLandsNonce,
-  sftTavernNonce,
-  sftTavernR1Nonce,
-  sftTavernR2Nonce
-} from 'config';
+import { sftLandsNonce } from 'config';
 import {
   useGetAccountInfo,
   useGetNetworkConfig,
@@ -35,23 +15,18 @@ import { Production } from './widgets/Production/Production';
 import { useCallShadowLandsQuery } from './queries';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  faBeer,
   faBook,
-  faBuildingColumns,
-  faCross,
   faEye,
   faEyeSlash,
-  faFlaskVial,
-  faHouse,
   faPause,
   faPlay,
   faQuestion,
   faRankingStar,
-  faRotate,
-  faTree
+  faRotate
 } from '@fortawesome/free-solid-svg-icons';
 import { RouteNamesEnum } from 'localConstants';
 import LecteurAudio from 'components/LecteurAudio/LecteurAudio';
+import { Toolbar } from './Toolbar';
 
 const WIDGETS: WidgetsType[] = [
   {
@@ -216,69 +191,9 @@ export const Game = () => {
                     </MxLink>
                   </span>
                 </div>
-                <div className='flex w-full justify-center gap-4 text-slate-300'>
-                  <span title='Land'>
-                    <FontAwesomeIcon icon={faTree} size='sm' />{' '}
-                    {sfts.filter((x) => x === sftLandsNonce).length} / 1
-                  </span>
-                  <span title='Tavern'>
-                    <FontAwesomeIcon icon={faBeer} size='sm' />{' '}
-                    {sfts.filter((x) => x === sftTavernNonce).length}
-                    {sfts.filter((x) => x === sftTavernR2Nonce).length > 0 &&
-                      sfts.filter((x) => x === sftTavernR1Nonce).length > 0 && (
-                        <span className='text-sm'>&nbsp;(+2)</span>
-                      )}
-                    {sfts.filter((x) => x === sftTavernR1Nonce).length > 0 &&
-                      sfts.filter((x) => x === sftTavernR2Nonce).length ===
-                        0 && <span className='text-sm'>&nbsp;(+1)</span>}
-                    {sfts.filter((x) => x === sftTavernR1Nonce).length ===
-                      0 && <span className='text-sm'>&nbsp;(+0)</span>}
-                    &nbsp;/&nbsp;1
-                  </span>
-                  <span title='Bank'>
-                    <FontAwesomeIcon icon={faBuildingColumns} size='sm' />{' '}
-                    {sfts.filter((x) => x === sftBanksNonce).length}
-                    {sfts.filter((x) => x === sftBankR1Nonce).length > 0 && (
-                      <span className='text-sm'>&nbsp;(+1)</span>
-                    )}
-                    {sfts.filter((x) => x === sftBankR1Nonce).length === 0 && (
-                      <span className='text-sm'>&nbsp;(+0)</span>
-                    )}
-                    &nbsp;/&nbsp;1
-                  </span>
-                </div>
-                <div className='flex w-full mt-2 justify-center gap-4 text-slate-300'>
-                  <span title='Haunted House'>
-                    <FontAwesomeIcon icon={faHouse} size='sm' />{' '}
-                    {sfts.filter((x) => x === sftHauntedHouseNonce).length}
-                    {sfts.filter((x) => x === sftHauntedHouseR1Nonce).length >
-                      0 && <span className='text-sm'>&nbsp;(+1)</span>}
-                    {sfts.filter((x) => x === sftHauntedHouseR1Nonce).length ===
-                      0 && <span className='text-sm'>&nbsp;(+0)</span>}
-                    &nbsp;/&nbsp;1
-                  </span>
-                  <span title='Crypt'>
-                    <FontAwesomeIcon icon={faCross} size='sm' />{' '}
-                    {sfts.filter((x) => x === sftCryptNonce).length}
-                    {sfts.filter((x) => x === sftCryptR1Nonce).length > 0 && (
-                      <span className='text-sm'>&nbsp;(+1)</span>
-                    )}
-                    {sfts.filter((x) => x === sftCryptR1Nonce).length === 0 && (
-                      <span className='text-sm'>&nbsp;(+0)</span>
-                    )}
-                    &nbsp;/&nbsp;1
-                  </span>
-                  <span title='Laboratory'>
-                    <FontAwesomeIcon icon={faFlaskVial} size='sm' />{' '}
-                    {sfts.filter((x) => x === sftLaboNonce).length}
-                    {sfts.filter((x) => x === sftLaboR1Nonce).length > 0 && (
-                      <span className='text-sm'>&nbsp;(+1)</span>
-                    )}
-                    {sfts.filter((x) => x === sftLaboR1Nonce).length === 0 && (
-                      <span className='text-sm'>&nbsp;(+0)</span>
-                    )}
-                  </span>
-                </div>
+
+                <Toolbar sfts={sfts} />
+
                 {sfts.filter((x) => x === sftLandsNonce).length > 0 && (
                   <Map
                     sfts={sfts}
