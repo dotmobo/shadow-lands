@@ -137,7 +137,7 @@ export const Game = () => {
     <AuthRedirectWrapper>
       <PageWrapper>
         <div className='flex flex-col lg:flex-row items-center h-full w-full'>
-          <div className='flex flex-col items-start lg:items-center h-screen lg:h-full w-full lg:bg-center bg-slate-900'>
+          <div className='flex flex-col items-center lg:items-center h-screen lg:h-full w-full lg:bg-center bg-slate-900'>
             {sfts !== undefined && (
               <>
                 <div className='flex w-full mt-2 mb-2 text-slate-300 justify-center sm:justify-normal sm:pl-6'>
@@ -195,23 +195,25 @@ export const Game = () => {
                 <Toolbar sfts={sfts} />
 
                 {sfts.filter((x) => x === sftLandsNonce).length > 0 && (
-                  <Map
-                    sfts={sfts}
-                    walletTaverns={taverns}
-                    walletBanks={banks}
-                    walletHauntedHouses={hauntedHouses}
-                    walletCrypts={crypts}
-                    walletLabos={labos}
-                    walletTavernsR1={tavernsR1}
-                    walletBanksR1={banksR1}
-                    walletHauntedHousesR1={hauntedHousesR1}
-                    walletCryptsR1={cryptsR1}
-                    walletLabosR1={labosR1}
-                    walletTavernsR2={tavernsR2}
-                    rewardsPerDay={rewardsTokenAmountPerDay}
-                    defaultAutoRotate={autoRotate}
-                    fpsView={fpsView}
-                  />
+                  <div className='flex w-[94%] h-4/5'>
+                    <Map
+                      sfts={sfts}
+                      walletTaverns={taverns}
+                      walletBanks={banks}
+                      walletHauntedHouses={hauntedHouses}
+                      walletCrypts={crypts}
+                      walletLabos={labos}
+                      walletTavernsR1={tavernsR1}
+                      walletBanksR1={banksR1}
+                      walletHauntedHousesR1={hauntedHousesR1}
+                      walletCryptsR1={cryptsR1}
+                      walletLabosR1={labosR1}
+                      walletTavernsR2={tavernsR2}
+                      rewardsPerDay={rewardsTokenAmountPerDay}
+                      defaultAutoRotate={autoRotate}
+                      fpsView={fpsView}
+                    />
+                  </div>
                 )}
               </>
             )}
