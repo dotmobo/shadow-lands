@@ -138,7 +138,7 @@ export const Map = ({
     sfts.filter((x) => x === sftLaboR1Nonce).length === 0;
 
   return (
-    <Canvas shadows dpr={[1, 2]}>
+    <Canvas shadows dpr={[1, 2]} resize={{ debounce: 0 }}>
       <Suspense fallback={<Loader />}>
         {sfts !== undefined && (
           <Stage
