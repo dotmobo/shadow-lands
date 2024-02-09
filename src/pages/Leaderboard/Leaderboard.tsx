@@ -1,6 +1,8 @@
 import { faCircleArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useGetAccountInfo } from '@multiversx/sdk-dapp/hooks/account/useGetAccountInfo';
 import { useGetPendingTransactions } from '@multiversx/sdk-dapp/hooks/transactions/useGetPendingTransactions';
+import { useGetNetworkConfig } from '@multiversx/sdk-dapp/hooks/useGetNetworkConfig';
 import axios from 'axios';
 import { FormatAmount, Loader, MxLink } from 'components';
 import {
@@ -14,6 +16,8 @@ import { useEffect, useState } from 'react';
 import { AuthRedirectWrapper, PageWrapper } from 'wrappers';
 
 export const Leaderboard = () => {
+  const { network } = useGetNetworkConfig();
+  const { address, account } = useGetAccountInfo();
   const { hasPendingTransactions } = useGetPendingTransactions();
   const [leaderboard, setLeaderboard] = useState<any>();
   const CLAIM_TRANSACTION_VALUE = BigInt(15000000000000000000);
@@ -99,14 +103,18 @@ export const Leaderboard = () => {
                   <span className='flex flex-items-center'>
                     <a
                       target='_blank'
-                      className='text-slate-400 hover:text-slate-100'
+                      className={`mb-2 hover:text-slate-100 ${
+                        item.address === address
+                          ? ' text-yellow-400 '
+                          : 'text-slate-400'
+                      }`}
                       href={`${mvxExplorerUrl}/accounts/${item.address}`}
                     >
                       {item.address.substring(0, 6) +
                         '...' +
                         item.address.substring(item.address.length - 6)}
-                      &nbsp;:&nbsp;
                     </a>
+                    &nbsp;:&nbsp;
                     <FormatAmount
                       value={item.balance ?? 0}
                       showLabel={false}
