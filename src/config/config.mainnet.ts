@@ -35,13 +35,15 @@ export const sftLaboR1Nonce = 11;
 // Upgrade +2
 export const sftTavernR2Id = 'SHALAN-55b9a9-0c';
 export const sftTavernR2Nonce = 12;
+export const sftBankR2Id = 'SHALAN-55b9a9-0d';
+export const sftBankR2Nonce = 13;
 // Dust and SC
 export const dustTokenId = 'DUST-e7e490';
 export const contractGameAddress =
   'erd1qqqqqqqqqqqqqpgq6px7uzxhcsagfkguf269kj937dg766282krscvp908';
 export const contractMarketAddress =
   'erd1qqqqqqqqqqqqqpgqc4s83k0ut7c2p6v3rqlddz4wtz7djhq42krs0m3afj';
-export const totalYield = 60;
+export const totalYield = 65;
 export const totalProducted = 5000;
 
 // Price

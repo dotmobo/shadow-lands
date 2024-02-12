@@ -34,7 +34,8 @@ import {
   sftHauntedHouseR1Id,
   sftCryptR1Id,
   sftLaboR1Id,
-  sftTavernR2Id
+  sftTavernR2Id,
+  sftBankR2Id
 } from 'config';
 import {
   useGetAccountInfo,
@@ -60,6 +61,7 @@ export const Account = ({
   outputCryptsR1,
   outputLabosR1,
   outputTavernsR2,
+  outputBanksR2,
 }) => {
   const { network } = useGetNetworkConfig();
   const { address, account } = useGetAccountInfo();
@@ -77,6 +79,7 @@ export const Account = ({
   const [labosR1, setLabosR1] = useState<Sft[]>();
 
   const [tavernsR2, setTavernsR2] = useState<Sft[]>();
+  const [banksR2, setBanksR2] = useState<Sft[]>();
 
   const [dust, setDustToken] = useState<Token | null>();
   const { hasPendingTransactions } = useGetPendingTransactions();
@@ -101,7 +104,7 @@ export const Account = ({
     // Use [] as second argument in useEffect for not rendering each time
     axios
       .get<any>(
-        `${mvxApiUrl}/accounts/${address}/nfts?size=3330&identifiers=${sftLandsId},${sftTavernId},${sftBanksId},${sftHauntedHouseId},${sftCryptId},${sftLaboId},${sftTavernR1Id},${sftBankR1Id},${sftHauntedHouseR1Id},${sftCryptR1Id},${sftLaboR1Id},${sftTavernR2Id}`
+        `${mvxApiUrl}/accounts/${address}/nfts?size=3330&identifiers=${sftLandsId},${sftTavernId},${sftBanksId},${sftHauntedHouseId},${sftCryptId},${sftLaboId},${sftTavernR1Id},${sftBankR1Id},${sftHauntedHouseR1Id},${sftCryptR1Id},${sftLaboR1Id},${sftTavernR2Id},${sftBankR2Id}`
       )
       .then((response) => {
         const res = orderBy(
@@ -160,6 +163,10 @@ export const Account = ({
         const tavernsR2 = res.filter((x) => x.identifier === sftTavernR2Id);
         setTavernsR2(tavernsR2);
         outputTavernsR2(tavernsR2);
+        // Banks R2
+        const banksR2 = res.filter((x) => x.identifier === sftBankR2Id);
+        setBanksR2(banksR2);
+        outputBanksR2(banksR2);
       });
   }, [hasPendingTransactions]);
 
@@ -224,6 +231,12 @@ export const Account = ({
               <FontAwesomeIcon icon={faArrowUp} size='sm' className='mr-1' />
               <label className='text-gray-600 hidden md:inline'>+1</label>:{' '}
               {banksR1?.[0]?.balance ?? 0}
+            </span>
+            <span>
+              <FontAwesomeIcon icon={faArrowUp} size='sm' className='mr-1' />
+              <FontAwesomeIcon icon={faArrowUp} size='sm' className='mr-1' />
+              <label className='text-gray-600 hidden md:inline'>+2</label>:{' '}
+              {banksR2?.[0]?.balance ?? 0}
             </span>
           </span>
         </div>

@@ -10,6 +10,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import {
   sftBankR1Nonce,
+  sftBankR2Nonce,
   sftBanksNonce,
   sftCryptNonce,
   sftCryptR1Nonce,
@@ -30,6 +31,7 @@ export const Toolbar = ({ sfts }: { sfts: number[] }) => {
   const isTavernR2 = sfts.filter((x) => x === sftTavernR2Nonce).length > 0;
   const isBank = sfts.filter((x) => x === sftBanksNonce).length > 0;
   const isBankR1 = sfts.filter((x) => x === sftBankR1Nonce).length > 0;
+  const isBankR2 = sfts.filter((x) => x === sftBankR2Nonce).length > 0;
   const isHauntedHouse =
     sfts.filter((x) => x === sftHauntedHouseNonce).length > 0;
   const isHauntedHouseR1 =
@@ -119,6 +121,24 @@ export const Toolbar = ({ sfts }: { sfts: number[] }) => {
                 icon={faArrowUp}
                 className={`text-sm ${
                   isBankR1 ? 'text-white' : 'text-gray-600'
+                }`}
+              />
+            </div>
+            <div
+              className={`w-6 h-6 border border-gray-600 flex justify-center items-center ${
+                isBankR2 ? 'bg-green-600' : 'bg-transparent'
+              }`}
+            >
+              <FontAwesomeIcon
+                icon={faArrowUp}
+                className={`text-sm ${
+                  isBankR2 ? 'text-white' : 'text-gray-600'
+                }`}
+              />
+              <FontAwesomeIcon
+                icon={faArrowUp}
+                className={`text-sm ${
+                  isBankR2 ? 'text-white' : 'text-gray-600'
                 }`}
               />
             </div>
