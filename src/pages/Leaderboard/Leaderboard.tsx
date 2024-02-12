@@ -82,7 +82,7 @@ export const Leaderboard = () => {
         'data:text/csv;charset=utf-8,' +
         'Address,Score\n' +
         leaderboard
-          .slice(0, 10)
+          .slice(0, 50)
           .map(
             (item: any) => `${item.address},${item.balance / BigInt(Math.pow(10, 18))}`
           )
@@ -103,7 +103,7 @@ export const Leaderboard = () => {
         <div className='flex flex-col items-center h-full w-full bg-slate-900 text-slate-400'>
           <h1 className='text-4xl sm:text-4xl font-bold mt-4 mb-2 ml-2 mr-2'>
             Leaderboard {new Date().toLocaleString('en-US', { month: 'long' })}{' '}
-            Top 10
+            Top 50
           </h1>
           <span className='ml-2 mr-2 mb-2 italic'>
             To stay on the leaderboard, make sure to claim rewards within the
@@ -125,7 +125,7 @@ export const Leaderboard = () => {
                 </Button>
               </div>
               <ul className='list-decimal ml-8 mb-8'>
-                {leaderboard.slice(0, 10).map((item: any, index: number) => (
+                {leaderboard.slice(0, 50).map((item: any, index: number) => (
                   <li key={index} className='mb-2'>
                     <span className='flex flex-items-center'>
                       <a
