@@ -7,7 +7,7 @@ import { useGLTF, useAnimations } from '@react-three/drei';
 
 export function BankR2({ color, ...props }: any) {
   const group = useRef();
-  const { nodes, materials, animations } = useGLTF('/game/Bank+1.glb');
+  const { nodes, materials, animations } = useGLTF('/game/Bank+2.glb');
   const { actions } = useAnimations(animations, group);
 
   const position = [-3.0777, 1.0154, -3.8426];
@@ -121,9 +121,100 @@ export function BankR2({ color, ...props }: any) {
             <meshStandardMaterial color={color} transparent opacity={0.2} />
           )}
         </mesh>
+        <group name='Armature' position={[-2.767, 1.127, -3.02]} scale={0.035}>
+          <group name='LPSkeleton'>
+            <skinnedMesh
+              name='Sphere001'
+              geometry={nodes.Sphere001.geometry}
+              material={materials.SkBase}
+              skeleton={nodes.Sphere001.skeleton}
+            >
+              {color !== undefined && (
+                <meshStandardMaterial color={color} transparent opacity={0.2} />
+              )}
+            </skinnedMesh>
+            <skinnedMesh
+              name='Sphere001_1'
+              geometry={nodes.Sphere001_1.geometry}
+              material={materials.SkShadow}
+              skeleton={nodes.Sphere001_1.skeleton}
+            >
+              {color !== undefined && (
+                <meshStandardMaterial color={color} transparent opacity={0.2} />
+              )}
+            </skinnedMesh>
+            <skinnedMesh
+              name='Sphere001_2'
+              geometry={nodes.Sphere001_2.geometry}
+              material={materials.SkTeeth}
+              skeleton={nodes.Sphere001_2.skeleton}
+            >
+              {color !== undefined && (
+                <meshStandardMaterial color={color} transparent opacity={0.2} />
+              )}
+            </skinnedMesh>
+          </group>
+          <primitive object={nodes.mixamorigHips} />
+          <primitive object={nodes.Ctrl_Master} />
+          <primitive object={nodes.Ctrl_ArmPole_IK_Left} />
+          <primitive object={nodes.Ctrl_Hand_IK_Left} />
+          <primitive object={nodes.Ctrl_ArmPole_IK_Right} />
+          <primitive object={nodes.Ctrl_Hand_IK_Right} />
+          <primitive object={nodes.Ctrl_Foot_IK_Left} />
+          <primitive object={nodes.Ctrl_LegPole_IK_Left} />
+          <primitive object={nodes.Ctrl_Foot_IK_Right} />
+          <primitive object={nodes.Ctrl_LegPole_IK_Right} />
+        </group>
+        <group
+          name='Coffre'
+          position={[-2.613, 1.121, -2.955]}
+          rotation={[0, 0.004, 0]}
+          scale={0.044}
+        >
+          <mesh
+            name='Cube014'
+            castShadow
+            receiveShadow
+            geometry={nodes.Cube014.geometry}
+            material={materials.CoffreBois}
+          >
+            {color !== undefined && (
+              <meshStandardMaterial color={color} transparent opacity={0.2} />
+            )}
+          </mesh>
+          <mesh
+            name='Cube014_1'
+            castShadow
+            receiveShadow
+            geometry={nodes.Cube014_1.geometry}
+            material={materials.CoffreCuirSangles}
+          >
+            {color !== undefined && (
+              <meshStandardMaterial color={color} transparent opacity={0.2} />
+            )}
+          </mesh>
+          <mesh
+            name='Cube014_2'
+            castShadow
+            receiveShadow
+            geometry={nodes.Cube014_2.geometry}
+            material={materials.CoffreCuirPanneaux}
+          >
+            {color !== undefined && (
+              <meshStandardMaterial color={color} transparent opacity={0.2} />
+            )}
+          </mesh>
+          <mesh
+            name='Cube014_3'
+            castShadow
+            receiveShadow
+            geometry={nodes.Cube014_3.geometry}
+            material={materials.CoffreClou}
+          />
+        </group>
       </group>
     </group>
   );
 }
 
-useGLTF.preload('/game/Bank+1.glb');
+useGLTF.preload('/game/Bank+2.glb');
