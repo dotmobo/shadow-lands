@@ -1,10 +1,10 @@
-import { faCircleArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faCamera, faCircleArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useGetAccountInfo } from '@multiversx/sdk-dapp/hooks/account/useGetAccountInfo';
 import { useGetPendingTransactions } from '@multiversx/sdk-dapp/hooks/transactions/useGetPendingTransactions';
 import { useGetNetworkConfig } from '@multiversx/sdk-dapp/hooks/useGetNetworkConfig';
 import axios from 'axios';
-import { FormatAmount, Loader, MxLink } from 'components';
+import { Button, FormatAmount, Loader, MxLink } from 'components';
 import {
   contractGameAddress,
   ignoredAddresses,
@@ -76,6 +76,27 @@ export const Leaderboard = () => {
       });
   }, [hasPendingTransactions]);
 
+  const downloadCSV = () => {
+    if (leaderboard) {
+      const csvContent =
+        'data:text/csv;charset=utf-8,' +
+        'Address,Score\n' +
+        leaderboard
+          .slice(0, 10)
+          .map(
+            (item: any) => `${item.address},${item.balance / BigInt(Math.pow(10, 18))}`
+          )
+          .join('\n');
+
+      const encodedUri = encodeURI(csvContent);
+      const link = document.createElement('a');
+      link.setAttribute('href', encodedUri);
+      link.setAttribute('download', 'leaderboard.csv');
+      document.body.appendChild(link);
+      link.click();
+    }
+  };
+
   return (
     <AuthRedirectWrapper requireAuth={true}>
       <PageWrapper>
@@ -97,35 +118,42 @@ export const Leaderboard = () => {
             </div>
           )}
           {leaderboard !== undefined && leaderboard.length > 0 && (
-            <ul className='list-decimal ml-8 mb-8'>
-              {leaderboard.slice(0, 10).map((item: any, index: number) => (
-                <li key={index} className='mb-2'>
-                  <span className='flex flex-items-center'>
-                    <a
-                      target='_blank'
-                      className={`mb-2 hover:text-slate-100 ${
-                        item.address === address
-                          ? ' text-yellow-400 '
-                          : 'text-slate-400'
-                      }`}
-                      href={`${mvxExplorerUrl}/accounts/${item.address}`}
-                    >
-                      {item.address.substring(0, 6) +
-                        '...' +
-                        item.address.substring(item.address.length - 6)}
-                    </a>
-                    &nbsp;:&nbsp;
-                    <FormatAmount
-                      value={item.balance ?? 0}
-                      showLabel={false}
-                      egldLabel='$DUST'
-                      digits={0}
-                      data-testid='balance'
-                    />
-                  </span>
-                </li>
-              ))}
-            </ul>
+            <>
+              <div className='mb-8'>
+                <Button onClick={downloadCSV} aria-label='snapshot'>
+                  <FontAwesomeIcon icon={faCamera} />
+                </Button>
+              </div>
+              <ul className='list-decimal ml-8 mb-8'>
+                {leaderboard.slice(0, 10).map((item: any, index: number) => (
+                  <li key={index} className='mb-2'>
+                    <span className='flex flex-items-center'>
+                      <a
+                        target='_blank'
+                        className={`mb-2 hover:text-slate-100 ${
+                          item.address === address
+                            ? ' text-yellow-400 '
+                            : 'text-slate-400'
+                        }`}
+                        href={`${mvxExplorerUrl}/accounts/${item.address}`}
+                      >
+                        {item.address.substring(0, 6) +
+                          '...' +
+                          item.address.substring(item.address.length - 6)}
+                      </a>
+                      &nbsp;:&nbsp;
+                      <FormatAmount
+                        value={item.balance ?? 0}
+                        showLabel={false}
+                        egldLabel='$DUST'
+                        digits={0}
+                        data-testid='balance'
+                      />
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </>
           )}
           <span className='mb-2'>
             <MxLink to={RouteNamesEnum.game}>
