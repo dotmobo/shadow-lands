@@ -14,7 +14,8 @@ export function BankR2({ color, ...props }: any) {
   const rotation = [0, 0.2688036, 0];
 
   useEffect(() => {
-    actions.Action.play();
+    console.log(actions);
+    actions.BankAction.play();
   }, [group]);
 
   return (
@@ -27,12 +28,12 @@ export function BankR2({ color, ...props }: any) {
         />
       )}
       <group name='Scene'>
-        <group name='Cube005'>
+        <group name='Bank'>
           <mesh
-            name='Cube008'
+            name='Cube010'
             castShadow
             receiveShadow
-            geometry={nodes.Cube008.geometry}
+            geometry={nodes.Cube010.geometry}
             material={materials.BankFace}
           >
             {color !== undefined && (
@@ -40,10 +41,10 @@ export function BankR2({ color, ...props }: any) {
             )}
           </mesh>
           <mesh
-            name='Cube008_1'
+            name='Cube010_1'
             castShadow
             receiveShadow
-            geometry={nodes.Cube008_1.geometry}
+            geometry={nodes.Cube010_1.geometry}
             material={materials.BankColonnes}
           >
             {color !== undefined && (
@@ -51,10 +52,10 @@ export function BankR2({ color, ...props }: any) {
             )}
           </mesh>
           <mesh
-            name='Cube008_2'
+            name='Cube010_2'
             castShadow
             receiveShadow
-            geometry={nodes.Cube008_2.geometry}
+            geometry={nodes.Cube010_2.geometry}
             material={materials.BankMarches}
           >
             {color !== undefined && (
@@ -62,10 +63,10 @@ export function BankR2({ color, ...props }: any) {
             )}
           </mesh>
           <mesh
-            name='Cube008_3'
+            name='Cube010_3'
             castShadow
             receiveShadow
-            geometry={nodes.Cube008_3.geometry}
+            geometry={nodes.Cube010_3.geometry}
             material={materials.Lumiere}
           >
             {color !== undefined && (
@@ -73,10 +74,10 @@ export function BankR2({ color, ...props }: any) {
             )}
           </mesh>
           <mesh
-            name='Cube008_4'
+            name='Cube010_4'
             castShadow
             receiveShadow
-            geometry={nodes.Cube008_4.geometry}
+            geometry={nodes.Cube010_4.geometry}
             material={materials.BankToit}
           >
             {color !== undefined && (
@@ -84,10 +85,10 @@ export function BankR2({ color, ...props }: any) {
             )}
           </mesh>
           <mesh
-            name='Cube008_5'
+            name='Cube010_5'
             castShadow
             receiveShadow
-            geometry={nodes.Cube008_5.geometry}
+            geometry={nodes.Cube010_5.geometry}
             material={materials.Palette}
           >
             {color !== undefined && (
@@ -96,10 +97,10 @@ export function BankR2({ color, ...props }: any) {
           </mesh>
         </group>
         <mesh
-          name='Cylinder'
+          name='Token1001'
           castShadow
           receiveShadow
-          geometry={nodes.Cylinder.geometry}
+          geometry={nodes.Token1001.geometry}
           material={materials.Token}
           position={[-3.857, 2.132, -3.278]}
           rotation={[Math.PI / 2, 0, 0]}
@@ -109,10 +110,10 @@ export function BankR2({ color, ...props }: any) {
           )}
         </mesh>
         <mesh
-          name='Cylinder001'
+          name='Token2001'
           castShadow
           receiveShadow
-          geometry={nodes.Cylinder001.geometry}
+          geometry={nodes.Token2001.geometry}
           material={materials.Token}
           position={[-1.911, 2.132, -3.805]}
           rotation={[Math.PI / 2, 0, 1.882]}
@@ -121,33 +122,33 @@ export function BankR2({ color, ...props }: any) {
             <meshStandardMaterial color={color} transparent opacity={0.2} />
           )}
         </mesh>
-        <group name='Armature' position={[-2.767, 1.127, -3.02]} scale={0.035}>
-          <group name='LPSkeleton'>
+        <group name='ArmatureSkeleton001' position={[-2.767, 1.127, -3.02]} scale={0.035}>
+          <group name='LPSkeleton001'>
             <skinnedMesh
-              name='Sphere001'
-              geometry={nodes.Sphere001.geometry}
+              name='Sphere002'
+              geometry={nodes.Sphere002.geometry}
               material={materials.SkBase}
-              skeleton={nodes.Sphere001.skeleton}
+              skeleton={nodes.Sphere002.skeleton}
             >
               {color !== undefined && (
                 <meshStandardMaterial color={color} transparent opacity={0.2} />
               )}
             </skinnedMesh>
             <skinnedMesh
-              name='Sphere001_1'
-              geometry={nodes.Sphere001_1.geometry}
+              name='Sphere002_1'
+              geometry={nodes.Sphere002_1.geometry}
               material={materials.SkShadow}
-              skeleton={nodes.Sphere001_1.skeleton}
+              skeleton={nodes.Sphere002_1.skeleton}
             >
               {color !== undefined && (
                 <meshStandardMaterial color={color} transparent opacity={0.2} />
               )}
             </skinnedMesh>
             <skinnedMesh
-              name='Sphere001_2'
-              geometry={nodes.Sphere001_2.geometry}
+              name='Sphere002_2'
+              geometry={nodes.Sphere002_2.geometry}
               material={materials.SkTeeth}
-              skeleton={nodes.Sphere001_2.skeleton}
+              skeleton={nodes.Sphere002_2.skeleton}
             >
               {color !== undefined && (
                 <meshStandardMaterial color={color} transparent opacity={0.2} />
@@ -166,16 +167,16 @@ export function BankR2({ color, ...props }: any) {
           <primitive object={nodes.Ctrl_LegPole_IK_Right} />
         </group>
         <group
-          name='Coffre'
+          name='Coffre001'
           position={[-2.613, 1.121, -2.955]}
           rotation={[0, 0.004, 0]}
           scale={0.044}
         >
           <mesh
-            name='Cube014'
+            name='Cube011'
             castShadow
             receiveShadow
-            geometry={nodes.Cube014.geometry}
+            geometry={nodes.Cube011.geometry}
             material={materials.CoffreBois}
           >
             {color !== undefined && (
@@ -183,10 +184,10 @@ export function BankR2({ color, ...props }: any) {
             )}
           </mesh>
           <mesh
-            name='Cube014_1'
+            name='Cube011_1'
             castShadow
             receiveShadow
-            geometry={nodes.Cube014_1.geometry}
+            geometry={nodes.Cube011_1.geometry}
             material={materials.CoffreCuirSangles}
           >
             {color !== undefined && (
@@ -194,10 +195,10 @@ export function BankR2({ color, ...props }: any) {
             )}
           </mesh>
           <mesh
-            name='Cube014_2'
+            name='Cube011_2'
             castShadow
             receiveShadow
-            geometry={nodes.Cube014_2.geometry}
+            geometry={nodes.Cube011_2.geometry}
             material={materials.CoffreCuirPanneaux}
           >
             {color !== undefined && (
@@ -205,10 +206,10 @@ export function BankR2({ color, ...props }: any) {
             )}
           </mesh>
           <mesh
-            name='Cube014_3'
+            name='Cube011_3'
             castShadow
             receiveShadow
-            geometry={nodes.Cube014_3.geometry}
+            geometry={nodes.Cube011_3.geometry}
             material={materials.CoffreClou}
           />
         </group>
