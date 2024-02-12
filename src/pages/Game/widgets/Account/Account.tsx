@@ -35,7 +35,8 @@ import {
   sftCryptR1Id,
   sftLaboR1Id,
   sftTavernR2Id,
-  sftBankR2Id
+  sftBankR2Id,
+  sftHauntedHouseR2Id
 } from 'config';
 import {
   useGetAccountInfo,
@@ -62,6 +63,7 @@ export const Account = ({
   outputLabosR1,
   outputTavernsR2,
   outputBanksR2,
+  outputHauntedHousesR2
 }) => {
   const { network } = useGetNetworkConfig();
   const { address, account } = useGetAccountInfo();
@@ -80,6 +82,7 @@ export const Account = ({
 
   const [tavernsR2, setTavernsR2] = useState<Sft[]>();
   const [banksR2, setBanksR2] = useState<Sft[]>();
+  const [hauntedHousesR2, setHauntedHousesR2] = useState<Sft[]>();
 
   const [dust, setDustToken] = useState<Token | null>();
   const { hasPendingTransactions } = useGetPendingTransactions();
@@ -104,7 +107,7 @@ export const Account = ({
     // Use [] as second argument in useEffect for not rendering each time
     axios
       .get<any>(
-        `${mvxApiUrl}/accounts/${address}/nfts?size=3330&identifiers=${sftLandsId},${sftTavernId},${sftBanksId},${sftHauntedHouseId},${sftCryptId},${sftLaboId},${sftTavernR1Id},${sftBankR1Id},${sftHauntedHouseR1Id},${sftCryptR1Id},${sftLaboR1Id},${sftTavernR2Id},${sftBankR2Id}`
+        `${mvxApiUrl}/accounts/${address}/nfts?size=3330&identifiers=${sftLandsId},${sftTavernId},${sftBanksId},${sftHauntedHouseId},${sftCryptId},${sftLaboId},${sftTavernR1Id},${sftBankR1Id},${sftHauntedHouseR1Id},${sftCryptR1Id},${sftLaboR1Id},${sftTavernR2Id},${sftBankR2Id},${sftHauntedHouseR2Id}`
       )
       .then((response) => {
         const res = orderBy(
@@ -167,6 +170,12 @@ export const Account = ({
         const banksR2 = res.filter((x) => x.identifier === sftBankR2Id);
         setBanksR2(banksR2);
         outputBanksR2(banksR2);
+        // Haunted Houses R2
+        const hauntedHousesR2 = res.filter(
+          (x) => x.identifier === sftHauntedHouseR2Id
+        );
+        setHauntedHousesR2(hauntedHousesR2);
+        outputHauntedHousesR2(hauntedHousesR2);
       });
   }, [hasPendingTransactions]);
 
@@ -252,6 +261,12 @@ export const Account = ({
               <FontAwesomeIcon icon={faArrowUp} size='sm' className='mr-1' />
               <label className='text-gray-600 hidden md:inline'>+1</label>:{' '}
               {hauntedHousesR1?.[0]?.balance ?? 0}
+            </span>
+            <span>
+              <FontAwesomeIcon icon={faArrowUp} size='sm' className='mr-1' />
+              <FontAwesomeIcon icon={faArrowUp} size='sm' className='mr-1' />
+              <label className='text-gray-600 hidden md:inline'>+1</label>:{' '}
+              {hauntedHousesR2?.[0]?.balance ?? 0}
             </span>
           </span>
           <span className='flex flex-col w-1/3'>
