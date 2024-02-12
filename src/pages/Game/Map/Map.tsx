@@ -26,7 +26,8 @@ import {
   sftCryptR1Nonce,
   sftLaboR1Nonce,
   sftTavernR2Nonce,
-  sftBankR2Nonce
+  sftBankR2Nonce,
+  sftHauntedHouseR2Nonce
 } from 'config';
 import { Bank } from './Bank';
 import { HauntedHouse } from './HauntedHouse';
@@ -39,6 +40,7 @@ import { CryptR1 } from './CryptR1';
 import { LaboR1 } from './LaboR1';
 import { TavernR2 } from './TavernR2';
 import { BankR2 } from './BankR2';
+import { HauntedHouseR2 } from './HauntedHouseR2';
 
 function Loader() {
   return (
@@ -62,6 +64,7 @@ export const Map = ({
   walletLabosR1,
   walletTavernsR2,
   walletBanksR2,
+  walletHauntedHousesR2,
   rewardsPerDay,
   defaultAutoRotate,
   fpsView
@@ -114,6 +117,10 @@ export const Map = ({
     sfts.filter((x) => x === sftBanksNonce).length === 0 &&
     sfts.filter((x) => x === sftBankR1Nonce).length === 0;
 
+  const isStakedHauntedHouseR2 =
+    sfts.filter((x) => x === sftHauntedHouseNonce).length > 0 &&
+    sfts.filter((x) => x === sftHauntedHouseR1Nonce).length > 0 &&
+    sfts.filter((x) => x === sftHauntedHouseR2Nonce).length > 0;
   const isStakedHauntedHouseR1 =
     sfts.filter((x) => x === sftHauntedHouseNonce).length > 0 &&
     sfts.filter((x) => x === sftHauntedHouseR1Nonce).length > 0;
@@ -238,7 +245,19 @@ export const Map = ({
             ) : null}
 
             {/* Haunted House */}
-            {isStakedHauntedHouseR1 ? (
+            {isStakedHauntedHouseR2 ? (
+              <HauntedHouseR2 />
+            ) : isStakedHauntedHouseR1 && walletHauntedHousesR2.length > 0 ? (
+              <HauntedHouseR1
+                onClick={(event) => {
+                  hover3(false);
+                  sendStakeBuildingTransaction(sftHauntedHouseR2Nonce);
+                }}
+                onPointerOver={(event) => hover3(true)}
+                onPointerOut={(event) => hover3(false)}
+                color={hovered3 ? 'blue' : undefined}
+              />
+            ) : isStakedHauntedHouseR1 ? (
               <HauntedHouseR1 />
             ) : walletHauntedHousesR1.length > 0 && isStakedHauntedHouse ? (
               <HauntedHouse
