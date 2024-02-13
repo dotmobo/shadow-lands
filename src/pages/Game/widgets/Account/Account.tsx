@@ -272,7 +272,7 @@ export const Account = ({
             <span>
               <FontAwesomeIcon icon={faArrowUp} size='sm' className='mr-1' />
               <FontAwesomeIcon icon={faArrowUp} size='sm' className='mr-1' />
-              <label className='text-gray-600 hidden md:inline'>+1</label>:{' '}
+              <label className='text-gray-600 hidden md:inline'>+2</label>:{' '}
               {hauntedHousesR2?.[0]?.balance ?? 0}
             </span>
           </span>
