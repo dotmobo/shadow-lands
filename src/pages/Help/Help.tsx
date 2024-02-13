@@ -130,7 +130,7 @@ export const Help = () => {
                   />
                   <label
                     htmlFor='quest1'
-                    className='ms-2 text-sm font-medium text-gray-900 dark:text-gray-300'
+                    className='ms-2 text-sm font-medium'
                   >
                     Add the Land to the game.
                   </label>
@@ -147,7 +147,7 @@ export const Help = () => {
                   />
                   <label
                     htmlFor='quest2'
-                    className='ms-2 text-sm font-medium text-gray-900 dark:text-gray-300'
+                    className='ms-2 text-sm font-medium'
                   >
                     Place the Tavern on the map.
                   </label>
@@ -162,7 +162,7 @@ export const Help = () => {
                   />
                   <label
                     htmlFor='quest3'
-                    className='ms-2 text-sm font-medium text-gray-900 dark:text-gray-300'
+                    className='ms-2 text-sm font-medium'
                   >
                     Place the Bank on the map.
                   </label>
@@ -179,7 +179,7 @@ export const Help = () => {
                   />
                   <label
                     htmlFor='quest4'
-                    className='ms-2 text-sm font-medium text-gray-900 dark:text-gray-300'
+                    className='ms-2 text-sm font-medium'
                   >
                     Place the Haunted House on the map.
                   </label>
@@ -194,7 +194,7 @@ export const Help = () => {
                   />
                   <label
                     htmlFor='quest5'
-                    className='ms-2 text-sm font-medium text-gray-900 dark:text-gray-300'
+                    className='ms-2 text-sm font-medium'
                   >
                     Place the Crypt on the map.
                   </label>
@@ -209,7 +209,7 @@ export const Help = () => {
                   />
                   <label
                     htmlFor='quest6'
-                    className='ms-2 text-sm font-medium text-gray-900 dark:text-gray-300'
+                    className='ms-2 text-sm font-medium'
                   >
                     Place the Labo on the map.
                   </label>
@@ -226,7 +226,7 @@ export const Help = () => {
                   />
                   <label
                     htmlFor='quest7'
-                    className='ms-2 text-sm font-medium text-gray-900 dark:text-gray-300'
+                    className='ms-2 text-sm font-medium'
                   >
                     Upgrade the Tavern to level +1.
                   </label>
@@ -243,7 +243,7 @@ export const Help = () => {
                   />
                   <label
                     htmlFor='quest8'
-                    className='ms-2 text-sm font-medium text-gray-900 dark:text-gray-300'
+                    className='ms-2 text-sm font-medium'
                   >
                     Upgrade the Bank to level +1.
                   </label>
@@ -261,7 +261,7 @@ export const Help = () => {
                   />
                   <label
                     htmlFor='quest9'
-                    className='ms-2 text-sm font-medium text-gray-900 dark:text-gray-300'
+                    className='ms-2 text-sm font-medium'
                   >
                     Upgrade the Haunted House to level +1.
                   </label>
@@ -278,7 +278,7 @@ export const Help = () => {
                   />
                   <label
                     htmlFor='quest10'
-                    className='ms-2 text-sm font-medium text-gray-900 dark:text-gray-300'
+                    className='ms-2 text-sm font-medium'
                   >
                     Upgrade the Crypt to level +1.
                   </label>
@@ -295,7 +295,7 @@ export const Help = () => {
                   />
                   <label
                     htmlFor='quest11'
-                    className='ms-2 text-sm font-medium text-gray-900 dark:text-gray-300'
+                    className='ms-2 text-sm font-medium'
                   >
                     Upgrade the Labo to level +1.
                   </label>
@@ -312,7 +312,7 @@ export const Help = () => {
                   />
                   <label
                     htmlFor='quest12'
-                    className='ms-2 text-sm font-medium text-gray-900 dark:text-gray-300'
+                    className='ms-2 text-sm font-medium'
                   >
                     Upgrade the Tavern to level +2.
                   </label>
@@ -329,7 +329,7 @@ export const Help = () => {
                   />
                   <label
                     htmlFor='quest13'
-                    className='ms-2 text-sm font-medium text-gray-900 dark:text-gray-300'
+                    className='ms-2 text-sm font-medium'
                   >
                     Upgrade the Bank to level +2.
                   </label>
@@ -347,7 +347,7 @@ export const Help = () => {
                   />
                   <label
                     htmlFor='quest14'
-                    className='ms-2 text-sm font-medium text-gray-900 dark:text-gray-300'
+                    className='ms-2 text-sm font-medium'
                   >
                     Upgrade the Haunted House to level +2.
                   </label>
