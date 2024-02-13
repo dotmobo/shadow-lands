@@ -28,7 +28,8 @@ import {
   sftTavernR2Nonce,
   sftBankR2Nonce,
   sftHauntedHouseR2Nonce,
-  sftCryptR2Nonce
+  sftCryptR2Nonce,
+  sftLaboR2Nonce
 } from 'config';
 import { Bank } from './Bank';
 import { HauntedHouse } from './HauntedHouse';
@@ -43,6 +44,8 @@ import { TavernR2 } from './TavernR2';
 import { BankR2 } from './BankR2';
 import { HauntedHouseR2 } from './HauntedHouseR2';
 import { CryptR2 } from './CryptR2';
+import { is } from '@react-three/fiber/dist/declarations/src/core/utils';
+import { LaboR2 } from './LaboR2';
 
 function Loader() {
   return (
@@ -68,6 +71,7 @@ export const Map = ({
   walletBanksR2,
   walletHauntedHousesR2,
   walletCryptsR2,
+  walletLabosR2,
   rewardsPerDay,
   defaultAutoRotate,
   fpsView
@@ -148,6 +152,10 @@ export const Map = ({
     sfts.filter((x) => x === sftCryptNonce).length === 0 &&
     sfts.filter((x) => x === sftCryptR1Nonce).length === 0;
 
+  const isStakedLaboR2 =
+    sfts.filter((x) => x === sftLaboR1Nonce).length > 0 &&
+    sfts.filter((x) => x === sftLaboR2Nonce).length > 0 &&
+    sfts.filter((x) => x === sftLaboNonce).length > 0;
   const isStakedLaboR1 =
     sfts.filter((x) => x === sftLaboNonce).length > 0 &&
     sfts.filter((x) => x === sftLaboR1Nonce).length > 0;
@@ -330,7 +338,19 @@ export const Map = ({
             ) : null}
 
             {/* Laboratory */}
-            {isStakedLaboR1 ? (
+            {isStakedLaboR2 ? (
+              <LaboR2 />
+            ) : isStakedLaboR1 && walletLabosR2.length > 0 ? (
+              <LaboR1
+                onClick={(event) => {
+                  hover5(false);
+                  sendStakeBuildingTransaction(sftLaboR2Nonce);
+                }}
+                onPointerOver={(event) => hover5(true)}
+                onPointerOut={(event) => hover5(false)}
+                color={hovered5 ? 'blue' : undefined}
+              />
+            ) : isStakedLaboR1 ? (
               <LaboR1 />
             ) : walletLabosR1.length > 0 && isStakedLabo ? (
               <Labo

@@ -20,6 +20,7 @@ import {
   sftHauntedHouseR2Nonce,
   sftLaboNonce,
   sftLaboR1Nonce,
+  sftLaboR2Nonce,
   sftLandsNonce,
   sftTavernNonce,
   sftTavernR1Nonce,
@@ -45,6 +46,7 @@ export const Toolbar = ({ sfts }: { sfts: number[] }) => {
   const isCryptR2 = sfts.filter((x) => x === sftCryptR2Nonce).length > 0;
   const isLabo = sfts.filter((x) => x === sftLaboNonce).length > 0;
   const isLaboR1 = sfts.filter((x) => x === sftLaboR1Nonce).length > 0;
+  const isLaboR2 = sfts.filter((x) => x === sftLaboR2Nonce).length > 0;
 
   return (
     <div className='flex w-full justify-center'>
@@ -258,6 +260,24 @@ export const Toolbar = ({ sfts }: { sfts: number[] }) => {
                 icon={faArrowUp}
                 className={`text-sm ${
                   isLaboR1 ? 'text-white' : 'text-gray-600'
+                }`}
+              />
+            </div>
+            <div
+              className={`w-6 h-6 border border-gray-600 flex justify-center items-center ${
+                isLaboR2 ? 'bg-green-600' : 'bg-transparent'
+              }`}
+            >
+              <FontAwesomeIcon
+                icon={faArrowUp}
+                className={`text-sm ${
+                  isLaboR2 ? 'text-white' : 'text-gray-600'
+                }`}
+              />
+              <FontAwesomeIcon
+                icon={faArrowUp}
+                className={`text-sm ${
+                  isLaboR2 ? 'text-white' : 'text-gray-600'
                 }`}
               />
             </div>
