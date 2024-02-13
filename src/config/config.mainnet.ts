@@ -41,7 +41,7 @@ export const sftHauntedHouseR2Id = 'SHALAN-55b9a9-0e';
 export const sftHauntedHouseR2Nonce = 14;
 export const sftCryptR2Id = 'SHALAN-55b9a9-0f';
 export const sftCryptR2Nonce = 15;
-export const sftLaboR2Id = 'SHALAN-55b9a9-0g';
+export const sftLaboR2Id = 'SHALAN-55b9a9-10';
 export const sftLaboR2Nonce = 16;
 // Dust and SC
 export const dustTokenId = 'DUST-e7e490';
