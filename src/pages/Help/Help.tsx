@@ -1,6 +1,9 @@
 import { faCircleArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { MxLink } from 'components';
+import { useGetPendingTransactions } from '@multiversx/sdk-dapp/hooks/transactions/useGetPendingTransactions';
+import { useGetNetworkConfig } from '@multiversx/sdk-dapp/hooks/useGetNetworkConfig';
+import { ProxyNetworkProvider } from '@multiversx/sdk-network-providers/out';
+import { Loader, MxLink } from 'components';
 import {
   contractGameAddress,
   contractMarketAddress,
@@ -8,9 +11,67 @@ import {
   mvxExplorerUrl
 } from 'config';
 import { RouteNamesEnum } from 'localConstants';
+import { useCallShadowLandsQuery } from 'pages/Game/queries';
+import { useEffect, useState } from 'react';
 import { AuthRedirectWrapper, PageWrapper } from 'wrappers';
+import {
+  sftBankR1Nonce,
+  sftBankR2Nonce,
+  sftBanksNonce,
+  sftCryptNonce,
+  sftCryptR1Nonce,
+  sftHauntedHouseNonce,
+  sftHauntedHouseR1Nonce,
+  sftHauntedHouseR2Nonce,
+  sftLaboNonce,
+  sftLaboR1Nonce,
+  sftLandsNonce,
+  sftTavernNonce,
+  sftTavernR1Nonce,
+  sftTavernR2Nonce
+} from 'config';
 
 export const Help = () => {
+  const { network } = useGetNetworkConfig();
+
+  const [sfts, setSftsList] = useState<number[]>();
+
+  const { getNftNonce } = useCallShadowLandsQuery();
+
+  const { hasPendingTransactions } = useGetPendingTransactions();
+
+  const proxy = new ProxyNetworkProvider(network.apiAddress, {
+    timeout: 5000
+  });
+
+  useEffect(() => {
+    proxy
+      .queryContract(getNftNonce)
+      .then(({ returnData }) => {
+        const [encoded] = returnData;
+        switch (encoded) {
+          case undefined:
+            setSftsList([]);
+            break;
+          case '':
+            setSftsList([]);
+            break;
+          default: {
+            const decoded: Uint8Array = Buffer.from(encoded, 'base64');
+            const filteredNumbers = Array.from(decoded).filter(
+              (x, i) => (i + 1) % 8 === 0
+            );
+            setSftsList(filteredNumbers);
+            break;
+          }
+        }
+      })
+      .catch((err) => {
+        console.error('Unable to call VM query', err);
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [hasPendingTransactions]);
+
   return (
     <AuthRedirectWrapper requireAuth={true}>
       <PageWrapper>
@@ -19,6 +80,9 @@ export const Help = () => {
             How to play ?
           </h1>
           <div>
+            <h2 className='text-2xl sm:text-2xl font-bold mb-8'>
+              Instructions
+            </h2>
             <ul className='list-disc ml-8 mb-8 mr-2'>
               <li>
                 🌴 Land Acquisition: Kick things off by using the market to snag
@@ -48,6 +112,248 @@ export const Help = () => {
                 glory!
               </li>
             </ul>
+            <h2 className='text-2xl sm:text-2xl font-bold mb-8'>Quests</h2>
+            {sfts === undefined && (
+              <div className='flex'>
+                <Loader />
+              </div>
+            )}
+            {sfts !== undefined && (
+              <ul className='ml-8 mb-8 mr-2'>
+                <li className='flex items-center mb-4'>
+                  <input
+                    id='quest1'
+                    type='checkbox'
+                    checked={sfts.filter((x) => x === sftLandsNonce).length > 0}
+                    readOnly={true}
+                    className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'
+                  />
+                  <label
+                    htmlFor='quest1'
+                    className='ms-2 text-sm font-medium text-gray-900 dark:text-gray-300'
+                  >
+                    Add the Land to the game.
+                  </label>
+                </li>
+                <li className='flex items-center mb-4'>
+                  <input
+                    id='quest2'
+                    type='checkbox'
+                    checked={
+                      sfts.filter((x) => x === sftTavernNonce).length > 0
+                    }
+                    readOnly={true}
+                    className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'
+                  />
+                  <label
+                    htmlFor='quest2'
+                    className='ms-2 text-sm font-medium text-gray-900 dark:text-gray-300'
+                  >
+                    Place the Tavern on the map.
+                  </label>
+                </li>
+                <li className='flex items-center mb-4'>
+                  <input
+                    id='quest3'
+                    type='checkbox'
+                    checked={sfts.filter((x) => x === sftBanksNonce).length > 0}
+                    readOnly={true}
+                    className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'
+                  />
+                  <label
+                    htmlFor='quest3'
+                    className='ms-2 text-sm font-medium text-gray-900 dark:text-gray-300'
+                  >
+                    Place the Bank on the map.
+                  </label>
+                </li>
+                <li className='flex items-center mb-4'>
+                  <input
+                    id='quest4'
+                    type='checkbox'
+                    checked={
+                      sfts.filter((x) => x === sftHauntedHouseNonce).length > 0
+                    }
+                    readOnly={true}
+                    className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'
+                  />
+                  <label
+                    htmlFor='quest4'
+                    className='ms-2 text-sm font-medium text-gray-900 dark:text-gray-300'
+                  >
+                    Place the Haunted House on the map.
+                  </label>
+                </li>
+                <li className='flex items-center mb-4'>
+                  <input
+                    id='quest5'
+                    type='checkbox'
+                    checked={sfts.filter((x) => x === sftCryptNonce).length > 0}
+                    readOnly={true}
+                    className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'
+                  />
+                  <label
+                    htmlFor='quest5'
+                    className='ms-2 text-sm font-medium text-gray-900 dark:text-gray-300'
+                  >
+                    Place the Crypt on the map.
+                  </label>
+                </li>
+                <li className='flex items-center mb-4'>
+                  <input
+                    id='quest6'
+                    type='checkbox'
+                    checked={sfts.filter((x) => x === sftLaboNonce).length > 0}
+                    readOnly={true}
+                    className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'
+                  />
+                  <label
+                    htmlFor='quest6'
+                    className='ms-2 text-sm font-medium text-gray-900 dark:text-gray-300'
+                  >
+                    Place the Labo on the map.
+                  </label>
+                </li>
+                <li className='flex items-center mb-4'>
+                  <input
+                    id='quest7'
+                    type='checkbox'
+                    checked={
+                      sfts.filter((x) => x === sftTavernR1Nonce).length > 0
+                    }
+                    readOnly={true}
+                    className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'
+                  />
+                  <label
+                    htmlFor='quest7'
+                    className='ms-2 text-sm font-medium text-gray-900 dark:text-gray-300'
+                  >
+                    Upgrade the Tavern to level +1.
+                  </label>
+                </li>
+                <li className='flex items-center mb-4'>
+                  <input
+                    id='quest8'
+                    type='checkbox'
+                    checked={
+                      sfts.filter((x) => x === sftBankR1Nonce).length > 0
+                    }
+                    readOnly={true}
+                    className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'
+                  />
+                  <label
+                    htmlFor='quest8'
+                    className='ms-2 text-sm font-medium text-gray-900 dark:text-gray-300'
+                  >
+                    Upgrade the Bank to level +1.
+                  </label>
+                </li>
+                <li className='flex items-center mb-4'>
+                  <input
+                    id='quest9'
+                    type='checkbox'
+                    checked={
+                      sfts.filter((x) => x === sftHauntedHouseR1Nonce).length >
+                      0
+                    }
+                    readOnly={true}
+                    className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'
+                  />
+                  <label
+                    htmlFor='quest9'
+                    className='ms-2 text-sm font-medium text-gray-900 dark:text-gray-300'
+                  >
+                    Upgrade the Haunted House to level +1.
+                  </label>
+                </li>
+                <li className='flex items-center mb-4'>
+                  <input
+                    id='quest10'
+                    type='checkbox'
+                    checked={
+                      sfts.filter((x) => x === sftCryptR1Nonce).length > 0
+                    }
+                    readOnly={true}
+                    className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'
+                  />
+                  <label
+                    htmlFor='quest10'
+                    className='ms-2 text-sm font-medium text-gray-900 dark:text-gray-300'
+                  >
+                    Upgrade the Crypt to level +1.
+                  </label>
+                </li>
+                <li className='flex items-center mb-4'>
+                  <input
+                    id='quest11'
+                    type='checkbox'
+                    checked={
+                      sfts.filter((x) => x === sftLaboR1Nonce).length > 0
+                    }
+                    readOnly={true}
+                    className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'
+                  />
+                  <label
+                    htmlFor='quest11'
+                    className='ms-2 text-sm font-medium text-gray-900 dark:text-gray-300'
+                  >
+                    Upgrade the Labo to level +1.
+                  </label>
+                </li>
+                <li className='flex items-center mb-4'>
+                  <input
+                    id='quest12'
+                    type='checkbox'
+                    checked={
+                      sfts.filter((x) => x === sftTavernR2Nonce).length > 0
+                    }
+                    readOnly={true}
+                    className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'
+                  />
+                  <label
+                    htmlFor='quest12'
+                    className='ms-2 text-sm font-medium text-gray-900 dark:text-gray-300'
+                  >
+                    Upgrade the Tavern to level +2.
+                  </label>
+                </li>
+                <li className='flex items-center mb-4'>
+                  <input
+                    id='quest13'
+                    type='checkbox'
+                    checked={
+                      sfts.filter((x) => x === sftBankR2Nonce).length > 0
+                    }
+                    readOnly={true}
+                    className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'
+                  />
+                  <label
+                    htmlFor='quest13'
+                    className='ms-2 text-sm font-medium text-gray-900 dark:text-gray-300'
+                  >
+                    Upgrade the Bank to level +2.
+                  </label>
+                </li>
+                <li className='flex items-center mb-4'>
+                  <input
+                    id='quest14'
+                    type='checkbox'
+                    checked={
+                      sfts.filter((x) => x === sftHauntedHouseR2Nonce).length >
+                      0
+                    }
+                    readOnly={true}
+                    className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'
+                  />
+                  <label
+                    htmlFor='quest14'
+                    className='ms-2 text-sm font-medium text-gray-900 dark:text-gray-300'
+                  >
+                    Upgrade the Haunted House to level +2.
+                  </label>
+                </li>
+              </ul>
+            )}
             <h2 className='text-2xl sm:text-2xl font-bold mb-8'>
               Important notices
             </h2>
