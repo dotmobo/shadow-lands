@@ -14,7 +14,6 @@ export function BankR2({ color, ...props }: any) {
   const rotation = [0, 0.2688036, 0];
 
   useEffect(() => {
-    console.log(actions);
     actions.BankAction.play();
   }, [group]);
 
@@ -122,7 +121,11 @@ export function BankR2({ color, ...props }: any) {
             <meshStandardMaterial color={color} transparent opacity={0.2} />
           )}
         </mesh>
-        <group name='ArmatureSkeleton001' position={[-2.767, 1.127, -3.02]} scale={0.035}>
+        <group
+          name='ArmatureSkeleton001'
+          position={[-2.767, 1.127, -3.02]}
+          scale={0.035}
+        >
           <group name='LPSkeleton001'>
             <skinnedMesh
               name='Sphere002'
