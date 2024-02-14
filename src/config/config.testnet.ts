@@ -77,7 +77,7 @@ export const contractMarketDbAddress =
 // Dusty statue
 export enum StatueType {
   Dusty = 'DUSTY',
-  Shroom = 'Shroom'
+  Shroom = 'SHROOM'
 }
-export const typeStatue = StatueType.Dusty;
-export const linkStatue = 'https://dustybones.xyz';
+export const selectedStatue = StatueType.Shroom;
+export const linkStatue = 'https://cryptoshrooms.net/';

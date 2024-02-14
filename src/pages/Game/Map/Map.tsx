@@ -29,8 +29,8 @@ import {
   sftBankR2Nonce,
   sftHauntedHouseR2Nonce,
   linkStatue,
-  typeStatue,
-  StatueType
+  StatueType,
+  selectedStatue
 } from 'config';
 import { Bank } from './Bank';
 import { HauntedHouse } from './HauntedHouse';
@@ -45,6 +45,7 @@ import { TavernR2 } from './TavernR2';
 import { BankR2 } from './BankR2';
 import { HauntedHouseR2 } from './HauntedHouseR2';
 import { StatueDusty } from './StatueDusty';
+import { StatueShroom } from './StatueShroom';
 
 function Loader() {
   return (
@@ -173,8 +174,19 @@ export const Map = ({
               onPointerOut={(event) => hover(false)}
             />
 
-            {typeStatue === StatueType.Dusty && (
+            {selectedStatue === StatueType.Dusty && (
               <StatueDusty
+                onClick={(event) => {
+                  hover6(false);
+                  window.open(linkStatue, '_blank');
+                }}
+                onPointerOver={(event) => hover6(true)}
+                onPointerOut={(event) => hover6(false)}
+                color={hovered6 ? 'yellow' : undefined}
+              />
+            )}
+            {selectedStatue === StatueType.Shroom && (
+              <StatueShroom
                 onClick={(event) => {
                   hover6(false);
                   window.open(linkStatue, '_blank');
