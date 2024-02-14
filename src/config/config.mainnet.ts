@@ -75,3 +75,11 @@ export const nftCollectionDustyBonesId = 'DUSTYBONES-c1fc90';
 export const priceDustyBone = 2000;
 export const contractMarketDbAddress =
   'erd1qqqqqqqqqqqqqpgqwyxk57xdunghh8cyefwgdzm38wmrlzf62krsz63ft6';
+
+// Dusty statue
+export enum StatueType {
+  Dusty = 'DUSTY',
+  Shroom = 'SHROOM'
+}
+export const selectedStatue = StatueType.Shroom;
+export const linkStatue = 'https://cryptoshrooms.net/';

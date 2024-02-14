@@ -27,7 +27,10 @@ import {
   sftLaboR1Nonce,
   sftTavernR2Nonce,
   sftBankR2Nonce,
-  sftHauntedHouseR2Nonce
+  sftHauntedHouseR2Nonce,
+  linkStatue,
+  StatueType,
+  selectedStatue
 } from 'config';
 import { Bank } from './Bank';
 import { HauntedHouse } from './HauntedHouse';
@@ -41,6 +44,8 @@ import { LaboR1 } from './LaboR1';
 import { TavernR2 } from './TavernR2';
 import { BankR2 } from './BankR2';
 import { HauntedHouseR2 } from './HauntedHouseR2';
+import { StatueDusty } from './StatueDusty';
+import { StatueShroom } from './StatueShroom';
 
 function Loader() {
   return (
@@ -81,13 +86,16 @@ export const Map = ({
   const [hovered3, hover3] = useState(false);
   const [hovered4, hover4] = useState(false);
   const [hovered5, hover5] = useState(false);
+  const [hovered6, hover6] = useState(false);
 
   useEffect(() => {
     document.body.style.cursor =
       hovered1 || hovered2 || hovered3 || hovered4 || hovered5
         ? 'pointer'
+        : hovered6
+        ? 'zoom-in'
         : 'auto';
-  }, [hovered1, hovered2, hovered3, hovered4, hovered5]);
+  }, [hovered1, hovered2, hovered3, hovered4, hovered5 || hovered6]);
 
   const isStakedTavernR2 =
     sfts.filter((x) => x === sftTavernR2Nonce).length > 0 &&
@@ -165,6 +173,29 @@ export const Map = ({
               onPointerOver={(event) => hover(true)}
               onPointerOut={(event) => hover(false)}
             />
+
+            {selectedStatue === StatueType.Dusty && (
+              <StatueDusty
+                onClick={(event) => {
+                  hover6(false);
+                  window.open(linkStatue, '_blank');
+                }}
+                onPointerOver={(event) => hover6(true)}
+                onPointerOut={(event) => hover6(false)}
+                color={hovered6 ? 'yellow' : undefined}
+              />
+            )}
+            {selectedStatue === StatueType.Shroom && (
+              <StatueShroom
+                onClick={(event) => {
+                  hover6(false);
+                  window.open(linkStatue, '_blank');
+                }}
+                onPointerOver={(event) => hover6(true)}
+                onPointerOut={(event) => hover6(false)}
+                color={hovered6 ? 'yellow' : undefined}
+              />
+            )}
 
             {/* Tavern */}
             {isStakedTavernR2 ? (

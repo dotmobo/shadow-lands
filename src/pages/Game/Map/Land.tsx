@@ -7,7 +7,7 @@ import { useGLTF, useAnimations } from '@react-three/drei';
 
 export function Land(props) {
   const group = useRef();
-  const { nodes, materials, animations } = useGLTF('/game/Land.glb');
+  const { nodes, materials, animations } = useGLTF('/game/Land_1_01_Anim.glb');
   const { actions } = useAnimations(animations, group);
 
   useEffect(() => {
@@ -559,8 +559,8 @@ export function Land(props) {
           geometry={nodes.Pin051.geometry}
           material={materials.Pin512}
           position={[-3.699, 1.217, -4.807]}
-          rotation={[Math.PI, -0.446, Math.PI]}
-          scale={[0.279, 0.54, 0.279]}
+          rotation={[Math.PI, -0.166, Math.PI]}
+          scale={[0.257, 0.498, 0.257]}
         />
         <mesh
           name='Pin052'
@@ -1555,26 +1555,6 @@ export function Land(props) {
             material={materials.PaletteLumiere}
           />
         </group>
-        <group name='ArmatureDusty' position={[0, 1.914, 0]}>
-          <skinnedMesh
-            name='Dusty'
-            geometry={nodes.Dusty.geometry}
-            material={materials.DustySkin}
-            skeleton={nodes.Dusty.skeleton}
-            morphTargetDictionary={nodes.Dusty.morphTargetDictionary}
-            morphTargetInfluences={nodes.Dusty.morphTargetInfluences}
-          />
-          <primitive object={nodes.mixamorigHips} />
-          <primitive object={nodes.Ctrl_Master} />
-          <primitive object={nodes.Ctrl_ArmPole_IK_Left} />
-          <primitive object={nodes.Ctrl_Hand_IK_Left} />
-          <primitive object={nodes.Ctrl_ArmPole_IK_Right} />
-          <primitive object={nodes.Ctrl_Hand_IK_Right} />
-          <primitive object={nodes.Ctrl_Foot_IK_Left} />
-          <primitive object={nodes.Ctrl_LegPole_IK_Left} />
-          <primitive object={nodes.Ctrl_Foot_IK_Right} />
-          <primitive object={nodes.Ctrl_LegPole_IK_Right} />
-        </group>
         <mesh
           name='Socle'
           castShadow
@@ -1588,4 +1568,4 @@ export function Land(props) {
   );
 }
 
-useGLTF.preload('/game/Land.glb');
+useGLTF.preload('/game/Land_1_01_Anim.glb');
