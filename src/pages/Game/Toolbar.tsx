@@ -20,6 +20,7 @@ import {
   sftHauntedHouseR2Nonce,
   sftLaboNonce,
   sftLaboR1Nonce,
+  sftLaboR2Nonce,
   sftLandsNonce,
   sftTavernNonce,
   sftTavernR1Nonce,
@@ -45,6 +46,7 @@ export const Toolbar = ({ sfts }: { sfts: number[] }) => {
   const isCryptR2 = sfts.filter((x) => x === sftCryptR2Nonce).length > 0;
   const isLabo = sfts.filter((x) => x === sftLaboNonce).length > 0;
   const isLaboR1 = sfts.filter((x) => x === sftLaboR1Nonce).length > 0;
+  const isLaboR2 = sfts.filter((x) => x === sftLaboR2Nonce).length > 0;
 
   return (
     <div className='flex w-full justify-center'>
@@ -52,6 +54,7 @@ export const Toolbar = ({ sfts }: { sfts: number[] }) => {
         <div className='flex justify-center'>
           <div className='flex justify-center items-center mr-2'>
             <div
+              title='Land'
               className={`w-6 h-6 border border-gray-600 flex justify-center items-center ${
                 isLand ? 'bg-green-600' : 'bg-transparent'
               }`}
@@ -64,6 +67,7 @@ export const Toolbar = ({ sfts }: { sfts: number[] }) => {
           </div>
           <div className='flex justify-center items-center mr-2'>
             <div
+              title='Tavern'
               className={`w-6 h-6 border border-gray-600 flex justify-center items-center ${
                 isTavern ? 'bg-green-600' : 'bg-transparent'
               }`}
@@ -76,6 +80,7 @@ export const Toolbar = ({ sfts }: { sfts: number[] }) => {
               />
             </div>
             <div
+              title='Tavern +1'
               className={`w-6 h-6 border border-gray-600 flex justify-center items-center ${
                 isTavernR1 ? 'bg-green-600' : 'bg-transparent'
               }`}
@@ -88,6 +93,7 @@ export const Toolbar = ({ sfts }: { sfts: number[] }) => {
               />
             </div>
             <div
+              title='Tavern +2'
               className={`w-6 h-6 border border-gray-600 flex justify-center items-center ${
                 isTavernR2 ? 'bg-green-600' : 'bg-transparent'
               }`}
@@ -108,6 +114,7 @@ export const Toolbar = ({ sfts }: { sfts: number[] }) => {
           </div>
           <div className='flex justify-center items-center mr-2'>
             <div
+              title='Bank'
               className={`w-6 h-6 border border-gray-600 flex justify-center items-center ${
                 isBank ? 'bg-green-600' : 'bg-transparent'
               }`}
@@ -118,6 +125,7 @@ export const Toolbar = ({ sfts }: { sfts: number[] }) => {
               />
             </div>
             <div
+              title='Bank +1'
               className={`w-6 h-6 border border-gray-600 flex justify-center items-center ${
                 isBankR1 ? 'bg-green-600' : 'bg-transparent'
               }`}
@@ -130,6 +138,7 @@ export const Toolbar = ({ sfts }: { sfts: number[] }) => {
               />
             </div>
             <div
+              title='Bank +2'
               className={`w-6 h-6 border border-gray-600 flex justify-center items-center ${
                 isBankR2 ? 'bg-green-600' : 'bg-transparent'
               }`}
@@ -152,6 +161,7 @@ export const Toolbar = ({ sfts }: { sfts: number[] }) => {
         <div className='flex justify-center mt-2'>
           <div className='flex justify-center items-center mr-2'>
             <div
+              title='Haunted House'
               className={`w-6 h-6 border border-gray-600 flex justify-center items-center ${
                 isHauntedHouse ? 'bg-green-600' : 'bg-transparent'
               }`}
@@ -164,6 +174,7 @@ export const Toolbar = ({ sfts }: { sfts: number[] }) => {
               />
             </div>
             <div
+              title='Haunted House +1'
               className={`w-6 h-6 border border-gray-600 flex justify-center items-center ${
                 isHauntedHouseR1 ? 'bg-green-600' : 'bg-transparent'
               }`}
@@ -176,6 +187,7 @@ export const Toolbar = ({ sfts }: { sfts: number[] }) => {
               />
             </div>
             <div
+              title='Haunted House +2'
               className={`w-6 h-6 border border-gray-600 flex justify-center items-center ${
                 isHauntedHouseR2 ? 'bg-green-600' : 'bg-transparent'
               }`}
@@ -196,6 +208,7 @@ export const Toolbar = ({ sfts }: { sfts: number[] }) => {
           </div>
           <div className='flex justify-center items-center mr-2'>
             <div
+              title='Crypt'
               className={`w-6 h-6 border border-gray-600 flex justify-center items-center ${
                 isCrypt ? 'bg-green-600' : 'bg-transparent'
               }`}
@@ -208,6 +221,7 @@ export const Toolbar = ({ sfts }: { sfts: number[] }) => {
               />
             </div>
             <div
+              title='Crypt +1'
               className={`w-6 h-6 border border-gray-600 flex justify-center items-center ${
                 isCryptR1 ? 'bg-green-600' : 'bg-transparent'
               }`}
@@ -220,6 +234,7 @@ export const Toolbar = ({ sfts }: { sfts: number[] }) => {
               />
             </div>
             <div
+              title='Crypt +2'
               className={`w-6 h-6 border border-gray-600 flex justify-center items-center ${
                 isCryptR2 ? 'bg-green-600' : 'bg-transparent'
               }`}
@@ -240,6 +255,7 @@ export const Toolbar = ({ sfts }: { sfts: number[] }) => {
           </div>
           <div className='flex justify-center items-center mr-2'>
             <div
+              title='Labo'
               className={`w-6 h-6 border border-gray-600 flex justify-center items-center ${
                 isLabo ? 'bg-green-600' : 'bg-transparent'
               }`}
@@ -250,6 +266,7 @@ export const Toolbar = ({ sfts }: { sfts: number[] }) => {
               />
             </div>
             <div
+              title='Labo +1'
               className={`w-6 h-6 border border-gray-600 flex justify-center items-center ${
                 isLaboR1 ? 'bg-green-600' : 'bg-transparent'
               }`}
@@ -258,6 +275,25 @@ export const Toolbar = ({ sfts }: { sfts: number[] }) => {
                 icon={faArrowUp}
                 className={`text-sm ${
                   isLaboR1 ? 'text-white' : 'text-gray-600'
+                }`}
+              />
+            </div>
+            <div
+              title='Labo +2'
+              className={`w-6 h-6 border border-gray-600 flex justify-center items-center ${
+                isLaboR2 ? 'bg-green-600' : 'bg-transparent'
+              }`}
+            >
+              <FontAwesomeIcon
+                icon={faArrowUp}
+                className={`text-sm ${
+                  isLaboR2 ? 'text-white' : 'text-gray-600'
+                }`}
+              />
+              <FontAwesomeIcon
+                icon={faArrowUp}
+                className={`text-sm ${
+                  isLaboR2 ? 'text-white' : 'text-gray-600'
                 }`}
               />
             </div>
