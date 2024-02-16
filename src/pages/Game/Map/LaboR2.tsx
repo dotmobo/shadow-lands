@@ -7,7 +7,7 @@ import { useGLTF, useAnimations } from '@react-three/drei';
 
 export function LaboR2({ color, ...props }: any) {
   const group = useRef();
-  const { nodes, materials, animations } = useGLTF('/game/Labo+1.glb');
+  const { nodes, materials, animations } = useGLTF('/game/Labo+2.glb');
   const { actions } = useAnimations(animations, group);
 
   const position = [-4.6456, 1.0172, 0.69635];
@@ -99,4 +99,4 @@ export function LaboR2({ color, ...props }: any) {
   );
 }
 
-useGLTF.preload('/game/Labo+1.glb');
+useGLTF.preload('/game/Labo+2.glb');
