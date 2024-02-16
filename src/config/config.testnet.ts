@@ -39,13 +39,15 @@ export const sftBankR2Id = 'DEVSHALAN-933f80-0e';
 export const sftBankR2Nonce = 14;
 export const sftHauntedHouseR2Id = 'DEVSHALAN-933f80-0f';
 export const sftHauntedHouseR2Nonce = 15;
+export const sftCryptR2Id = 'DEVSHALAN-933f80-10';
+export const sftCryptR2Nonce = 16;
 // Dust and SC
 export const dustTokenId = 'DEVDUST-d62981';
 export const contractGameAddress =
   'erd1qqqqqqqqqqqqqpgqvfh5j05pw23upxz4hmh6fdsrcmvfjjd22krsxc4hy2';
 export const contractMarketAddress =
   'erd1qqqqqqqqqqqqqpgqsp7wpnxv8lpn6hg4fhhp3vqkwmst5ljm2krs2fxjrk';
-export const totalYield = 140;
+export const totalYield = 150;
 export const totalProducted = 10000;
 
 // Price
