@@ -14,7 +14,6 @@ export function HauntedHouseR2({ color, ...props }: any) {
   const rotation = [0, -1.5338651598227, 0];
 
   useEffect(() => {
-    console.log(actions);
     actions.Action.play();
   }, [group]);
 

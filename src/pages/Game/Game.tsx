@@ -61,6 +61,7 @@ export const Game = () => {
   const [banksR2, setBanksR2List] = useState<Sft[]>([]);
   const [hauntedHousesR2, setHauntedHousesR2List] = useState<Sft[]>([]);
   const [cryptsR2, setCryptsR2List] = useState<Sft[]>([]);
+  const [labosR2, setLabosR2List] = useState<Sft[]>([]);
 
   const [rewardsTokenAmountPerDay, setRewardsTokenAmountPerDay] =
     useState<number>(0);
@@ -215,6 +216,7 @@ export const Game = () => {
                       walletBanksR2={banksR2}
                       walletHauntedHousesR2={hauntedHousesR2}
                       walletCryptsR2={cryptsR2}
+                      walletLabosR2={labosR2}
                       rewardsPerDay={rewardsTokenAmountPerDay}
                       defaultAutoRotate={autoRotate}
                       fpsView={fpsView}
@@ -251,6 +253,7 @@ export const Game = () => {
                   props['outputBanksR2'] = setBanksR2List;
                   props['outputHauntedHousesR2'] = setHauntedHousesR2List;
                   props['outputCryptsR2'] = setCryptsR2List;
+                  props['outputLabosR2'] = setLabosR2List;
 
                   return (
                     <Card key={title} title={title} description={description}>
