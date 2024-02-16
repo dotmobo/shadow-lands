@@ -27,7 +27,8 @@ import {
   priceBuildingR2,
   sftTavernR2Nonce,
   sftBankR2Nonce,
-  sftHauntedHouseR2Nonce
+  sftHauntedHouseR2Nonce,
+  sftCryptR2Nonce
 } from 'config';
 import { Button } from 'components';
 import { confirmAlert } from 'react-confirm-alert';
@@ -642,6 +643,57 @@ export const Market = () => {
                       className='mr-1'
                     />
                     Buy 1 crypt +1
+                  </Button>
+                </span>
+              </span>
+              <span className='flex md:w-1/3 md:ml-2 mt-1 md:mt-0'>
+                {priceBuildingR2}
+                <span>
+                  <img src='/dust-logo.png' alt='Dust' className='ml-1 w-5' />
+                </span>
+                <span className='ml-2'>
+                  <Button
+                    className='inline-block rounded-lg px-3 py-0.5 text-center hover:no-underline my-0 bg-blue-600 text-white hover:bg-blue-700 mr-0 disabled:bg-gray-200 disabled:text-black disabled:cursor-not-allowed'
+                    aria-label='Buy a crypt +2'
+                    disabled={hasPendingTransactions}
+                    onClick={() => {
+                      confirmAlert({
+                        title: 'Buy 1 crypt +2',
+                        message:
+                          'Are you sure you want to buy 1 crypt +2 for 1200 $DUST ?',
+                        buttons: [
+                          {
+                            label: 'Yes',
+                            onClick: () =>
+                              sendBuyItemTransaction(
+                                {
+                                  collection: sftCollectionId,
+                                  nonce: sftCryptR2Nonce
+                                },
+                                priceBuildingR2 * Math.pow(10, 18)
+                              )
+                          },
+                          {
+                            label: 'No',
+                            onClick: () => {
+                              return;
+                            }
+                          }
+                        ]
+                      });
+                    }}
+                  >
+                    <FontAwesomeIcon
+                      icon={faArrowUp}
+                      size='sm'
+                      className='mr-1'
+                    />
+                    <FontAwesomeIcon
+                      icon={faArrowUp}
+                      size='sm'
+                      className='mr-1'
+                    />
+                    Buy 1 crypt +2
                   </Button>
                 </span>
               </span>

@@ -14,6 +14,7 @@ import {
   sftBanksNonce,
   sftCryptNonce,
   sftCryptR1Nonce,
+  sftCryptR2Nonce,
   sftHauntedHouseNonce,
   sftHauntedHouseR1Nonce,
   sftHauntedHouseR2Nonce,
@@ -41,6 +42,7 @@ export const Toolbar = ({ sfts }: { sfts: number[] }) => {
     sfts.filter((x) => x === sftHauntedHouseR2Nonce).length > 0;
   const isCrypt = sfts.filter((x) => x === sftCryptNonce).length > 0;
   const isCryptR1 = sfts.filter((x) => x === sftCryptR1Nonce).length > 0;
+  const isCryptR2 = sfts.filter((x) => x === sftCryptR2Nonce).length > 0;
   const isLabo = sfts.filter((x) => x === sftLaboNonce).length > 0;
   const isLaboR1 = sfts.filter((x) => x === sftLaboR1Nonce).length > 0;
 
@@ -214,6 +216,24 @@ export const Toolbar = ({ sfts }: { sfts: number[] }) => {
                 icon={faArrowUp}
                 className={`text-sm ${
                   isCryptR1 ? 'text-white' : 'text-gray-600'
+                }`}
+              />
+            </div>
+            <div
+              className={`w-6 h-6 border border-gray-600 flex justify-center items-center ${
+                isCryptR2 ? 'bg-green-600' : 'bg-transparent'
+              }`}
+            >
+              <FontAwesomeIcon
+                icon={faArrowUp}
+                className={`text-sm ${
+                  isCryptR2 ? 'text-white' : 'text-gray-600'
+                }`}
+              />
+              <FontAwesomeIcon
+                icon={faArrowUp}
+                className={`text-sm ${
+                  isCryptR2 ? 'text-white' : 'text-gray-600'
                 }`}
               />
             </div>
