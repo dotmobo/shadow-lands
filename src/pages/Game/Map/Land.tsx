@@ -7,7 +7,7 @@ import { useGLTF, useAnimations } from '@react-three/drei';
 
 export function Land(props) {
   const group = useRef();
-  const { nodes, materials, animations } = useGLTF('/game/Land_1_01_Anim.glb');
+  const { nodes, materials, animations } = useGLTF('/game/Land.glb');
   const { actions } = useAnimations(animations, group);
 
   useEffect(() => {
@@ -33,17 +33,17 @@ export function Land(props) {
           rotation={[Math.PI, -0.971, Math.PI]}
         >
           <mesh
+            name='Cube007'
+            castShadow
+            receiveShadow
+            geometry={nodes.Cube007.geometry}
+            material={materials.Palette}
+          />
+          <mesh
             name='Cube007_1'
             castShadow
             receiveShadow
             geometry={nodes.Cube007_1.geometry}
-            material={materials.Palette}
-          />
-          <mesh
-            name='Cube007_2'
-            castShadow
-            receiveShadow
-            geometry={nodes.Cube007_2.geometry}
             material={materials.PaletteLumiere}
           />
         </group>
@@ -64,6 +64,14 @@ export function Land(props) {
           material={materials.Palette}
           position={[2.706, 1.554, -3.917]}
           rotation={[-0.016, 0.214, 0.019]}
+        />
+        <mesh
+          name='Socle'
+          castShadow
+          receiveShadow
+          geometry={nodes.Socle.geometry}
+          material={materials.Palette}
+          position={[0, 1.07, 0]}
         />
         <mesh
           name='Caillou1'
@@ -226,26 +234,6 @@ export function Land(props) {
           scale={0.57}
         />
         <mesh
-          name='Caillou1009'
-          castShadow
-          receiveShadow
-          geometry={nodes.Caillou1009.geometry}
-          material={materials.Palette}
-          position={[0.04, 1.137, 0.071]}
-          rotation={[0, Math.PI / 2, 0]}
-          scale={0.616}
-        />
-        <mesh
-          name='Caillou1006'
-          castShadow
-          receiveShadow
-          geometry={nodes.Caillou1006.geometry}
-          material={materials.Palette}
-          position={[1.972, 1.205, 0.139]}
-          rotation={[0, -0.306, 0]}
-          scale={0.795}
-        />
-        <mesh
           name='Caillou1010'
           castShadow
           receiveShadow
@@ -281,18 +269,8 @@ export function Land(props) {
           receiveShadow
           geometry={nodes.Caillou1001.geometry}
           material={materials.Palette}
-          position={[-1.514, 1.004, 1.729]}
+          position={[-1.98, 1.194, 2.525]}
           rotation={[-0.133, -0.133, 0.016]}
-        />
-        <mesh
-          name='Caillou1003'
-          castShadow
-          receiveShadow
-          geometry={nodes.Caillou1003.geometry}
-          material={materials.Palette}
-          position={[-1.724, 1.022, 1.762]}
-          rotation={[-0.109, -1.023, 0.031]}
-          scale={[0.839, 0.839, 0.639]}
         />
         <mesh
           name='Caillou2001'
@@ -300,7 +278,7 @@ export function Land(props) {
           receiveShadow
           geometry={nodes.Caillou2001.geometry}
           material={materials.Palette}
-          position={[-1.28, 1.002, 1.847]}
+          position={[-1.746, 1.191, 2.643]}
           rotation={[-0.214, -0.078, -0.089]}
         />
         <mesh
@@ -309,7 +287,7 @@ export function Land(props) {
           receiveShadow
           geometry={nodes.Caillou2003.geometry}
           material={materials.Palette}
-          position={[-1.263, 1.043, 2.129]}
+          position={[-1.729, 1.233, 2.925]}
           rotation={[-0.287, 1.465, 0.153]}
           scale={1.308}
         />
@@ -319,9 +297,9 @@ export function Land(props) {
           receiveShadow
           geometry={nodes.Caillou3001.geometry}
           material={materials.Palette}
-          position={[-1.448, 1.047, 2.03]}
+          position={[-1.413, 1.092, 2.363]}
           rotation={[-0.133, -0.133, 0.016]}
-          scale={[0.91, 1.467, 1.467]}
+          scale={[0.491, 0.792, 0.792]}
         />
         <mesh
           name='Caillou3003'
@@ -329,8 +307,19 @@ export function Land(props) {
           receiveShadow
           geometry={nodes.Caillou3003.geometry}
           material={materials.Palette}
-          position={[-1.591, 1.049, 1.939]}
+          position={[-1.929, 1.119, 1.852]}
           rotation={[-0.159, 0.981, 0.029]}
+          scale={0.54}
+        />
+        <mesh
+          name='Caillou1003'
+          castShadow
+          receiveShadow
+          geometry={nodes.Caillou1003.geometry}
+          material={materials.Palette}
+          position={[-1.528, 1.073, 2.111]}
+          rotation={[0.112, 0.465, -0.224]}
+          scale={0.251}
         />
         <mesh
           name='Caillou3004'
@@ -338,259 +327,299 @@ export function Land(props) {
           receiveShadow
           geometry={nodes.Caillou3004.geometry}
           material={materials.Palette}
-          position={[-1.557, 1.046, 2.053]}
-          rotation={[-0.159, 0.981, 0.029]}
-          scale={[1.089, 1, 1.331]}
+          position={[0.154, 1.139, 0.521]}
+          rotation={[-0.697, 0.908, 1.599]}
+          scale={0.54}
         />
         <mesh
-          name='Pin002'
+          name='Caillou3009'
           castShadow
           receiveShadow
-          geometry={nodes.Pin002.geometry}
-          material={materials.Pin512}
-          position={[1.412, 1.389, 6.752]}
-          rotation={[0, -1.391, 0]}
-          scale={[0.162, 0.313, 0.162]}
+          geometry={nodes.Caillou3009.geometry}
+          material={materials.Palette}
+          position={[0.355, 1.129, 0.431]}
+          rotation={[-2.627, -0.638, -1.802]}
+          scale={0.763}
         />
         <mesh
-          name='Pin030'
+          name='Caillou3010'
           castShadow
           receiveShadow
-          geometry={nodes.Pin030.geometry}
-          material={materials.Pin512}
-          position={[3.508, 1.389, 7.73]}
-          rotation={[0, -0.275, 0]}
-          scale={[0.229, 0.442, 0.229]}
+          geometry={nodes.Caillou3010.geometry}
+          material={materials.Palette}
+          position={[0.493, 1.129, 0.211]}
+          rotation={[-2.511, 0.836, -2.622]}
+          scale={0.763}
         />
         <mesh
-          name='Pin031'
+          name='Caillou3011'
           castShadow
           receiveShadow
-          geometry={nodes.Pin031.geometry}
-          material={materials.Pin512}
-          position={[3.648, 0.942, 6.472]}
-          rotation={[0, -1.027, 0]}
-          scale={[0.157, 0.303, 0.157]}
+          geometry={nodes.Caillou3011.geometry}
+          material={materials.Palette}
+          position={[0.497, 1.129, -0.012]}
+          rotation={[-2.725, 0.217, -2.221]}
+          scale={0.763}
         />
         <mesh
-          name='Pin032'
+          name='Caillou3012'
           castShadow
           receiveShadow
-          geometry={nodes.Pin032.geometry}
-          material={materials.Pin512}
-          position={[6.782, 1.059, 8.489]}
-          rotation={[0, -0.174, 0]}
-          scale={[0.229, 0.442, 0.229]}
+          geometry={nodes.Caillou3012.geometry}
+          material={materials.Palette}
+          position={[0.463, 1.129, -0.199]}
+          rotation={[-0.928, -1.055, 0.156]}
+          scale={0.763}
         />
         <mesh
-          name='Pin033'
+          name='Caillou3013'
           castShadow
           receiveShadow
-          geometry={nodes.Pin033.geometry}
-          material={materials.Pin512}
-          position={[8.24, 1.14, 8.189]}
-          rotation={[Math.PI, -1.202, Math.PI]}
-          scale={[0.179, 0.346, 0.179]}
+          geometry={nodes.Caillou3013.geometry}
+          material={materials.Palette}
+          position={[0.388, 1.149, -0.349]}
+          rotation={[-2.609, -0.68, -1.771]}
+          scale={0.763}
         />
         <mesh
-          name='Pin034'
+          name='Caillou3014'
           castShadow
           receiveShadow
-          geometry={nodes.Pin034.geometry}
-          material={materials.Pin512}
-          position={[8.639, 0.956, 6.233]}
-          rotation={[0, -0.837, 0]}
-          scale={[0.229, 0.442, 0.229]}
+          geometry={nodes.Caillou3014.geometry}
+          material={materials.Palette}
+          position={[0.173, 1.149, -0.456]}
+          rotation={[-0.425, -0.293, 0.886]}
+          scale={0.763}
         />
         <mesh
-          name='Pin035'
+          name='Caillou3015'
           castShadow
           receiveShadow
-          geometry={nodes.Pin035.geometry}
-          material={materials.Pin512}
-          position={[1.831, 0.988, 5.135]}
-          rotation={[Math.PI, -0.446, Math.PI]}
-          scale={[0.229, 0.442, 0.229]}
+          geometry={nodes.Caillou3015.geometry}
+          material={materials.Palette}
+          position={[-0.133, 1.149, -0.435]}
+          rotation={[-2.655, -0.563, -1.851]}
+          scale={0.763}
         />
         <mesh
-          name='Pin036'
+          name='Caillou3016'
           castShadow
           receiveShadow
-          geometry={nodes.Pin036.geometry}
-          material={materials.Pin512}
-          position={[0.793, 1.094, 3.957]}
-          rotation={[Math.PI, -1.202, Math.PI]}
-          scale={[0.229, 0.442, 0.229]}
+          geometry={nodes.Caillou3016.geometry}
+          material={materials.Palette}
+          position={[-0.337, 1.149, -0.279]}
+          rotation={[-2.021, -1.116, -1.049]}
+          scale={0.763}
         />
         <mesh
-          name='Pin037'
+          name='Caillou3017'
           castShadow
           receiveShadow
-          geometry={nodes.Pin037.geometry}
-          material={materials.Pin512}
-          position={[-2.141, 0.988, 6.153]}
-          rotation={[Math.PI, -0.446, Math.PI]}
-          scale={[0.229, 0.442, 0.229]}
+          geometry={nodes.Caillou3017.geometry}
+          material={materials.Palette}
+          position={[-0.46, 1.149, -0.145]}
+          rotation={[-0.475, -0.527, 0.763]}
+          scale={0.518}
         />
         <mesh
-          name='Pin038'
+          name='Caillou3018'
           castShadow
           receiveShadow
-          geometry={nodes.Pin038.geometry}
-          material={materials.Pin512}
-          position={[-3.599, 0.841, 6.552]}
-          rotation={[0, -1.031, 0]}
-          scale={[0.229, 0.442, 0.229]}
+          geometry={nodes.Caillou3018.geometry}
+          material={materials.Palette}
+          position={[-0.508, 1.149, 0.075]}
+          rotation={[-1.3, -1.148, -0.26]}
+          scale={0.787}
         />
         <mesh
-          name='Pin039'
+          name='Caillou3019'
           castShadow
           receiveShadow
-          geometry={nodes.Pin039.geometry}
-          material={materials.Pin512}
-          position={[-4.657, 1.089, 6.612]}
-          rotation={[Math.PI, -1.202, Math.PI]}
-          scale={[0.163, 0.315, 0.163]}
+          geometry={nodes.Caillou3019.geometry}
+          material={materials.Palette}
+          position={[-0.379, 1.149, 0.236]}
+          rotation={[-0.438, -0.371, 0.848]}
+          scale={0.787}
         />
         <mesh
-          name='Pin040'
+          name='Caillou3020'
           castShadow
           receiveShadow
-          geometry={nodes.Pin040.geometry}
-          material={materials.Pin512}
-          position={[-5.256, 0.988, 5.534]}
-          rotation={[0, -0.275, 0]}
-          scale={[0.229, 0.442, 0.229]}
+          geometry={nodes.Caillou3020.geometry}
+          material={materials.Palette}
+          position={[-0.353, 1.117, 0.456]}
+          rotation={[-2.697, 0.404, -2.311]}
+          scale={0.787}
         />
         <mesh
-          name='Pin041'
+          name='Caillou3021'
           castShadow
           receiveShadow
-          geometry={nodes.Pin041.geometry}
-          material={materials.Pin512}
-          position={[-6.274, 1.084, -0.395]}
-          rotation={[Math.PI, -1.202, Math.PI]}
-          scale={[0.293, 0.567, 0.293]}
+          geometry={nodes.Caillou3021.geometry}
+          material={materials.Palette}
+          position={[-0.068, 1.117, 0.516]}
+          rotation={[-0.453, 0.446, 1.223]}
+          scale={0.665}
         />
         <mesh
-          name='Pin042'
+          name='Caillou3022'
           castShadow
           receiveShadow
-          geometry={nodes.Pin042.geometry}
-          material={materials.Pin512}
-          position={[-5.464, 0.985, -1.019]}
-          rotation={[0, -0.275, 0]}
-          scale={[0.229, 0.442, 0.229]}
+          geometry={nodes.Caillou3022.geometry}
+          material={materials.Palette}
+          position={[2.653, 1.19, -0.164]}
+          rotation={[-2.712, 0.324, -2.271]}
+          scale={[0.683, 0.677, 0.568]}
         />
         <mesh
-          name='Pin043'
+          name='Caillou3023'
           castShadow
           receiveShadow
-          geometry={nodes.Pin043.geometry}
-          material={materials.Pin512}
-          position={[7.201, 1.389, -2.172]}
-          rotation={[0, -1.223, 0]}
-          scale={[0.229, 0.442, 0.229]}
+          geometry={nodes.Caillou3023.geometry}
+          material={materials.Palette}
+          position={[2.554, 1.178, -0.384]}
+          rotation={[-0.505, -0.616, 0.706]}
+          scale={[0.969, 0.875, 0.88]}
         />
         <mesh
-          name='Pin044'
+          name='Caillou3024'
           castShadow
           receiveShadow
-          geometry={nodes.Pin044.geometry}
-          material={materials.Pin512}
-          position={[5.225, 1.627, -3.01]}
-          rotation={[Math.PI, -1.202, Math.PI]}
-          scale={[0.229, 0.442, 0.229]}
+          geometry={nodes.Caillou3024.geometry}
+          material={materials.Palette}
+          position={[2.137, 1.178, -0.433]}
+          rotation={[-2.581, -0.733, -1.729]}
+          scale={[0.845, 0.961, 0.918]}
         />
         <mesh
-          name='Pin045'
+          name='Caillou3025'
           castShadow
           receiveShadow
-          geometry={nodes.Pin045.geometry}
-          material={materials.Pin512}
-          position={[4.686, 1.707, -3.968]}
-          rotation={[0, -0.275, 0]}
-          scale={[0.229, 0.442, 0.229]}
+          geometry={nodes.Caillou3025.geometry}
+          material={materials.Palette}
+          position={[1.826, 1.178, -0.396]}
+          rotation={[-1.69, -1.162, -0.685]}
+          scale={[0.872, 0.803, 1.048]}
         />
         <mesh
-          name='Pin046'
+          name='Caillou3026'
           castShadow
           receiveShadow
-          geometry={nodes.Pin046.geometry}
-          material={materials.Pin512}
-          position={[4.327, 1.943, -5.446]}
-          rotation={[0, -0.415, 0]}
-          scale={[0.229, 0.442, 0.229]}
+          geometry={nodes.Caillou3026.geometry}
+          material={materials.Palette}
+          position={[1.577, 1.178, -0.331]}
+          rotation={[-0.459, 0.468, 1.235]}
+          scale={[0.87, 1.017, 0.837]}
         />
         <mesh
-          name='Pin047'
+          name='Caillou3027'
           castShadow
           receiveShadow
-          geometry={nodes.Pin047.geometry}
-          material={materials.Pin512}
-          position={[3.149, 1.389, -4.827]}
-          rotation={[Math.PI, -1.202, Math.PI]}
-          scale={[0.229, 0.442, 0.229]}
+          geometry={nodes.Caillou3027.geometry}
+          material={materials.Palette}
+          position={[1.389, 1.201, -0.232]}
+          rotation={[-0.49, -0.574, 0.734]}
+          scale={[0.97, 0.887, 0.867]}
         />
         <mesh
-          name='Pin049'
+          name='Caillou3028'
           castShadow
           receiveShadow
-          geometry={nodes.Pin049.geometry}
-          material={materials.Pin512}
-          position={[-2.401, 1.389, -6.564]}
-          rotation={[Math.PI, -1.202, Math.PI]}
-          scale={[0.229, 0.442, 0.229]}
+          geometry={nodes.Caillou3028.geometry}
+          material={materials.Palette}
+          position={[1.296, 1.201, -0.007]}
+          rotation={[-1.269, 1.144, 2.257]}
+          scale={[0.864, 0.816, 1.044]}
         />
         <mesh
-          name='Pin050'
+          name='Caillou3029'
           castShadow
           receiveShadow
-          geometry={nodes.Pin050.geometry}
-          material={materials.Pin512}
-          position={[-3.419, 1.389, -5.865]}
-          rotation={[0, -0.275, 0]}
-          scale={[0.168, 0.325, 0.168]}
+          geometry={nodes.Caillou3029.geometry}
+          material={materials.Palette}
+          position={[1.242, 1.201, 0.231]}
+          rotation={[-0.975, -1.023, 0.088]}
+          scale={[0.776, 0.687, 0.727]}
         />
         <mesh
-          name='Pin051'
+          name='Caillou3030'
           castShadow
           receiveShadow
-          geometry={nodes.Pin051.geometry}
-          material={materials.Pin512}
-          position={[-3.699, 1.217, -4.807]}
-          rotation={[Math.PI, -0.166, Math.PI]}
-          scale={[0.257, 0.498, 0.257]}
+          geometry={nodes.Caillou3030.geometry}
+          material={materials.Palette}
+          position={[1.673, 1.201, 0.532]}
+          rotation={[-0.406, -0.022, 1.006]}
+          scale={[0.936, 1.018, 0.77]}
         />
         <mesh
-          name='Pin052'
+          name='Caillou3031'
           castShadow
           receiveShadow
-          geometry={nodes.Pin052.geometry}
-          material={materials.Pin512}
-          position={[-4.817, 1.389, -5.406]}
-          rotation={[Math.PI, -1.202, Math.PI]}
-          scale={[0.229, 0.442, 0.229]}
+          geometry={nodes.Caillou3031.geometry}
+          material={materials.Palette}
+          position={[1.891, 1.201, 0.543]}
+          rotation={[-0.842, 1.013, 1.776]}
+          scale={[0.573, 0.591, 0.684]}
         />
         <mesh
-          name='Pin053'
+          name='Caillou3032'
           castShadow
           receiveShadow
-          geometry={nodes.Pin053.geometry}
-          material={materials.Pin512}
-          position={[-1.183, 1.05, -5.286]}
-          rotation={[Math.PI, -1.202, Math.PI]}
-          scale={[0.096, 0.185, 0.096]}
+          geometry={nodes.Caillou3032.geometry}
+          material={materials.Palette}
+          position={[2.208, 1.201, 0.55]}
+          rotation={[-0.424, 0.279, 1.139]}
+          scale={[0.923, 1.067, 0.82]}
         />
         <mesh
-          name='Pin001'
+          name='Caillou3033'
           castShadow
           receiveShadow
-          geometry={nodes.Pin001.geometry}
-          material={materials.Pin512}
-          position={[-6.58, 1.243, -1.879]}
-          rotation={[0, 0.155, 0]}
-          scale={[0.179, 0.346, 0.179]}
+          geometry={nodes.Caillou3033.geometry}
+          material={materials.Palette}
+          position={[2.397, 1.201, 0.398]}
+          rotation={[-1.101, 1.112, 2.071]}
+          scale={[0.883, 0.859, 1.068]}
+        />
+        <mesh
+          name='Caillou3034'
+          castShadow
+          receiveShadow
+          geometry={nodes.Caillou3034.geometry}
+          material={materials.Palette}
+          position={[2.478, 1.163, 0.076]}
+          rotation={[-2.104, -1.094, -1.141]}
+          scale={[0.88, 0.866, 1.064]}
+        />
+        <mesh
+          name='Caillou3035'
+          castShadow
+          receiveShadow
+          geometry={nodes.Caillou3035.geometry}
+          material={materials.Palette}
+          position={[2.705, 1.163, 0.049]}
+          rotation={[-2.538, 0.801, -2.585]}
+          scale={[0.833, 0.72, 0.819]}
+        />
+        <mesh
+          name='Caillou3036'
+          castShadow
+          receiveShadow
+          geometry={nodes.Caillou3036.geometry}
+          material={materials.Palette}
+          position={[1.353, 1.201, 0.518]}
+          rotation={[-2.681, 0.247, -2.275]}
+          scale={[0.776, 0.687, 0.727]}
+        />
+        <mesh
+          name='Caillou3037'
+          castShadow
+          receiveShadow
+          geometry={nodes.Caillou3037.geometry}
+          material={materials.Palette}
+          position={[2.325, 1.163, -0.395]}
+          rotation={[-0.64, 0.848, 1.525]}
+          scale={[0.833, 0.72, 0.819]}
         />
         <mesh
           name='Cube260'
@@ -752,34 +781,16 @@ export function Land(props) {
           rotation={[1.51, 0.549, -1.455]}
           scale={0.959}
         />
-        <group
+        <mesh
           name='Arbre_1002'
+          castShadow
+          receiveShadow
+          geometry={nodes.Arbre_1002.geometry}
+          material={materials.Chene_128}
           position={[7.021, 1.928, 3.009]}
           rotation={[-2.94, 0.522, 3.09]}
           scale={[0.748, 0.838, 0.748]}
-        >
-          <mesh
-            name='Icosphere044'
-            castShadow
-            receiveShadow
-            geometry={nodes.Icosphere044.geometry}
-            material={materials.Arbre10}
-          />
-          <mesh
-            name='Icosphere044_1'
-            castShadow
-            receiveShadow
-            geometry={nodes.Icosphere044_1.geometry}
-            material={materials.Arbre11}
-          />
-          <mesh
-            name='Icosphere044_2'
-            castShadow
-            receiveShadow
-            geometry={nodes.Icosphere044_2.geometry}
-            material={materials.Planches}
-          />
-        </group>
+        />
         <mesh
           name='Arbre_1019'
           castShadow
@@ -789,214 +800,6 @@ export function Land(props) {
           position={[7.006, 0.934, 6.757]}
           rotation={[-1.955, -1.534, -1.811]}
           scale={[1.621, 1.815, 1.621]}
-        />
-        <group
-          name='Icosphere'
-          position={[-1.075, 1.035, -3.094]}
-          scale={0.167}
-        >
-          <mesh
-            name='Icosphere009_1'
-            castShadow
-            receiveShadow
-            geometry={nodes.Icosphere009_1.geometry}
-            material={materials.Pin512}
-          />
-          <mesh
-            name='Icosphere009_2'
-            castShadow
-            receiveShadow
-            geometry={nodes.Icosphere009_2.geometry}
-            material={materials.Planches}
-          />
-        </group>
-        <group
-          name='Icosphere001'
-          position={[-0.909, 1.035, -2.686]}
-          rotation={[Math.PI, -1.412, Math.PI]}
-          scale={0.193}
-        >
-          <mesh
-            name='Icosphere010'
-            castShadow
-            receiveShadow
-            geometry={nodes.Icosphere010.geometry}
-            material={materials.Pin512}
-          />
-          <mesh
-            name='Icosphere010_1'
-            castShadow
-            receiveShadow
-            geometry={nodes.Icosphere010_1.geometry}
-            material={materials.Planches}
-          />
-        </group>
-        <group
-          name='Icosphere002'
-          position={[-0.692, 1.035, -2.227]}
-          rotation={[0, -0.673, 0]}
-          scale={0.167}
-        >
-          <mesh
-            name='Icosphere011'
-            castShadow
-            receiveShadow
-            geometry={nodes.Icosphere011.geometry}
-            material={materials.Pin512}
-          />
-          <mesh
-            name='Icosphere011_1'
-            castShadow
-            receiveShadow
-            geometry={nodes.Icosphere011_1.geometry}
-            material={materials.Planches}
-          />
-        </group>
-        <group
-          name='Icosphere003'
-          position={[-4.232, 0.942, -1.341]}
-          rotation={[-Math.PI, 0.514, -Math.PI]}
-          scale={0.177}
-        >
-          <mesh
-            name='Icosphere012'
-            castShadow
-            receiveShadow
-            geometry={nodes.Icosphere012.geometry}
-            material={materials.Pin512}
-          />
-          <mesh
-            name='Icosphere012_1'
-            castShadow
-            receiveShadow
-            geometry={nodes.Icosphere012_1.geometry}
-            material={materials.Planches}
-          />
-        </group>
-        <group
-          name='Icosphere004'
-          position={[-4.176, 0.942, -1.778]}
-          rotation={[0, 0.897, 0]}
-          scale={0.152}
-        >
-          <mesh
-            name='Icosphere013'
-            castShadow
-            receiveShadow
-            geometry={nodes.Icosphere013.geometry}
-            material={materials.Pin512}
-          />
-          <mesh
-            name='Icosphere013_1'
-            castShadow
-            receiveShadow
-            geometry={nodes.Icosphere013_1.geometry}
-            material={materials.Planches}
-          />
-        </group>
-        <group
-          name='Icosphere005'
-          position={[-4.138, 0.942, -2.285]}
-          rotation={[-Math.PI, 1.187, -Math.PI]}
-          scale={0.167}
-        >
-          <mesh
-            name='Icosphere014'
-            castShadow
-            receiveShadow
-            geometry={nodes.Icosphere014.geometry}
-            material={materials.Pin512}
-          />
-          <mesh
-            name='Icosphere014_1'
-            castShadow
-            receiveShadow
-            geometry={nodes.Icosphere014_1.geometry}
-            material={materials.Planches}
-          />
-        </group>
-        <group
-          name='Icosphere006'
-          position={[0.323, 1.361, -6.038]}
-          rotation={[0, 0.897, 0]}
-          scale={0.201}
-        >
-          <mesh
-            name='Icosphere015'
-            castShadow
-            receiveShadow
-            geometry={nodes.Icosphere015.geometry}
-            material={materials.Pin512}
-          />
-          <mesh
-            name='Icosphere015_1'
-            castShadow
-            receiveShadow
-            geometry={nodes.Icosphere015_1.geometry}
-            material={materials.Planches}
-          />
-        </group>
-        <mesh
-          name='Icosphere007'
-          castShadow
-          receiveShadow
-          geometry={nodes.Icosphere007.geometry}
-          material={materials.Pin512}
-          position={[2.032, 1.071, 0.426]}
-          rotation={[-Math.PI, 1.187, -Math.PI]}
-          scale={0.268}
-        />
-        <group
-          name='Icosphere008'
-          position={[1.45, 1.071, 0.303]}
-          rotation={[-Math.PI, 0.227, -Math.PI]}
-          scale={0.196}
-        >
-          <mesh
-            name='Icosphere061'
-            castShadow
-            receiveShadow
-            geometry={nodes.Icosphere061.geometry}
-            material={materials.Pin512}
-          />
-          <mesh
-            name='Icosphere061_1'
-            castShadow
-            receiveShadow
-            geometry={nodes.Icosphere061_1.geometry}
-            material={materials.Planches}
-          />
-        </group>
-        <group
-          name='Icosphere009'
-          position={[2.414, 1.071, -0.217]}
-          rotation={[-Math.PI, 1.007, -Math.PI]}
-          scale={0.217}
-        >
-          <mesh
-            name='Icosphere062'
-            castShadow
-            receiveShadow
-            geometry={nodes.Icosphere062.geometry}
-            material={materials.Pin512}
-          />
-          <mesh
-            name='Icosphere062_1'
-            castShadow
-            receiveShadow
-            geometry={nodes.Icosphere062_1.geometry}
-            material={materials.Planches}
-          />
-        </group>
-        <mesh
-          name='Arbre_1033'
-          castShadow
-          receiveShadow
-          geometry={nodes.Arbre_1033.geometry}
-          material={materials.Chene_128}
-          position={[-4.768, 1.381, 9.362]}
-          rotation={[-0.102, -0.452, -0.039]}
-          scale={0.611}
         />
         <mesh
           name='Arbre_1011'
@@ -1139,6 +942,898 @@ export function Land(props) {
           scale={[0.966, 1.082, 0.966]}
         />
         <mesh
+          name='Arbre_1003'
+          castShadow
+          receiveShadow
+          geometry={nodes.Arbre_1003.geometry}
+          material={materials.Chene_128}
+          position={[3.606, 1.085, -3.178]}
+          rotation={[3.126, 0.138, -3.102]}
+          scale={[1.148, 1.285, 1.148]}
+        />
+        <group
+          name='ClotureMetal_Move'
+          position={[1.426, 1.77, -4.619]}
+          rotation={[0, 1.09, 0]}
+        >
+          <mesh
+            name='3Piquets_Base'
+            castShadow
+            receiveShadow
+            geometry={nodes['3Piquets_Base'].geometry}
+            material={materials.Palette}
+            position={[-1.481, -0.606, -1.292]}
+            scale={[1, 1.743, 1]}
+          />
+          <mesh
+            name='3Piquets_Inst001'
+            castShadow
+            receiveShadow
+            geometry={nodes['3Piquets_Inst001'].geometry}
+            material={materials.Palette}
+            position={[-0.939, -0.606, -1.292]}
+            scale={[1, 1.743, 1]}
+          />
+          <mesh
+            name='3Piquets_Inst002'
+            castShadow
+            receiveShadow
+            geometry={nodes['3Piquets_Inst002'].geometry}
+            material={materials.Palette}
+            position={[-0.369, -0.606, -1.292]}
+            scale={[1, 1.743, 1]}
+          />
+          <mesh
+            name='3Piquets_Inst003'
+            castShadow
+            receiveShadow
+            geometry={nodes['3Piquets_Inst003'].geometry}
+            material={materials.Palette}
+            position={[0.187, -0.606, -1.292]}
+            scale={[1, 1.743, 1]}
+          />
+          <mesh
+            name='3Piquets_Inst004'
+            castShadow
+            receiveShadow
+            geometry={nodes['3Piquets_Inst004'].geometry}
+            material={materials.Palette}
+            position={[0.762, -0.606, -1.292]}
+            scale={[1, 1.743, 1]}
+          />
+          <mesh
+            name='3Piquets_Inst005'
+            castShadow
+            receiveShadow
+            geometry={nodes['3Piquets_Inst005'].geometry}
+            material={materials.Palette}
+            position={[1.323, -0.606, -1.292]}
+            scale={[1, 1.743, 1]}
+          />
+          <mesh
+            name='3Piquets_Inst006'
+            castShadow
+            receiveShadow
+            geometry={nodes['3Piquets_Inst006'].geometry}
+            material={materials.Palette}
+            position={[1.874, -0.606, -1.292]}
+            scale={[1, 1.743, 1]}
+          />
+          <mesh
+            name='3Piquets_Inst007'
+            castShadow
+            receiveShadow
+            geometry={nodes['3Piquets_Inst007'].geometry}
+            material={materials.Palette}
+            position={[-0.939, -0.606, 1.307]}
+            scale={[1, 1.743, 1]}
+          />
+          <mesh
+            name='3Piquets_Inst008'
+            castShadow
+            receiveShadow
+            geometry={nodes['3Piquets_Inst008'].geometry}
+            material={materials.Palette}
+            position={[-0.369, -0.606, 1.307]}
+            scale={[1, 1.743, 1]}
+          />
+          <mesh
+            name='3Piquets_Inst009'
+            castShadow
+            receiveShadow
+            geometry={nodes['3Piquets_Inst009'].geometry}
+            material={materials.Palette}
+            position={[0.187, -0.606, 1.307]}
+            scale={[1, 1.743, 1]}
+          />
+          <mesh
+            name='3Piquets_Inst010'
+            castShadow
+            receiveShadow
+            geometry={nodes['3Piquets_Inst010'].geometry}
+            material={materials.Palette}
+            position={[0.762, -0.606, 1.307]}
+            scale={[1, 1.743, 1]}
+          />
+          <mesh
+            name='3Piquets_Inst011'
+            castShadow
+            receiveShadow
+            geometry={nodes['3Piquets_Inst011'].geometry}
+            material={materials.Palette}
+            position={[1.323, -0.606, 1.307]}
+            scale={[1, 1.743, 1]}
+          />
+          <mesh
+            name='3Piquets_Inst012'
+            castShadow
+            receiveShadow
+            geometry={nodes['3Piquets_Inst012'].geometry}
+            material={materials.Palette}
+            position={[1.874, -0.606, 1.307]}
+            scale={[1, 1.743, 1]}
+          />
+          <mesh
+            name='3Piquets_Inst013'
+            castShadow
+            receiveShadow
+            geometry={nodes['3Piquets_Inst013'].geometry}
+            material={materials.Palette}
+            position={[-1.485, -0.606, 1.307]}
+            scale={[1, 1.743, 1]}
+          />
+          <mesh
+            name='3Piquets_Inst014'
+            castShadow
+            receiveShadow
+            geometry={nodes['3Piquets_Inst014'].geometry}
+            material={materials.Palette}
+            position={[-1.865, -0.606, 1.104]}
+            rotation={[0, -Math.PI / 2, 0]}
+            scale={[1, 1.743, 1]}
+          />
+          <mesh
+            name='3Piquets_Inst015'
+            castShadow
+            receiveShadow
+            geometry={nodes['3Piquets_Inst015'].geometry}
+            material={materials.Palette}
+            position={[-1.865, -0.606, 0.574]}
+            rotation={[0, -Math.PI / 2, 0]}
+            scale={[1, 1.743, 1]}
+          />
+          <mesh
+            name='3Piquets_Inst016'
+            castShadow
+            receiveShadow
+            geometry={nodes['3Piquets_Inst016'].geometry}
+            material={materials.Palette}
+            position={[-1.865, -0.606, -1.109]}
+            rotation={[0, -Math.PI / 2, 0]}
+            scale={[1, 1.743, 1]}
+          />
+          <mesh
+            name='3Piquets_Inst017'
+            castShadow
+            receiveShadow
+            geometry={nodes['3Piquets_Inst017'].geometry}
+            material={materials.Palette}
+            position={[-1.865, -0.606, -0.586]}
+            rotation={[0, -Math.PI / 2, 0]}
+            scale={[1, 1.743, 1]}
+          />
+          <mesh
+            name='3Piquets_Inst018'
+            castShadow
+            receiveShadow
+            geometry={nodes['3Piquets_Inst018'].geometry}
+            material={materials.Palette}
+            position={[2.06, -0.606, 0.9]}
+            rotation={[0, -Math.PI / 2, 0]}
+            scale={[1, 1.743, 1]}
+          />
+          <mesh
+            name='3Piquets_Inst019'
+            castShadow
+            receiveShadow
+            geometry={nodes['3Piquets_Inst019'].geometry}
+            material={materials.Palette}
+            position={[2.06, -0.606, 0.291]}
+            rotation={[0, -Math.PI / 2, 0]}
+            scale={[1, 1.743, 1]}
+          />
+          <mesh
+            name='3Piquets_Inst020'
+            castShadow
+            receiveShadow
+            geometry={nodes['3Piquets_Inst020'].geometry}
+            material={materials.Palette}
+            position={[2.066, -0.606, -0.911]}
+            rotation={[0, -Math.PI / 2, 0]}
+            scale={[1, 1.743, 1]}
+          />
+          <mesh
+            name='3Piquets_Inst021'
+            castShadow
+            receiveShadow
+            geometry={nodes['3Piquets_Inst021'].geometry}
+            material={materials.Palette}
+            position={[2.066, -0.606, -0.326]}
+            rotation={[0, -Math.PI / 2, 0]}
+            scale={[1, 1.743, 1]}
+          />
+          <mesh
+            name='Barreaux'
+            castShadow
+            receiveShadow
+            geometry={nodes.Barreaux.geometry}
+            material={materials.Palette}
+            scale={[1, 1.743, 1]}
+          />
+        </group>
+        <group name='ClotureBois_Move' position={[5.193, 1.707, 5.862]}>
+          <mesh
+            name='ClotureBois_Base'
+            castShadow
+            receiveShadow
+            geometry={nodes.ClotureBois_Base.geometry}
+            material={materials.ClotureBois}
+            position={[-2.49, -0.692, -0.933]}
+            rotation={[Math.PI, -0.646, Math.PI]}
+          />
+          <mesh
+            name='ClotureBois_Base001'
+            castShadow
+            receiveShadow
+            geometry={nodes.ClotureBois_Base001.geometry}
+            material={materials.ClotureBois}
+            position={[2.137, -0.692, 1.272]}
+            rotation={[0, 0.809, 0]}
+          />
+          <mesh
+            name='ClotureBois_Inst001'
+            castShadow
+            receiveShadow
+            geometry={nodes.ClotureBois_Inst001.geometry}
+            material={materials.ClotureBois}
+            position={[-1.191, -0.525, -2.128]}
+            rotation={[3.079, -0.752, 2.94]}
+          />
+          <mesh
+            name='ClotureBois_Inst002'
+            castShadow
+            receiveShadow
+            geometry={nodes.ClotureBois_Inst002.geometry}
+            material={materials.ClotureBois}
+            position={[-0.678, -0.281, -2.601]}
+            rotation={[2.983, -0.725, 2.742]}
+          />
+          <mesh
+            name='ClotureBois_Inst003'
+            castShadow
+            receiveShadow
+            geometry={nodes.ClotureBois_Inst003.geometry}
+            material={materials.ClotureBois}
+            position={[-0.056, -0.224, -2.428]}
+            rotation={[3.035, 0.79, -3.127]}
+          />
+          <mesh
+            name='ClotureBois_Inst004'
+            castShadow
+            receiveShadow
+            geometry={nodes.ClotureBois_Inst004.geometry}
+            material={materials.ClotureBois}
+            position={[0.605, -0.215, -1.7]}
+            rotation={[3.044, 0.879, -2.99]}
+          />
+          <mesh
+            name='ClotureBois_Inst005'
+            castShadow
+            receiveShadow
+            geometry={nodes.ClotureBois_Inst005.geometry}
+            material={materials.ClotureBois}
+            position={[1.202, -0.407, -0.944]}
+            rotation={[3.044, 0.879, -2.817]}
+          />
+          <mesh
+            name='ClotureBois_Inst006'
+            castShadow
+            receiveShadow
+            geometry={nodes.ClotureBois_Inst006.geometry}
+            material={materials.ClotureBois}
+            position={[1.884, -0.603, -0.153]}
+            rotation={[3.051, 0.815, -3]}
+          />
+          <mesh
+            name='ClotureBois_Inst007'
+            castShadow
+            receiveShadow
+            geometry={nodes.ClotureBois_Inst007.geometry}
+            material={materials.ClotureBois}
+            position={[2.315, -0.656, 0.444]}
+            rotation={[2.943, 1.249, -2.877]}
+          />
+          <mesh
+            name='ClotureBois_Inst008'
+            castShadow
+            receiveShadow
+            geometry={nodes.ClotureBois_Inst008.geometry}
+            material={materials.ClotureBois}
+            position={[1.455, -0.689, 1.968]}
+            rotation={[0.064, 0.759, -0.063]}
+          />
+          <mesh
+            name='ClotureBois_Inst009'
+            castShadow
+            receiveShadow
+            geometry={nodes.ClotureBois_Inst009.geometry}
+            material={materials.ClotureBois}
+            position={[0.719, -0.612, 2.655]}
+            rotation={[0.177, 0.794, -0.229]}
+          />
+          <mesh
+            name='ClotureBois_Inst010'
+            castShadow
+            receiveShadow
+            geometry={nodes.ClotureBois_Inst010.geometry}
+            material={materials.ClotureBois}
+            position={[0.109, -0.536, 2.52]}
+            rotation={[3.051, 0.815, -3]}
+          />
+          <mesh
+            name='ClotureBois_Inst011'
+            castShadow
+            receiveShadow
+            geometry={nodes.ClotureBois_Inst011.geometry}
+            material={materials.ClotureBois}
+            position={[-0.546, -0.536, 1.81]}
+            rotation={[3.051, 0.815, -3.128]}
+          />
+          <mesh
+            name='ClotureBois_Inst012'
+            castShadow
+            receiveShadow
+            geometry={nodes.ClotureBois_Inst012.geometry}
+            material={materials.ClotureBois}
+            position={[-1.214, -0.618, 1.101]}
+            rotation={[3.051, 0.815, -3.136]}
+          />
+          <mesh
+            name='ClotureBois_Inst013'
+            castShadow
+            receiveShadow
+            geometry={nodes.ClotureBois_Inst013.geometry}
+            material={materials.ClotureBois}
+            position={[-1.91, -0.663, 0.35]}
+            rotation={[3.051, 0.815, -3.078]}
+          />
+          <mesh
+            name='ClotureBois_Inst014'
+            castShadow
+            receiveShadow
+            geometry={nodes.ClotureBois_Inst014.geometry}
+            material={materials.ClotureBois}
+            position={[-2.538, -0.708, -0.332]}
+            rotation={[3.051, 0.815, -3.076]}
+          />
+        </group>
+        <mesh
+          name='Land'
+          castShadow
+          receiveShadow
+          geometry={nodes.Land.geometry}
+          material={materials.Ground}
+        />
+        <mesh
+          name='SousSol'
+          castShadow
+          receiveShadow
+          geometry={nodes.SousSol.geometry}
+          material={materials.Palette}
+        />
+        <group name='Lampadaires_1' position={[-2.358, 1.346, -0.099]}>
+          <mesh
+            name='Cylinder026'
+            castShadow
+            receiveShadow
+            geometry={nodes.Cylinder026.geometry}
+            material={materials.Palette}
+          />
+          <mesh
+            name='Cylinder026_1'
+            castShadow
+            receiveShadow
+            geometry={nodes.Cylinder026_1.geometry}
+            material={materials.PaletteLumiere}
+          />
+        </group>
+        <group
+          name='Lampadaires_1001'
+          position={[-2.166, 1.183, 1.725]}
+          rotation={[-1.538, -1.477, -1.706]}
+          scale={0.668}
+        >
+          <mesh
+            name='Cylinder026'
+            castShadow
+            receiveShadow
+            geometry={nodes.Cylinder026.geometry}
+            material={materials.Palette}
+          />
+          <mesh
+            name='Cylinder026_1'
+            castShadow
+            receiveShadow
+            geometry={nodes.Cylinder026_1.geometry}
+            material={materials.PaletteLumiere}
+          />
+        </group>
+        <mesh
+          name='Pin_Base'
+          castShadow
+          receiveShadow
+          geometry={nodes.Pin_Base.geometry}
+          material={materials.Pin_128_Inst}
+          position={[-6.274, 1.084, -0.395]}
+          rotation={[Math.PI, -1.202, Math.PI]}
+          scale={[0.293, 0.567, 0.293]}
+        />
+        <mesh
+          name='Pin_Inst001'
+          castShadow
+          receiveShadow
+          geometry={nodes.Pin_Inst001.geometry}
+          material={materials.Pin_128_Inst}
+          position={[-6.61, 1.084, -1.966]}
+          rotation={[0, -1.152, 0]}
+          scale={[0.171, 0.331, 0.171]}
+        />
+        <mesh
+          name='Pin_Inst002'
+          castShadow
+          receiveShadow
+          geometry={nodes.Pin_Inst002.geometry}
+          material={materials.Pin_128_Inst}
+          position={[-5.433, 1.084, -0.975]}
+          rotation={[Math.PI, -1.44, Math.PI]}
+          scale={[0.219, 0.423, 0.219]}
+        />
+        <mesh
+          name='Pin_Inst003'
+          castShadow
+          receiveShadow
+          geometry={nodes.Pin_Inst003.geometry}
+          material={materials.Pin_128_Inst}
+          position={[-3.731, 1.084, -4.77]}
+          rotation={[0.05, -0.962, -0.018]}
+          scale={[0.219, 0.423, 0.219]}
+        />
+        <mesh
+          name='Pin_Inst004'
+          castShadow
+          receiveShadow
+          geometry={nodes.Pin_Inst004.geometry}
+          material={materials.Pin_128_Inst}
+          position={[-4.815, 1.732, -5.331]}
+          rotation={[0.056, -0.637, -0.08]}
+          scale={[0.248, 0.48, 0.248]}
+        />
+        <mesh
+          name='Pin_Inst005'
+          castShadow
+          receiveShadow
+          geometry={nodes.Pin_Inst005.geometry}
+          material={materials.Pin_128_Inst}
+          position={[-3.338, 1.439, -5.855]}
+          rotation={[Math.PI, -1.361, Math.PI]}
+          scale={[0.193, 0.374, 0.193]}
+        />
+        <mesh
+          name='Pin_Inst006'
+          castShadow
+          receiveShadow
+          geometry={nodes.Pin_Inst006.geometry}
+          material={materials.Pin_128_Inst}
+          position={[-2.385, 1.421, -6.565]}
+          rotation={[0, -1.177, 0]}
+          scale={[0.226, 0.437, 0.226]}
+        />
+        <mesh
+          name='Pin_Inst007'
+          castShadow
+          receiveShadow
+          geometry={nodes.Pin_Inst007.geometry}
+          material={materials.Pin_128_Inst}
+          position={[3.187, 1.359, -4.864]}
+          rotation={[0.112, -1.313, 0.049]}
+          scale={[0.219, 0.423, 0.219]}
+        />
+        <mesh
+          name='Pin_Inst008'
+          castShadow
+          receiveShadow
+          geometry={nodes.Pin_Inst008.geometry}
+          material={materials.Pin_128_Inst}
+          position={[4.283, 1.647, -5.47]}
+          rotation={[2.721, -1.17, 2.634]}
+          scale={[0.251, 0.485, 0.251]}
+        />
+        <mesh
+          name='Pin_Inst009'
+          castShadow
+          receiveShadow
+          geometry={nodes.Pin_Inst009.geometry}
+          material={materials.Pin_128_Inst}
+          position={[4.724, 1.765, -3.976]}
+          rotation={[0.362, -1.302, 0.312]}
+          scale={[0.217, 0.42, 0.217]}
+        />
+        <mesh
+          name='Pin_Inst010'
+          castShadow
+          receiveShadow
+          geometry={nodes.Pin_Inst010.geometry}
+          material={materials.Pin_128_Inst}
+          position={[5.23, 1.765, -2.951]}
+          rotation={[0.013, 0.114, 0.002]}
+          scale={[0.192, 0.372, 0.192]}
+        />
+        <mesh
+          name='Pin_Inst011'
+          castShadow
+          receiveShadow
+          geometry={nodes.Pin_Inst011.geometry}
+          material={materials.Pin_128_Inst}
+          position={[7.254, 1.765, -2.107]}
+          rotation={[0.013, -0.233, 0.006]}
+          scale={[0.212, 0.41, 0.212]}
+        />
+        <mesh
+          name='Pin_Inst012'
+          castShadow
+          receiveShadow
+          geometry={nodes.Pin_Inst012.geometry}
+          material={materials.Pin_128_Inst}
+          position={[0.836, 1.149, 3.974]}
+          rotation={[0.024, -1.029, 0.024]}
+          scale={[0.221, 0.427, 0.221]}
+        />
+        <mesh
+          name='Pin_Inst013'
+          castShadow
+          receiveShadow
+          geometry={nodes.Pin_Inst013.geometry}
+          material={materials.Pin_128_Inst}
+          position={[1.784, 1.149, 5.194]}
+          rotation={[0.014, -0.49, 0.01]}
+          scale={[0.221, 0.427, 0.221]}
+        />
+        <mesh
+          name='Pin_Inst014'
+          castShadow
+          receiveShadow
+          geometry={nodes.Pin_Inst014.geometry}
+          material={materials.Pin_128_Inst}
+          position={[1.473, 1.443, 6.792]}
+          rotation={[3.128, -0.448, 3.139]}
+          scale={[0.171, 0.33, 0.171]}
+        />
+        <mesh
+          name='Pin_Inst015'
+          castShadow
+          receiveShadow
+          geometry={nodes.Pin_Inst015.geometry}
+          material={materials.Pin_128_Inst}
+          position={[3.563, 1.374, 7.765]}
+          rotation={[3.122, 0.87, -3.124]}
+          scale={[0.243, 0.47, 0.243]}
+        />
+        <mesh
+          name='Pin_Inst016'
+          castShadow
+          receiveShadow
+          geometry={nodes.Pin_Inst016.geometry}
+          material={materials.Pin_128_Inst}
+          position={[3.693, 0.939, 6.456]}
+          rotation={[0.02, -0.894, 0.019]}
+          scale={[0.161, 0.312, 0.161]}
+        />
+        <mesh
+          name='Pin_Inst017'
+          castShadow
+          receiveShadow
+          geometry={nodes.Pin_Inst017.geometry}
+          material={materials.Pin_128_Inst}
+          position={[8.666, 0.939, 6.222]}
+          rotation={[3.095, -1.297, 3.1]}
+          scale={[0.228, 0.441, 0.228]}
+        />
+        <mesh
+          name='Pin_Inst018'
+          castShadow
+          receiveShadow
+          geometry={nodes.Pin_Inst018.geometry}
+          material={materials.Pin_128_Inst}
+          position={[6.758, 0.939, 8.534]}
+          rotation={[0.022, 0.961, -0.015]}
+          scale={[0.228, 0.441, 0.228]}
+        />
+        <mesh
+          name='Pin_Inst019'
+          castShadow
+          receiveShadow
+          geometry={nodes.Pin_Inst019.geometry}
+          material={materials.Pin_128_Inst}
+          position={[8.251, 1.151, 8.235]}
+          rotation={[0.013, 0.233, 0]}
+          scale={[0.162, 0.313, 0.162]}
+        />
+        <mesh
+          name='Pin_Inst020'
+          castShadow
+          receiveShadow
+          geometry={nodes.Pin_Inst020.geometry}
+          material={materials.Pin_128_Inst}
+          position={[-2.121, 1.194, 6.12]}
+          rotation={[-3.11, 0.355, 3.022]}
+          scale={[0.243, 0.47, 0.243]}
+        />
+        <mesh
+          name='Pin_Inst021'
+          castShadow
+          receiveShadow
+          geometry={nodes.Pin_Inst021.geometry}
+          material={materials.Pin_128_Inst}
+          position={[-3.654, 0.908, 6.569]}
+          rotation={[3.101, 1.254, -3.1]}
+          scale={[0.208, 0.403, 0.208]}
+        />
+        <mesh
+          name='Pin_Inst022'
+          castShadow
+          receiveShadow
+          geometry={nodes.Pin_Inst022.geometry}
+          material={materials.Pin_128_Inst}
+          position={[-4.664, 1.059, 6.644]}
+          rotation={[3.126, 0.644, -3.129]}
+          scale={[0.165, 0.32, 0.165]}
+        />
+        <mesh
+          name='Pin_Inst023'
+          castShadow
+          receiveShadow
+          geometry={nodes.Pin_Inst023.geometry}
+          material={materials.Pin_128_Inst}
+          position={[-5.187, 0.953, 5.522]}
+          rotation={[0.022, 0.962, -0.015]}
+          scale={[0.23, 0.444, 0.23]}
+        />
+        <mesh
+          name='Pin_Inst024'
+          castShadow
+          receiveShadow
+          geometry={nodes.Pin_Inst024.geometry}
+          material={materials.Pin_128_Inst}
+          position={[-1.159, 1.104, -5.231]}
+          rotation={[Math.PI, -1.268, Math.PI]}
+          scale={[0.102, 0.197, 0.102]}
+        />
+        <group name='Peuplier' position={[-1.075, 1.035, -3.094]} scale={0.167}>
+          <mesh
+            name='Icosphere009_1'
+            castShadow
+            receiveShadow
+            geometry={nodes.Icosphere009_1.geometry}
+            material={materials.Pin_128}
+          />
+          <mesh
+            name='Icosphere009_2'
+            castShadow
+            receiveShadow
+            geometry={nodes.Icosphere009_2.geometry}
+            material={materials.Planches}
+          />
+        </group>
+        <group
+          name='Icosphere001'
+          position={[-0.909, 1.035, -2.686]}
+          rotation={[Math.PI, -1.412, Math.PI]}
+          scale={0.193}
+        >
+          <mesh
+            name='Icosphere009_1'
+            castShadow
+            receiveShadow
+            geometry={nodes.Icosphere009_1.geometry}
+            material={materials.Pin_128}
+          />
+          <mesh
+            name='Icosphere009_2'
+            castShadow
+            receiveShadow
+            geometry={nodes.Icosphere009_2.geometry}
+            material={materials.Planches}
+          />
+        </group>
+        <group
+          name='Icosphere002'
+          position={[-0.692, 1.035, -2.227]}
+          rotation={[0, -0.673, 0]}
+          scale={0.167}
+        >
+          <mesh
+            name='Icosphere009_1'
+            castShadow
+            receiveShadow
+            geometry={nodes.Icosphere009_1.geometry}
+            material={materials.Pin_128}
+          />
+          <mesh
+            name='Icosphere009_2'
+            castShadow
+            receiveShadow
+            geometry={nodes.Icosphere009_2.geometry}
+            material={materials.Planches}
+          />
+        </group>
+        <group
+          name='Icosphere003'
+          position={[-4.232, 0.942, -1.341]}
+          rotation={[-Math.PI, 0.514, -Math.PI]}
+          scale={0.177}
+        >
+          <mesh
+            name='Icosphere009_1'
+            castShadow
+            receiveShadow
+            geometry={nodes.Icosphere009_1.geometry}
+            material={materials.Pin_128}
+          />
+          <mesh
+            name='Icosphere009_2'
+            castShadow
+            receiveShadow
+            geometry={nodes.Icosphere009_2.geometry}
+            material={materials.Planches}
+          />
+        </group>
+        <group
+          name='Icosphere004'
+          position={[-4.176, 0.942, -1.778]}
+          rotation={[0, 0.897, 0]}
+          scale={0.152}
+        >
+          <mesh
+            name='Icosphere009_1'
+            castShadow
+            receiveShadow
+            geometry={nodes.Icosphere009_1.geometry}
+            material={materials.Pin_128}
+          />
+          <mesh
+            name='Icosphere009_2'
+            castShadow
+            receiveShadow
+            geometry={nodes.Icosphere009_2.geometry}
+            material={materials.Planches}
+          />
+        </group>
+        <group
+          name='Icosphere005'
+          position={[-4.138, 0.942, -2.285]}
+          rotation={[-Math.PI, 1.187, -Math.PI]}
+          scale={0.167}
+        >
+          <mesh
+            name='Icosphere009_1'
+            castShadow
+            receiveShadow
+            geometry={nodes.Icosphere009_1.geometry}
+            material={materials.Pin_128}
+          />
+          <mesh
+            name='Icosphere009_2'
+            castShadow
+            receiveShadow
+            geometry={nodes.Icosphere009_2.geometry}
+            material={materials.Planches}
+          />
+        </group>
+        <group
+          name='Icosphere006'
+          position={[0.323, 1.361, -6.038]}
+          rotation={[0, 0.897, 0]}
+          scale={0.201}
+        >
+          <mesh
+            name='Icosphere009_1'
+            castShadow
+            receiveShadow
+            geometry={nodes.Icosphere009_1.geometry}
+            material={materials.Pin_128}
+          />
+          <mesh
+            name='Icosphere009_2'
+            castShadow
+            receiveShadow
+            geometry={nodes.Icosphere009_2.geometry}
+            material={materials.Planches}
+          />
+        </group>
+        <group
+          name='Icosphere007'
+          position={[2.032, 1.071, 0.426]}
+          rotation={[-Math.PI, 1.187, -Math.PI]}
+          scale={0.268}
+        >
+          <mesh
+            name='Icosphere009_1'
+            castShadow
+            receiveShadow
+            geometry={nodes.Icosphere009_1.geometry}
+            material={materials.Pin_128}
+          />
+          <mesh
+            name='Icosphere009_2'
+            castShadow
+            receiveShadow
+            geometry={nodes.Icosphere009_2.geometry}
+            material={materials.Planches}
+          />
+        </group>
+        <group
+          name='Icosphere008'
+          position={[1.45, 1.071, 0.303]}
+          rotation={[-Math.PI, 0.227, -Math.PI]}
+          scale={0.196}
+        >
+          <mesh
+            name='Icosphere009_1'
+            castShadow
+            receiveShadow
+            geometry={nodes.Icosphere009_1.geometry}
+            material={materials.Pin_128}
+          />
+          <mesh
+            name='Icosphere009_2'
+            castShadow
+            receiveShadow
+            geometry={nodes.Icosphere009_2.geometry}
+            material={materials.Planches}
+          />
+        </group>
+        <group
+          name='Icosphere009'
+          position={[2.414, 1.071, -0.217]}
+          rotation={[-Math.PI, 1.007, -Math.PI]}
+          scale={0.217}
+        >
+          <mesh
+            name='Icosphere009_1'
+            castShadow
+            receiveShadow
+            geometry={nodes.Icosphere009_1.geometry}
+            material={materials.Pin_128}
+          />
+          <mesh
+            name='Icosphere009_2'
+            castShadow
+            receiveShadow
+            geometry={nodes.Icosphere009_2.geometry}
+            material={materials.Planches}
+          />
+        </group>
+        <mesh
+          name='Arbre_1033'
+          castShadow
+          receiveShadow
+          geometry={nodes.Arbre_1033.geometry}
+          material={materials.Chene_128}
+          position={[-4.768, 1.381, 9.362]}
+          rotation={[-0.102, -0.452, -0.039]}
+          scale={0.611}
+        />
+        <mesh
           name='Arbre_1008'
           castShadow
           receiveShadow
@@ -1189,36 +1884,6 @@ export function Land(props) {
           scale={0.508}
         />
         <mesh
-          name='Arbre_1032'
-          castShadow
-          receiveShadow
-          geometry={nodes.Arbre_1032.geometry}
-          material={materials.Chene_128}
-          position={[6.647, 0.908, 6.679]}
-          rotation={[-0.32, -1.275, -0.301]}
-          scale={0.41}
-        />
-        <mesh
-          name='Arbre_1034'
-          castShadow
-          receiveShadow
-          geometry={nodes.Arbre_1034.geometry}
-          material={materials.Chene_128}
-          position={[6.647, 0.908, 6.253]}
-          rotation={[-0.105, -0.512, -0.046]}
-          scale={0.61}
-        />
-        <mesh
-          name='Arbre_1035'
-          castShadow
-          receiveShadow
-          geometry={nodes.Arbre_1035.geometry}
-          material={materials.Chene_128}
-          position={[3.788, 1.212, 3.165]}
-          rotation={[-3.041, -0.418, -3.095]}
-          scale={0.372}
-        />
-        <mesh
           name='Arbre_1027'
           castShadow
           receiveShadow
@@ -1257,16 +1922,6 @@ export function Land(props) {
           position={[2.701, 0.992, -3.937]}
           rotation={[-3.032, 0.571, 3.088]}
           scale={0.671}
-        />
-        <mesh
-          name='Arbre_1003'
-          castShadow
-          receiveShadow
-          geometry={nodes.Arbre_1003.geometry}
-          material={materials.Chene_128}
-          position={[3.606, 1.085, -3.178]}
-          rotation={[3.126, 0.138, -3.102]}
-          scale={[1.148, 1.285, 1.148]}
         />
         <mesh
           name='Arbre_1001'
@@ -1319,175 +1974,64 @@ export function Land(props) {
           scale={0.325}
         />
         <mesh
-          name='ArbreMort_2'
+          name='Arbre_1032'
           castShadow
           receiveShadow
-          geometry={nodes.ArbreMort_2.geometry}
-          material={materials.Palette}
-          position={[6.535, 2.632, -2.662]}
-          rotation={[-2.952, -0.205, -3.09]}
-          scale={0.65}
+          geometry={nodes.Arbre_1032.geometry}
+          material={materials.Chene_128}
+          position={[6.647, 0.908, 6.679]}
+          rotation={[-0.32, -1.275, -0.301]}
+          scale={0.41}
         />
         <mesh
-          name='ArbreMort_1'
+          name='Arbre_1034'
           castShadow
           receiveShadow
-          geometry={nodes.ArbreMort_1.geometry}
-          material={materials.Palette}
-          position={[6.335, 3.046, 0.546]}
-          rotation={[-Math.PI, 0.886, -Math.PI]}
+          geometry={nodes.Arbre_1034.geometry}
+          material={materials.Chene_128}
+          position={[6.647, 0.908, 6.253]}
+          rotation={[-0.105, -0.512, -0.046]}
+          scale={0.61}
         />
         <mesh
-          name='Cube'
+          name='Arbre_1035'
           castShadow
           receiveShadow
-          geometry={nodes.Cube.geometry}
-          material={materials.Palette}
-          position={[2.4, 1.009, 5.333]}
-          rotation={[0, -0.772, 0]}
-        />
-        <mesh
-          name='Cube001'
-          castShadow
-          receiveShadow
-          geometry={nodes.Cube001.geometry}
-          material={materials.Palette}
-          position={[3.618, 1.009, 6.518]}
-          rotation={[0.096, -0.842, 0.211]}
-          scale={0.801}
-        />
-        <mesh
-          name='Cube002'
-          castShadow
-          receiveShadow
-          geometry={nodes.Cube002.geometry}
-          material={materials.Palette}
-          position={[4.787, 1.556, 2.987]}
-          rotation={[2.975, -0.75, 2.652]}
-          scale={0.801}
-        />
-        <mesh
-          name='Cube003'
-          castShadow
-          receiveShadow
-          geometry={nodes.Cube003.geometry}
-          material={materials.Palette}
-          position={[3.428, 1.009, 4.156]}
-          rotation={[Math.PI, -0.809, Math.PI]}
-        />
-        <mesh
-          name='Cube004'
-          castShadow
-          receiveShadow
-          geometry={nodes.Cube004.geometry}
-          material={materials.Palette}
-          position={[5.632, 1.032, 8.763]}
-          rotation={[0.138, 0.736, -0.122]}
-          scale={0.801}
-        />
-        <mesh
-          name='Cube005'
-          castShadow
-          receiveShadow
-          geometry={nodes.Cube005.geometry}
-          material={materials.Palette}
-          position={[4.628, 1.237, 7.665]}
-          rotation={[-0.181, -0.825, -0.246]}
-          scale={0.801}
-        />
-        <mesh
-          name='Cube006'
-          castShadow
-          receiveShadow
-          geometry={nodes.Cube006.geometry}
-          material={materials.Palette}
-          position={[6.787, 0.99, 7.678]}
-          rotation={[0.089, 0.748, -0.074]}
-          scale={0.801}
-        />
-        <mesh
-          name='Cube007'
-          castShadow
-          receiveShadow
-          geometry={nodes.Cube007.geometry}
-          material={materials.Palette}
-          position={[7.962, 1.009, 6.581]}
-          rotation={[-Math.PI, 0.804, -Math.PI]}
-          scale={0.801}
-        />
-        <mesh
-          name='Cube008'
-          castShadow
-          receiveShadow
-          geometry={nodes.Cube008.geometry}
-          material={materials.Palette}
-          position={[6.783, 1.093, 5.357]}
-          rotation={[-3.026, 0.917, -2.969]}
-          scale={0.801}
-        />
-        <mesh
-          name='Cube009'
-          castShadow
-          receiveShadow
-          geometry={nodes.Cube009.geometry}
-          material={materials.Palette}
-          position={[5.815, 1.414, 4.07]}
-          rotation={[-2.982, 0.816, 3.05]}
-          scale={0.801}
-        />
-        <mesh
-          name='HP_Clôture002'
-          castShadow
-          receiveShadow
-          geometry={nodes.HP_Clôture002.geometry}
-          material={materials.Palette}
-          position={[1.426, 1.77, -4.619]}
-          rotation={[0, 1.09, 0]}
-          scale={[1, 1.743, 1]}
-        />
-        <mesh
-          name='Land'
-          castShadow
-          receiveShadow
-          geometry={nodes.Land.geometry}
-          material={materials.Ground}
-        />
-        <mesh
-          name='SousSol'
-          castShadow
-          receiveShadow
-          geometry={nodes.SousSol.geometry}
-          material={materials.Palette}
+          geometry={nodes.Arbre_1035.geometry}
+          material={materials.Chene_128}
+          position={[3.788, 1.212, 3.165]}
+          rotation={[-3.041, -0.418, -3.095]}
+          scale={0.372}
         />
         <group name='Lampadaire_2001' position={[3.458, 1.108, 4.046]}>
           <mesh
-            name='Cylinder002'
+            name='Cylinder004'
             castShadow
             receiveShadow
-            geometry={nodes.Cylinder002.geometry}
+            geometry={nodes.Cylinder004.geometry}
             material={materials.Palette}
           />
           <mesh
-            name='Cylinder002_1'
+            name='Cylinder004_1'
             castShadow
             receiveShadow
-            geometry={nodes.Cylinder002_1.geometry}
+            geometry={nodes.Cylinder004_1.geometry}
             material={materials.PaletteLumiere}
           />
         </group>
         <group name='Lampadaire_2002' position={[-0.178, 1.122, -3.173]}>
           <mesh
-            name='Cylinder003'
+            name='Cylinder004'
             castShadow
             receiveShadow
-            geometry={nodes.Cylinder003.geometry}
+            geometry={nodes.Cylinder004.geometry}
             material={materials.Palette}
           />
           <mesh
-            name='Cylinder003_1'
+            name='Cylinder004_1'
             castShadow
             receiveShadow
-            geometry={nodes.Cylinder003_1.geometry}
+            geometry={nodes.Cylinder004_1.geometry}
             material={materials.PaletteLumiere}
           />
         </group>
@@ -1509,63 +2053,57 @@ export function Land(props) {
         </group>
         <group name='Lampadaire_2004' position={[4.572, 1.516, -0.864]}>
           <mesh
-            name='Cylinder005'
+            name='Cylinder004'
             castShadow
             receiveShadow
-            geometry={nodes.Cylinder005.geometry}
+            geometry={nodes.Cylinder004.geometry}
             material={materials.Palette}
           />
           <mesh
-            name='Cylinder005_1'
+            name='Cylinder004_1'
             castShadow
             receiveShadow
-            geometry={nodes.Cylinder005_1.geometry}
+            geometry={nodes.Cylinder004_1.geometry}
             material={materials.PaletteLumiere}
           />
         </group>
         <group name='Lampadaire_2005' position={[4.558, 1.467, -1.374]}>
           <mesh
-            name='Cylinder006'
+            name='Cylinder004'
             castShadow
             receiveShadow
-            geometry={nodes.Cylinder006.geometry}
+            geometry={nodes.Cylinder004.geometry}
             material={materials.Palette}
           />
           <mesh
-            name='Cylinder006_1'
+            name='Cylinder004_1'
             castShadow
             receiveShadow
-            geometry={nodes.Cylinder006_1.geometry}
-            material={materials.PaletteLumiere}
-          />
-        </group>
-        <group name='Lampadaires_1' position={[-2.358, 1.346, -0.099]}>
-          <mesh
-            name='Cylinder026'
-            castShadow
-            receiveShadow
-            geometry={nodes.Cylinder026.geometry}
-            material={materials.Palette}
-          />
-          <mesh
-            name='Cylinder026_1'
-            castShadow
-            receiveShadow
-            geometry={nodes.Cylinder026_1.geometry}
+            geometry={nodes.Cylinder004_1.geometry}
             material={materials.PaletteLumiere}
           />
         </group>
         <mesh
-          name='Socle'
+          name='ArbreMort_1'
           castShadow
           receiveShadow
-          geometry={nodes.Socle.geometry}
+          geometry={nodes.ArbreMort_1.geometry}
           material={materials.Palette}
-          position={[0, 1.07, 0]}
+          position={[6.335, 3.046, 0.546]}
+        />
+        <mesh
+          name='ArbreMort_1001'
+          castShadow
+          receiveShadow
+          geometry={nodes.ArbreMort_1001.geometry}
+          material={materials.Palette}
+          position={[6.547, 2.649, -2.656]}
+          rotation={[1.386, 1.436, -1.248]}
+          scale={0.611}
         />
       </group>
     </group>
   );
 }
 
-useGLTF.preload('/game/Land_1_01_Anim.glb');
+useGLTF.preload('/game/Land.glb');
