@@ -10,8 +10,12 @@ export function Tavern({ color, ...props }: any) {
   const { nodes, materials, animations } = useGLTF('/game/Tavern.glb');
   const { actions } = useAnimations(animations, group);
 
-  const position = [4.435, 1.067, 5.3641];
-  const rotation = [0, -2.2521728667735, 0];
+  // const position = [4.435, 1.067, 5.3641];
+  // const rotation = [0, -2.2521728667735, 0];
+
+  const materiauxOnHover = (
+    <meshStandardMaterial color={color} transparent opacity={0.2} />
+  );
 
   return (
     <group {...props} dispose={null}>
@@ -60,9 +64,7 @@ export function Tavern({ color, ...props }: any) {
         geometry={nodes.Cube036.geometry}
         material={materials.Palette}
       >
-        {color !== undefined && (
-          <meshStandardMaterial color={color} transparent opacity={0.2} />
-        )}
+        {color !== undefined && materiauxOnHover}
       </mesh>
       <mesh
         castShadow
@@ -70,9 +72,7 @@ export function Tavern({ color, ...props }: any) {
         geometry={nodes.Cube036_1.geometry}
         material={materials.SkBase}
       >
-        {color !== undefined && (
-          <meshStandardMaterial color={color} transparent opacity={0.2} />
-        )}
+        {color !== undefined && materiauxOnHover}
       </mesh>
       <mesh
         castShadow
@@ -80,9 +80,7 @@ export function Tavern({ color, ...props }: any) {
         geometry={nodes.Cube036_2.geometry}
         material={materials.SkShadow}
       >
-        {color !== undefined && (
-          <meshStandardMaterial color={color} transparent opacity={0.2} />
-        )}
+        {color !== undefined && materiauxOnHover}
       </mesh>
       <mesh
         castShadow
@@ -90,9 +88,7 @@ export function Tavern({ color, ...props }: any) {
         geometry={nodes.Cube036_3.geometry}
         material={materials.SkTeeth}
       >
-        {color !== undefined && (
-          <meshStandardMaterial color={color} transparent opacity={0.2} />
-        )}
+        {color !== undefined && materiauxOnHover}
       </mesh>
       <mesh
         castShadow
@@ -100,9 +96,7 @@ export function Tavern({ color, ...props }: any) {
         geometry={nodes.Cube036_4.geometry}
         material={materials.LanterneVerreLumière}
       >
-        {color !== undefined && (
-          <meshStandardMaterial color={color} transparent opacity={0.2} />
-        )}
+        {color !== undefined && materiauxOnHover}
       </mesh>
       <mesh
         castShadow
@@ -110,9 +104,7 @@ export function Tavern({ color, ...props }: any) {
         geometry={nodes.Cube036_5.geometry}
         material={materials.Tabouret}
       >
-        {color !== undefined && (
-          <meshStandardMaterial color={color} transparent opacity={0.2} />
-        )}
+        {color !== undefined && materiauxOnHover}
       </mesh>
       <mesh
         castShadow
@@ -120,9 +112,7 @@ export function Tavern({ color, ...props }: any) {
         geometry={nodes.Cube036_6.geometry}
         material={materials['Planches.001']}
       >
-        {color !== undefined && (
-          <meshStandardMaterial color={color} transparent opacity={0.2} />
-        )}
+        {color !== undefined && materiauxOnHover}
       </mesh>
       <mesh
         castShadow
@@ -130,9 +120,7 @@ export function Tavern({ color, ...props }: any) {
         geometry={nodes.Cube036_7.geometry}
         material={materials.Portrait}
       >
-        {color !== undefined && (
-          <meshStandardMaterial color={color} transparent opacity={0.2} />
-        )}
+        {color !== undefined && materiauxOnHover}
       </mesh>
       <mesh
         castShadow
@@ -140,9 +128,7 @@ export function Tavern({ color, ...props }: any) {
         geometry={nodes.Cube004.geometry}
         material={materials.MursTerre}
       >
-        {color !== undefined && (
-          <meshStandardMaterial color={color} transparent opacity={0.2} />
-        )}
+        {color !== undefined && materiauxOnHover}
       </mesh>
       <mesh
         castShadow
@@ -150,9 +136,7 @@ export function Tavern({ color, ...props }: any) {
         geometry={nodes.Cube004_1.geometry}
         material={materials['Planches.001']}
       >
-        {color !== undefined && (
-          <meshStandardMaterial color={color} transparent opacity={0.2} />
-        )}
+        {color !== undefined && materiauxOnHover}
       </mesh>
       <mesh
         castShadow
@@ -160,9 +144,7 @@ export function Tavern({ color, ...props }: any) {
         geometry={nodes.Cube004_2.geometry}
         material={materials.Vitraux}
       >
-        {color !== undefined && (
-          <meshStandardMaterial color={color} transparent opacity={0.2} />
-        )}
+        {color !== undefined && materiauxOnHover}
       </mesh>
       <mesh
         castShadow
@@ -170,9 +152,7 @@ export function Tavern({ color, ...props }: any) {
         geometry={nodes.Cube004_3.geometry}
         material={materials.VitresLumière}
       >
-        {color !== undefined && (
-          <meshStandardMaterial color={color} transparent opacity={0.2} />
-        )}
+        {color !== undefined && materiauxOnHover}
       </mesh>
       <mesh
         castShadow
@@ -180,9 +160,7 @@ export function Tavern({ color, ...props }: any) {
         geometry={nodes.Cube004_4.geometry}
         material={materials.Palette}
       >
-        {color !== undefined && (
-          <meshStandardMaterial color={color} transparent opacity={0.2} />
-        )}
+        {color !== undefined && materiauxOnHover}
       </mesh>
       <mesh
         castShadow
@@ -190,9 +168,7 @@ export function Tavern({ color, ...props }: any) {
         geometry={nodes.Cube004_5.geometry}
         material={materials.LanterneVerreLumière}
       >
-        {color !== undefined && (
-          <meshStandardMaterial color={color} transparent opacity={0.2} />
-        )}
+        {color !== undefined && materiauxOnHover}
       </mesh>
       <mesh
         castShadow
@@ -200,9 +176,7 @@ export function Tavern({ color, ...props }: any) {
         geometry={nodes.Cube004_6.geometry}
         material={materials['Cheminée.001']}
       >
-        {color !== undefined && (
-          <meshStandardMaterial color={color} transparent opacity={0.2} />
-        )}
+        {color !== undefined && materiauxOnHover}
       </mesh>
       <mesh
         castShadow
@@ -210,9 +184,7 @@ export function Tavern({ color, ...props }: any) {
         geometry={nodes.Cube004_7.geometry}
         material={materials.Porte_1}
       >
-        {color !== undefined && (
-          <meshStandardMaterial color={color} transparent opacity={0.2} />
-        )}
+        {color !== undefined && materiauxOnHover}
       </mesh>
       <mesh
         castShadow
@@ -220,9 +192,7 @@ export function Tavern({ color, ...props }: any) {
         geometry={nodes.Cube004_8.geometry}
         material={materials.Floor}
       >
-        {color !== undefined && (
-          <meshStandardMaterial color={color} transparent opacity={0.2} />
-        )}
+        {color !== undefined && materiauxOnHover}
       </mesh>
       <mesh
         castShadow
@@ -230,9 +200,7 @@ export function Tavern({ color, ...props }: any) {
         geometry={nodes.Cube004_9.geometry}
         material={materials.Poutre_Inst}
       >
-        {color !== undefined && (
-          <meshStandardMaterial color={color} transparent opacity={0.2} />
-        )}
+        {color !== undefined && materiauxOnHover}
       </mesh>
       <mesh
         castShadow
@@ -240,9 +208,7 @@ export function Tavern({ color, ...props }: any) {
         geometry={nodes.Cube004_10.geometry}
         material={materials.Ardoises}
       >
-        {color !== undefined && (
-          <meshStandardMaterial color={color} transparent opacity={0.2} />
-        )}
+        {color !== undefined && materiauxOnHover}
       </mesh>
     </group>
   );
