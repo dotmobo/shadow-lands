@@ -169,7 +169,7 @@ export const Production = ({ sfts, rewardPerDay }) => {
 
         <div className='w-full bg-slate-200 rounded-full h-2.5 mb-1 mt-2'>
           <div
-            className='bg-yellow-500 h-2.5 rounded-full'
+            className='bg-yellow-500 h-2.5 rounded-full animate-pulse'
             style={{
               width: calculateWidth(
                 currentRewards ?? 0,
