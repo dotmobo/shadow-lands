@@ -66,7 +66,9 @@ export const Production = ({ sfts, rewardPerDay }) => {
       0
     );
 
-    const lastMondayTimestampInSeconds = Math.floor(lastMonday.getTime() / 1000);
+    const lastMondayTimestampInSeconds = Math.floor(
+      lastMonday.getTime() / 1000
+    );
 
     axios
       .get<any>(
@@ -146,7 +148,11 @@ export const Production = ({ sfts, rewardPerDay }) => {
       <div className='flex flex-col text-black' data-testid='topInfo'>
         <div className='w-full bg-slate-200 rounded-full h-2.5 mb-1'>
           <div
-            className='bg-green-500 h-2.5 rounded-full'
+            className={`bg-green-500 h-2.5 rounded-full ${
+              (rewardPerDay * sfts.length) / totalYield === 1
+                ? 'ring-4 ring-green-300'
+                : ''
+            }`}
             style={{
               width: ((rewardPerDay * sfts.length) / totalYield) * 100 + '%'
             }}
@@ -163,7 +169,7 @@ export const Production = ({ sfts, rewardPerDay }) => {
 
         <div className='w-full bg-slate-200 rounded-full h-2.5 mb-1 mt-2'>
           <div
-            className='bg-yellow-500 h-2.5 rounded-full'
+            className='bg-yellow-500 h-2.5 rounded-full animate-pulse'
             style={{
               width: calculateWidth(
                 currentRewards ?? 0,
