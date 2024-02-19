@@ -102,7 +102,7 @@ export const Cards = () => {
                   .map((item: any, index: number) => (
                     <li
                       key={index}
-                      className='mb-2 w-1/2 sm:w-1/4 flex-shrink-0 p-4'
+                      className='mb-2 w-1/2 sm:w-1/4 lg:w-1/6 flex-shrink-0 p-4'
                     >
                       <span className='text-sm whitespace-nowrap'>
                         {item.name}
