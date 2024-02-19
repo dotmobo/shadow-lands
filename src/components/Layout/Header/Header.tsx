@@ -1,19 +1,35 @@
-import {
-  faCircleXmark,
-  faClose,
-  faRectangleXmark
-} from '@fortawesome/free-solid-svg-icons';
+import { faCircleUser, faCircleXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import axios from 'axios';
 import { Button } from 'components/Button';
 import { MxLink } from 'components/MxLink';
-import { environment } from 'config';
+import { mvxApiUrl, nftCollectionDustyBonesId } from 'config';
 import { logout } from 'helpers';
 import { useGetAccountInfo, useGetIsLoggedIn } from 'hooks';
 import { RouteNamesEnum } from 'localConstants';
+import { shuffle } from 'lodash';
+import { useEffect, useState } from 'react';
 
 export const Header = () => {
   const isLoggedIn = useGetIsLoggedIn();
   const { address, account } = useGetAccountInfo();
+  const [avatar, setAvatar] = useState<string>();
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      axios
+        .get<any>(
+          `${mvxApiUrl}/accounts/${address}/nfts?size=666&collection=${nftCollectionDustyBonesId}`
+        )
+        .then((response) => {
+          // Si on a au moins un NFT Dusty Bones, on prend 1 au hasard et on récupère l'avatar
+          if (response.data.length > 0) {
+            const randomNft = shuffle(response.data)[0];
+            setAvatar(randomNft.url);
+          }
+        });
+    }
+  }, [isLoggedIn]);
 
   const handleLogout = () => {
     sessionStorage.clear();
@@ -33,11 +49,26 @@ export const Header = () => {
         <div className='flex justify-end container mx-auto items-center gap-2'>
           {isLoggedIn ? (
             <>
-              <span className='text-gray-400'>
-                {address.substring(0, 6) +
-                  '...' +
-                  address.substring(address.length - 6)}
-              </span>
+              <div className='flex items-center'>
+                {!!avatar ? (
+                  <img
+                    src={avatar}
+                    alt='Avatar'
+                    className='h-9 w-9 rounded-full mr-2'
+                  />
+                ) : (
+                  <FontAwesomeIcon
+                    color='#9ca3af'
+                    icon={faCircleUser}
+                    className='h-9 w-9 rounded-full mr-2'
+                  />
+                )}
+                <span className='text-gray-400'>
+                  {address.substring(0, 6) +
+                    '...' +
+                    address.substring(address.length - 6)}
+                </span>
+              </div>
               <Button
                 aria-label='Close'
                 onClick={handleLogout}
