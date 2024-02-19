@@ -20,97 +20,268 @@ export function TavernR2({ color, ...props }: any) {
   return (
     <group ref={group} {...props} dispose={null}>
       {color === undefined && (
-        <spotLight
-          position={[position[0] + 0.3, position[1] + 0.2, position[2]]}
-          color={'red'}
-          intensity={Math.PI * 2}
-        />
+        <>
+          <spotLight
+            position={[4.3041, 1.9694, 5.1689]}
+            color={'yellow'}
+            power={10}
+            angle={0.85}
+          />
+
+          <spotLight
+            position={[5.5716, 1.9694, 5.4831]}
+            color={'yellow'}
+            power={10}
+            angle={0.85}
+          />
+
+          <spotLight
+            position={[5.5124, 1.9694, 6.564]}
+            color={'yellow'}
+            power={10}
+            angle={0.85}
+          />
+
+          <spotLight
+            position={[4.9129, 1.5467, 6.6745]}
+            color={'yellow'}
+            power={10}
+            angle={0.85}
+          />
+
+          <spotLight
+            position={[4.1262, 1.5467, 6.072]}
+            color={'yellow'}
+            power={10}
+            angle={0.85}
+          />
+
+          <pointLight
+            position={[4.9558, 1.8621, 5.7825]}
+            power={10}
+            color={'yellow'}
+          />
+        </>
       )}
       <group name='Scene'>
-        <group name='Tavern'>
+        <mesh
+          name='Tonneaux'
+          castShadow
+          receiveShadow
+          geometry={nodes.Tonneaux.geometry}
+          material={materials.Tonneau}
+        >
+          {color !== undefined && (
+            <meshStandardMaterial color={color} transparent opacity={0.2} />
+          )}
+        </mesh>
+        <group name='Interieur'>
           <mesh
-            name='Cube001'
+            name='Cube036'
             castShadow
             receiveShadow
-            geometry={nodes.Cube001.geometry}
-            material={materials.Facade}
+            geometry={nodes.Cube036.geometry}
+            material={materials.Palette}
           >
             {color !== undefined && (
               <meshStandardMaterial color={color} transparent opacity={0.2} />
             )}
           </mesh>
           <mesh
-            name='Cube001_1'
+            name='Cube036_1'
             castShadow
             receiveShadow
-            geometry={nodes.Cube001_1.geometry}
-            material={materials.Toit}
+            geometry={nodes.Cube036_1.geometry}
+            material={materials.SkBase}
           >
             {color !== undefined && (
               <meshStandardMaterial color={color} transparent opacity={0.2} />
             )}
           </mesh>
           <mesh
-            name='Cube001_2'
+            name='Cube036_2'
             castShadow
             receiveShadow
-            geometry={nodes.Cube001_2.geometry}
-            material={materials.Pierres}
+            geometry={nodes.Cube036_2.geometry}
+            material={materials.SkShadow}
           >
             {color !== undefined && (
               <meshStandardMaterial color={color} transparent opacity={0.2} />
             )}
           </mesh>
           <mesh
-            name='Cube001_3'
+            name='Cube036_3'
             castShadow
             receiveShadow
-            geometry={nodes.Cube001_3.geometry}
-            material={materials.Porte}
+            geometry={nodes.Cube036_3.geometry}
+            material={materials.SkTeeth}
           >
             {color !== undefined && (
               <meshStandardMaterial color={color} transparent opacity={0.2} />
             )}
           </mesh>
           <mesh
-            name='Cube001_4'
+            name='Cube036_4'
             castShadow
             receiveShadow
-            geometry={nodes.Cube001_4.geometry}
-            material={materials.Lumiere}
+            geometry={nodes.Cube036_4.geometry}
+            material={materials.LanterneVerreLumière}
           >
             {color !== undefined && (
               <meshStandardMaterial color={color} transparent opacity={0.2} />
             )}
           </mesh>
           <mesh
-            name='Cube001_5'
+            name='Cube036_5'
             castShadow
             receiveShadow
-            geometry={nodes.Cube001_5.geometry}
-            material={materials.Cheminée}
+            geometry={nodes.Cube036_5.geometry}
+            material={materials.Tabouret}
           >
             {color !== undefined && (
               <meshStandardMaterial color={color} transparent opacity={0.2} />
             )}
           </mesh>
           <mesh
-            name='Cube001_6'
+            name='Cube036_6'
             castShadow
             receiveShadow
-            geometry={nodes.Cube001_6.geometry}
-            material={materials.Poutres}
+            geometry={nodes.Cube036_6.geometry}
+            material={materials['Planches.001']}
           >
             {color !== undefined && (
               <meshStandardMaterial color={color} transparent opacity={0.2} />
             )}
           </mesh>
           <mesh
-            name='Cube001_7'
+            name='Cube036_7'
             castShadow
             receiveShadow
-            geometry={nodes.Cube001_7.geometry}
-            material={materials.Tonneau}
+            geometry={nodes.Cube036_7.geometry}
+            material={materials.Portrait}
+          >
+            {color !== undefined && (
+              <meshStandardMaterial color={color} transparent opacity={0.2} />
+            )}
+          </mesh>
+        </group>
+        <group name='Taverne+2'>
+          <mesh
+            name='Cube002'
+            castShadow
+            receiveShadow
+            geometry={nodes.Cube002.geometry}
+            material={materials.MursBardageBleu}
+          >
+            {color !== undefined && (
+              <meshStandardMaterial color={color} transparent opacity={0.2} />
+            )}
+          </mesh>
+          <mesh
+            name='Cube002_1'
+            castShadow
+            receiveShadow
+            geometry={nodes.Cube002_1.geometry}
+            material={materials['Planches.001']}
+          >
+            {color !== undefined && (
+              <meshStandardMaterial color={color} transparent opacity={0.2} />
+            )}
+          </mesh>
+          <mesh
+            name='Cube002_2'
+            castShadow
+            receiveShadow
+            geometry={nodes.Cube002_2.geometry}
+            material={materials.Vitraux}
+          >
+            {color !== undefined && (
+              <meshStandardMaterial color={color} transparent opacity={0.2} />
+            )}
+          </mesh>
+          <mesh
+            name='Cube002_3'
+            castShadow
+            receiveShadow
+            geometry={nodes.Cube002_3.geometry}
+            material={materials.VitresLumière}
+          >
+            {color !== undefined && (
+              <meshStandardMaterial color={color} transparent opacity={0.2} />
+            )}
+          </mesh>
+          <mesh
+            name='Cube002_4'
+            castShadow
+            receiveShadow
+            geometry={nodes.Cube002_4.geometry}
+            material={materials.Palette}
+          >
+            {color !== undefined && (
+              <meshStandardMaterial color={color} transparent opacity={0.2} />
+            )}
+          </mesh>
+          <mesh
+            name='Cube002_5'
+            castShadow
+            receiveShadow
+            geometry={nodes.Cube002_5.geometry}
+            material={materials.LanterneVerreLumière}
+          >
+            {color !== undefined && (
+              <meshStandardMaterial color={color} transparent opacity={0.2} />
+            )}
+          </mesh>
+          <mesh
+            name='Cube002_6'
+            castShadow
+            receiveShadow
+            geometry={nodes.Cube002_6.geometry}
+            material={materials['Cheminée.001']}
+          >
+            {color !== undefined && (
+              <meshStandardMaterial color={color} transparent opacity={0.2} />
+            )}
+          </mesh>
+          <mesh
+            name='Cube002_7'
+            castShadow
+            receiveShadow
+            geometry={nodes.Cube002_7.geometry}
+            material={materials.Porte_1}
+          >
+            {color !== undefined && (
+              <meshStandardMaterial color={color} transparent opacity={0.2} />
+            )}
+          </mesh>
+          <mesh
+            name='Cube002_8'
+            castShadow
+            receiveShadow
+            geometry={nodes.Cube002_8.geometry}
+            material={materials.Floor}
+          >
+            {color !== undefined && (
+              <meshStandardMaterial color={color} transparent opacity={0.2} />
+            )}
+          </mesh>
+          <mesh
+            name='Cube002_9'
+            castShadow
+            receiveShadow
+            geometry={nodes.Cube002_9.geometry}
+            material={materials.Poutre_Inst}
+          >
+            {color !== undefined && (
+              <meshStandardMaterial color={color} transparent opacity={0.2} />
+            )}
+          </mesh>
+          <mesh
+            name='Cube002_10'
+            castShadow
+            receiveShadow
+            geometry={nodes.Cube002_10.geometry}
+            material={materials.ArdoisesVertes}
           >
             {color !== undefined && (
               <meshStandardMaterial color={color} transparent opacity={0.2} />
