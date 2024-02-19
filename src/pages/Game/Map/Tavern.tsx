@@ -16,10 +16,6 @@ export function Tavern({ color, ...props }: any) {
   emptyMaterial.transparent = true;
   emptyMaterial.opacity = 0.2;
 
-  const materiauxOnHover = (
-    <meshStandardMaterial color={color} transparent opacity={0.2} />
-  );
-
   return (
     <group {...props} dispose={null}>
       {color === undefined && (
