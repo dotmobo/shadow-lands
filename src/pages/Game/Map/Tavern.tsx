@@ -16,11 +16,48 @@ export function Tavern({ color, ...props }: any) {
   return (
     <group {...props} dispose={null}>
       {color === undefined && (
-        <spotLight
-          position={[position[0] + 0.3, position[1] + 0.2, position[2] + 0.3]}
-          color={'red'}
-          intensity={Math.PI * 2}
-        />
+        <>
+          <spotLight
+            position={[4.3041, 1.9694, 5.1689]}
+            color={'yellow'}
+            power={10}
+            angle={0.85}
+          />
+
+          <spotLight
+            position={[5.5716, 1.9694, 5.4831]}
+            color={'yellow'}
+            power={10}
+            angle={0.85}
+          />
+
+          <spotLight
+            position={[5.5124, 1.9694, 6.564]}
+            color={'yellow'}
+            power={10}
+            angle={0.85}
+          />
+
+          <spotLight
+            position={[4.9129, 1.5467, 6.6745]}
+            color={'yellow'}
+            power={10}
+            angle={0.85}
+          />
+
+          <spotLight
+            position={[4.1262, 1.5467, 6.072]}
+            color={'yellow'}
+            power={10}
+            angle={0.85}
+          />
+
+          <pointLight
+            position={[4.9558, 1.8621, 5.7825]}
+            power={10}
+            color={'yellow'}
+          />
+        </>
       )}
       <mesh
         castShadow
