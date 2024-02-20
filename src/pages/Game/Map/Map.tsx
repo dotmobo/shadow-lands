@@ -223,7 +223,7 @@ export const Map = ({
                 }}
                 onPointerOver={(event) => hover1(true)}
                 onPointerOut={(event) => hover1(false)}
-                color={hovered1 ? 'blue' : undefined}
+                color={hovered1 ? 'blue' : 'green'}
               />
             ) : isStakedTavernR1 ? (
               <TavernR1 />
@@ -235,7 +235,7 @@ export const Map = ({
                 }}
                 onPointerOver={(event) => hover1(true)}
                 onPointerOut={(event) => hover1(false)}
-                color={hovered1 ? 'blue' : undefined}
+                color={hovered1 ? 'blue' : 'yellow'}
               />
             ) : walletTavernsR1.length === 0 && isStakedTavern ? (
               <Tavern />
@@ -262,7 +262,7 @@ export const Map = ({
                 }}
                 onPointerOver={(event) => hover2(true)}
                 onPointerOut={(event) => hover2(false)}
-                color={hovered2 ? 'blue' : undefined}
+                color={hovered2 ? 'blue' : 'green'}
               />
             ) : isStakedBankR1 ? (
               <BankR1 />
@@ -274,7 +274,7 @@ export const Map = ({
                 }}
                 onPointerOver={(event) => hover2(true)}
                 onPointerOut={(event) => hover2(false)}
-                color={hovered2 ? 'blue' : undefined}
+                color={hovered2 ? 'blue' : 'yellow'}
               />
             ) : walletBanksR1.length === 0 && isStakedBank ? (
               <Bank />
@@ -301,7 +301,7 @@ export const Map = ({
                 }}
                 onPointerOver={(event) => hover3(true)}
                 onPointerOut={(event) => hover3(false)}
-                color={hovered3 ? 'blue' : undefined}
+                color={hovered3 ? 'blue' : 'green'}
               />
             ) : isStakedHauntedHouseR1 ? (
               <HauntedHouseR1 />
@@ -313,7 +313,7 @@ export const Map = ({
                 }}
                 onPointerOver={(event) => hover3(true)}
                 onPointerOut={(event) => hover3(false)}
-                color={hovered3 ? 'blue' : undefined}
+                color={hovered3 ? 'blue' : 'yellow'}
               />
             ) : walletHauntedHousesR1.length === 0 && isStakedHauntedHouse ? (
               <HauntedHouse />
@@ -340,7 +340,7 @@ export const Map = ({
                 }}
                 onPointerOver={(event) => hover4(true)}
                 onPointerOut={(event) => hover4(false)}
-                color={hovered4 ? 'blue' : undefined}
+                color={hovered4 ? 'blue' : 'green'}
               />
             ) : isStakedCryptR1 ? (
               <CryptR1 />
@@ -352,7 +352,7 @@ export const Map = ({
                 }}
                 onPointerOver={(event) => hover4(true)}
                 onPointerOut={(event) => hover4(false)}
-                color={hovered4 ? 'blue' : undefined}
+                color={hovered4 ? 'blue' : 'yellow'}
               />
             ) : walletCryptsR1.length === 0 && isStakedCrypt ? (
               <Crypt />
@@ -379,7 +379,7 @@ export const Map = ({
                 }}
                 onPointerOver={(event) => hover5(true)}
                 onPointerOut={(event) => hover5(false)}
-                color={hovered5 ? 'blue' : undefined}
+                color={hovered5 ? 'blue' : 'green'}
               />
             ) : isStakedLaboR1 ? (
               <LaboR1 />
@@ -391,7 +391,7 @@ export const Map = ({
                 }}
                 onPointerOver={(event) => hover5(true)}
                 onPointerOut={(event) => hover5(false)}
-                color={hovered5 ? 'blue' : undefined}
+                color={hovered5 ? 'blue' : 'yellow'}
               />
             ) : walletLabosR1.length === 0 && isStakedLabo ? (
               <Labo />
