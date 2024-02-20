@@ -1,9 +1,10 @@
-import { faCamera, faCircleArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCamera, faCircleArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { useGetAccountInfo } from '@multiversx/sdk-dapp/hooks/account/useGetAccountInfo';
 import { useGetPendingTransactions } from '@multiversx/sdk-dapp/hooks/transactions/useGetPendingTransactions';
 import { useGetNetworkConfig } from '@multiversx/sdk-dapp/hooks/useGetNetworkConfig';
-import axios from 'axios';
 import { Button, FormatAmount, Loader, MxLink } from 'components';
 import {
   contractGameAddress,
@@ -12,7 +13,6 @@ import {
   mvxExplorerUrl
 } from 'config';
 import { RouteNamesEnum } from 'localConstants';
-import { useEffect, useState } from 'react';
 import { AuthRedirectWrapper, PageWrapper } from 'wrappers';
 
 export const Leaderboard = () => {
@@ -20,19 +20,25 @@ export const Leaderboard = () => {
   const { address, account } = useGetAccountInfo();
   const { hasPendingTransactions } = useGetPendingTransactions();
   const [leaderboard, setLeaderboard] = useState<any>();
+  const [selectedTab, setSelectedTab] = useState<'current' | 'previous'>(
+    'current'
+  );
   const CLAIM_TRANSACTION_VALUE = BigInt(15000000000000000000);
 
   useEffect(() => {
     const today = new Date();
-    today.setDate(1); // Définir le jour actuel au 1er jour du mois
-    const previousMonth = Math.floor(
-      today.setMonth(today.getMonth() - 1) / 1000
-    );
+    const targetMonth =
+      selectedTab === 'current' ? today.getMonth() : today.getMonth() - 1;
+    const targetYear = today.getFullYear();
+    const firstDayOfTargetMonth =
+      new Date(targetYear, targetMonth, 1).getTime() / 1000;
+    const lastDayOfTargetMonth =
+      new Date(targetYear, targetMonth + 1, 0, 23, 59, 59).getTime() / 1000;
 
     // Use [] as second argument in useEffect for not rendering each time
     axios
       .get<any>(
-        `${mvxApiUrl}/accounts/${contractGameAddress}/transfers?sender=${contractGameAddress}&size=10000&status=success&function=ESDTTransfer&after=${previousMonth}`
+        `${mvxApiUrl}/accounts/${contractGameAddress}/transfers?sender=${contractGameAddress}&size=10000&status=success&function=ESDTTransfer&after=${firstDayOfTargetMonth}&before=${lastDayOfTargetMonth}`
       )
       .then((response) => {
         const playersData = response.data.filter(
@@ -74,7 +80,7 @@ export const Leaderboard = () => {
       .catch((_error) => {
         setLeaderboard([]);
       });
-  }, [hasPendingTransactions]);
+  }, [hasPendingTransactions, selectedTab]);
 
   const downloadCSV = () => {
     if (leaderboard) {
@@ -84,7 +90,8 @@ export const Leaderboard = () => {
         leaderboard
           .slice(0, 50)
           .map(
-            (item: any) => `${item.address},${item.balance / BigInt(Math.pow(10, 18))}`
+            (item: any) =>
+              `${item.address},${item.balance / BigInt(Math.pow(10, 18))}`
           )
           .join('\n');
 
@@ -97,12 +104,46 @@ export const Leaderboard = () => {
     }
   };
 
+  const getCurrentMonthName = () => {
+    const today = new Date();
+    return today.toLocaleString('en-US', { month: 'long' });
+  };
+
+  const getPreviousMonthName = () => {
+    const today = new Date();
+    today.setMonth(today.getMonth() - 1);
+    return today.toLocaleString('en-US', { month: 'long' });
+  };
+
   return (
     <AuthRedirectWrapper requireAuth={true}>
       <PageWrapper>
         <div className='flex flex-col items-center h-full w-full bg-slate-900 text-slate-400'>
+          <div className='flex justify-center mb-4'>
+            <Button
+              className={`inline-block rounded-lg px-3 py-2 text-center hover:no-underline my-0 text-white hover:bg-blue-700 mr-0 disabled:bg-gray-200 disabled:text-black disabled:cursor-not-allowed
+              mr-2 ${
+                selectedTab === 'current' ? 'bg-blue-600' : 'bg-gray-600'
+              }`}
+              onClick={() => setSelectedTab('current')}
+            >
+              Current month
+            </Button>
+            <Button
+              className={`inline-block rounded-lg px-3 py-2 text-center hover:no-underline my-0 text-white hover:bg-blue-700 mr-0 disabled:bg-gray-200 disabled:text-black disabled:cursor-not-allowed
+              ml-2 ${
+                selectedTab === 'previous' ? 'bg-blue-600' : 'bg-gray-600'
+              }`}
+              onClick={() => setSelectedTab('previous')}
+            >
+              Previous month
+            </Button>
+          </div>
           <h1 className='text-4xl sm:text-4xl font-bold mt-4 mb-2 ml-2 mr-2'>
-            Leaderboard {new Date().toLocaleString('en-US', { month: 'long' })}{' '}
+            Leaderboard{' '}
+            {selectedTab === 'current'
+              ? getCurrentMonthName()
+              : getPreviousMonthName()}{' '}
             Top 50
           </h1>
           <span className='ml-2 mr-2 mb-2 italic'>
