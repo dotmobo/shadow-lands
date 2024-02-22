@@ -42,6 +42,23 @@ pub trait NftStaking {
         }
     }
 
+    #[upgrade]
+    fn upgrade(&self,
+        _nft_identifier: EgldOrEsdtTokenIdentifier,
+        _minimum_staking_days: u64,
+        _rewards_token_id: EgldOrEsdtTokenIdentifier,
+        _rewards_token_amount_per_day: BigUint,
+        _rewards_token_total_supply: BigUint,) {
+            // Currently we don't change stored data on upgrade
+            // self.nft_identifier().set(&nft_identifier);
+            // self.minimum_staking_days().set(&minimum_staking_days);
+            // self.rewards_token_id().set(&rewards_token_id);
+            // self.rewards_token_amount_per_day()
+            //     .set(&rewards_token_amount_per_day);
+            // self.rewards_token_total_supply()
+            //     .set(&rewards_token_total_supply);
+    }
+
     #[payable("*")]
     #[endpoint]
     fn stake(&self) -> SCResult<()> {
@@ -259,7 +276,7 @@ pub trait NftStaking {
         for n in nft_nonce_with_lock_time.iter() {
             let mut staked_days = 0u64;
             if from_time > n.get(1) {
-                staked_days = (from_time - n.get(1)) / 86400;
+                staked_days = (from_time - (n.get(1) - (n.get(1) % 86400))  ) / 86400;
             }
             rewards_amount += self.rewards_token_amount_per_day().get() * staked_days;
         }
