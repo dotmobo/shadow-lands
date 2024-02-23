@@ -84,4 +84,5 @@ export enum StatueType {
   Shroom = 'SHROOM'
 }
 export const selectedStatue = StatueType.Shroom;
-export const linkStatue = 'https://twitter.com/ShroomsCrypto';
+export const linkStatue =
+  'https://twitter.com/intent/follow?screen_name=ShroomsCrypto';
