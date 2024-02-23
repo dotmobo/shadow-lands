@@ -5,9 +5,9 @@
 ////////////////////////////////////////////////////
 
 // Init:                                 1
-// Endpoints:                           22
+// Endpoints:                           23
 // Async Callback (empty):               1
-// Total number of exported functions:  24
+// Total number of exported functions:  25
 
 #![no_std]
 
@@ -22,6 +22,7 @@ multiversx_sc_wasm_adapter::endpoints! {
     shadowlands
     (
         init => init
+        upgrade => upgrade
         stake => stake
         unstake => unstake
         claim => claim
