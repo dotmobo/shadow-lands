@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCamera, faCircleArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import {
+  faCamera,
+  faCircleArrowLeft,
+  faCrown,
+  faHatWizard,
+  faMask
+} from '@fortawesome/free-solid-svg-icons';
 import { useGetAccountInfo } from '@multiversx/sdk-dapp/hooks/account/useGetAccountInfo';
 import { useGetPendingTransactions } from '@multiversx/sdk-dapp/hooks/transactions/useGetPendingTransactions';
 import { useGetNetworkConfig } from '@multiversx/sdk-dapp/hooks/useGetNetworkConfig';
@@ -167,31 +173,51 @@ export const Leaderboard = () => {
               </div>
               <ul className='list-decimal ml-8 mb-8'>
                 {leaderboard.slice(0, 50).map((item: any, index: number) => (
-                  <li key={index} className='mb-2'>
-                    <span className='flex flex-items-center'>
-                      <a
-                        target='_blank'
-                        className={`mb-2 hover:text-slate-100 ${
-                          item.address === address
-                            ? ' text-yellow-400 '
-                            : 'text-slate-400'
-                        }`}
-                        href={`${mvxExplorerUrl}/accounts/${item.address}`}
-                      >
-                        {item.address.substring(0, 6) +
-                          '...' +
-                          item.address.substring(item.address.length - 6)}
-                      </a>
-                      &nbsp;:&nbsp;
-                      <FormatAmount
-                        value={item.balance ?? 0}
-                        showLabel={false}
-                        egldLabel='$DUST'
-                        digits={0}
-                        data-testid='balance'
-                      />
-                    </span>
-                  </li>
+                  <React.Fragment key={index}>
+                    {index === 0 && (
+                      <h2 className='text-xl font-bold mb-4 text-center bg-red-500 text-white p-2 rounded'>
+                        <FontAwesomeIcon icon={faCrown} className='mr-2' />
+                        Lich Kings
+                      </h2>
+                    )}
+                    {index === 5 && (
+                      <h2 className='text-xl font-bold mt-8 mb-4 text-center bg-green-500 text-white p-2 rounded'>
+                        <FontAwesomeIcon icon={faHatWizard} className='mr-2' />
+                        Skeleton Mages
+                      </h2>
+                    )}
+                    {index === 10 && (
+                      <h2 className='text-xl font-bold mt-8 mb-4 text-center bg-purple-500 text-white p-2 rounded'>
+                        <FontAwesomeIcon icon={faMask} className='mr-2' />
+                        Shadow Warriors
+                      </h2>
+                    )}
+                    <li className='mb-2'>
+                      <span className='flex flex-items-center'>
+                        <a
+                          target='_blank'
+                          className={`mb-2 hover:text-slate-100 ${
+                            item.address === address
+                              ? ' text-yellow-400 '
+                              : 'text-slate-400'
+                          }`}
+                          href={`${mvxExplorerUrl}/accounts/${item.address}`}
+                        >
+                          {item.address.substring(0, 6) +
+                            '...' +
+                            item.address.substring(item.address.length - 6)}
+                        </a>
+                        &nbsp;:&nbsp;
+                        <FormatAmount
+                          value={item.balance ?? 0}
+                          showLabel={false}
+                          egldLabel='$DUST'
+                          digits={0}
+                          data-testid='balance'
+                        />
+                      </span>
+                    </li>
+                  </React.Fragment>
                 ))}
               </ul>
             </>
