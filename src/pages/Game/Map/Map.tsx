@@ -51,6 +51,7 @@ import { StatueShroom } from './StatueShroom';
 import { CryptR2 } from './CryptR2';
 import { is } from '@react-three/fiber/dist/declarations/src/core/utils';
 import { LaboR2 } from './LaboR2';
+import { NeonLeaderBoard } from './NeonLeaderBoard';
 
 function Loader() {
   return (
@@ -188,6 +189,10 @@ export const Map = ({
               onPointerOver={(event) => hover(true)}
               onPointerOut={(event) => hover(false)}
             />
+
+            {/* Afficher seulement en fevrier 2024 */}
+            {new Date().getMonth() === 1 && new Date().getFullYear() === 2024 && <NeonLeaderBoard />}
+
 
             {selectedStatue === StatueType.Dusty && (
               <StatueDusty
