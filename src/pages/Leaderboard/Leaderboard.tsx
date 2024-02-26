@@ -131,7 +131,10 @@ export const Leaderboard = () => {
               mr-2 ${
                 selectedTab === 'current' ? 'bg-blue-600' : 'bg-gray-600'
               }`}
-              onClick={() => setSelectedTab('current')}
+              onClick={() => {
+                setLeaderboard(undefined);
+                setSelectedTab('current');
+              }}
             >
               Current month
             </Button>
@@ -140,7 +143,10 @@ export const Leaderboard = () => {
               ml-2 ${
                 selectedTab === 'previous' ? 'bg-blue-600' : 'bg-gray-600'
               }`}
-              onClick={() => setSelectedTab('previous')}
+              onClick={() => {
+                setLeaderboard(undefined);
+                setSelectedTab('previous');
+              }}
             >
               Previous month
             </Button>
