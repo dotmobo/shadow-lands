@@ -165,7 +165,7 @@ export const Leaderboard = () => {
                   <FontAwesomeIcon icon={faCamera} />
                 </Button>
               </div>
-              <ul className='list-decimal ml-8 mb-8'>
+              <ul className='list-decimal mb-8'>
                 {leaderboard.slice(0, 50).map((_, index) => (
                   <LeaderboardFragment
                     key={index}
