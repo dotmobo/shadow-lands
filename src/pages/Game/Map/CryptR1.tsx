@@ -248,4 +248,4 @@ export function CryptR1({ color, ...props }: any) {
   );
 }
 
-useGLTF.preload('/Crypt+1.glb');
+useGLTF.preload('/game/Crypt+1.glb');
