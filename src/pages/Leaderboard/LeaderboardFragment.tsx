@@ -62,7 +62,6 @@ const LeaderboardFragment: React.FC<LeaderboardFragmentProps> = ({
                   <li className='mb-2 text-white' key={idx}>
                     <span className='flex flex-items-center'>
                       <a
-                        target='_blank'
                         className={`mb-2 ${
                           item.address === address
                             ? 'text-yellow-400'

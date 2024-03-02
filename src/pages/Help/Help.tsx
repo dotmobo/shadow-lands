@@ -445,7 +445,6 @@ export const Help = () => {
                 Game&nbsp;:&nbsp;
                 <a
                   href={mvxExplorerUrl + '/accounts/' + contractGameAddress}
-                  target='_blank'
                   className='text-slate-400 hover:text-slate-100'
                 >
                   {contractGameAddress.substring(0, 6) +
@@ -459,7 +458,6 @@ export const Help = () => {
                 Dust Market SL&nbsp;:&nbsp;
                 <a
                   href={mvxExplorerUrl + '/accounts/' + contractMarketAddress}
-                  target='_blank'
                   className='text-slate-400 hover:text-slate-100'
                 >
                   {contractMarketAddress.substring(0, 6) +
@@ -473,7 +471,6 @@ export const Help = () => {
                 Dust Market DB&nbsp;:&nbsp;
                 <a
                   href={mvxExplorerUrl + '/accounts/' + contractMarketDbAddress}
-                  target='_blank'
                   className='text-slate-400 hover:text-slate-100'
                 >
                   {contractMarketDbAddress.substring(0, 6) +
