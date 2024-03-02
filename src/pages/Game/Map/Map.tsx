@@ -191,14 +191,14 @@ export const Map = ({
             />
 
             {/* Afficher seulement en mars 2024 */}
-            {new Date().getMonth() === 2 && new Date().getFullYear() === 2024 && <NeonLeaderBoard />}
-
+            {new Date().getMonth() === 2 &&
+              new Date().getFullYear() === 2024 && <NeonLeaderBoard />}
 
             {selectedStatue === StatueType.Dusty && (
               <StatueDusty
                 onClick={(event) => {
                   hover6(false);
-                  window.open(linkStatue, '_blank');
+                  window.location.href = linkStatue;
                 }}
                 onPointerOver={(event) => hover6(true)}
                 onPointerOut={(event) => hover6(false)}
@@ -209,7 +209,7 @@ export const Map = ({
               <StatueShroom
                 onClick={(event) => {
                   hover6(false);
-                  window.open(linkStatue, '_blank');
+                  window.location.href = linkStatue;
                 }}
                 onPointerOver={(event) => hover6(true)}
                 onPointerOut={(event) => hover6(false)}
