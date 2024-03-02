@@ -7,7 +7,6 @@ export const Footer = () => {
       <div className='flex flex-col items-center text sm text-gray-400'>
         <div className='flex gap-1 items-center'>
           <a
-            target='_blank'
             className='flex items-center text-sm hover:underline'
             href='https://dustybones.xyz/'
           >
