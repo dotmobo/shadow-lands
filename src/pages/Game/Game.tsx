@@ -22,7 +22,8 @@ import {
   faPlay,
   faQuestion,
   faRankingStar,
-  faRotate
+  faRotate,
+  faTree
 } from '@fortawesome/free-solid-svg-icons';
 import { RouteNamesEnum } from 'localConstants';
 import LecteurAudio from 'components/LecteurAudio/LecteurAudio';
@@ -198,6 +199,21 @@ export const Game = () => {
 
                 <Toolbar sfts={sfts} />
 
+                {sfts.filter((x) => x === sftLandsNonce).length === 0 && (
+                  <div className='flex items-center h-4/5'>
+                    <Button
+                      className='inline-block rounded-lg px-3 py-2 text-center hover:no-underline my-0 bg-purple-600 text-white hover:bg-purple-700 mr-0 disabled:bg-gray-200 disabled:text-black disabled:cursor-not-allowed'
+                      onClick={() =>
+                        window.open(
+                          'https://www.frameit.gg/marketplace/nft/SHALAN-55b9a9-01/130852'
+                        )
+                      }
+                    >
+                      <FontAwesomeIcon icon={faTree} className='mr-1' />
+                      Buy your land
+                    </Button>
+                  </div>
+                )}
                 {sfts.filter((x) => x === sftLandsNonce).length > 0 && (
                   <div className='flex w-[94%] h-4/5'>
                     <Map
