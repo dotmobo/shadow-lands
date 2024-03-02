@@ -20,6 +20,7 @@ import {
 } from 'config';
 import {
   useGetAccountInfo,
+  useGetLoginInfo,
   useGetNetworkConfig,
   useGetPendingTransactions
 } from 'hooks';
@@ -30,7 +31,7 @@ import axios from 'axios';
 export const Production = ({ sfts, rewardPerDay }) => {
   const { network } = useGetNetworkConfig();
   const { address, account } = useGetAccountInfo();
-
+  const { tokenLogin } = useGetLoginInfo();
   const { getCurrentRewards } = useCallShadowLandsQuery();
 
   const [currentRewards, setCurrentRewards] = useState<number>();
@@ -222,7 +223,7 @@ export const Production = ({ sfts, rewardPerDay }) => {
         <Button
           className='inline-block rounded-lg px-3 py-2 text-center hover:no-underline my-0 bg-purple-600 text-white hover:bg-purple-700 mr-0 disabled:bg-gray-200 disabled:text-black disabled:cursor-not-allowed'
           onClick={() =>
-            (window.location.href = 'https://swap.onedex.app/farm')
+            (window.location.href = `https://swap.onedex.app/farm?accessToken=${tokenLogin?.nativeAuthToken}`)
           }
         >
           <FontAwesomeIcon icon={faStore} className='mr-1' />
@@ -231,7 +232,7 @@ export const Production = ({ sfts, rewardPerDay }) => {
         <Button
           className='inline-block rounded-lg px-3 py-2 text-center hover:no-underline my-0 bg-purple-600 text-white hover:bg-purple-700 mr-0 disabled:bg-gray-200 disabled:text-black disabled:cursor-not-allowed'
           onClick={() =>
-            (window.location.href = 'https://swap.onedex.app/staking')
+            (window.location.href = `https://swap.onedex.app/staking?accessToken=${tokenLogin?.nativeAuthToken}`)
           }
         >
           <FontAwesomeIcon icon={faCoins} className='mr-1' />

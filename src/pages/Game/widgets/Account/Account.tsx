@@ -42,6 +42,7 @@ import {
 } from 'config';
 import {
   useGetAccountInfo,
+  useGetLoginInfo,
   useGetNetworkConfig,
   useGetPendingTransactions
 } from 'hooks';
@@ -71,6 +72,8 @@ export const Account = ({
 }) => {
   const { network } = useGetNetworkConfig();
   const { address, account } = useGetAccountInfo();
+  const { tokenLogin } = useGetLoginInfo();
+
   const [lands, setLandsList] = useState<Sft[]>();
   const [taverns, setTavernsList] = useState<Sft[]>();
   const [banks, setBanksList] = useState<Sft[]>();
@@ -335,8 +338,7 @@ export const Account = ({
         <Button
           className='inline-block rounded-lg px-3 py-2 text-center hover:no-underline my-0 bg-purple-600 text-white hover:bg-purple-700 mr-0 disabled:bg-gray-200 disabled:text-black disabled:cursor-not-allowed'
           onClick={() =>
-            (window.location.href =
-              'https://www.frameit.gg/marketplace/SHALAN-55b9a9/items')
+            (window.location.href = `https://www.frameit.gg/marketplace/SHALAN-55b9a9/items?accessToken=${tokenLogin?.nativeAuthToken}`)
           }
         >
           <FontAwesomeIcon icon={faStore} className='mr-1' />
