@@ -95,7 +95,6 @@ export const Factions = () => {
         .queryContract(factionFunction)
         .then(({ returnData }) => {
           const encoded = returnData;
-          console.log('encoded', encoded);
           switch (encoded) {
             case undefined:
               setFactionMembers([]);
@@ -118,7 +117,7 @@ export const Factions = () => {
           console.error('Unable to call VM query', err);
         });
     }
-  }, [hasPendingTransactions, faction]);
+  }, [faction]);
 
   const virus = factions.find((x) => x.id === 1);
   const heart = factions.find((x) => x.id === 2);
