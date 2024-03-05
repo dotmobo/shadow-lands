@@ -4,6 +4,7 @@ import {
   contractMarketAddress,
   contractMarketDbAddress,
   dustTokenId,
+  priceChooseFaction,
   sftCollectionId,
   sftLandsNonce
 } from 'config';
@@ -224,12 +225,51 @@ export const useSendShadowLandsTransaction = () => {
     }
   };
 
+  const sendChooseFactionTransaction = async (faction: number) => {
+    const getChooseFactionData = (f: number) => {
+      const price = priceChooseFaction * Math.pow(10, 18);
+      return (
+        'ESDTTransfer@' +
+        strtoHex(dustTokenId) +
+        '@' +
+        largeNumberToHex(
+          price.toLocaleString('fullwide', { useGrouping: false })
+        ) +
+        '@' +
+        strtoHex('choose_faction') +
+        '@' +
+        numtoHex(f)
+      );
+    };
+    const buyChooseFactionTransaction = {
+      value: '0',
+      data: getChooseFactionData(faction),
+      receiver: contractGameAddress,
+      gasLimit: '5000000'
+    };
+    await refreshAccount();
+
+    const { sessionId /*, error*/ } = await sendTransactions({
+      transactions: buyChooseFactionTransaction,
+      transactionsDisplayInfo: {
+        processingMessage: 'Processing choose faction transaction',
+        errorMessage: 'An error has occured during choose faction',
+        successMessage: 'Choose faction transaction successful'
+      },
+      redirectAfterSign: false
+    });
+    if (sessionId != null) {
+      setTransactionSessionId(sessionId);
+    }
+  };
+
   return {
     sendStakeLandTransaction,
     sendUnstakeLandTransaction,
     sendClaimTransaction,
     sendStakeBuildingTransaction,
     sendBuyItemTransaction,
-    sendBuyDustyBonesTransaction
+    sendBuyDustyBonesTransaction,
+    sendChooseFactionTransaction
   };
 };

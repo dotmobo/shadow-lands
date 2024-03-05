@@ -1,19 +1,73 @@
-import { faCircleUser, faCircleXmark } from '@fortawesome/free-solid-svg-icons';
+import {
+  IconName,
+  faCircleUser,
+  faCircleXmark,
+  faPeopleGroup,
+  faShieldCat,
+  faShieldDog,
+  faShieldHeart,
+  faShieldVirus
+} from '@fortawesome/free-solid-svg-icons';
+import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { ProxyNetworkProvider } from '@multiversx/sdk-network-providers/out';
 import axios from 'axios';
 import { Button } from 'components/Button';
 import { MxLink } from 'components/MxLink';
-import { mvxApiUrl, nftCollectionDustyBonesId } from 'config';
+import { factions, mvxApiUrl, nftCollectionDustyBonesId } from 'config';
 import { logout } from 'helpers';
-import { useGetAccountInfo, useGetIsLoggedIn } from 'hooks';
+import {
+  useGetAccountInfo,
+  useGetIsLoggedIn,
+  useGetNetworkConfig,
+  useGetPendingTransactions
+} from 'hooks';
 import { RouteNamesEnum } from 'localConstants';
 import { shuffle } from 'lodash';
+import { useCallShadowLandsQuery } from 'pages/Game/queries';
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+
+library.add(faShieldCat, faShieldDog, faShieldVirus, faShieldHeart);
 
 export const Header = () => {
   const isLoggedIn = useGetIsLoggedIn();
   const { address, account } = useGetAccountInfo();
   const [avatar, setAvatar] = useState<string>();
+  const [faction, setFaction] = useState<number>();
+
+  const { network } = useGetNetworkConfig();
+  const { hasPendingTransactions } = useGetPendingTransactions();
+  const { getMyFaction } = useCallShadowLandsQuery();
+  const proxy = new ProxyNetworkProvider(network.apiAddress, {
+    timeout: 5000
+  });
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      proxy
+        .queryContract(getMyFaction)
+        .then(({ returnData }) => {
+          const [encoded] = returnData;
+          switch (encoded) {
+            case undefined:
+              setFaction(0);
+              break;
+            case '':
+              setFaction(0);
+              break;
+            default: {
+              const decoded = Buffer.from(encoded, 'base64').toString('hex');
+              setFaction(parseInt(decoded, 16));
+              break;
+            }
+          }
+        })
+        .catch((err) => {
+          console.error('Unable to call VM query', err);
+        });
+    }
+  }, [hasPendingTransactions, isLoggedIn]);
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -50,6 +104,25 @@ export const Header = () => {
           {isLoggedIn ? (
             <>
               <div className='flex items-center'>
+                {!!faction ? (
+                  <FontAwesomeIcon
+                    title={factions.find((x) => x.id === 1)?.name}
+                    color='#9ca3af'
+                    icon={factions.find((x) => x.id === 1)?.icon as IconName}
+                    className='h-9 w-9 rounded-full mr-2'
+                  />
+                ) : (
+                  <Link
+                    title='Choose your faction'
+                    to={RouteNamesEnum.factions}
+                    className='inline-block rounded-lg px-1 py-0 text-center hover:no-underline my-0 bg-blue-600 text-white hover:bg-blue-700 mr-2'
+                  >
+                    <FontAwesomeIcon
+                      icon={faPeopleGroup}
+                      className='h-9 w-9 rounded-full'
+                    />
+                  </Link>
+                )}
                 {!!avatar ? (
                   <img
                     src={avatar}
