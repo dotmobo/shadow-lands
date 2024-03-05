@@ -133,7 +133,6 @@ export const Factions = () => {
               <Loader />
             </div>
           )}
-
           {faction !== undefined && (
             <>
               <h1 className='text-4xl sm:text-4xl font-bold mt-4 mb-8'>
@@ -358,6 +357,11 @@ export const Factions = () => {
                 </div>
               </div>
             </>
+          )}
+          {faction !== undefined && factionMembers === undefined && (
+            <div className='flex'>
+              <Loader />
+            </div>
           )}
           {faction !== undefined &&
             faction !== 0 &&
