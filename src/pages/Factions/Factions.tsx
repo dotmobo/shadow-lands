@@ -77,7 +77,11 @@ export const Factions = () => {
             Choose your faction
           </h1>
           <div className='flex flex-wrap justify-center px-4'>
-            <div className='w-full sm:w-1/2 mb-8'>
+            <div
+              className={`w-full sm:w-1/2 mb-8 p-2 ${
+                faction === virus?.id ? 'bg-green-900 rounded-lg' : ''
+              }`}
+            >
               <h2 className='text-2xl sm:text-2xl font-bold mb-8'>
                 <FontAwesomeIcon
                   title={virus?.name}
@@ -127,7 +131,11 @@ export const Factions = () => {
                 </Button>
               </span>
             </div>
-            <div className='w-full sm:w-1/2 mb-8'>
+            <div
+              className={`w-full sm:w-1/2 mb-8 p-2 ${
+                faction === heart?.id ? 'bg-green-900 rounded-lg' : ''
+              }`}
+            >
               <h2 className='text-2xl sm:text-2xl font-bold mb-8'>
                 <FontAwesomeIcon
                   title={heart?.name}
@@ -177,7 +185,11 @@ export const Factions = () => {
                 </Button>
               </span>
             </div>
-            <div className='w-full sm:w-1/2 mb-8'>
+            <div
+              className={`w-full sm:w-1/2 mb-8 p-2 ${
+                faction === dog?.id ? 'bg-green-900 rounded-lg' : ''
+              }`}
+            >
               <h2 className='text-2xl sm:text-2xl font-bold mb-8'>
                 <FontAwesomeIcon
                   title={dog?.name}
@@ -227,7 +239,11 @@ export const Factions = () => {
                 </Button>
               </span>
             </div>
-            <div className='w-full sm:w-1/2 mb-8'>
+            <div
+              className={`w-full sm:w-1/2 mb-8 p-2 ${
+                faction === cat?.id ? 'bg-green-900 rounded-lg' : ''
+              }`}
+            >
               <h2 className='text-2xl sm:text-2xl font-bold mb-8'>
                 <FontAwesomeIcon
                   title={cat?.name}

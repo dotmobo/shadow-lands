@@ -105,14 +105,19 @@ export const Header = () => {
             <>
               <div className='flex items-center'>
                 {!!faction ? (
-                  <FontAwesomeIcon
-                    title={factions.find((x) => x.id === faction)?.name}
-                    color='#9ca3af'
-                    icon={
-                      factions.find((x) => x.id === faction)?.icon as IconName
-                    }
-                    className='h-9 w-9 rounded-full mr-2'
-                  />
+                  <Link
+                    title='Choose your faction'
+                    to={RouteNamesEnum.factions}
+                    className='inline-block rounded-lg px-1 py-0 text-center hover:no-underline my-0 bg-blue-600 text-white hover:bg-blue-700 mr-2'
+                  >
+                    <FontAwesomeIcon
+                      title={factions.find((x) => x.id === faction)?.name}
+                      icon={
+                        factions.find((x) => x.id === faction)?.icon as IconName
+                      }
+                      className='h-9 w-9 rounded-full'
+                    />
+                  </Link>
                 ) : (
                   <Link
                     title='Choose your faction'
