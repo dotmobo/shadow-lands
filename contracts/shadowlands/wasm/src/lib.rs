@@ -5,9 +5,9 @@
 ////////////////////////////////////////////////////
 
 // Init:                                 1
-// Endpoints:                           23
+// Endpoints:                           27
 // Async Callback (empty):               1
-// Total number of exported functions:  25
+// Total number of exported functions:  29
 
 #![no_std]
 
@@ -26,12 +26,14 @@ multiversx_sc_wasm_adapter::endpoints! {
         stake => stake
         unstake => unstake
         claim => claim
+        choose_faction => choose_faction
         set_rewards_token_total_supply => set_rewards_token_total_supply
         set_rewards_token_amount_per_day => set_rewards_token_amount_per_day
         withdraw => withdraw
         restart_staking => restart_staking
         stop_staking => stop_staking
         calculateRewards => calculate_rewards
+        getMyFaction => get_my_faction
         getCurrentRewards => get_current_rewards
         getNftNonce => get_nft_nonce
         getUnstakeTime => get_unstake_time
@@ -45,6 +47,8 @@ multiversx_sc_wasm_adapter::endpoints! {
         getRewardsTokenTotalSupply => rewards_token_total_supply
         getNbrOfStakers => nbr_of_stakers
         getNbrOfNftStaked => nbr_of_nft_staked
+        getFactionMembers => faction_members
+        getPriceChooseFaction => price_choose_faction
     )
 }
 
