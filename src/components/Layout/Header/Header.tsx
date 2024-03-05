@@ -106,9 +106,11 @@ export const Header = () => {
               <div className='flex items-center'>
                 {!!faction ? (
                   <FontAwesomeIcon
-                    title={factions.find((x) => x.id === 1)?.name}
+                    title={factions.find((x) => x.id === faction)?.name}
                     color='#9ca3af'
-                    icon={factions.find((x) => x.id === 1)?.icon as IconName}
+                    icon={
+                      factions.find((x) => x.id === faction)?.icon as IconName
+                    }
                     className='h-9 w-9 rounded-full mr-2'
                   />
                 ) : (

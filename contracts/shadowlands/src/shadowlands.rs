@@ -243,7 +243,12 @@ pub trait NftStaking {
             payment_amount == self.price_choose_faction().get(),
             "Invalid payment amount"
         );
+
         let caller: ManagedAddress = self.blockchain().get_caller();
+        let my_faction = self.get_my_faction(&caller);
+        // if caller already joined a faction, return error
+        require!(my_faction == 0, "You already joined the faction number: {}", my_faction);
+        
         self.faction_members(faction).insert(caller);
         Ok(())
     }
@@ -311,10 +316,9 @@ pub trait NftStaking {
 
 
     #[view(getMyFaction)]
-    fn get_my_faction(&self) -> u64 {
-        let caller: ManagedAddress = self.blockchain().get_caller();
+    fn get_my_faction(&self, address: &ManagedAddress) -> u64 {
         for i in 1..5 {
-            if self.faction_members(i).contains(&caller) {
+            if self.faction_members(i).contains(&address) {
                 return i;
             }
         }

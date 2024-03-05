@@ -53,7 +53,7 @@ export const useCallShadowLandsQuery = () => {
   const getMyFaction = new Query({
     address: new Address(contractGameAddress),
     func: new ContractFunction('getMyFaction'),
-    args: []
+    args: [new AddressValue(new Address(address))]
   });
 
   const getFactionMembers1 = new Query({

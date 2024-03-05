@@ -31,15 +31,38 @@ library.add(faShieldCat, faShieldDog, faShieldVirus, faShieldHeart);
 export const Factions = () => {
   const { network } = useGetNetworkConfig();
 
-  const { getNftNonce } = useCallShadowLandsQuery();
-
   const { hasPendingTransactions } = useGetPendingTransactions();
-
   const { sendChooseFactionTransaction } = useSendShadowLandsTransaction();
+  const { getMyFaction } = useCallShadowLandsQuery();
+  const [faction, setFaction] = useState<number>();
 
   const proxy = new ProxyNetworkProvider(network.apiAddress, {
     timeout: 5000
   });
+
+  useEffect(() => {
+    proxy
+      .queryContract(getMyFaction)
+      .then(({ returnData }) => {
+        const [encoded] = returnData;
+        switch (encoded) {
+          case undefined:
+            setFaction(0);
+            break;
+          case '':
+            setFaction(0);
+            break;
+          default: {
+            const decoded = Buffer.from(encoded, 'base64').toString('hex');
+            setFaction(parseInt(decoded, 16));
+            break;
+          }
+        }
+      })
+      .catch((err) => {
+        console.error('Unable to call VM query', err);
+      });
+  }, [hasPendingTransactions]);
 
   const virus = factions.find((x) => x.id === 1);
   const heart = factions.find((x) => x.id === 2);
@@ -73,7 +96,7 @@ export const Factions = () => {
               <span className='ml-8 mr-2'>
                 <Button
                   aria-label='Join the Virus faction'
-                  disabled={hasPendingTransactions}
+                  disabled={hasPendingTransactions || faction !== 0}
                   onClick={() => {
                     confirmAlert({
                       title: 'Join the Virus faction',
@@ -123,7 +146,7 @@ export const Factions = () => {
               <span className='ml-8 mb-8 mr-2'>
                 <Button
                   aria-label='Join the Heart faction'
-                  disabled={hasPendingTransactions}
+                  disabled={hasPendingTransactions || faction !== 0}
                   onClick={() => {
                     confirmAlert({
                       title: 'Join the Heart faction',
@@ -173,7 +196,7 @@ export const Factions = () => {
               <span className='ml-8 mb-8 mr-2'>
                 <Button
                   aria-label='Join the Dog faction'
-                  disabled={hasPendingTransactions}
+                  disabled={hasPendingTransactions || faction !== 0}
                   onClick={() => {
                     confirmAlert({
                       title: 'Join the Dog faction',
@@ -223,7 +246,7 @@ export const Factions = () => {
               <span className='ml-8 mb-8 mr-2'>
                 <Button
                   aria-label='Join the Cat faction'
-                  disabled={hasPendingTransactions}
+                  disabled={hasPendingTransactions || faction !== 0}
                   onClick={() => {
                     confirmAlert({
                       title: 'Join the Cat faction',
