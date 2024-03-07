@@ -422,8 +422,32 @@ export const Factions = () => {
                   Your allies
                 </h1>
 
-                <div className='border-4 border-slate-500 bg-slate-900 rounded mb-4 p-2'>
-                  <h2 className='text-xl font-bold bg-slate-500 text-white p-2 rounded text-center'>
+                <div
+                  className={`border-4 ${
+                    faction === aleblade?.id
+                      ? 'border-red-500 bg-red-900'
+                      : faction === stormbrew?.id
+                      ? 'border-green-500 bg-green-900'
+                      : faction === goldpick?.id
+                      ? 'border-yellow-500 bg-yellow-900'
+                      : faction === sanctigrail?.id
+                      ? 'border-violet-500 bg-violet-900'
+                      : 'border-slate-500 bg-slate-900'
+                  } rounded mb-4 p-2`}
+                >
+                  <h2
+                    className={`text-xl font-bold ${
+                      faction === aleblade?.id
+                        ? 'bg-red-500'
+                        : faction === stormbrew?.id
+                        ? 'bg-green-500'
+                        : faction === goldpick?.id
+                        ? 'bg-yellow-500'
+                        : faction === sanctigrail?.id
+                        ? 'bg-violet-500'
+                        : 'bg-slate-500'
+                    } text-white p-2 rounded text-center`}
+                  >
                     <FontAwesomeIcon
                       icon={factions.find((x) => x.id === faction)?.icon}
                       className='mr-2'
