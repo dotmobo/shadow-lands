@@ -19,7 +19,8 @@ import {
   contractMarketAddress,
   contractMarketDbAddress,
   factions,
-  mvxExplorerUrl
+  mvxExplorerUrl,
+  priceChooseFaction
 } from 'config';
 import { RouteNamesEnum } from 'localConstants';
 import { useCallShadowLandsQuery } from 'pages/Game/queries';
@@ -119,10 +120,10 @@ export const Factions = () => {
     }
   }, [faction]);
 
-  const virus = factions.find((x) => x.id === 1);
-  const heart = factions.find((x) => x.id === 2);
-  const dog = factions.find((x) => x.id === 3);
-  const cat = factions.find((x) => x.id === 4);
+  const aleblade = factions.find((x) => x.id === 1);
+  const stormbrew = factions.find((x) => x.id === 2);
+  const goldpick = factions.find((x) => x.id === 3);
+  const sanctigrail = factions.find((x) => x.id === 4);
 
   return (
     <AuthRedirectWrapper requireAuth={true}>
@@ -141,218 +142,268 @@ export const Factions = () => {
               <div className='flex flex-wrap justify-center px-4'>
                 <div
                   className={`w-full sm:w-1/2 mb-8 p-2 ${
-                    faction === virus?.id ? 'bg-green-900 rounded-lg' : ''
+                    faction === aleblade?.id ? 'bg-red-900 rounded-lg' : ''
                   }`}
                 >
                   <h2 className='text-2xl sm:text-2xl font-bold mb-8'>
                     <FontAwesomeIcon
-                      title={virus?.name}
+                      title={aleblade?.name}
                       color='#9ca3af'
-                      icon={virus?.icon as IconName}
+                      icon={aleblade?.icon as IconName}
                       className='h-9 w-9 rounded-full mr-2'
                     />
-                    {virus?.name}
+                    {aleblade?.name}
                   </h2>
                   <p className='ml-8 mb-8 mr-2'>
-                    Lorel ipsum dolor sit amet, consectetur adipiscing elit. Sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    A fierce and resilient warrior faction, whose members are as
+                    skilled in battle as they are in celebrating their
+                    victories. Their courage is bolstered by ale, symbolizing
+                    their brotherhood and strength.
                   </p>
-                  <span className='ml-8 mr-2'>
-                    <Button
-                      aria-label='Join the Virus faction'
-                      disabled={hasPendingTransactions || faction !== 0}
-                      onClick={() => {
-                        confirmAlert({
-                          title: 'Join the Virus faction',
-                          message:
-                            'Are you sure you want to join the Virus faction for 100 $DUST ?',
-                          buttons: [
-                            {
-                              label: 'Yes',
-                              onClick: () =>
-                                sendChooseFactionTransaction(virus?.id ?? 0)
-                            },
-                            {
-                              label: 'No',
-                              onClick: () => {
-                                return;
-                              }
-                            }
-                          ]
-                        });
-                      }}
-                    >
-                      <FontAwesomeIcon
-                        icon={virus?.icon as IconName}
-                        size='sm'
-                        className='mr-1'
+                  <span className='flex flex-row ml-8'>
+                    {priceChooseFaction}
+                    <span>
+                      <img
+                        src='/dust-logo.png'
+                        alt='Dust'
+                        className='ml-1 w-5'
                       />
-                      Join the Virus faction
-                    </Button>
+                    </span>
+                    <span className='ml-2'>
+                      <Button
+                        aria-label='Join the Aleblade faction'
+                        disabled={hasPendingTransactions || faction !== 0}
+                        onClick={() => {
+                          confirmAlert({
+                            title: 'Join the Aleblade faction',
+                            message:
+                              'Are you sure you want to join the Aleblade faction for 100 $DUST ?',
+                            buttons: [
+                              {
+                                label: 'Yes',
+                                onClick: () =>
+                                  sendChooseFactionTransaction(
+                                    aleblade?.id ?? 0
+                                  )
+                              },
+                              {
+                                label: 'No',
+                                onClick: () => {
+                                  return;
+                                }
+                              }
+                            ]
+                          });
+                        }}
+                      >
+                        <FontAwesomeIcon
+                          icon={aleblade?.icon as IconName}
+                          size='sm'
+                          className='mr-1'
+                        />
+                        Join the Aleblade faction
+                      </Button>
+                    </span>
                   </span>
                 </div>
                 <div
                   className={`w-full sm:w-1/2 mb-8 p-2 ${
-                    faction === heart?.id ? 'bg-green-900 rounded-lg' : ''
+                    faction === stormbrew?.id ? 'bg-green-900 rounded-lg' : ''
                   }`}
                 >
                   <h2 className='text-2xl sm:text-2xl font-bold mb-8'>
                     <FontAwesomeIcon
-                      title={heart?.name}
+                      title={stormbrew?.name}
                       color='#9ca3af'
-                      icon={heart?.icon as IconName}
+                      icon={stormbrew?.icon as IconName}
                       className='h-9 w-9 rounded-full mr-2'
                     />
-                    {heart?.name}
+                    {stormbrew?.name}
                   </h2>
                   <p className='ml-8 mb-8 mr-2'>
-                    Lorel ipsum dolor sit amet, consectetur adipiscing elit. Sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    Magicians and alchemists who manipulate natural elements to
+                    brew powerful potions. Their mastery over storms makes them
+                    formidable, capable of unleashing the fury of the skies upon
+                    their enemies.
                   </p>
-                  <span className='ml-8 mb-8 mr-2'>
-                    <Button
-                      aria-label='Join the Heart faction'
-                      disabled={hasPendingTransactions || faction !== 0}
-                      onClick={() => {
-                        confirmAlert({
-                          title: 'Join the Heart faction',
-                          message:
-                            'Are you sure you want to join the Heart faction for 100 $DUST ?',
-                          buttons: [
-                            {
-                              label: 'Yes',
-                              onClick: () =>
-                                sendChooseFactionTransaction(heart?.id ?? 0)
-                            },
-                            {
-                              label: 'No',
-                              onClick: () => {
-                                return;
-                              }
-                            }
-                          ]
-                        });
-                      }}
-                    >
-                      <FontAwesomeIcon
-                        icon={heart?.icon as IconName}
-                        size='sm'
-                        className='mr-1'
+                  <span className='flex flex-row ml-8'>
+                    {priceChooseFaction}
+                    <span>
+                      <img
+                        src='/dust-logo.png'
+                        alt='Dust'
+                        className='ml-1 w-5'
                       />
-                      Join the Heart faction
-                    </Button>
+                    </span>
+                    <span className='ml-2'>
+                      <Button
+                        aria-label='Join the Stormbrew faction'
+                        disabled={hasPendingTransactions || faction !== 0}
+                        onClick={() => {
+                          confirmAlert({
+                            title: 'Join the Stormbrew faction',
+                            message:
+                              'Are you sure you want to join the Stormbrew faction for 100 $DUST ?',
+                            buttons: [
+                              {
+                                label: 'Yes',
+                                onClick: () =>
+                                  sendChooseFactionTransaction(
+                                    stormbrew?.id ?? 0
+                                  )
+                              },
+                              {
+                                label: 'No',
+                                onClick: () => {
+                                  return;
+                                }
+                              }
+                            ]
+                          });
+                        }}
+                      >
+                        <FontAwesomeIcon
+                          icon={stormbrew?.icon as IconName}
+                          size='sm'
+                          className='mr-1'
+                        />
+                        Join the Stormbrew faction
+                      </Button>
+                    </span>
                   </span>
                 </div>
                 <div
                   className={`w-full sm:w-1/2 mb-8 p-2 ${
-                    faction === dog?.id ? 'bg-green-900 rounded-lg' : ''
+                    faction === goldpick?.id ? 'bg-yellow-900 rounded-lg' : ''
                   }`}
                 >
                   <h2 className='text-2xl sm:text-2xl font-bold mb-8'>
                     <FontAwesomeIcon
-                      title={dog?.name}
+                      title={goldpick?.name}
                       color='#9ca3af'
-                      icon={dog?.icon as IconName}
+                      icon={goldpick?.icon as IconName}
                       className='h-9 w-9 rounded-full mr-2'
                     />
-                    {dog?.name}
+                    {goldpick?.name}
                   </h2>
                   <p className='ml-8 mb-8 mr-2'>
-                    Lorel ipsum dolor sit amet, consectetur adipiscing elit. Sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    Experts in mining and gathering riches, this faction excels
+                    at extracting gold and hidden treasures from the earth's
+                    depths. Their prosperity is built on their ability to
+                    discover and exploit precious resources.
                   </p>
-                  <span className='ml-8 mb-8 mr-2'>
-                    <Button
-                      aria-label='Join the Dog faction'
-                      disabled={hasPendingTransactions || faction !== 0}
-                      onClick={() => {
-                        confirmAlert({
-                          title: 'Join the Dog faction',
-                          message:
-                            'Are you sure you want to join the Dog faction for 100 $DUST ?',
-                          buttons: [
-                            {
-                              label: 'Yes',
-                              onClick: () =>
-                                sendChooseFactionTransaction(dog?.id ?? 0)
-                            },
-                            {
-                              label: 'No',
-                              onClick: () => {
-                                return;
-                              }
-                            }
-                          ]
-                        });
-                      }}
-                    >
-                      <FontAwesomeIcon
-                        icon={dog?.icon as IconName}
-                        size='sm'
-                        className='mr-1'
+                  <span className='flex flex-row ml-8'>
+                    {priceChooseFaction}
+                    <span>
+                      <img
+                        src='/dust-logo.png'
+                        alt='Dust'
+                        className='ml-1 w-5'
                       />
-                      Join the Dog faction
-                    </Button>
+                    </span>
+                    <span className='ml-2'>
+                      <Button
+                        aria-label='Join the Goldpick faction'
+                        disabled={hasPendingTransactions || faction !== 0}
+                        onClick={() => {
+                          confirmAlert({
+                            title: 'Join the Goldpick faction',
+                            message:
+                              'Are you sure you want to join the Goldpick faction for 100 $DUST ?',
+                            buttons: [
+                              {
+                                label: 'Yes',
+                                onClick: () =>
+                                  sendChooseFactionTransaction(
+                                    goldpick?.id ?? 0
+                                  )
+                              },
+                              {
+                                label: 'No',
+                                onClick: () => {
+                                  return;
+                                }
+                              }
+                            ]
+                          });
+                        }}
+                      >
+                        <FontAwesomeIcon
+                          icon={goldpick?.icon as IconName}
+                          size='sm'
+                          className='mr-1'
+                        />
+                        Join the Goldpick faction
+                      </Button>
+                    </span>
                   </span>
                 </div>
                 <div
                   className={`w-full sm:w-1/2 mb-8 p-2 ${
-                    faction === cat?.id ? 'bg-green-900 rounded-lg' : ''
+                    faction === sanctigrail?.id
+                      ? 'bg-violet-900 rounded-lg'
+                      : ''
                   }`}
                 >
                   <h2 className='text-2xl sm:text-2xl font-bold mb-8'>
                     <FontAwesomeIcon
-                      title={cat?.name}
+                      title={sanctigrail?.name}
                       color='#9ca3af'
-                      icon={cat?.icon as IconName}
+                      icon={sanctigrail?.icon as IconName}
                       className='h-9 w-9 rounded-full mr-2'
                     />
-                    {cat?.name}
+                    {sanctigrail?.name}
                   </h2>
                   <p className='ml-8 mb-8 mr-2'>
-                    Lorel ipsum dolor sit amet, consectetur adipiscing elit. Sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    Mystics and spiritual seekers, members of this faction are
+                    in pursuit of answers and ancient relics. Their devotion
+                    drives them to seek the sacred grail, symbolizing their
+                    quest for ultimate purity and truth.
                   </p>
-                  <span className='ml-8 mb-8 mr-2'>
-                    <Button
-                      aria-label='Join the Cat faction'
-                      disabled={hasPendingTransactions || faction !== 0}
-                      onClick={() => {
-                        confirmAlert({
-                          title: 'Join the Cat faction',
-                          message:
-                            'Are you sure you want to join the Cat faction for 100 $DUST ?',
-                          buttons: [
-                            {
-                              label: 'Yes',
-                              onClick: () =>
-                                sendChooseFactionTransaction(cat?.id ?? 0)
-                            },
-                            {
-                              label: 'No',
-                              onClick: () => {
-                                return;
-                              }
-                            }
-                          ]
-                        });
-                      }}
-                    >
-                      <FontAwesomeIcon
-                        icon={cat?.icon as IconName}
-                        size='sm'
-                        className='mr-1'
+                  <span className='flex flex-row ml-8'>
+                    {priceChooseFaction}
+                    <span>
+                      <img
+                        src='/dust-logo.png'
+                        alt='Dust'
+                        className='ml-1 w-5'
                       />
-                      Join the Cat faction
-                    </Button>
+                    </span>
+                    <span className='ml-2'>
+                      <Button
+                        aria-label='Join the Sanctigrail faction'
+                        disabled={hasPendingTransactions || faction !== 0}
+                        onClick={() => {
+                          confirmAlert({
+                            title: 'Join the Sanctigrail faction',
+                            message:
+                              'Are you sure you want to join the Sanctigrail faction for 100 $DUST ?',
+                            buttons: [
+                              {
+                                label: 'Yes',
+                                onClick: () =>
+                                  sendChooseFactionTransaction(
+                                    sanctigrail?.id ?? 0
+                                  )
+                              },
+                              {
+                                label: 'No',
+                                onClick: () => {
+                                  return;
+                                }
+                              }
+                            ]
+                          });
+                        }}
+                      >
+                        <FontAwesomeIcon
+                          icon={sanctigrail?.icon as IconName}
+                          size='sm'
+                          className='mr-1'
+                        />
+                        Join the Sanctigrail faction
+                      </Button>
+                    </span>
                   </span>
                 </div>
               </div>
@@ -371,8 +422,8 @@ export const Factions = () => {
                   Your allies
                 </h1>
 
-                <div className='border-4 border-green-500 bg-green-900 rounded mb-4 p-2'>
-                  <h2 className='text-xl font-bold bg-green-500 text-white p-2 rounded text-center'>
+                <div className='border-4 border-slate-500 bg-slate-900 rounded mb-4 p-2'>
+                  <h2 className='text-xl font-bold bg-slate-500 text-white p-2 rounded text-center'>
                     <FontAwesomeIcon
                       icon={factions.find((x) => x.id === faction)?.icon}
                       className='mr-2'
