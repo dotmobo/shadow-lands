@@ -129,8 +129,8 @@ export const Header = () => {
                   >
                     {faction === aleblade?.id && (
                       <img
-                        src='/sanctigrail.jpg'
-                        alt={sanctigrail?.name}
+                        src='/aleblade.jpg'
+                        alt={aleblade?.name}
                         className='h-9 w-9 rounded-full'
                       />
                     )}
