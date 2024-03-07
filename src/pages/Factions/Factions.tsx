@@ -75,7 +75,14 @@ export const Factions = () => {
   }, [hasPendingTransactions]);
 
   useEffect(() => {
-    if (!!faction) {
+    if (faction === 0) {
+      setFactionMembers([]);
+    } else if (
+      faction === 1 ||
+      faction === 2 ||
+      faction === 3 ||
+      faction === 4
+    ) {
       let factionFunction;
 
       switch (faction) {
