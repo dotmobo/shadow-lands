@@ -145,11 +145,10 @@ export const Factions = () => {
                     faction === aleblade?.id ? 'bg-red-900 rounded-lg' : ''
                   }`}
                 >
-                  <h2 className='text-2xl sm:text-2xl font-bold mb-8'>
-                    <FontAwesomeIcon
-                      title={aleblade?.name}
-                      color='#9ca3af'
-                      icon={aleblade?.icon as IconName}
+                  <h2 className='text-2xl sm:text-2xl font-bold mb-8 flex'>
+                    <img
+                      src='/aleblade.jpg'
+                      alt={aleblade?.name}
                       className='h-9 w-9 rounded-full mr-2'
                     />
                     {aleblade?.name}
@@ -211,11 +210,10 @@ export const Factions = () => {
                     faction === stormbrew?.id ? 'bg-green-900 rounded-lg' : ''
                   }`}
                 >
-                  <h2 className='text-2xl sm:text-2xl font-bold mb-8'>
-                    <FontAwesomeIcon
-                      title={stormbrew?.name}
-                      color='#9ca3af'
-                      icon={stormbrew?.icon as IconName}
+                  <h2 className='text-2xl sm:text-2xl font-bold mb-8 flex'>
+                    <img
+                      src='/stormbrew.jpg'
+                      alt={stormbrew?.name}
                       className='h-9 w-9 rounded-full mr-2'
                     />
                     {stormbrew?.name}
@@ -277,11 +275,10 @@ export const Factions = () => {
                     faction === goldpick?.id ? 'bg-yellow-900 rounded-lg' : ''
                   }`}
                 >
-                  <h2 className='text-2xl sm:text-2xl font-bold mb-8'>
-                    <FontAwesomeIcon
-                      title={goldpick?.name}
-                      color='#9ca3af'
-                      icon={goldpick?.icon as IconName}
+                  <h2 className='text-2xl sm:text-2xl font-bold mb-8 flex'>
+                    <img
+                      src='/goldpick.jpg'
+                      alt={goldpick?.name}
                       className='h-9 w-9 rounded-full mr-2'
                     />
                     {goldpick?.name}
@@ -345,11 +342,10 @@ export const Factions = () => {
                       : ''
                   }`}
                 >
-                  <h2 className='text-2xl sm:text-2xl font-bold mb-8'>
-                    <FontAwesomeIcon
-                      title={sanctigrail?.name}
-                      color='#9ca3af'
-                      icon={sanctigrail?.icon as IconName}
+                  <h2 className='text-2xl sm:text-2xl font-bold mb-8 flex'>
+                    <img
+                      src='/sanctigrail.jpg'
+                      alt={sanctigrail?.name}
                       className='h-9 w-9 rounded-full mr-2'
                     />
                     {sanctigrail?.name}
@@ -446,12 +442,36 @@ export const Factions = () => {
                         : faction === sanctigrail?.id
                         ? 'bg-violet-500'
                         : 'bg-slate-500'
-                    } text-white p-2 rounded text-center`}
+                    } text-white p-2 rounded text-center flex`}
                   >
-                    <FontAwesomeIcon
-                      icon={factions.find((x) => x.id === faction)?.icon}
-                      className='mr-2'
-                    />
+                    {faction === aleblade?.id && (
+                      <img
+                        src='/sanctigrail.jpg'
+                        alt={sanctigrail?.name}
+                        className='h-9 w-9 rounded-full mr-2'
+                      />
+                    )}
+                    {faction === stormbrew?.id && (
+                      <img
+                        src='/stormbrew.jpg'
+                        alt={stormbrew?.name}
+                        className='h-9 w-9 rounded-full mr-2'
+                      />
+                    )}
+                    {faction === goldpick?.id && (
+                      <img
+                        src='/goldpick.jpg'
+                        alt={goldpick?.name}
+                        className='h-9 w-9 rounded-full mr-2'
+                      />
+                    )}
+                    {faction === sanctigrail?.id && (
+                      <img
+                        src='/sanctigrail.jpg'
+                        alt={sanctigrail?.name}
+                        className='h-9 w-9 rounded-full mr-2'
+                      />
+                    )}
                     {factions.find((x) => x.id === faction)?.name}
                   </h2>
                   <div className='p-4 border-green-500 rounded'>

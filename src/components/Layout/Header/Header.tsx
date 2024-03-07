@@ -43,6 +43,11 @@ export const Header = () => {
     timeout: 5000
   });
 
+  const aleblade = factions.find((x) => x.id === 1);
+  const stormbrew = factions.find((x) => x.id === 2);
+  const goldpick = factions.find((x) => x.id === 3);
+  const sanctigrail = factions.find((x) => x.id === 4);
+
   useEffect(() => {
     if (isLoggedIn) {
       proxy
@@ -108,15 +113,48 @@ export const Header = () => {
                   <Link
                     title='Choose your faction'
                     to={RouteNamesEnum.factions}
-                    className='inline-block rounded-lg px-1 py-0 text-center hover:no-underline my-0 bg-blue-600 text-white hover:bg-blue-700 mr-2'
+                    className={`inline-block rounded-lg px-1 py-0 text-center hover:no-underline my-0 text-white mr-2 
+                    ${
+                      faction === aleblade?.id
+                        ? 'hover:bg-red-700 bg-red-600'
+                        : faction === stormbrew?.id
+                        ? 'hover:bg-green-700 bg-green-600'
+                        : faction === goldpick?.id
+                        ? 'hover:bg-yellow-700 bg-yellow-600'
+                        : faction === sanctigrail?.id
+                        ? 'hover:bg-violet-700 bg-violet-600'
+                        : 'hover:bg-blue-700 bg-blue-600'
+                    }
+                    `}
                   >
-                    <FontAwesomeIcon
-                      title={factions.find((x) => x.id === faction)?.name}
-                      icon={
-                        factions.find((x) => x.id === faction)?.icon as IconName
-                      }
-                      className='h-9 w-9 rounded-full'
-                    />
+                    {faction === aleblade?.id && (
+                      <img
+                        src='/sanctigrail.jpg'
+                        alt={sanctigrail?.name}
+                        className='h-9 w-9 rounded-full'
+                      />
+                    )}
+                    {faction === stormbrew?.id && (
+                      <img
+                        src='/stormbrew.jpg'
+                        alt={stormbrew?.name}
+                        className='h-9 w-9 rounded-full'
+                      />
+                    )}
+                    {faction === goldpick?.id && (
+                      <img
+                        src='/goldpick.jpg'
+                        alt={goldpick?.name}
+                        className='h-9 w-9 rounded-full'
+                      />
+                    )}
+                    {faction === sanctigrail?.id && (
+                      <img
+                        src='/sanctigrail.jpg'
+                        alt={sanctigrail?.name}
+                        className='h-9 w-9 rounded-full'
+                      />
+                    )}
                   </Link>
                 ) : (
                   <Link
