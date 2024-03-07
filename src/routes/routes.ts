@@ -1,6 +1,7 @@
 import { RouteNamesEnum } from 'localConstants';
 import { Home, Game } from 'pages';
 import { Cards } from 'pages/Cards/Cards';
+import { Factions } from 'pages/Factions';
 import { Help } from 'pages/Help/Help';
 import { Leaderboard } from 'pages/Leaderboard';
 import { Market } from 'pages/Market/Market';
@@ -40,5 +41,10 @@ export const routes: RouteWithTitleType[] = [
     path: RouteNamesEnum.market,
     title: 'Market',
     component: Market
+  },
+  {
+    path: RouteNamesEnum.factions,
+    title: 'Choose your faction',
+    component: Factions
   }
 ];

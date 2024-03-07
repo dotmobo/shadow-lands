@@ -88,3 +88,28 @@ export enum StatueType {
 export const selectedStatue = StatueType.Shroom;
 export const linkStatue =
   'https://twitter.com/intent/follow?screen_name=ShroomsCrypto';
+
+// Factions
+export const priceChooseFaction = 100;
+export const factions = [
+  {
+    id: 1,
+    name: 'Aleblade',
+    icon: 'shield-virus'
+  },
+  {
+    id: 2,
+    name: 'Stormbrew',
+    icon: 'shield-heart'
+  },
+  {
+    id: 3,
+    name: 'Goldpick',
+    icon: 'shield-dog'
+  },
+  {
+    id: 4,
+    name: 'Sanctigrail',
+    icon: 'shield-cat'
+  }
+];

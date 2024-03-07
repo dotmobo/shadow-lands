@@ -25,19 +25,19 @@ const LeaderboardFragment: React.FC<LeaderboardFragmentProps> = ({
         <div
           className={`border-4 ${
             index === 0
-              ? 'border-red-500 bg-red-900'
+              ? 'border-stone-500 bg-stone-900'
               : index === 5
-              ? 'border-green-500 bg-green-900'
-              : 'border-purple-500 bg-purple-900'
+              ? 'border-zinc-500 bg-zinc-900'
+              : 'border-slate-500 bg-slate-900'
           } rounded mb-4 p-2`}
         >
           <h2
             className={`text-xl font-bold ${
               index === 0
-                ? 'bg-red-500'
+                ? 'bg-stone-500'
                 : index === 5
-                ? 'bg-green-500'
-                : 'bg-purple-500'
+                ? 'bg-zinc-500'
+                : 'bg-slate-500'
             } text-white p-2 rounded text-center`}
           >
             <FontAwesomeIcon

@@ -16,6 +16,7 @@ pub trait NftStaking {
         rewards_token_id: EgldOrEsdtTokenIdentifier,
         rewards_token_amount_per_day: BigUint,
         rewards_token_total_supply: BigUint,
+        price_choose_faction: BigUint
     ) {
         self.nft_identifier().set(&nft_identifier);
         self.minimum_staking_days().set(&minimum_staking_days);
@@ -40,6 +41,8 @@ pub trait NftStaking {
         if self.nbr_of_nft_staked().is_empty() {
             self.nbr_of_nft_staked().set(0);
         }
+        // New factions system
+        self.price_choose_faction().set_if_empty(&price_choose_faction);
     }
 
     #[upgrade]
@@ -48,7 +51,9 @@ pub trait NftStaking {
         _minimum_staking_days: u64,
         _rewards_token_id: EgldOrEsdtTokenIdentifier,
         _rewards_token_amount_per_day: BigUint,
-        _rewards_token_total_supply: BigUint,) {
+        _rewards_token_total_supply: BigUint,
+        price_choose_faction: BigUint
+    ) {
             // Currently we don't change stored data on upgrade
             // self.nft_identifier().set(&nft_identifier);
             // self.minimum_staking_days().set(&minimum_staking_days);
@@ -57,6 +62,7 @@ pub trait NftStaking {
             //     .set(&rewards_token_amount_per_day);
             // self.rewards_token_total_supply()
             //     .set(&rewards_token_total_supply);
+            self.price_choose_faction().set_if_empty(&price_choose_faction);
     }
 
     #[payable("*")]
@@ -222,6 +228,31 @@ pub trait NftStaking {
         Ok(())
     }
 
+    #[payable("*")]
+    #[endpoint]
+    fn choose_faction(&self, #[payment_token] payment_token: EgldOrEsdtTokenIdentifier,
+        #[payment_amount] payment_amount: BigUint, faction: u64) -> SCResult<()> {
+        // faction have to be 1, 2, 3 or 4
+        require!(faction >= 1 && faction <= 4, "Invalid faction number");
+        // caller have to pay price_choose_faction to join a faction
+        require!(
+            payment_token == self.rewards_token_id().get(),
+            "Invalid payment token"
+        );
+        require!(
+            payment_amount == self.price_choose_faction().get(),
+            "Invalid payment amount"
+        );
+
+        let caller: ManagedAddress = self.blockchain().get_caller();
+        let my_faction = self.get_my_faction(&caller);
+        // if caller already joined a faction, return error
+        require!(my_faction == 0, "You already joined the faction number: {}", my_faction);
+        
+        self.faction_members(faction).insert(caller);
+        Ok(())
+    }
+
     // Owner endpoints
 
     #[only_owner]
@@ -281,6 +312,17 @@ pub trait NftStaking {
             rewards_amount += self.rewards_token_amount_per_day().get() * staked_days;
         }
         return rewards_amount;
+    }
+
+
+    #[view(getMyFaction)]
+    fn get_my_faction(&self, address: &ManagedAddress) -> u64 {
+        for i in 1..5 {
+            if self.faction_members(i).contains(&address) {
+                return i;
+            }
+        }
+        return 0;
     }
 
     // Views and storage
@@ -364,4 +406,12 @@ pub trait NftStaking {
     #[view(getNbrOfNftStaked)]
     #[storage_mapper("nbr_of_nft_staked")]
     fn nbr_of_nft_staked(&self) -> SingleValueMapper<u64>;
+
+    #[view(getFactionMembers)]
+    #[storage_mapper("faction_members")]
+    fn faction_members(&self, faction: u64) -> UnorderedSetMapper<ManagedAddress>;
+
+    #[view(getPriceChooseFaction)]
+    #[storage_mapper("price_choose_faction")]
+    fn price_choose_faction(&self) -> SingleValueMapper<BigUint>;
 }
