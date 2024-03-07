@@ -149,7 +149,7 @@ export const Factions = () => {
                     <img
                       src='/aleblade.jpg'
                       alt={aleblade?.name}
-                      className='h-32 w-32 rounded-full mr-2'
+                      className='h-32 w-32 rounded-2xl mr-2'
                     />
                     {aleblade?.name}
                   </h2>
@@ -214,7 +214,7 @@ export const Factions = () => {
                     <img
                       src='/stormbrew.jpg'
                       alt={stormbrew?.name}
-                      className='h-32 w-32 rounded-full mr-2'
+                      className='h-32 w-32 rounded-2xl mr-2'
                     />
                     {stormbrew?.name}
                   </h2>
@@ -279,7 +279,7 @@ export const Factions = () => {
                     <img
                       src='/goldpick.jpg'
                       alt={goldpick?.name}
-                      className='h-32 w-32 rounded-full mr-2'
+                      className='h-32 w-32 rounded-2xl mr-2'
                     />
                     {goldpick?.name}
                   </h2>
@@ -346,7 +346,7 @@ export const Factions = () => {
                     <img
                       src='/sanctigrail.jpg'
                       alt={sanctigrail?.name}
-                      className='h-32 w-32 rounded-full mr-2'
+                      className='h-32 w-32 rounded-2xl mr-2'
                     />
                     {sanctigrail?.name}
                   </h2>
@@ -448,28 +448,28 @@ export const Factions = () => {
                       <img
                         src='/aleblade.jpg'
                         alt={aleblade?.name}
-                        className='h-9 w-9 rounded-full mr-2'
+                        className='h-9 w-9 rounded mr-2'
                       />
                     )}
                     {faction === stormbrew?.id && (
                       <img
                         src='/stormbrew.jpg'
                         alt={stormbrew?.name}
-                        className='h-9 w-9 rounded-full mr-2'
+                        className='h-9 w-9 rounded mr-2'
                       />
                     )}
                     {faction === goldpick?.id && (
                       <img
                         src='/goldpick.jpg'
                         alt={goldpick?.name}
-                        className='h-9 w-9 rounded-full mr-2'
+                        className='h-9 w-9 rounded mr-2'
                       />
                     )}
                     {faction === sanctigrail?.id && (
                       <img
                         src='/sanctigrail.jpg'
                         alt={sanctigrail?.name}
-                        className='h-9 w-9 rounded-full mr-2'
+                        className='h-9 w-9 rounded mr-2'
                       />
                     )}
                     {factions.find((x) => x.id === faction)?.name}
