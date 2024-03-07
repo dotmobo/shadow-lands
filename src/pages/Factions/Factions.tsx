@@ -145,11 +145,11 @@ export const Factions = () => {
                     faction === aleblade?.id ? 'bg-red-900 rounded-lg' : ''
                   }`}
                 >
-                  <h2 className='text-2xl sm:text-2xl font-bold mb-8 flex'>
+                  <h2 className='text-2xl sm:text-2xl font-bold mb-8 flex items-center'>
                     <img
                       src='/aleblade.jpg'
                       alt={aleblade?.name}
-                      className='h-9 w-9 rounded-full mr-2'
+                      className='h-32 w-32 rounded-full mr-2'
                     />
                     {aleblade?.name}
                   </h2>
@@ -159,7 +159,7 @@ export const Factions = () => {
                     victories. Their courage is bolstered by ale, symbolizing
                     their brotherhood and strength.
                   </p>
-                  <span className='flex flex-row ml-8'>
+                  <span className='flex flex-row ml-8 items-center'>
                     {priceChooseFaction}
                     <span>
                       <img
@@ -210,11 +210,11 @@ export const Factions = () => {
                     faction === stormbrew?.id ? 'bg-green-900 rounded-lg' : ''
                   }`}
                 >
-                  <h2 className='text-2xl sm:text-2xl font-bold mb-8 flex'>
+                  <h2 className='text-2xl sm:text-2xl font-bold mb-8 flex items-center'>
                     <img
                       src='/stormbrew.jpg'
                       alt={stormbrew?.name}
-                      className='h-9 w-9 rounded-full mr-2'
+                      className='h-32 w-32 rounded-full mr-2'
                     />
                     {stormbrew?.name}
                   </h2>
@@ -224,7 +224,7 @@ export const Factions = () => {
                     formidable, capable of unleashing the fury of the skies upon
                     their enemies.
                   </p>
-                  <span className='flex flex-row ml-8'>
+                  <span className='flex flex-row ml-8 items-center'>
                     {priceChooseFaction}
                     <span>
                       <img
@@ -275,11 +275,11 @@ export const Factions = () => {
                     faction === goldpick?.id ? 'bg-yellow-900 rounded-lg' : ''
                   }`}
                 >
-                  <h2 className='text-2xl sm:text-2xl font-bold mb-8 flex'>
+                  <h2 className='text-2xl sm:text-2xl font-bold mb-8 flex items-center'>
                     <img
                       src='/goldpick.jpg'
                       alt={goldpick?.name}
-                      className='h-9 w-9 rounded-full mr-2'
+                      className='h-32 w-32 rounded-full mr-2'
                     />
                     {goldpick?.name}
                   </h2>
@@ -289,7 +289,7 @@ export const Factions = () => {
                     depths. Their prosperity is built on their ability to
                     discover and exploit precious resources.
                   </p>
-                  <span className='flex flex-row ml-8'>
+                  <span className='flex flex-row ml-8 items-center'>
                     {priceChooseFaction}
                     <span>
                       <img
@@ -342,11 +342,11 @@ export const Factions = () => {
                       : ''
                   }`}
                 >
-                  <h2 className='text-2xl sm:text-2xl font-bold mb-8 flex'>
+                  <h2 className='text-2xl sm:text-2xl font-bold mb-8 flex items-center'>
                     <img
                       src='/sanctigrail.jpg'
                       alt={sanctigrail?.name}
-                      className='h-9 w-9 rounded-full mr-2'
+                      className='h-32 w-32 rounded-full mr-2'
                     />
                     {sanctigrail?.name}
                   </h2>
@@ -356,7 +356,7 @@ export const Factions = () => {
                     drives them to seek the sacred grail, symbolizing their
                     quest for ultimate purity and truth.
                   </p>
-                  <span className='flex flex-row ml-8'>
+                  <span className='flex flex-row ml-8 items-center'>
                     {priceChooseFaction}
                     <span>
                       <img
