@@ -66,7 +66,7 @@ export const Game = () => {
 
   const [rewardsTokenAmountPerDay, setRewardsTokenAmountPerDay] =
     useState<number>(0);
-  const { getRewardsTokenAmountPerDay, getNftNonce } =
+  const { getRewardsTokenAmountPerDay, getNftNonce, getMyFaction } =
     useCallShadowLandsQuery();
 
   const { hasPendingTransactions } = useGetPendingTransactions();
@@ -79,9 +79,35 @@ export const Game = () => {
   const [autoRotate, setAutoRotate] = useState<boolean>(true);
   const [fpsView, setFpsView] = useState<boolean>(false);
 
+  const [faction, setFaction] = useState<number>();
+
   const proxy = new ProxyNetworkProvider(network.apiAddress, {
     timeout: 5000
   });
+
+  useEffect(() => {
+    proxy
+      .queryContract(getMyFaction)
+      .then(({ returnData }) => {
+        const [encoded] = returnData;
+        switch (encoded) {
+          case undefined:
+            setFaction(0);
+            break;
+          case '':
+            setFaction(0);
+            break;
+          default: {
+            const decoded = Buffer.from(encoded, 'base64').toString('hex');
+            setFaction(parseInt(decoded, 16));
+            break;
+          }
+        }
+      })
+      .catch((err) => {
+        console.error('Unable to call VM query', err);
+      });
+  }, [hasPendingTransactions]);
 
   useEffect(() => {
     proxy
@@ -213,31 +239,32 @@ export const Game = () => {
                     </Button>
                   </div>
                 )}
-                {sfts.filter((x) => x === sftLandsNonce).length > 0 && (
-                  <div className='flex w-[94%] h-4/5'>
-                    <Map
-                      sfts={sfts}
-                      walletTaverns={taverns}
-                      walletBanks={banks}
-                      walletHauntedHouses={hauntedHouses}
-                      walletCrypts={crypts}
-                      walletLabos={labos}
-                      walletTavernsR1={tavernsR1}
-                      walletBanksR1={banksR1}
-                      walletHauntedHousesR1={hauntedHousesR1}
-                      walletCryptsR1={cryptsR1}
-                      walletLabosR1={labosR1}
-                      walletTavernsR2={tavernsR2}
-                      walletBanksR2={banksR2}
-                      walletHauntedHousesR2={hauntedHousesR2}
-                      walletCryptsR2={cryptsR2}
-                      walletLabosR2={labosR2}
-                      rewardsPerDay={rewardsTokenAmountPerDay}
-                      defaultAutoRotate={autoRotate}
-                      fpsView={fpsView}
-                    />
-                  </div>
-                )}
+                {sfts.filter((x) => x === sftLandsNonce).length > 0 &&
+                  faction !== undefined && (
+                    <div className='flex w-[94%] h-4/5'>
+                      <Map
+                        sfts={sfts}
+                        walletTaverns={taverns}
+                        walletBanks={banks}
+                        walletHauntedHouses={hauntedHouses}
+                        walletCrypts={crypts}
+                        walletLabos={labos}
+                        walletTavernsR1={tavernsR1}
+                        walletBanksR1={banksR1}
+                        walletHauntedHousesR1={hauntedHousesR1}
+                        walletCryptsR1={cryptsR1}
+                        walletLabosR1={labosR1}
+                        walletTavernsR2={tavernsR2}
+                        walletBanksR2={banksR2}
+                        walletHauntedHousesR2={hauntedHousesR2}
+                        walletCryptsR2={cryptsR2}
+                        walletLabosR2={labosR2}
+                        defaultAutoRotate={autoRotate}
+                        fpsView={fpsView}
+                        faction={faction}
+                      />
+                    </div>
+                  )}
               </>
             )}
           </div>
