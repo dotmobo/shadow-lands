@@ -8,7 +8,7 @@ import {
   contractGameAddress,
   contractMarketAddress,
   contractMarketDbAddress,
-  mvxExplorerUrl,
+  mvxExplorerUrl
 } from 'config';
 import { RouteNamesEnum } from 'localConstants';
 import { useCallShadowLandsQuery } from 'pages/Game/queries';
@@ -37,8 +37,9 @@ export const Help = () => {
   const { network } = useGetNetworkConfig();
 
   const [sfts, setSftsList] = useState<number[]>();
+  const [faction, setFaction] = useState<number>();
 
-  const { getNftNonce } = useCallShadowLandsQuery();
+  const { getNftNonce, getMyFaction } = useCallShadowLandsQuery();
 
   const { hasPendingTransactions } = useGetPendingTransactions();
 
@@ -72,6 +73,30 @@ export const Help = () => {
         console.error('Unable to call VM query', err);
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [hasPendingTransactions]);
+
+  useEffect(() => {
+    proxy
+      .queryContract(getMyFaction)
+      .then(({ returnData }) => {
+        const [encoded] = returnData;
+        switch (encoded) {
+          case undefined:
+            setFaction(0);
+            break;
+          case '':
+            setFaction(0);
+            break;
+          default: {
+            const decoded = Buffer.from(encoded, 'base64').toString('hex');
+            setFaction(parseInt(decoded, 16));
+            break;
+          }
+        }
+      })
+      .catch((err) => {
+        console.error('Unable to call VM query', err);
+      });
   }, [hasPendingTransactions]);
 
   return (
@@ -130,10 +155,7 @@ export const Help = () => {
                     readOnly={true}
                     className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'
                   />
-                  <label
-                    htmlFor='quest1'
-                    className='ms-2 text-sm font-medium'
-                  >
+                  <label htmlFor='quest1' className='ms-2 text-sm font-medium'>
                     Add the Land to the game.
                   </label>
                 </li>
@@ -147,10 +169,7 @@ export const Help = () => {
                     readOnly={true}
                     className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'
                   />
-                  <label
-                    htmlFor='quest2'
-                    className='ms-2 text-sm font-medium'
-                  >
+                  <label htmlFor='quest2' className='ms-2 text-sm font-medium'>
                     Place the Tavern on the map.
                   </label>
                 </li>
@@ -162,10 +181,7 @@ export const Help = () => {
                     readOnly={true}
                     className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'
                   />
-                  <label
-                    htmlFor='quest3'
-                    className='ms-2 text-sm font-medium'
-                  >
+                  <label htmlFor='quest3' className='ms-2 text-sm font-medium'>
                     Place the Bank on the map.
                   </label>
                 </li>
@@ -179,10 +195,7 @@ export const Help = () => {
                     readOnly={true}
                     className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'
                   />
-                  <label
-                    htmlFor='quest4'
-                    className='ms-2 text-sm font-medium'
-                  >
+                  <label htmlFor='quest4' className='ms-2 text-sm font-medium'>
                     Place the Haunted House on the map.
                   </label>
                 </li>
@@ -194,10 +207,7 @@ export const Help = () => {
                     readOnly={true}
                     className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'
                   />
-                  <label
-                    htmlFor='quest5'
-                    className='ms-2 text-sm font-medium'
-                  >
+                  <label htmlFor='quest5' className='ms-2 text-sm font-medium'>
                     Place the Crypt on the map.
                   </label>
                 </li>
@@ -209,10 +219,7 @@ export const Help = () => {
                     readOnly={true}
                     className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'
                   />
-                  <label
-                    htmlFor='quest6'
-                    className='ms-2 text-sm font-medium'
-                  >
+                  <label htmlFor='quest6' className='ms-2 text-sm font-medium'>
                     Place the Labo on the map.
                   </label>
                 </li>
@@ -226,10 +233,7 @@ export const Help = () => {
                     readOnly={true}
                     className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'
                   />
-                  <label
-                    htmlFor='quest7'
-                    className='ms-2 text-sm font-medium'
-                  >
+                  <label htmlFor='quest7' className='ms-2 text-sm font-medium'>
                     Upgrade the Tavern to level +1.
                   </label>
                 </li>
@@ -243,10 +247,7 @@ export const Help = () => {
                     readOnly={true}
                     className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'
                   />
-                  <label
-                    htmlFor='quest8'
-                    className='ms-2 text-sm font-medium'
-                  >
+                  <label htmlFor='quest8' className='ms-2 text-sm font-medium'>
                     Upgrade the Bank to level +1.
                   </label>
                 </li>
@@ -261,10 +262,7 @@ export const Help = () => {
                     readOnly={true}
                     className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'
                   />
-                  <label
-                    htmlFor='quest9'
-                    className='ms-2 text-sm font-medium'
-                  >
+                  <label htmlFor='quest9' className='ms-2 text-sm font-medium'>
                     Upgrade the Haunted House to level +1.
                   </label>
                 </li>
@@ -278,10 +276,7 @@ export const Help = () => {
                     readOnly={true}
                     className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'
                   />
-                  <label
-                    htmlFor='quest10'
-                    className='ms-2 text-sm font-medium'
-                  >
+                  <label htmlFor='quest10' className='ms-2 text-sm font-medium'>
                     Upgrade the Crypt to level +1.
                   </label>
                 </li>
@@ -295,10 +290,7 @@ export const Help = () => {
                     readOnly={true}
                     className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'
                   />
-                  <label
-                    htmlFor='quest11'
-                    className='ms-2 text-sm font-medium'
-                  >
+                  <label htmlFor='quest11' className='ms-2 text-sm font-medium'>
                     Upgrade the Labo to level +1.
                   </label>
                 </li>
@@ -312,10 +304,7 @@ export const Help = () => {
                     readOnly={true}
                     className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'
                   />
-                  <label
-                    htmlFor='quest12'
-                    className='ms-2 text-sm font-medium'
-                  >
+                  <label htmlFor='quest12' className='ms-2 text-sm font-medium'>
                     Upgrade the Tavern to level +2.
                   </label>
                 </li>
@@ -329,10 +318,7 @@ export const Help = () => {
                     readOnly={true}
                     className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'
                   />
-                  <label
-                    htmlFor='quest13'
-                    className='ms-2 text-sm font-medium'
-                  >
+                  <label htmlFor='quest13' className='ms-2 text-sm font-medium'>
                     Upgrade the Bank to level +2.
                   </label>
                 </li>
@@ -347,10 +333,7 @@ export const Help = () => {
                     readOnly={true}
                     className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'
                   />
-                  <label
-                    htmlFor='quest14'
-                    className='ms-2 text-sm font-medium'
-                  >
+                  <label htmlFor='quest14' className='ms-2 text-sm font-medium'>
                     Upgrade the Haunted House to level +2.
                   </label>
                 </li>
@@ -364,10 +347,7 @@ export const Help = () => {
                     readOnly={true}
                     className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'
                   />
-                  <label
-                    htmlFor='quest15'
-                    className='ms-2 text-sm font-medium'
-                  >
+                  <label htmlFor='quest15' className='ms-2 text-sm font-medium'>
                     Upgrade the Crypt to level +2.
                   </label>
                 </li>
@@ -381,11 +361,20 @@ export const Help = () => {
                     readOnly={true}
                     className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'
                   />
-                  <label
-                    htmlFor='quest16'
-                    className='ms-2 text-sm font-medium'
-                  >
+                  <label htmlFor='quest16' className='ms-2 text-sm font-medium'>
                     Upgrade the Labo to level +2.
+                  </label>
+                </li>
+                <li className='flex items-center mb-4'>
+                  <input
+                    id='quest17'
+                    type='checkbox'
+                    checked={faction !== undefined && faction > 0}
+                    readOnly={true}
+                    className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'
+                  />
+                  <label htmlFor='quest17' className='ms-2 text-sm font-medium'>
+                    Join a faction.
                   </label>
                 </li>
               </ul>
