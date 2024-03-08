@@ -94,22 +94,18 @@ export const priceChooseFaction = 100;
 export const factions = [
   {
     id: 1,
-    name: 'Aleblade',
-    icon: 'shield-virus'
+    name: 'Aleblade'
   },
   {
     id: 2,
-    name: 'Stormbrew',
-    icon: 'shield-heart'
+    name: 'Stormbrew'
   },
   {
     id: 3,
-    name: 'Goldpick',
-    icon: 'shield-dog'
+    name: 'Goldpick'
   },
   {
     id: 4,
-    name: 'Sanctigrail',
-    icon: 'shield-cat'
+    name: 'Sanctigrail'
   }
 ];
