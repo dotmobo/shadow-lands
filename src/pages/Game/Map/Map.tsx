@@ -52,6 +52,10 @@ import { CryptR2 } from './CryptR2';
 import { is } from '@react-three/fiber/dist/declarations/src/core/utils';
 import { LaboR2 } from './LaboR2';
 import { NeonLeaderBoard } from './NeonLeaderBoard';
+import { FlagAB } from './FlagAB';
+import { FlagSB } from './FlagSB';
+import { FlagGP } from './FlagGP';
+import { FlagSG } from './FlagSG';
 
 function Loader() {
   return (
@@ -78,9 +82,9 @@ export const Map = ({
   walletHauntedHousesR2,
   walletCryptsR2,
   walletLabosR2,
-  rewardsPerDay,
   defaultAutoRotate,
-  fpsView
+  fpsView,
+  faction
 }) => {
   const { network } = useGetNetworkConfig();
   const { address, account } = useGetAccountInfo();
@@ -216,6 +220,11 @@ export const Map = ({
                 color={hovered6 ? 'yellow' : undefined}
               />
             )}
+
+            {faction === 1 && <FlagAB />}
+            {faction === 2 && <FlagSB />}
+            {faction === 3 && <FlagGP />}
+            {faction === 4 && <FlagSG />}
 
             {/* Tavern */}
             {isStakedTavernR2 ? (
