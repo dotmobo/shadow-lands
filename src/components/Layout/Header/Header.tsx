@@ -129,28 +129,28 @@ export const Header = () => {
                   >
                     {faction === aleblade?.id && (
                       <img
-                        src='/aleblade.jpg'
+                        src='/AB.png'
                         alt={aleblade?.name}
                         className='h-9 w-9 rounded'
                       />
                     )}
                     {faction === stormbrew?.id && (
                       <img
-                        src='/stormbrew.jpg'
+                        src='/SB.png'
                         alt={stormbrew?.name}
                         className='h-9 w-9 rounded'
                       />
                     )}
                     {faction === goldpick?.id && (
                       <img
-                        src='/goldpick.jpg'
+                        src='/GP.png'
                         alt={goldpick?.name}
                         className='h-9 w-9 rounded'
                       />
                     )}
                     {faction === sanctigrail?.id && (
                       <img
-                        src='/sanctigrail.jpg'
+                        src='/SG.png'
                         alt={sanctigrail?.name}
                         className='h-9 w-9 rounded'
                       />
