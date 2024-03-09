@@ -5,9 +5,9 @@
 ////////////////////////////////////////////////////
 
 // Init:                                 1
-// Endpoints:                           29
+// Endpoints:                           31
 // Async Callback (empty):               1
-// Total number of exported functions:  31
+// Total number of exported functions:  33
 
 #![no_std]
 
@@ -51,6 +51,8 @@ multiversx_sc_wasm_adapter::endpoints! {
         getFactionMembers => faction_members
         getPriceChooseFaction => price_choose_faction
         getFactionBank => faction_bank
+        getPriceBonus => price_bonus
+        getFactionBonus => faction_bonus
     )
 }
 
