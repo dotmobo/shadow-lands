@@ -43,6 +43,11 @@ pub trait NftStaking {
         }
         // New factions system
         self.price_choose_faction().set_if_empty(&price_choose_faction);
+        for i in 1..5 {
+            if self.faction_bank(i).is_empty() {
+                self.faction_bank(i).set(&BigUint::from(0u32));
+            }
+        }
     }
 
     #[upgrade]
@@ -63,6 +68,11 @@ pub trait NftStaking {
             // self.rewards_token_total_supply()
             //     .set(&rewards_token_total_supply);
             self.price_choose_faction().set_if_empty(&price_choose_faction);
+            for i in 1..5 {
+                if self.faction_bank(i).is_empty() {
+                    self.faction_bank(i).set(&BigUint::from(0u32));
+                }
+            }
     }
 
     #[payable("*")]
@@ -253,6 +263,27 @@ pub trait NftStaking {
         Ok(())
     }
 
+    #[payable("*")]
+    #[endpoint]
+    fn donate(&self, #[payment_token] payment_token: EgldOrEsdtTokenIdentifier,
+        #[payment_amount] payment_amount: BigUint, faction: u64) -> SCResult<()> {
+        // faction have to be 1, 2, 3 or 4
+        require!(faction >= 1 && faction <= 4, "Invalid faction number");
+        // caller have to pay price_choose_faction to join a faction
+        require!(
+            payment_token == self.rewards_token_id().get(),
+            "Invalid payment token"
+        );
+
+        let caller: ManagedAddress = self.blockchain().get_caller();
+        let my_faction = self.get_my_faction(&caller);
+        // if caller already joined a faction, return error
+        require!(my_faction == faction, "You are not in the faction number: {}", faction);
+        
+        self.faction_bank(faction).set(&self.faction_bank(faction).get() + &payment_amount);
+        Ok(())
+    }
+
     // Owner endpoints
 
     #[only_owner]
@@ -311,6 +342,13 @@ pub trait NftStaking {
             }
             rewards_amount += self.rewards_token_amount_per_day().get() * staked_days;
         }
+        // Bonus based on faction bank (add 1% of rewards_amount for each 10000 tokens in the bank)
+        let my_faction = self.get_my_faction(&self.blockchain().get_caller());
+        if my_faction != 0 {
+            let bonus = self.faction_bank(my_faction).get() / BigUint::from(10000u32);
+            rewards_amount += &rewards_amount * &bonus / BigUint::from(100u32);
+        }
+        
         return rewards_amount;
     }
 
@@ -414,4 +452,8 @@ pub trait NftStaking {
     #[view(getPriceChooseFaction)]
     #[storage_mapper("price_choose_faction")]
     fn price_choose_faction(&self) -> SingleValueMapper<BigUint>;
+
+    #[view(getFactionBank)]
+    #[storage_mapper("faction_bank")]
+    fn faction_bank(&self, faction: u64) -> SingleValueMapper<BigUint>;
 }
