@@ -5,6 +5,7 @@ multiversx_sc::imports!();
 use core::ops::Deref;
 mod stake_info;
 use stake_info::StakeInfo;
+use spell::Spell;
 
 #[multiversx_sc::contract]
 pub trait NftStaking {
@@ -16,7 +17,8 @@ pub trait NftStaking {
         rewards_token_id: EgldOrEsdtTokenIdentifier,
         rewards_token_amount_per_day: BigUint,
         rewards_token_total_supply: BigUint,
-        price_choose_faction: BigUint
+        price_choose_faction: BigUint,
+        price_spell: BigUint,
     ) {
         self.nft_identifier().set(&nft_identifier);
         self.minimum_staking_days().set(&minimum_staking_days);
@@ -48,6 +50,7 @@ pub trait NftStaking {
                 self.faction_bank(i).set(&BigUint::from(0u32));
             }
         }
+        self.price_spell().set_if_empty(&price_spell);
     }
 
     #[upgrade]
@@ -73,6 +76,7 @@ pub trait NftStaking {
                     self.faction_bank(i).set(&BigUint::from(0u32));
                 }
             }
+            self.price_spell().set_if_empty(&price_spell);
     }
 
     #[payable("*")]
@@ -274,13 +278,32 @@ pub trait NftStaking {
             payment_token == self.rewards_token_id().get(),
             "Invalid payment token"
         );
+        // return an error if a spell exist and if the spell is not expired
+        if !self.faction_spell(faction).is_empty() {
+            let spell = self.faction_spell(faction).get();
+            require!(spell.end_at <= self.blockchain().get_block_timestamp(), "A spell is already active for this faction");
+        }
 
         let caller: ManagedAddress = self.blockchain().get_caller();
         let my_faction = self.get_my_faction(&caller);
         // if caller already joined a faction, return error
         require!(my_faction == faction, "You are not in the faction number: {}", faction);
-        
         self.faction_bank(faction).set(&self.faction_bank(faction).get() + &payment_amount);
+
+        // if the bank is equal or greater than the spell price, the spell is activated and the spell price is removed from the bank
+        if self.faction_bank(faction).get() >= self.price_spell().get() {
+            let spell = Spell {
+                numero: 1,
+                start_at: self.blockchain().get_block_timestamp(),
+                // end 1 week after start
+                end_at: self.blockchain().get_block_timestamp() + 604800,
+                bonus: BigUint::from(0u32),
+            };
+            self.faction_spell(faction).set(&spell);
+            self.faction_bank(faction).set(&self.faction_bank(faction).get() - self.price_spell().get());
+        }
+
+
         Ok(())
     }
 
@@ -342,12 +365,22 @@ pub trait NftStaking {
             }
             rewards_amount += self.rewards_token_amount_per_day().get() * staked_days;
         }
-        // Bonus based on faction bank (add 1% of rewards_amount for each 10000 tokens in the bank)
+        // if a spell is active for the faction of the call, add the bonus to the rewards
         let my_faction = self.get_my_faction(&self.blockchain().get_caller());
-        if my_faction != 0 {
-            let bonus = self.faction_bank(my_faction).get() / BigUint::from(10000u32);
-            rewards_amount += &rewards_amount * &bonus / BigUint::from(100u32);
+        if !self.faction_spell(my_faction).is_empty() {
+            let spell = self.faction_spell(my_faction).get();
+            if spell.end_at > from_time {
+                rewards_amount += &rewards_amount * spell.bonus / BigUint::from(100u32);
+            }
         }
+
+
+        // // Bonus based on faction bank (add 1% of rewards_amount for each 10000 tokens in the bank)
+        // let my_faction = self.get_my_faction(&self.blockchain().get_caller());
+        // if my_faction != 0 {
+        //     let bonus = self.faction_bank(my_faction).get() / BigUint::from(10000u32);
+        //     rewards_amount += &rewards_amount * BigUint::from(10u32) / BigUint::from(100u32);
+        // }
         
         return rewards_amount;
     }
@@ -456,4 +489,12 @@ pub trait NftStaking {
     #[view(getFactionBank)]
     #[storage_mapper("faction_bank")]
     fn faction_bank(&self, faction: u64) -> SingleValueMapper<BigUint>;
+
+    #[view(getPriceSpell)]
+    #[storage_mapper("price_spell")]
+    fn price_spell(&self) -> SingleValueMapper<BigUint>;
+
+    #[view(getFactionSpell)]
+    #[storage_mapper("faction_spell")]
+    fn faction_spell(&self, faction: u64) -> SingleValueMapper<Spell>;
 }
