@@ -13,7 +13,7 @@ import { useGetAccountInfo } from '@multiversx/sdk-dapp/hooks/account/useGetAcco
 import { useGetPendingTransactions } from '@multiversx/sdk-dapp/hooks/transactions/useGetPendingTransactions';
 import { useGetNetworkConfig } from '@multiversx/sdk-dapp/hooks/useGetNetworkConfig';
 import { ProxyNetworkProvider } from '@multiversx/sdk-network-providers/out';
-import { Button, Loader, MxLink } from 'components';
+import { Button, FormatAmount, Loader, MxLink } from 'components';
 import {
   contractGameAddress,
   contractMarketAddress,
@@ -25,6 +25,7 @@ import {
 import { RouteNamesEnum } from 'localConstants';
 import { useCallShadowLandsQuery } from 'pages/Game/queries';
 import { useSendShadowLandsTransaction } from 'pages/Game/transactions';
+import { parse } from 'path';
 import { useEffect, useState } from 'react';
 import { confirmAlert } from 'react-confirm-alert';
 import { AuthRedirectWrapper, PageWrapper } from 'wrappers';
@@ -41,10 +42,15 @@ export const Factions = () => {
     getFactionMembers1,
     getFactionMembers2,
     getFactionMembers3,
-    getFactionMembers4
+    getFactionMembers4,
+    getFactionBank1,
+    getFactionBank2,
+    getFactionBank3,
+    getFactionBank4
   } = useCallShadowLandsQuery();
   const [faction, setFaction] = useState<number>();
   const [factionMembers, setFactionMembers] = useState<string[]>();
+  const [factionBank, setFactionBank] = useState<number>();
 
   const proxy = new ProxyNetworkProvider(network.apiAddress, {
     timeout: 5000
@@ -117,6 +123,55 @@ export const Factions = () => {
                 ).toString()
               );
               setFactionMembers(decoded);
+              break;
+            }
+          }
+        })
+        .catch((err) => {
+          console.error('Unable to call VM query', err);
+        });
+    }
+  }, [faction]);
+
+  useEffect(() => {
+    if (faction === 0) {
+      setFactionBank(0);
+    } else if (
+      faction === 1 ||
+      faction === 2 ||
+      faction === 3 ||
+      faction === 4
+    ) {
+      let factionFunction;
+
+      switch (faction) {
+        case 1:
+          factionFunction = getFactionBank1;
+          break;
+        case 2:
+          factionFunction = getFactionBank2;
+          break;
+        case 3:
+          factionFunction = getFactionBank3;
+          break;
+        default:
+          factionFunction = getFactionBank4;
+          break;
+      }
+      proxy
+        .queryContract(factionFunction)
+        .then(({ returnData }) => {
+          const [encoded] = returnData;
+          switch (encoded) {
+            case undefined:
+              setFactionBank(0);
+              break;
+            case '':
+              setFactionBank(0);
+              break;
+            default: {
+              const decoded = Buffer.from(encoded, 'base64').toString('hex');
+              setFactionBank(parseInt(decoded, 16) / Math.pow(10, 18));
               break;
             }
           }
@@ -412,100 +467,151 @@ export const Factions = () => {
               </div>
             </>
           )}
-          {faction !== undefined && factionMembers === undefined && (
-            <div className='flex'>
-              <Loader />
-            </div>
-          )}
-          {faction !== undefined &&
-            faction !== 0 &&
-            factionMembers !== undefined && (
-              <>
-                <h1 className='text-4xl sm:text-4xl font-bold mt-4 mb-8'>
-                  Your allies
-                </h1>
 
-                <div
-                  className={`border-4 ${
-                    faction === aleblade?.id
-                      ? 'border-red-500 bg-red-900'
-                      : faction === stormbrew?.id
-                      ? 'border-green-500 bg-green-900'
-                      : faction === goldpick?.id
-                      ? 'border-yellow-500 bg-yellow-900'
-                      : faction === sanctigrail?.id
-                      ? 'border-violet-500 bg-violet-900'
-                      : 'border-slate-500 bg-slate-900'
-                  } rounded mb-4 p-2`}
-                >
-                  <h2
-                    className={`text-xl font-bold ${
-                      faction === aleblade?.id
-                        ? 'bg-red-500'
-                        : faction === stormbrew?.id
-                        ? 'bg-green-500'
-                        : faction === goldpick?.id
-                        ? 'bg-yellow-500'
-                        : faction === sanctigrail?.id
-                        ? 'bg-violet-500'
-                        : 'bg-slate-500'
-                    } text-white p-2 rounded text-center flex`}
-                  >
-                    {faction === aleblade?.id && (
-                      <img
-                        src='/AB.png'
-                        alt={aleblade?.name}
-                        className='h-9 w-9 rounded mr-2'
-                      />
-                    )}
-                    {faction === stormbrew?.id && (
-                      <img
-                        src='/SB.png'
-                        alt={stormbrew?.name}
-                        className='h-9 w-9 rounded mr-2'
-                      />
-                    )}
-                    {faction === goldpick?.id && (
-                      <img
-                        src='/GP.png'
-                        alt={goldpick?.name}
-                        className='h-9 w-9 rounded mr-2'
-                      />
-                    )}
-                    {faction === sanctigrail?.id && (
-                      <img
-                        src='/SG.png'
-                        alt={sanctigrail?.name}
-                        className='h-9 w-9 rounded mr-2'
-                      />
-                    )}
-                    {factions.find((x) => x.id === faction)?.name}
-                  </h2>
-                  <div className='p-4 border-green-500 rounded'>
-                    <ol start={1} className='list-decimal ml-4'>
-                      {factionMembers.map((item, idx) => (
-                        <li className='mb-2 text-white' key={idx}>
-                          <span className='flex flex-items-center'>
-                            <a
-                              className={`mb-2 ${
-                                item === address
-                                  ? 'text-yellow-400'
-                                  : 'hover:text-slate-400'
-                              }`}
-                              href={`${mvxExplorerUrl}/accounts/${item}`}
-                            >
-                              {item.substring(0, 6) +
-                                '...' +
-                                item.substring(item.length - 6)}
-                            </a>
-                          </span>
-                        </li>
-                      ))}
-                    </ol>
-                  </div>
+          <div className='flex flex-wrap w-full justify-center px-4'>
+            <div className='w-full sm:w-1/2 px-4'>
+              {faction !== undefined && factionBank === undefined && (
+                <div className='flex'>
+                  <Loader />
                 </div>
-              </>
-            )}
+              )}
+              {faction !== undefined &&
+                faction !== 0 &&
+                factionBank !== undefined && (
+                  <>
+                    <h1 className='text-4xl sm:text-4xl font-bold mt-4 mb-8'>
+                      Tresorery
+                    </h1>
+                    <p className='mb-4'>
+                      The faction bank allows you to cast spells, like a bonus
+                      on your rewards, by depositing funds in common with other
+                      members of the faction.
+                    </p>
+
+                    <span>
+                      Spell 1 : reach 500 $DUST in the faction bank to unlock
+                      the 10% rewards bonus during 1 week
+                    </span>
+                    <div className='w-full bg-slate-200 rounded-full h-2.5 mb-1 mt-2'>
+                      <div
+                        className='bg-green-500 h-2.5 rounded-full'
+                        style={{
+                          width: (factionBank / 500) * 100 + '%'
+                        }}
+                      ></div>
+                    </div>
+
+                    <p className='flex items-center'>
+                      <span>{factionBank}</span>
+                      <span>
+                        <img
+                          src='/dust-logo.png'
+                          alt='Dust'
+                          className='ml-1 w-5'
+                        />
+                      </span>
+                    </p>
+                  </>
+                )}
+            </div>
+
+            <div className='w-full sm:w-1/2'>
+              {faction !== undefined && factionMembers === undefined && (
+                <div className='flex'>
+                  <Loader />
+                </div>
+              )}
+              {faction !== undefined &&
+                faction !== 0 &&
+                factionMembers !== undefined && (
+                  <>
+                    <h1 className='text-4xl sm:text-4xl font-bold mt-4 mb-8'>
+                      Your allies
+                    </h1>
+
+                    <div
+                      className={`border-4 ${
+                        faction === aleblade?.id
+                          ? 'border-red-500 bg-red-900'
+                          : faction === stormbrew?.id
+                          ? 'border-green-500 bg-green-900'
+                          : faction === goldpick?.id
+                          ? 'border-yellow-500 bg-yellow-900'
+                          : faction === sanctigrail?.id
+                          ? 'border-violet-500 bg-violet-900'
+                          : 'border-slate-500 bg-slate-900'
+                      } rounded mb-4 p-2`}
+                    >
+                      <h2
+                        className={`text-xl font-bold ${
+                          faction === aleblade?.id
+                            ? 'bg-red-500'
+                            : faction === stormbrew?.id
+                            ? 'bg-green-500'
+                            : faction === goldpick?.id
+                            ? 'bg-yellow-500'
+                            : faction === sanctigrail?.id
+                            ? 'bg-violet-500'
+                            : 'bg-slate-500'
+                        } text-white p-2 rounded text-center flex`}
+                      >
+                        {faction === aleblade?.id && (
+                          <img
+                            src='/AB.png'
+                            alt={aleblade?.name}
+                            className='h-9 w-9 rounded mr-2'
+                          />
+                        )}
+                        {faction === stormbrew?.id && (
+                          <img
+                            src='/SB.png'
+                            alt={stormbrew?.name}
+                            className='h-9 w-9 rounded mr-2'
+                          />
+                        )}
+                        {faction === goldpick?.id && (
+                          <img
+                            src='/GP.png'
+                            alt={goldpick?.name}
+                            className='h-9 w-9 rounded mr-2'
+                          />
+                        )}
+                        {faction === sanctigrail?.id && (
+                          <img
+                            src='/SG.png'
+                            alt={sanctigrail?.name}
+                            className='h-9 w-9 rounded mr-2'
+                          />
+                        )}
+                        {factions.find((x) => x.id === faction)?.name}
+                      </h2>
+                      <div className='p-4 border-green-500 rounded'>
+                        <ol start={1} className='list-decimal ml-4'>
+                          {factionMembers.map((item, idx) => (
+                            <li className='mb-2 text-white' key={idx}>
+                              <span className='flex flex-items-center'>
+                                <a
+                                  className={`mb-2 ${
+                                    item === address
+                                      ? 'text-yellow-400'
+                                      : 'hover:text-slate-400'
+                                  }`}
+                                  href={`${mvxExplorerUrl}/accounts/${item}`}
+                                >
+                                  {item.substring(0, 6) +
+                                    '...' +
+                                    item.substring(item.length - 6)}
+                                </a>
+                              </span>
+                            </li>
+                          ))}
+                        </ol>
+                      </div>
+                    </div>
+                  </>
+                )}
+            </div>
+          </div>
 
           <span className='mb-2'>
             <MxLink to={RouteNamesEnum.game}>

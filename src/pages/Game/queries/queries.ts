@@ -80,6 +80,60 @@ export const useCallShadowLandsQuery = () => {
     args: [new U64Value(4)]
   });
 
+  const getPriceBonus = new Query({
+    address: new Address(contractMarketAddress),
+    func: new ContractFunction('getPriceBonus'),
+    args: []
+  });
+
+  const getFactionBank1 = new Query({
+    address: new Address(contractGameAddress),
+    func: new ContractFunction('getFactionBank'),
+    args: [new U64Value(1)]
+  });
+
+  const getFactionBank2 = new Query({
+    address: new Address(contractGameAddress),
+    func: new ContractFunction('getFactionBank'),
+    args: [new U64Value(2)]
+  });
+
+  const getFactionBank3 = new Query({
+    address: new Address(contractGameAddress),
+    func: new ContractFunction('getFactionBank'),
+    args: [new U64Value(3)]
+  });
+
+  const getFactionBank4 = new Query({
+    address: new Address(contractGameAddress),
+    func: new ContractFunction('getFactionBank'),
+    args: [new U64Value(4)]
+  });
+
+  const getFactionBonus1 = new Query({
+    address: new Address(contractGameAddress),
+    func: new ContractFunction('getFactionBonus'),
+    args: [new U64Value(1)]
+  });
+
+  const getFactionBonus2 = new Query({
+    address: new Address(contractGameAddress),
+    func: new ContractFunction('getFactionBonus'),
+    args: [new U64Value(2)]
+  });
+
+  const getFactionBonus3 = new Query({
+    address: new Address(contractGameAddress),
+    func: new ContractFunction('getFactionBonus'),
+    args: [new U64Value(3)]
+  });
+
+  const getFactionBonus4 = new Query({
+    address: new Address(contractGameAddress),
+    func: new ContractFunction('getFactionBonus'),
+    args: [new U64Value(4)]
+  });
+
   return {
     getRewardsTokenAmountPerDay,
     getNftNonce,
@@ -91,6 +145,15 @@ export const useCallShadowLandsQuery = () => {
     getFactionMembers2,
     getFactionMembers3,
     getFactionMembers4,
-    getMyFaction
+    getMyFaction,
+    getPriceBonus,
+    getFactionBank1,
+    getFactionBank2,
+    getFactionBank3,
+    getFactionBank4,
+    getFactionBonus1,
+    getFactionBonus2,
+    getFactionBonus3,
+    getFactionBonus4
   };
 };
