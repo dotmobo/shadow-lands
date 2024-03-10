@@ -519,7 +519,7 @@ export const Factions = () => {
           )}
 
           <div className='flex flex-wrap w-full justify-center px-4'>
-            <div className='w-full sm:w-1/2 px-4'>
+            <div className='w-full sm:w-1/2 px-4 py-4'>
               {faction !== undefined && factionBank === undefined && (
                 <div className='flex'>
                   <Loader />
@@ -661,7 +661,7 @@ export const Factions = () => {
                 )}
             </div>
 
-            <div className='w-full sm:w-1/2'>
+            <div className='w-full sm:w-1/2 px-4 py-4'>
               {faction !== undefined && factionMembers === undefined && (
                 <div className='flex'>
                   <Loader />
