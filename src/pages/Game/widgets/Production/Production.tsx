@@ -26,8 +26,9 @@ import {
 import { useSendShadowLandsTransaction } from 'pages/Game/transactions';
 import { useCallShadowLandsQuery } from 'pages/Game/queries';
 import axios from 'axios';
+import moment from 'moment';
 
-export const Production = ({ sfts, rewardPerDay }) => {
+export const Production = ({ sfts, rewardPerDay, factionBonus }) => {
   const { network } = useGetNetworkConfig();
   const { address, account } = useGetAccountInfo();
 
@@ -163,8 +164,13 @@ export const Production = ({ sfts, rewardPerDay }) => {
           <Label>Daily yield: </Label>
           <span>{rewardPerDay * sfts.length}</span>
           <span>
-            <img src='/dust-logo.png' alt='Dust' className='ml-1 w-5' />
+            <img src='/dust-logo.png' alt='Dust' className='ml-1 w-5 mr-1' />
           </span>
+          {factionBonus !== undefined &&
+            factionBonus !== 0 &&
+            moment.unix(factionBonus).isSameOrAfter(moment()) && (
+              <span>+ 10% faction bonus</span>
+            )}
         </p>
 
         <div className='w-full bg-slate-200 rounded-full h-2.5 mb-1 mt-2'>

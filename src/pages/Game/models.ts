@@ -30,6 +30,8 @@ export type WidgetsType = {
     outputHauntedHousesR2?: any;
     outputCryptsR2?: any;
     outputLabosR2?: any;
+    faction?: number;
+    factionBonus?: number;
   };
 };
 

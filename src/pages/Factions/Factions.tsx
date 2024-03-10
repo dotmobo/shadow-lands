@@ -5,7 +5,8 @@ import {
   faShieldCat,
   faShieldDog,
   faShieldHeart,
-  faShieldVirus
+  faShieldVirus,
+  faWandSparkles
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Address } from '@multiversx/sdk-core/out';
@@ -23,6 +24,7 @@ import {
   priceChooseFaction
 } from 'config';
 import { RouteNamesEnum } from 'localConstants';
+import moment from 'moment';
 import { useCallShadowLandsQuery } from 'pages/Game/queries';
 import { useSendShadowLandsTransaction } from 'pages/Game/transactions';
 import { parse } from 'path';
@@ -46,11 +48,16 @@ export const Factions = () => {
     getFactionBank1,
     getFactionBank2,
     getFactionBank3,
-    getFactionBank4
+    getFactionBank4,
+    getFactionBonus1,
+    getFactionBonus2,
+    getFactionBonus3,
+    getFactionBonus4
   } = useCallShadowLandsQuery();
   const [faction, setFaction] = useState<number>();
   const [factionMembers, setFactionMembers] = useState<string[]>();
   const [factionBank, setFactionBank] = useState<number>();
+  const [factionBonus, setFactionBonus] = useState<number>();
 
   const proxy = new ProxyNetworkProvider(network.apiAddress, {
     timeout: 5000
@@ -172,6 +179,56 @@ export const Factions = () => {
             default: {
               const decoded = Buffer.from(encoded, 'base64').toString('hex');
               setFactionBank(parseInt(decoded, 16) / Math.pow(10, 18));
+              break;
+            }
+          }
+        })
+        .catch((err) => {
+          console.error('Unable to call VM query', err);
+        });
+    }
+  }, [faction]);
+
+  useEffect(() => {
+    if (faction === 0) {
+      setFactionBonus(0);
+    } else if (
+      faction === 1 ||
+      faction === 2 ||
+      faction === 3 ||
+      faction === 4
+    ) {
+      let factionFunction;
+
+      switch (faction) {
+        case 1:
+          factionFunction = getFactionBonus1;
+          break;
+        case 2:
+          factionFunction = getFactionBonus2;
+          break;
+        case 3:
+          factionFunction = getFactionBonus3;
+          break;
+        default:
+          factionFunction = getFactionBonus4;
+          break;
+      }
+      proxy
+        .queryContract(factionFunction)
+        .then(({ returnData }) => {
+          const [encoded] = returnData;
+          switch (encoded) {
+            case undefined:
+              setFactionBonus(0);
+              break;
+            case '':
+              setFactionBonus(0);
+              break;
+            default: {
+              const decoded = Buffer.from(encoded, 'base64').toString('hex');
+              setFactionBonus(parseInt(decoded, 16));
+              // moment.unix(factionBonus).format('MMMM Do YYYY, h:mm:ss a');
               break;
             }
           }
@@ -488,29 +545,58 @@ export const Factions = () => {
                       members of the faction.
                     </p>
 
-                    <span>
-                      Spell 1 : reach 500 $DUST in the faction bank to unlock
-                      the 10% rewards bonus during 1 week
-                    </span>
-                    <div className='w-full bg-slate-200 rounded-full h-2.5 mb-1 mt-2'>
-                      <div
-                        className='bg-green-500 h-2.5 rounded-full'
-                        style={{
-                          width: (factionBank / 500) * 100 + '%'
-                        }}
-                      ></div>
-                    </div>
+                    {factionBonus !== undefined &&
+                      (factionBonus === 0 ||
+                        moment.unix(factionBonus).isBefore(moment())) && (
+                        <>
+                          <FontAwesomeIcon
+                            icon={faWandSparkles}
+                            size='sm'
+                            className='mr-2'
+                          />
+                          <span>
+                            Augury of Fortune : reach 500 $DUST in the faction
+                            bank to unlock the 10% rewards bonus during 1 week
+                          </span>
+                          <div className='w-full bg-slate-200 rounded-full h-2.5 mb-1 mt-2'>
+                            <div
+                              className='bg-green-500 h-2.5 rounded-full'
+                              style={{
+                                width: (factionBank / 500) * 100 + '%'
+                              }}
+                            ></div>
+                          </div>
+                          <p className='flex items-center'>
+                            <span>{factionBank}</span>
+                            <span>
+                              <img
+                                src='/dust-logo.png'
+                                alt='Dust'
+                                className='ml-1 w-5'
+                              />
+                            </span>
+                          </p>
+                        </>
+                      )}
 
-                    <p className='flex items-center'>
-                      <span>{factionBank}</span>
-                      <span>
-                        <img
-                          src='/dust-logo.png'
-                          alt='Dust'
-                          className='ml-1 w-5'
-                        />
-                      </span>
-                    </p>
+                    {factionBonus !== undefined &&
+                      factionBonus !== 0 &&
+                      moment.unix(factionBonus).isSameOrAfter(moment()) && (
+                        <>
+                          <FontAwesomeIcon
+                            icon={faWandSparkles}
+                            size='sm'
+                            className='mr-2'
+                          />
+                          <span>
+                            Augury of Fortune (10% rewards bonus during 1 week)
+                            : active until $
+                            {moment
+                              .unix(factionBonus)
+                              .format('MMMM Do YYYY, h:mm:ss a')}
+                          </span>
+                        </>
+                      )}
                   </>
                 )}
             </div>

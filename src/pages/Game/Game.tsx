@@ -66,8 +66,15 @@ export const Game = () => {
 
   const [rewardsTokenAmountPerDay, setRewardsTokenAmountPerDay] =
     useState<number>(0);
-  const { getRewardsTokenAmountPerDay, getNftNonce, getMyFaction } =
-    useCallShadowLandsQuery();
+  const {
+    getRewardsTokenAmountPerDay,
+    getNftNonce,
+    getMyFaction,
+    getFactionBonus1,
+    getFactionBonus2,
+    getFactionBonus3,
+    getFactionBonus4
+  } = useCallShadowLandsQuery();
 
   const { hasPendingTransactions } = useGetPendingTransactions();
   const /*transactionSessionId*/ [, setTransactionSessionId] = useState<
@@ -80,6 +87,7 @@ export const Game = () => {
   const [fpsView, setFpsView] = useState<boolean>(false);
 
   const [faction, setFaction] = useState<number>();
+  const [factionBonus, setFactionBonus] = useState<number>();
 
   const proxy = new ProxyNetworkProvider(network.apiAddress, {
     timeout: 5000
@@ -108,6 +116,56 @@ export const Game = () => {
         console.error('Unable to call VM query', err);
       });
   }, [hasPendingTransactions]);
+
+  useEffect(() => {
+    if (faction === 0) {
+      setFactionBonus(0);
+    } else if (
+      faction === 1 ||
+      faction === 2 ||
+      faction === 3 ||
+      faction === 4
+    ) {
+      let factionFunction;
+
+      switch (faction) {
+        case 1:
+          factionFunction = getFactionBonus1;
+          break;
+        case 2:
+          factionFunction = getFactionBonus2;
+          break;
+        case 3:
+          factionFunction = getFactionBonus3;
+          break;
+        default:
+          factionFunction = getFactionBonus4;
+          break;
+      }
+      proxy
+        .queryContract(factionFunction)
+        .then(({ returnData }) => {
+          const [encoded] = returnData;
+          switch (encoded) {
+            case undefined:
+              setFactionBonus(0);
+              break;
+            case '':
+              setFactionBonus(0);
+              break;
+            default: {
+              const decoded = Buffer.from(encoded, 'base64').toString('hex');
+              setFactionBonus(parseInt(decoded, 16));
+              // moment.unix(factionBonus).format('MMMM Do YYYY, h:mm:ss a');
+              break;
+            }
+          }
+        })
+        .catch((err) => {
+          console.error('Unable to call VM query', err);
+        });
+    }
+  }, [faction]);
 
   useEffect(() => {
     proxy
@@ -296,6 +354,8 @@ export const Game = () => {
                   props['outputHauntedHousesR2'] = setHauntedHousesR2List;
                   props['outputCryptsR2'] = setCryptsR2List;
                   props['outputLabosR2'] = setLabosR2List;
+                  props['faction'] = faction;
+                  props['factionBonus'] = factionBonus;
 
                   return (
                     <Card key={title} title={title} description={description}>
