@@ -538,7 +538,7 @@ export const Factions = () => {
                 factionBank !== undefined && (
                   <>
                     <h1 className='text-4xl sm:text-4xl font-bold mt-4 mb-8'>
-                      Tresorery
+                      Cast a spell
                     </h1>
                     <p className='mb-4'>
                       The faction bank allows you to cast spells, like a bonus
