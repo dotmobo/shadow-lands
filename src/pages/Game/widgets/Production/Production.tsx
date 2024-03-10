@@ -169,7 +169,7 @@ export const Production = ({ sfts, rewardPerDay, factionBonus }) => {
           {factionBonus !== undefined &&
             factionBonus !== 0 &&
             moment.unix(factionBonus).isSameOrAfter(moment()) && (
-              <span>+ 10% faction bonus</span>
+              <span>+ 25% faction bonus</span>
             )}
         </p>
 

@@ -363,8 +363,8 @@ pub trait NftStaking {
         if faction != 0 && !self.faction_bonus(faction).is_empty() {
             let bonus_end = self.faction_bonus(faction).get();
             if bonus_end > from_time {
-                // 10% bonus
-                rewards_amount += &rewards_amount * &BigUint::from(10u32) / &BigUint::from(100u32);
+                // 25% bonus
+                rewards_amount += &rewards_amount * &BigUint::from(25u32) / &BigUint::from(100u32);
             }
         }
         return rewards_amount;

@@ -582,7 +582,7 @@ export const Factions = () => {
                               Augury of Fortune
                             </b>{' '}
                             : reach <b>500 $DUST</b> in the faction bank to
-                            unlock the <b>10% rewards bonus</b> during{' '}
+                            unlock the <b>25% rewards bonus</b> during{' '}
                             <b>1 week</b>
                           </span>
                           <div className='w-full bg-slate-200 rounded-full h-2.5 mb-1 mt-2'>
@@ -673,7 +673,7 @@ export const Factions = () => {
                             >
                               Augury of Fortune
                             </b>{' '}
-                            (10% rewards bonus during 1 week) : active until{' '}
+                            (25% rewards bonus during 1 week) : active until{' '}
                             <b>
                               {moment
                                 .unix(factionBonus)
