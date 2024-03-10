@@ -5,6 +5,7 @@ import {
   contractMarketDbAddress,
   dustTokenId,
   priceChooseFaction,
+  priceDonate,
   sftCollectionId,
   sftLandsNonce
 } from 'config';
@@ -263,6 +264,44 @@ export const useSendShadowLandsTransaction = () => {
     }
   };
 
+  const sendDonateFaction = async (faction: number) => {
+    const getDonateFactionData = (f: number) => {
+      const price = priceDonate * Math.pow(10, 18);
+      return (
+        'ESDTTransfer@' +
+        strtoHex(dustTokenId) +
+        '@' +
+        largeNumberToHex(
+          price.toLocaleString('fullwide', { useGrouping: false })
+        ) +
+        '@' +
+        strtoHex('donate') +
+        '@' +
+        numtoHex(f)
+      );
+    };
+    const donateFactionTransaction = {
+      value: '0',
+      data: getDonateFactionData(faction),
+      receiver: contractGameAddress,
+      gasLimit: '5000000'
+    };
+    await refreshAccount();
+
+    const { sessionId /*, error*/ } = await sendTransactions({
+      transactions: donateFactionTransaction,
+      transactionsDisplayInfo: {
+        processingMessage: 'Processing donate transaction',
+        errorMessage: 'An error has occured during donate',
+        successMessage: 'Donate transaction successful'
+      },
+      redirectAfterSign: false
+    });
+    if (sessionId != null) {
+      setTransactionSessionId(sessionId);
+    }
+  };
+
   return {
     sendStakeLandTransaction,
     sendUnstakeLandTransaction,
@@ -270,6 +309,7 @@ export const useSendShadowLandsTransaction = () => {
     sendStakeBuildingTransaction,
     sendBuyItemTransaction,
     sendBuyDustyBonesTransaction,
-    sendChooseFactionTransaction
+    sendChooseFactionTransaction,
+    sendDonateFaction,
   };
 };

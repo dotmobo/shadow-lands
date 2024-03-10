@@ -38,7 +38,8 @@ export const Factions = () => {
   const { network } = useGetNetworkConfig();
   const { address } = useGetAccountInfo();
   const { hasPendingTransactions } = useGetPendingTransactions();
-  const { sendChooseFactionTransaction } = useSendShadowLandsTransaction();
+  const { sendChooseFactionTransaction, sendDonateFaction } =
+    useSendShadowLandsTransaction();
   const {
     getMyFaction,
     getFactionMembers1,
@@ -187,7 +188,7 @@ export const Factions = () => {
           console.error('Unable to call VM query', err);
         });
     }
-  }, [faction]);
+  }, [faction, hasPendingTransactions]);
 
   useEffect(() => {
     if (faction === 0) {
@@ -237,7 +238,7 @@ export const Factions = () => {
           console.error('Unable to call VM query', err);
         });
     }
-  }, [faction]);
+  }, [faction, hasPendingTransactions]);
 
   const aleblade = factions.find((x) => x.id === 1);
   const stormbrew = factions.find((x) => x.id === 2);
@@ -552,11 +553,37 @@ export const Factions = () => {
                           <FontAwesomeIcon
                             icon={faWandSparkles}
                             size='sm'
-                            className='mr-2'
+                            className={`mr-2 ${
+                              faction === aleblade?.id
+                                ? 'text-red-400'
+                                : faction === stormbrew?.id
+                                ? 'text-green-400'
+                                : faction === goldpick?.id
+                                ? 'text-yellow-400'
+                                : faction === sanctigrail?.id
+                                ? 'text-violet-400'
+                                : 'text-slate-400'
+                            }`}
                           />
                           <span>
-                            Augury of Fortune : reach 500 $DUST in the faction
-                            bank to unlock the 10% rewards bonus during 1 week
+                            <b
+                              className={`${
+                                faction === aleblade?.id
+                                  ? 'text-red-400'
+                                  : faction === stormbrew?.id
+                                  ? 'text-green-400'
+                                  : faction === goldpick?.id
+                                  ? 'text-yellow-400'
+                                  : faction === sanctigrail?.id
+                                  ? 'text-violet-400'
+                                  : 'text-slate-400'
+                              }`}
+                            >
+                              Augury of Fortune
+                            </b>{' '}
+                            : reach <b>500 $DUST</b> in the faction bank to
+                            unlock the <b>10% rewards bonus</b> during{' '}
+                            <b>1 week</b>
                           </span>
                           <div className='w-full bg-slate-200 rounded-full h-2.5 mb-1 mt-2'>
                             <div
@@ -566,7 +593,7 @@ export const Factions = () => {
                               }}
                             ></div>
                           </div>
-                          <p className='flex items-center'>
+                          <p className='flex items-center mb-4'>
                             <span>{factionBank}</span>
                             <span>
                               <img
@@ -576,6 +603,38 @@ export const Factions = () => {
                               />
                             </span>
                           </p>
+                          <span className=''>
+                            <Button
+                              aria-label='Donate 25 $DUST to the faction bank'
+                              disabled={hasPendingTransactions}
+                              onClick={() => {
+                                confirmAlert({
+                                  title: 'Donate 25 $DUST to the faction bank',
+                                  message:
+                                    'Are you sure you want to donate 25 $DUST to the faction bank ?',
+                                  buttons: [
+                                    {
+                                      label: 'Yes',
+                                      onClick: () => sendDonateFaction(faction)
+                                    },
+                                    {
+                                      label: 'No',
+                                      onClick: () => {
+                                        return;
+                                      }
+                                    }
+                                  ]
+                                });
+                              }}
+                            >
+                              <FontAwesomeIcon
+                                icon={faWandSparkles}
+                                size='sm'
+                                className='mr-1'
+                              />
+                              Donate 25 $DUST
+                            </Button>
+                          </span>
                         </>
                       )}
 
@@ -586,14 +645,40 @@ export const Factions = () => {
                           <FontAwesomeIcon
                             icon={faWandSparkles}
                             size='sm'
-                            className='mr-2'
+                            className={`mr-2 ${
+                              faction === aleblade?.id
+                                ? 'text-red-400'
+                                : faction === stormbrew?.id
+                                ? 'text-green-400'
+                                : faction === goldpick?.id
+                                ? 'text-yellow-400'
+                                : faction === sanctigrail?.id
+                                ? 'text-violet-400'
+                                : 'text-slate-400'
+                            }`}
                           />
                           <span>
-                            Augury of Fortune (10% rewards bonus during 1 week)
-                            : active until $
-                            {moment
-                              .unix(factionBonus)
-                              .format('MMMM Do YYYY, h:mm:ss a')}
+                            <b
+                              className={`${
+                                faction === aleblade?.id
+                                  ? 'text-red-400'
+                                  : faction === stormbrew?.id
+                                  ? 'text-green-400'
+                                  : faction === goldpick?.id
+                                  ? 'text-yellow-400'
+                                  : faction === sanctigrail?.id
+                                  ? 'text-violet-400'
+                                  : 'text-slate-400'
+                              }`}
+                            >
+                              Augury of Fortune
+                            </b>{' '}
+                            (10% rewards bonus during 1 week) : active until{' '}
+                            <b>
+                              {moment
+                                .unix(factionBonus)
+                                .format('MMMM Do YYYY, h:mm:ss a')}
+                            </b>
                           </span>
                         </>
                       )}

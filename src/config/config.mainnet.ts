@@ -110,3 +110,4 @@ export const factions = [
   }
 ];
 export const priceBonus = 500;
+export const priceDonate = 25;
