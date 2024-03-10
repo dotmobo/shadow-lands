@@ -14,20 +14,12 @@ import { useGetAccountInfo } from '@multiversx/sdk-dapp/hooks/account/useGetAcco
 import { useGetPendingTransactions } from '@multiversx/sdk-dapp/hooks/transactions/useGetPendingTransactions';
 import { useGetNetworkConfig } from '@multiversx/sdk-dapp/hooks/useGetNetworkConfig';
 import { ProxyNetworkProvider } from '@multiversx/sdk-network-providers/out';
-import { Button, FormatAmount, Loader, MxLink } from 'components';
-import {
-  contractGameAddress,
-  contractMarketAddress,
-  contractMarketDbAddress,
-  factions,
-  mvxExplorerUrl,
-  priceChooseFaction
-} from 'config';
+import { Button, Loader, MxLink } from 'components';
+import { factions, mvxExplorerUrl, priceChooseFaction } from 'config';
 import { RouteNamesEnum } from 'localConstants';
 import moment from 'moment';
 import { useCallShadowLandsQuery } from 'pages/Game/queries';
 import { useSendShadowLandsTransaction } from 'pages/Game/transactions';
-import { parse } from 'path';
 import { useEffect, useState } from 'react';
 import { confirmAlert } from 'react-confirm-alert';
 import { AuthRedirectWrapper, PageWrapper } from 'wrappers';
@@ -550,41 +542,33 @@ export const Factions = () => {
                       (factionBonus === 0 ||
                         moment.unix(factionBonus).isBefore(moment())) && (
                         <>
-                          <FontAwesomeIcon
-                            icon={faWandSparkles}
-                            size='sm'
-                            className={`mr-2 ${
-                              faction === aleblade?.id
-                                ? 'text-red-400'
-                                : faction === stormbrew?.id
-                                ? 'text-green-400'
-                                : faction === goldpick?.id
-                                ? 'text-yellow-400'
-                                : faction === sanctigrail?.id
-                                ? 'text-violet-400'
-                                : 'text-slate-400'
-                            }`}
-                          />
-                          <span>
-                            <b
-                              className={`${
-                                faction === aleblade?.id
-                                  ? 'text-red-400'
-                                  : faction === stormbrew?.id
-                                  ? 'text-green-400'
-                                  : faction === goldpick?.id
-                                  ? 'text-yellow-400'
-                                  : faction === sanctigrail?.id
-                                  ? 'text-violet-400'
-                                  : 'text-slate-400'
-                              }`}
-                            >
-                              Augury of Fortune
-                            </b>{' '}
-                            : reach <b>500 $DUST</b> in the faction bank to
-                            unlock the <b>25% rewards bonus</b> during{' '}
-                            <b>1 week</b>
-                          </span>
+                          <div className='flex items-center'>
+                            <img
+                              src='/augury.png'
+                              alt='Augury of Fortune'
+                              className='h-16 w-16 rounded-2xl mr-2'
+                            />
+                            <span>
+                              <b
+                                className={`${
+                                  faction === aleblade?.id
+                                    ? 'text-red-400'
+                                    : faction === stormbrew?.id
+                                    ? 'text-green-400'
+                                    : faction === goldpick?.id
+                                    ? 'text-yellow-400'
+                                    : faction === sanctigrail?.id
+                                    ? 'text-violet-400'
+                                    : 'text-slate-400'
+                                }`}
+                              >
+                                Augury of Fortune
+                              </b>{' '}
+                              : reach <b>500 $DUST</b> in the faction bank to
+                              unlock the <b>25% rewards bonus</b> during{' '}
+                              <b>1 week</b>
+                            </span>
+                          </div>
                           <div className='w-full bg-slate-200 rounded-full h-2.5 mb-1 mt-2'>
                             <div
                               className='bg-green-500 h-2.5 rounded-full'
@@ -641,21 +625,11 @@ export const Factions = () => {
                     {factionBonus !== undefined &&
                       factionBonus !== 0 &&
                       moment.unix(factionBonus).isSameOrAfter(moment()) && (
-                        <>
-                          <FontAwesomeIcon
-                            icon={faWandSparkles}
-                            size='sm'
-                            className={`mr-2 ${
-                              faction === aleblade?.id
-                                ? 'text-red-400'
-                                : faction === stormbrew?.id
-                                ? 'text-green-400'
-                                : faction === goldpick?.id
-                                ? 'text-yellow-400'
-                                : faction === sanctigrail?.id
-                                ? 'text-violet-400'
-                                : 'text-slate-400'
-                            }`}
+                        <div className='flex items-center'>
+                          <img
+                            src='/augury.png'
+                            alt='Augury of Fortune'
+                            className='h-16 w-16 rounded-2xl mr-2'
                           />
                           <span>
                             <b
@@ -674,14 +648,15 @@ export const Factions = () => {
                               Augury of Fortune
                             </b>{' '}
                             (25% rewards bonus during 1 week) :{' '}
-                            <span className='text-green-400'>active</span> until{' '}
+                            <span className='text-green-400np'>active</span>{' '}
+                            until{' '}
                             <b>
                               {moment
                                 .unix(factionBonus)
                                 .format('MMMM Do YYYY, h:mm:ss a')}
                             </b>
                           </span>
-                        </>
+                        </div>
                       )}
                   </>
                 )}
