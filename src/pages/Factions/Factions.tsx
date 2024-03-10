@@ -648,8 +648,7 @@ export const Factions = () => {
                               Augury of Fortune
                             </b>{' '}
                             (25% rewards bonus during 1 week) :{' '}
-                            <span className='text-green-400np'>active</span>{' '}
-                            until{' '}
+                            <span className='text-green-400'>active</span> until{' '}
                             <b>
                               {moment
                                 .unix(factionBonus)
