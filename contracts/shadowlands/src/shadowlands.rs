@@ -16,7 +16,8 @@ pub trait NftStaking {
         rewards_token_id: EgldOrEsdtTokenIdentifier,
         rewards_token_amount_per_day: BigUint,
         rewards_token_total_supply: BigUint,
-        price_choose_faction: BigUint
+        price_choose_faction: BigUint,
+        price_bonus: BigUint,
     ) {
         self.nft_identifier().set(&nft_identifier);
         self.minimum_staking_days().set(&minimum_staking_days);
@@ -43,6 +44,12 @@ pub trait NftStaking {
         }
         // New factions system
         self.price_choose_faction().set_if_empty(&price_choose_faction);
+        for i in 1..5 {
+            if self.faction_bank(i).is_empty() {
+                self.faction_bank(i).set(&BigUint::from(0u32));
+            }
+        }
+        self.price_bonus().set_if_empty(&price_bonus);
     }
 
     #[upgrade]
@@ -52,7 +59,8 @@ pub trait NftStaking {
         _rewards_token_id: EgldOrEsdtTokenIdentifier,
         _rewards_token_amount_per_day: BigUint,
         _rewards_token_total_supply: BigUint,
-        price_choose_faction: BigUint
+        price_choose_faction: BigUint,
+        price_bonus: BigUint,
     ) {
             // Currently we don't change stored data on upgrade
             // self.nft_identifier().set(&nft_identifier);
@@ -62,7 +70,13 @@ pub trait NftStaking {
             //     .set(&rewards_token_amount_per_day);
             // self.rewards_token_total_supply()
             //     .set(&rewards_token_total_supply);
-            self.price_choose_faction().set_if_empty(&price_choose_faction);
+            // self.price_choose_faction().set_if_empty(&price_choose_faction);
+            for i in 1..5 {
+                if self.faction_bank(i).is_empty() {
+                    self.faction_bank(i).set(&BigUint::from(0u32));
+                }
+            }
+            self.price_bonus().set_if_empty(&price_bonus);
     }
 
     #[payable("*")]
@@ -187,7 +201,8 @@ pub trait NftStaking {
         if !self.staking_status().get() {
             from_time = self.staking_end_time().get();
         }
-        let rewards_amount = self.calculate_rewards(&nft_nonce_with_lock_time, from_time);
+        let faction = self.get_my_faction(&caller);
+        let rewards_amount = self.calculate_rewards(&nft_nonce_with_lock_time, from_time, faction);
 
         // check the supply
         require!(
@@ -253,6 +268,39 @@ pub trait NftStaking {
         Ok(())
     }
 
+    #[payable("*")]
+    #[endpoint]
+    fn donate(&self, #[payment_token] payment_token: EgldOrEsdtTokenIdentifier,
+        #[payment_amount] payment_amount: BigUint, faction: u64) -> SCResult<()> {
+        // faction have to be 1, 2, 3 or 4
+        require!(faction >= 1 && faction <= 4, "Invalid faction number");
+        // caller have to pay price_choose_faction to join a faction
+        require!(
+            payment_token == self.rewards_token_id().get(),
+            "Invalid payment token"
+        );
+        // return an error if a bonus exist and if the bonus is not expired
+        if !self.faction_bonus(faction).is_empty() {
+            let bonus_end = self.faction_bonus(faction).get();
+            require!(bonus_end <= self.blockchain().get_block_timestamp(), "A bonus is already active for this faction");
+        }
+
+        let caller: ManagedAddress = self.blockchain().get_caller();
+        let my_faction = self.get_my_faction(&caller);
+        require!(my_faction == faction, "You are not in the faction number: {}", faction);
+
+        self.faction_bank(faction).set(&self.faction_bank(faction).get() + &payment_amount);
+
+        // if the bank is equal or greater than the bonus price, the bonus is activated and the bonus price is removed from the bank
+        if self.faction_bank(faction).get() >= self.price_bonus().get() {
+            self.faction_bonus(faction).set(self.blockchain().get_block_timestamp() + 604800);
+            self.faction_bank(faction).set(&self.faction_bank(faction).get() - &self.price_bonus().get());
+        }
+
+
+        Ok(())
+    }
+
     // Owner endpoints
 
     #[only_owner]
@@ -302,7 +350,7 @@ pub trait NftStaking {
 
     // Utils
     #[view(calculateRewards)]
-    fn calculate_rewards(&self, nft_nonce_with_lock_time: &ManagedVec<ManagedVec<u64>>, from_time: u64) -> BigUint {
+    fn calculate_rewards(&self, nft_nonce_with_lock_time: &ManagedVec<ManagedVec<u64>>, from_time: u64, faction: u64) -> BigUint {
         let mut rewards_amount = BigUint::from(0u32);
         for n in nft_nonce_with_lock_time.iter() {
             let mut staked_days = 0u64;
@@ -310,6 +358,14 @@ pub trait NftStaking {
                 staked_days = (from_time - (n.get(1) - (n.get(1) % 86400))  ) / 86400;
             }
             rewards_amount += self.rewards_token_amount_per_day().get() * staked_days;
+        }
+        // if a bonus is active for the faction of the call, add the bonus to the rewards
+        if faction != 0 && !self.faction_bonus(faction).is_empty() {
+            let bonus_end = self.faction_bonus(faction).get();
+            if bonus_end > from_time {
+                // 25% bonus
+                rewards_amount += &rewards_amount * &BigUint::from(25u32) / &BigUint::from(100u32);
+            }
         }
         return rewards_amount;
     }
@@ -340,7 +396,8 @@ pub trait NftStaking {
             from_time = self.staking_end_time().get();
         }
 
-        return self.calculate_rewards(&stake_info.nft_nonce_with_lock_time, from_time);
+        let faction = self.get_my_faction(&address);
+        return self.calculate_rewards(&stake_info.nft_nonce_with_lock_time, from_time,faction);
     }
 
     #[view(getNftNonce)]
@@ -414,4 +471,16 @@ pub trait NftStaking {
     #[view(getPriceChooseFaction)]
     #[storage_mapper("price_choose_faction")]
     fn price_choose_faction(&self) -> SingleValueMapper<BigUint>;
+
+    #[view(getFactionBank)]
+    #[storage_mapper("faction_bank")]
+    fn faction_bank(&self, faction: u64) -> SingleValueMapper<BigUint>;
+
+    #[view(getPriceBonus)]
+    #[storage_mapper("price_bonus")]
+    fn price_bonus(&self) -> SingleValueMapper<BigUint>;
+
+    #[view(getFactionBonus)]
+    #[storage_mapper("faction_bonus")]
+    fn faction_bonus(&self, faction: u64) -> SingleValueMapper<u64>;
 }

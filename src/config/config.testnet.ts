@@ -107,3 +107,6 @@ export const factions = [
     name: 'Sanctigrail'
   }
 ];
+export const priceBonus = 500;
+export const priceDonate = 25;
+
