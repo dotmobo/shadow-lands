@@ -59,7 +59,7 @@ pub trait NftStaking {
         _rewards_token_id: EgldOrEsdtTokenIdentifier,
         _rewards_token_amount_per_day: BigUint,
         _rewards_token_total_supply: BigUint,
-        price_choose_faction: BigUint,
+        _price_choose_faction: BigUint,
         price_bonus: BigUint,
     ) {
             // Currently we don't change stored data on upgrade
