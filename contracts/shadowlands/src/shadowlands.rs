@@ -70,7 +70,7 @@ pub trait NftStaking {
             //     .set(&rewards_token_amount_per_day);
             // self.rewards_token_total_supply()
             //     .set(&rewards_token_total_supply);
-            self.price_choose_faction().set_if_empty(&price_choose_faction);
+            // self.price_choose_faction().set_if_empty(&price_choose_faction);
             for i in 1..5 {
                 if self.faction_bank(i).is_empty() {
                     self.faction_bank(i).set(&BigUint::from(0u32));
