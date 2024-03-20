@@ -81,11 +81,12 @@ export const contractMarketDbAddress =
 // Dusty statue
 export enum StatueType {
   Dusty = 'DUSTY',
-  Shroom = 'SHROOM'
+  Shroom = 'SHROOM',
+  Pingu = 'PINGU'
 }
-export const selectedStatue = StatueType.Shroom;
+export const selectedStatue = StatueType.Pingu;
 export const linkStatue =
-  'https://twitter.com/intent/follow?screen_name=ShroomsCrypto';
+  'https://twitter.com/intent/follow?screen_name=xPingouins';
 
 // Factions
 export const priceChooseFaction = 100;

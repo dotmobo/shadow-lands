@@ -56,6 +56,7 @@ import { FlagAB } from './FlagAB';
 import { FlagSB } from './FlagSB';
 import { FlagGP } from './FlagGP';
 import { FlagSG } from './FlagSG';
+import { StatuePingu } from './StatuePingu';
 
 function Loader() {
   return (
@@ -211,6 +212,17 @@ export const Map = ({
             )}
             {selectedStatue === StatueType.Shroom && (
               <StatueShroom
+                onClick={(event) => {
+                  hover6(false);
+                  window.location.href = linkStatue;
+                }}
+                onPointerOver={(event) => hover6(true)}
+                onPointerOut={(event) => hover6(false)}
+                color={hovered6 ? 'yellow' : undefined}
+              />
+            )}
+            {selectedStatue === StatueType.Pingu && (
+              <StatuePingu
                 onClick={(event) => {
                   hover6(false);
                   window.location.href = linkStatue;
