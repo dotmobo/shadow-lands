@@ -5,9 +5,9 @@
 ////////////////////////////////////////////////////
 
 // Init:                                 1
-// Endpoints:                           31
+// Endpoints:                           34
 // Async Callback (empty):               1
-// Total number of exported functions:  33
+// Total number of exported functions:  36
 
 #![no_std]
 
@@ -28,6 +28,7 @@ multiversx_sc_wasm_adapter::endpoints! {
         claim => claim
         choose_faction => choose_faction
         donate => donate
+        refer => refer
         set_rewards_token_total_supply => set_rewards_token_total_supply
         set_rewards_token_amount_per_day => set_rewards_token_amount_per_day
         withdraw => withdraw
@@ -53,6 +54,8 @@ multiversx_sc_wasm_adapter::endpoints! {
         getFactionBank => faction_bank
         getPriceBonus => price_bonus
         getFactionBonus => faction_bonus
+        getReferees => get_referees
+        getReferrer => get_referrer
     )
 }
 

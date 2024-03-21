@@ -60,7 +60,7 @@ pub trait NftStaking {
         _rewards_token_amount_per_day: BigUint,
         _rewards_token_total_supply: BigUint,
         _price_choose_faction: BigUint,
-        price_bonus: BigUint,
+        _price_bonus: BigUint,
     ) {
             // Currently we don't change stored data on upgrade
             // self.nft_identifier().set(&nft_identifier);
@@ -71,12 +71,12 @@ pub trait NftStaking {
             // self.rewards_token_total_supply()
             //     .set(&rewards_token_total_supply);
             // self.price_choose_faction().set_if_empty(&price_choose_faction);
-            for i in 1..5 {
-                if self.faction_bank(i).is_empty() {
-                    self.faction_bank(i).set(&BigUint::from(0u32));
-                }
-            }
-            self.price_bonus().set_if_empty(&price_bonus);
+            // for i in 1..5 {
+            //     if self.faction_bank(i).is_empty() {
+            //         self.faction_bank(i).set(&BigUint::from(0u32));
+            //     }
+            // }
+            // self.price_bonus().set_if_empty(&price_bonus);
     }
 
     #[payable("*")]
@@ -301,6 +301,27 @@ pub trait NftStaking {
         Ok(())
     }
 
+    #[endpoint]
+    fn refer(&self, referrer: ManagedAddress) -> SCResult<()> {
+        let referee: ManagedAddress = self.blockchain().get_caller();
+        // check if the referrer is already set
+        require!(self.get_referrer(&referee).is_empty(), "You already have a referrer");
+        // check if the referrer is not the referee
+        require!(referrer != referee, "You can't refer yourself");
+        // check if the referrer is a staker
+        require!(!self.staking_info(&referrer).is_empty(), "The referrer is not a staker");
+        // check if the referee is not already a referee of the referrer
+        require!(!self.get_referees(&referrer).contains(&referee), "You are already a referee of the referrer");
+
+        // set the referrer
+        self.get_referrer(&referee).set(&referrer);
+        // add the referee to the referrer's referees
+        self.get_referees(&referrer).insert(referee);
+        
+
+        Ok(())
+    }
+
     // Owner endpoints
 
     #[only_owner]
@@ -483,4 +504,12 @@ pub trait NftStaking {
     #[view(getFactionBonus)]
     #[storage_mapper("faction_bonus")]
     fn faction_bonus(&self, faction: u64) -> SingleValueMapper<u64>;
+
+    #[view(getReferees)]
+    #[storage_mapper("get_referees")]
+    fn get_referees(&self, address: &ManagedAddress) -> UnorderedSetMapper<ManagedAddress>;
+
+    #[view(getReferrer)]
+    #[storage_mapper("get_referrer")]
+    fn get_referrer(&self, address: &ManagedAddress) -> SingleValueMapper<ManagedAddress>;
 }
