@@ -23,6 +23,7 @@ export const Referral = () => {
 
   const [isCopied, setIsCopied] = useState(false);
   const [friendReferralCode, setFriendReferralCode] = useState('');
+  const [referralCount, setReferralCount] = useState(0);
 
   const proxy = new ProxyNetworkProvider(network.apiAddress, {
     timeout: 5000
@@ -62,6 +63,11 @@ export const Referral = () => {
     }
   }, []);
 
+  useEffect(() => {
+    // todo get from sc
+    setReferralCount(4);
+  }, [hasPendingTransactions]);
+
   return (
     <AuthRedirectWrapper requireAuth={true}>
       <PageWrapper>
@@ -69,6 +75,11 @@ export const Referral = () => {
           <h1 className='text-4xl sm:text-4xl font-bold mt-4 mb-8'>
             Referral program
           </h1>
+          <div>
+            <h2 className='text-2xl sm:text-2xl font-bold mb-8'>
+              Your referral count: {referralCount}
+            </h2>
+          </div>
           <div>
             <h2 className='text-2xl sm:text-2xl font-bold mb-4'>
               Your referral link
@@ -84,6 +95,7 @@ export const Referral = () => {
           {isCopied && (
             <span className='text-green-500 mb-8'>Link copied!</span>
           )}
+
           <div>
             <h2 className='text-2xl sm:text-2xl font-bold mb-4'>
               Enter your friend's referral code
@@ -96,11 +108,7 @@ export const Referral = () => {
               placeholder='Enter a code...'
             />
           </div>
-          <Button
-              onClick={handleValidation}
-            >
-              Validate
-            </Button>
+          <Button onClick={handleValidation}>Validate</Button>
           <span className='mt-8 mb-2'>
             <MxLink to={RouteNamesEnum.game}>
               <FontAwesomeIcon
