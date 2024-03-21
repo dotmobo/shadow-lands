@@ -5,9 +5,9 @@
 ////////////////////////////////////////////////////
 
 // Init:                                 1
-// Endpoints:                           34
+// Endpoints:                           35
 // Async Callback (empty):               1
-// Total number of exported functions:  36
+// Total number of exported functions:  37
 
 #![no_std]
 
@@ -34,6 +34,7 @@ multiversx_sc_wasm_adapter::endpoints! {
         withdraw => withdraw
         restart_staking => restart_staking
         stop_staking => stop_staking
+        countMyReferees => count_my_referees
         calculateRewards => calculate_rewards
         getMyFaction => get_my_faction
         getCurrentRewards => get_current_rewards

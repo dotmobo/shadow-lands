@@ -369,6 +369,12 @@ pub trait NftStaking {
         Ok(())
     }
 
+    #[view(countMyReferees)]
+    fn count_my_referees(&self) -> u64 {
+        let caller: ManagedAddress = self.blockchain().get_caller();
+        return self.get_referees(&caller).len().try_into().unwrap();
+    }
+
     // Utils
     #[view(calculateRewards)]
     fn calculate_rewards(&self, nft_nonce_with_lock_time: &ManagedVec<ManagedVec<u64>>, from_time: u64, faction: u64) -> BigUint {

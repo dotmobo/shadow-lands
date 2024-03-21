@@ -146,6 +146,12 @@ export const useCallShadowLandsQuery = () => {
     args: [new AddressValue(new Address(address))]
   });
 
+  const countMyReferees = new Query({
+    address: new Address(contractGameAddress),
+    func: new ContractFunction('countMyReferees'),
+    args: []
+  });
+
   return {
     getRewardsTokenAmountPerDay,
     getNftNonce,
@@ -168,6 +174,7 @@ export const useCallShadowLandsQuery = () => {
     getFactionBonus3,
     getFactionBonus4,
     getReferrer,
-    getReferees
+    getReferees,
+    countMyReferees
   };
 };

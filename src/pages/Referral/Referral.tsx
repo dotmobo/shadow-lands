@@ -13,6 +13,7 @@ import {
 } from 'config';
 import { RouteNamesEnum } from 'localConstants';
 import { useCallShadowLandsQuery } from 'pages/Game/queries';
+import { useSendShadowLandsTransaction } from 'pages/Game/transactions';
 import { useEffect, useState } from 'react';
 import { AuthRedirectWrapper, PageWrapper } from 'wrappers';
 
@@ -24,6 +25,10 @@ export const Referral = () => {
   const [isCopied, setIsCopied] = useState(false);
   const [friendReferralCode, setFriendReferralCode] = useState('');
   const [referralCount, setReferralCount] = useState(0);
+  const [referrer, setReferrer] = useState('');
+
+  const { countMyReferees, getReferrer } = useCallShadowLandsQuery();
+  const { sendReferTransaction } = useSendShadowLandsTransaction();
 
   const proxy = new ProxyNetworkProvider(network.apiAddress, {
     timeout: 5000
@@ -45,7 +50,7 @@ export const Referral = () => {
     if (friendReferralCode) {
       try {
         const decodedCode = atob(friendReferralCode);
-        console.log('Decoded code:', decodedCode);
+        sendReferTransaction(decodedCode);
       } catch (error) {
         console.error('Invalid base64 string:', error);
       }
@@ -55,17 +60,63 @@ export const Referral = () => {
   };
 
   useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const codeParam = urlParams.get('code');
-
-    if (codeParam) {
-      setFriendReferralCode(codeParam);
-    }
-  }, []);
+    proxy
+      .queryContract(countMyReferees)
+      .then(({ returnData }) => {
+        const [encoded] = returnData;
+        switch (encoded) {
+          case undefined:
+            setReferralCount(0);
+            break;
+          case '':
+            setReferralCount(0);
+            break;
+          default: {
+            const decoded = Buffer.from(encoded, 'base64').toString('hex');
+            setReferralCount(parseInt(decoded, 16));
+            break;
+          }
+        }
+      })
+      .catch((err) => {
+        console.error('Unable to call VM query', err);
+      });
+  }, [hasPendingTransactions]);
 
   useEffect(() => {
-    // todo get from sc
-    setReferralCount(4);
+    proxy
+      .queryContract(getReferrer)
+      .then(({ returnData }) => {
+        const [encoded] = returnData;
+        switch (encoded) {
+          case undefined:
+            setReferrer('');
+            break;
+          case '':
+            setReferrer('');
+            break;
+          default: {
+            const decoded = Buffer.from(encoded, 'base64').toString('hex');
+            setReferrer(decoded);
+            break;
+          }
+        }
+
+        if (!!referrer) {
+          // set the referrer code in base64
+          setFriendReferralCode(btoa(referrer));
+        } else {
+          const urlParams = new URLSearchParams(window.location.search);
+          const codeParam = urlParams.get('code');
+
+          if (codeParam) {
+            setFriendReferralCode(codeParam);
+          }
+        }
+      })
+      .catch((err) => {
+        console.error('Unable to call VM query', err);
+      });
   }, [hasPendingTransactions]);
 
   return (
@@ -96,19 +147,28 @@ export const Referral = () => {
             <span className='text-green-500 mb-8'>Link copied!</span>
           )}
 
-          <div>
+          <div className='mb-8'>
             <h2 className='text-2xl sm:text-2xl font-bold mb-4'>
               Enter your friend's referral code
             </h2>
             <input
               type='text'
+              readOnly={!!referrer}
               value={friendReferralCode}
               onChange={handleFriendReferralCodeChange}
-              className='border rounded-md p-2 w-full mb-8'
+              className='border rounded-md p-2 w-full'
               placeholder='Enter a code...'
             />
+            {!!referrer && (
+              <div className='text-red-500'>You already have a referrer</div>
+            )}
           </div>
-          <Button onClick={handleValidation}>Validate</Button>
+          <Button
+            onClick={handleValidation}
+            disabled={!!referrer || !friendReferralCode}
+          >
+            Validate
+          </Button>
           <span className='mt-8 mb-2'>
             <MxLink to={RouteNamesEnum.game}>
               <FontAwesomeIcon
