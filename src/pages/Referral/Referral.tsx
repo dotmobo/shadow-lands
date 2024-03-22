@@ -128,7 +128,16 @@ export const Referral = () => {
           </h1>
           <div>
             <h2 className='text-2xl sm:text-2xl font-bold mb-8'>
-              Your referral count: {referralCount}
+              Your referral count:{' '}
+              <span className='text-green-400'>{referralCount}</span>
+            </h2>
+          </div>
+          <div>
+            <h2 className='text-2xl sm:text-2xl font-bold mb-8'>
+              Your referral bonus:{' '}
+              <span className='text-green-400'>
+                {referralCount}% of daily yield
+              </span>
             </h2>
           </div>
           <div>

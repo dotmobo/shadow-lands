@@ -202,7 +202,8 @@ pub trait NftStaking {
             from_time = self.staking_end_time().get();
         }
         let faction = self.get_my_faction(&caller);
-        let rewards_amount = self.calculate_rewards(&nft_nonce_with_lock_time, from_time, faction);
+        let nbr_of_referrees = self.get_referees(&caller).len().try_into().unwrap();
+        let rewards_amount = self.calculate_rewards(&nft_nonce_with_lock_time, from_time, faction,nbr_of_referrees);
 
         // check the supply
         require!(
@@ -377,7 +378,7 @@ pub trait NftStaking {
 
     // Utils
     #[view(calculateRewards)]
-    fn calculate_rewards(&self, nft_nonce_with_lock_time: &ManagedVec<ManagedVec<u64>>, from_time: u64, faction: u64) -> BigUint {
+    fn calculate_rewards(&self, nft_nonce_with_lock_time: &ManagedVec<ManagedVec<u64>>, from_time: u64, faction: u64, nbr_of_referrees: u64) -> BigUint {
         let mut rewards_amount = BigUint::from(0u32);
         for n in nft_nonce_with_lock_time.iter() {
             let mut staked_days = 0u64;
@@ -394,6 +395,9 @@ pub trait NftStaking {
                 rewards_amount += &rewards_amount * &BigUint::from(25u32) / &BigUint::from(100u32);
             }
         }
+        // bonus of 1% for each of my referrees
+        rewards_amount += &rewards_amount * &BigUint::from(nbr_of_referrees) / &BigUint::from(100u32);
+
         return rewards_amount;
     }
 
@@ -424,7 +428,8 @@ pub trait NftStaking {
         }
 
         let faction = self.get_my_faction(&address);
-        return self.calculate_rewards(&stake_info.nft_nonce_with_lock_time, from_time,faction);
+        let nbr_of_referrees = self.get_referees(&address).len().try_into().unwrap();
+        return self.calculate_rewards(&stake_info.nft_nonce_with_lock_time, from_time,faction,nbr_of_referrees);
     }
 
     #[view(getNftNonce)]
