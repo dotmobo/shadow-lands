@@ -32,7 +32,7 @@ export const Production = ({ sfts, rewardPerDay, factionBonus }) => {
   const { network } = useGetNetworkConfig();
   const { address, account } = useGetAccountInfo();
 
-  const { getCurrentRewards } = useCallShadowLandsQuery();
+  const { getCurrentRewards, countMyReferees } = useCallShadowLandsQuery();
 
   const [currentRewards, setCurrentRewards] = useState<number>();
   const [claimStrike, setClaimStrike] = useState<boolean[]>([
@@ -44,6 +44,7 @@ export const Production = ({ sfts, rewardPerDay, factionBonus }) => {
     false,
     false
   ]);
+  const [referralCount, setReferralCount] = useState(0);
 
   const { hasPendingTransactions } = useGetPendingTransactions();
   const { sendClaimTransaction } = useSendShadowLandsTransaction();
@@ -51,6 +52,30 @@ export const Production = ({ sfts, rewardPerDay, factionBonus }) => {
   const proxy = new ProxyNetworkProvider(network.apiAddress, {
     timeout: 5000
   });
+
+  useEffect(() => {
+    proxy
+      .queryContract(countMyReferees)
+      .then(({ returnData }) => {
+        const [encoded] = returnData;
+        switch (encoded) {
+          case undefined:
+            setReferralCount(0);
+            break;
+          case '':
+            setReferralCount(0);
+            break;
+          default: {
+            const decoded = Buffer.from(encoded, 'base64').toString('hex');
+            setReferralCount(parseInt(decoded, 16));
+            break;
+          }
+        }
+      })
+      .catch((err) => {
+        console.error('Unable to call VM query', err);
+      });
+  }, []);
 
   useEffect(() => {
     const now = new Date();
@@ -166,10 +191,13 @@ export const Production = ({ sfts, rewardPerDay, factionBonus }) => {
           <span>
             <img src='/dust-logo.png' alt='Dust' className='ml-1 w-5 mr-1' />
           </span>
+          {referralCount !== undefined && referralCount !== 0 && (
+            <span className='pl-1 pr-1'>+{referralCount}% referral</span>
+          )}
           {factionBonus !== undefined &&
             factionBonus !== 0 &&
             moment.unix(factionBonus).isSameOrAfter(moment()) && (
-              <span>+ 25% faction bonus</span>
+              <span className='pl-1 pr-1'>+25% faction</span>
             )}
         </p>
 

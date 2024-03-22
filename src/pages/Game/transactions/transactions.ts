@@ -302,6 +302,29 @@ export const useSendShadowLandsTransaction = () => {
     }
   };
 
+  const sendReferTransaction = async (referrer: string) => {
+    const referTransaction = {
+      value: '0',
+      data: 'refer@' + Address.fromBech32(referrer).hex(),
+      receiver: contractGameAddress,
+      gasLimit: 20000000
+    };
+    await refreshAccount();
+
+    const { sessionId /*, error*/ } = await sendTransactions({
+      transactions: referTransaction,
+      transactionsDisplayInfo: {
+        processingMessage: 'Refering a friend',
+        errorMessage: 'Refering a friend failed',
+        successMessage: 'Refering a friend succeeded'
+      },
+      redirectAfterSign: false
+    });
+    if (sessionId != null) {
+      setTransactionSessionId(sessionId);
+    }
+  };
+
   return {
     sendStakeLandTransaction,
     sendUnstakeLandTransaction,
@@ -311,5 +334,6 @@ export const useSendShadowLandsTransaction = () => {
     sendBuyDustyBonesTransaction,
     sendChooseFactionTransaction,
     sendDonateFaction,
+    sendReferTransaction
   };
 };
