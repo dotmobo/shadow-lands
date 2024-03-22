@@ -149,7 +149,7 @@ export const useCallShadowLandsQuery = () => {
   const countMyReferees = new Query({
     address: new Address(contractGameAddress),
     func: new ContractFunction('countMyReferees'),
-    args: []
+    args: [new AddressValue(new Address(address))]
   });
 
   return {

@@ -192,7 +192,7 @@ export const Production = ({ sfts, rewardPerDay, factionBonus }) => {
             <img src='/dust-logo.png' alt='Dust' className='ml-1 w-5 mr-1' />
           </span>
           {referralCount !== undefined && referralCount !== 0 && (
-            <span className='pl-1 pr-1'>{referralCount}% referral</span>
+            <span className='pl-1 pr-1'>+{referralCount}% referral</span>
           )}
           {factionBonus !== undefined &&
             factionBonus !== 0 &&

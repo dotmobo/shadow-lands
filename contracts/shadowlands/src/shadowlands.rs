@@ -377,11 +377,10 @@ pub trait NftStaking {
     }
 
     #[view(countMyReferees)]
-    fn count_my_referees(&self) -> u64 {
-        let caller: ManagedAddress = self.blockchain().get_caller();
+    fn count_my_referees(&self, address: &ManagedAddress) -> u64 {
         // count the number of referees who are stakers
         let mut nbr_of_referrees = 0;
-        for referee in self.get_referees(&caller).iter() {
+        for referee in self.get_referees(&address).iter() {
             if !self.staking_info(&referee).is_empty() {
                 nbr_of_referrees += 1;
             }
