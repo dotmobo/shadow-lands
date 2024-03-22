@@ -127,8 +127,11 @@ export const Referral = () => {
             Referral program
           </h1>
           <p>
-            Share your referral link with your friends and earn 1% of daily
-            yield bonus for each friend that joins the game.
+            Share your referral link with your friends and{' '}
+            <span className='text-yellow-400'>
+              earn 1% of daily yield bonus for each friend
+            </span>{' '}
+            that joins the game.
           </p>
           <p className='mb-8'>
             Both you and your friends must have at least 1 land to be eligible
