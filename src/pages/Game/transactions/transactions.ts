@@ -305,7 +305,7 @@ export const useSendShadowLandsTransaction = () => {
   const sendReferTransaction = async (referrer: string) => {
     const referTransaction = {
       value: '0',
-      data: 'refer@' + strtoHex(referrer),
+      data: 'refer@' + Address.fromBech32(referrer).hex(),
       receiver: contractGameAddress,
       gasLimit: 20000000
     };
