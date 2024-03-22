@@ -191,11 +191,11 @@ export const Production = ({ sfts, rewardPerDay, factionBonus }) => {
           <span>
             <img src='/dust-logo.png' alt='Dust' className='ml-1 w-5 mr-1' />
           </span>
-          {referralCount !== undefined && referralCount !== 0 && (
-            <span className='pl-1 pr-1'>+{referralCount}% referral</span>
+          {referralCount !== undefined && referralCount === 0 && (
+            <span className='pl-1 pr-1'>+16% referral</span>
           )}
+          <span className='pl-1 pr-1'>+25% faction</span>
           {factionBonus !== undefined &&
-            factionBonus !== 0 &&
             moment.unix(factionBonus).isSameOrAfter(moment()) && (
               <span className='pl-1 pr-1'>+25% faction</span>
             )}

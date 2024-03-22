@@ -202,7 +202,13 @@ pub trait NftStaking {
             from_time = self.staking_end_time().get();
         }
         let faction = self.get_my_faction(&caller);
-        let nbr_of_referrees = self.get_referees(&caller).len().try_into().unwrap();
+        // nbr of referees who are stakers
+        let mut nbr_of_referrees = 0;
+        for referee in self.get_referees(&caller).iter() {
+            if !self.staking_info(&referee).is_empty() {
+                nbr_of_referrees += 1;
+            }
+        }
         let rewards_amount = self.calculate_rewards(&nft_nonce_with_lock_time, from_time, faction,nbr_of_referrees);
 
         // check the supply
@@ -373,7 +379,14 @@ pub trait NftStaking {
     #[view(countMyReferees)]
     fn count_my_referees(&self) -> u64 {
         let caller: ManagedAddress = self.blockchain().get_caller();
-        return self.get_referees(&caller).len().try_into().unwrap();
+        // count the number of referees who are stakers
+        let mut nbr_of_referrees = 0;
+        for referee in self.get_referees(&caller).iter() {
+            if !self.staking_info(&referee).is_empty() {
+                nbr_of_referrees += 1;
+            }
+        }
+        return nbr_of_referrees;
     }
 
     // Utils
@@ -428,7 +441,13 @@ pub trait NftStaking {
         }
 
         let faction = self.get_my_faction(&address);
-        let nbr_of_referrees = self.get_referees(&address).len().try_into().unwrap();
+        // nbr of referees who are stakers
+        let mut nbr_of_referrees = 0;
+        for referee in self.get_referees(&address).iter() {
+            if !self.staking_info(&referee).is_empty() {
+                nbr_of_referrees += 1;
+            }
+        }
         return self.calculate_rewards(&stake_info.nft_nonce_with_lock_time, from_time,faction,nbr_of_referrees);
     }
 
