@@ -123,9 +123,17 @@ export const Referral = () => {
     <AuthRedirectWrapper requireAuth={true}>
       <PageWrapper>
         <div className='flex flex-col items-center h-full w-full bg-slate-900 text-slate-400'>
-          <h1 className='text-4xl sm:text-4xl font-bold mt-4 mb-8'>
+          <h1 className='text-4xl sm:text-4xl font-bold mt-4 mb-4'>
             Referral program
           </h1>
+          <p>
+            Share your referral link with your friends and earn 1% of daily
+            yield bonus for each friend that joins the game.
+          </p>
+          <p className='mb-8'>
+            Both you and your friends must have at least 1 land to be eligible
+            for the bonus.
+          </p>
           <div>
             <h2 className='text-2xl sm:text-2xl font-bold mb-8'>
               Your referral count:{' '}
