@@ -101,23 +101,25 @@ export const Referral = () => {
             break;
           }
         }
-
-        if (!!referrer) {
-          // set the referrer code in base64
-          setFriendReferralCode(btoa(referrer));
-        } else {
-          const urlParams = new URLSearchParams(window.location.search);
-          const codeParam = urlParams.get('code');
-
-          if (codeParam) {
-            setFriendReferralCode(codeParam);
-          }
-        }
       })
       .catch((err) => {
         console.error('Unable to call VM query', err);
       });
   }, [hasPendingTransactions]);
+
+  useEffect(() => {
+    if (!!referrer) {
+      // set the referrer code in base64
+      setFriendReferralCode(btoa(referrer));
+    } else {
+      const urlParams = new URLSearchParams(window.location.search);
+      const codeParam = urlParams.get('code');
+
+      if (codeParam) {
+        setFriendReferralCode(codeParam);
+      }
+    }
+  }, [referrer]);
 
   return (
     <AuthRedirectWrapper requireAuth={true}>
