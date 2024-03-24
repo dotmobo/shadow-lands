@@ -129,7 +129,7 @@ export const Referral = () => {
           <p>
             Share your referral link with your friends and{' '}
             <span className='text-yellow-400'>
-              earn 1% of daily yield bonus for each friend
+              earn 2% of daily yield bonus for each friend
             </span>{' '}
             that joins the game.
           </p>
@@ -147,7 +147,7 @@ export const Referral = () => {
             <h2 className='text-2xl sm:text-2xl font-bold mb-8'>
               Your referral bonus:{' '}
               <span className='text-green-400'>
-                {referralCount}% of daily yield
+                {referralCount * 2}% of daily yield
               </span>
             </h2>
           </div>

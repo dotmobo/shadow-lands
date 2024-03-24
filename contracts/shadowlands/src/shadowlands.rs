@@ -407,8 +407,8 @@ pub trait NftStaking {
                 rewards_amount += &rewards_amount * &BigUint::from(25u32) / &BigUint::from(100u32);
             }
         }
-        // bonus of 1% for each of my referrees
-        rewards_amount += &rewards_amount * &BigUint::from(nbr_of_referrees) / &BigUint::from(100u32);
+        // bonus of 2% for each of my referrees
+        rewards_amount += &rewards_amount * &BigUint::from(nbr_of_referrees * 2) / &BigUint::from(100u32);
 
         return rewards_amount;
     }
