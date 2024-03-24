@@ -23,6 +23,7 @@ export const Referral = () => {
   const { hasPendingTransactions } = useGetPendingTransactions();
 
   const [isCopied, setIsCopied] = useState(false);
+  const [isCopiedCode, setIsCopiedCode] = useState(false);
   const [friendReferralCode, setFriendReferralCode] = useState('');
   const [referralCount, setReferralCount] = useState(0);
   const [referrer, setReferrer] = useState('');
@@ -40,6 +41,12 @@ export const Referral = () => {
     navigator.clipboard.writeText(userReferralLink);
     setIsCopied(true);
     setTimeout(() => setIsCopied(false), 5000);
+  };
+
+  const copyToClipboardCode = () => {
+    navigator.clipboard.writeText(btoa(address));
+    setIsCopiedCode(true);
+    setTimeout(() => setIsCopiedCode(false), 5000);
   };
 
   const handleFriendReferralCodeChange = (event) => {
@@ -153,6 +160,21 @@ export const Referral = () => {
               </span>
             </h2>
           </div>
+          <div>
+            <h2 className='text-2xl sm:text-2xl font-bold mb-4'>
+              Your referral code
+            </h2>
+            <input
+              type='text'
+              value={btoa(address)}
+              className='border rounded-md p-2 w-full mb-8'
+              readOnly
+              onClick={copyToClipboardCode}
+            />
+          </div>
+          {isCopiedCode && (
+            <span className='text-green-500 mb-8'>Code copied!</span>
+          )}
           <div>
             <h2 className='text-2xl sm:text-2xl font-bold mb-4'>
               Your referral link
