@@ -209,6 +209,10 @@ pub trait NftStaking {
                 nbr_of_referrees += 1;
             }
         }
+        // add 1 to nbr_of_referrees if he have a referrer
+        if !self.get_referrer(&caller).is_empty() {
+            nbr_of_referrees += 1;
+        }
         let rewards_amount = self.calculate_rewards(&nft_nonce_with_lock_time, from_time, faction,nbr_of_referrees);
 
         // check the supply
@@ -385,6 +389,10 @@ pub trait NftStaking {
                 nbr_of_referrees += 1;
             }
         }
+        // add 1 to nbr_of_referrees if he have a referrer
+        if !self.get_referrer(&address).is_empty() {
+            nbr_of_referrees += 1;
+        }
         return nbr_of_referrees;
     }
 
@@ -446,6 +454,10 @@ pub trait NftStaking {
             if !self.staking_info(&referee).is_empty() {
                 nbr_of_referrees += 1;
             }
+        }
+        // add 1 to nbr_of_referrees if he have a referrer
+        if !self.get_referrer(&address).is_empty() {
+            nbr_of_referrees += 1;
         }
         return self.calculate_rewards(&stake_info.nft_nonce_with_lock_time, from_time,faction,nbr_of_referrees);
     }
