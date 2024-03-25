@@ -49,8 +49,8 @@ export const contractGameAddress =
   'erd1qqqqqqqqqqqqqpgqvfh5j05pw23upxz4hmh6fdsrcmvfjjd22krsxc4hy2';
 export const contractMarketAddress =
   'erd1qqqqqqqqqqqqqpgqsp7wpnxv8lpn6hg4fhhp3vqkwmst5ljm2krs2fxjrk';
-export const totalYield = 160;
-export const totalProducted = 10000;
+export const totalYield = 48;
+export const totalProducted = 3000;
 
 // Price
 export const priceLand = 150;

@@ -5,6 +5,7 @@ import { Factions } from 'pages/Factions';
 import { Help } from 'pages/Help/Help';
 import { Leaderboard } from 'pages/Leaderboard';
 import { Market } from 'pages/Market/Market';
+import { Referral } from 'pages/Referral';
 import { RouteType } from 'types';
 
 interface RouteWithTitleType extends RouteType {
@@ -46,5 +47,10 @@ export const routes: RouteWithTitleType[] = [
     path: RouteNamesEnum.factions,
     title: 'Choose your faction',
     component: Factions
+  },
+  {
+    path: RouteNamesEnum.referral,
+    title: 'Referral',
+    component: Referral
   }
 ];

@@ -169,17 +169,29 @@ export const Header = () => {
                   </Link>
                 )}
                 {!!avatar ? (
-                  <img
-                    src={avatar}
-                    alt='Avatar'
-                    className='h-9 w-9 rounded-full mr-2'
-                  />
+                  <Link
+                    title='Referral'
+                    to={RouteNamesEnum.referral}
+                    className='inline-block rounded-lg px-1 py-0 text-center hover:no-underline my-0 bg-blue-600 text-white hover:bg-blue-700 mr-2'
+                  >
+                    <img
+                      src={avatar}
+                      alt='Avatar'
+                      className='h-9 w-9 rounded-full'
+                    />
+                  </Link>
                 ) : (
-                  <FontAwesomeIcon
-                    color='#9ca3af'
-                    icon={faCircleUser}
-                    className='h-9 w-9 rounded-full mr-2'
-                  />
+                  <Link
+                    title='Referral'
+                    to={RouteNamesEnum.referral}
+                    className='inline-block rounded-lg px-1 py-0 text-center hover:no-underline my-0 bg-blue-600 text-white hover:bg-blue-700 mr-2'
+                  >
+                    <FontAwesomeIcon
+                      color='#9ca3af'
+                      icon={faCircleUser}
+                      className='h-9 w-9 rounded-full'
+                    />
+                  </Link>
                 )}
                 <span className='text-gray-400'>
                   {address.substring(0, 6) +

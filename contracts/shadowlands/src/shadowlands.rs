@@ -60,7 +60,7 @@ pub trait NftStaking {
         _rewards_token_amount_per_day: BigUint,
         _rewards_token_total_supply: BigUint,
         _price_choose_faction: BigUint,
-        price_bonus: BigUint,
+        _price_bonus: BigUint,
     ) {
             // Currently we don't change stored data on upgrade
             // self.nft_identifier().set(&nft_identifier);
@@ -71,12 +71,12 @@ pub trait NftStaking {
             // self.rewards_token_total_supply()
             //     .set(&rewards_token_total_supply);
             // self.price_choose_faction().set_if_empty(&price_choose_faction);
-            for i in 1..5 {
-                if self.faction_bank(i).is_empty() {
-                    self.faction_bank(i).set(&BigUint::from(0u32));
-                }
-            }
-            self.price_bonus().set_if_empty(&price_bonus);
+            // for i in 1..5 {
+            //     if self.faction_bank(i).is_empty() {
+            //         self.faction_bank(i).set(&BigUint::from(0u32));
+            //     }
+            // }
+            // self.price_bonus().set_if_empty(&price_bonus);
     }
 
     #[payable("*")]
@@ -202,7 +202,18 @@ pub trait NftStaking {
             from_time = self.staking_end_time().get();
         }
         let faction = self.get_my_faction(&caller);
-        let rewards_amount = self.calculate_rewards(&nft_nonce_with_lock_time, from_time, faction);
+        // nbr of referees who are stakers
+        let mut nbr_of_referrees = 0;
+        for referee in self.get_referees(&caller).iter() {
+            if !self.staking_info(&referee).is_empty() {
+                nbr_of_referrees += 1;
+            }
+        }
+        // add 1 to nbr_of_referrees if he have a referrer
+        if !self.get_referrer(&caller).is_empty() {
+            nbr_of_referrees += 1;
+        }
+        let rewards_amount = self.calculate_rewards(&nft_nonce_with_lock_time, from_time, faction,nbr_of_referrees);
 
         // check the supply
         require!(
@@ -301,6 +312,27 @@ pub trait NftStaking {
         Ok(())
     }
 
+    #[endpoint]
+    fn refer(&self, referrer: ManagedAddress) -> SCResult<()> {
+        let referee: ManagedAddress = self.blockchain().get_caller();
+        // check if the referrer is already set
+        require!(self.get_referrer(&referee).is_empty(), "You already have a referrer");
+        // check if the referrer is not the referee
+        require!(referrer != referee, "You can't refer yourself");
+        // check if the referrer is a staker
+        require!(!self.staking_info(&referrer).is_empty(), "The referrer is not a staker");
+        // check if the referee is not already a referee of the referrer
+        require!(!self.get_referees(&referrer).contains(&referee), "You are already a referee of the referrer");
+
+        // set the referrer
+        self.get_referrer(&referee).set(&referrer);
+        // add the referee to the referrer's referees
+        self.get_referees(&referrer).insert(referee);
+        
+
+        Ok(())
+    }
+
     // Owner endpoints
 
     #[only_owner]
@@ -348,9 +380,25 @@ pub trait NftStaking {
         Ok(())
     }
 
+    #[view(countMyReferees)]
+    fn count_my_referees(&self, address: &ManagedAddress) -> u64 {
+        // count the number of referees who are stakers
+        let mut nbr_of_referrees = 0;
+        for referee in self.get_referees(&address).iter() {
+            if !self.staking_info(&referee).is_empty() {
+                nbr_of_referrees += 1;
+            }
+        }
+        // add 1 to nbr_of_referrees if he have a referrer
+        if !self.get_referrer(&address).is_empty() {
+            nbr_of_referrees += 1;
+        }
+        return nbr_of_referrees;
+    }
+
     // Utils
     #[view(calculateRewards)]
-    fn calculate_rewards(&self, nft_nonce_with_lock_time: &ManagedVec<ManagedVec<u64>>, from_time: u64, faction: u64) -> BigUint {
+    fn calculate_rewards(&self, nft_nonce_with_lock_time: &ManagedVec<ManagedVec<u64>>, from_time: u64, faction: u64, nbr_of_referrees: u64) -> BigUint {
         let mut rewards_amount = BigUint::from(0u32);
         for n in nft_nonce_with_lock_time.iter() {
             let mut staked_days = 0u64;
@@ -367,6 +415,9 @@ pub trait NftStaking {
                 rewards_amount += &rewards_amount * &BigUint::from(25u32) / &BigUint::from(100u32);
             }
         }
+        // bonus of 2% for each of my referrees
+        rewards_amount += &rewards_amount * &BigUint::from(nbr_of_referrees * 2) / &BigUint::from(100u32);
+
         return rewards_amount;
     }
 
@@ -397,7 +448,18 @@ pub trait NftStaking {
         }
 
         let faction = self.get_my_faction(&address);
-        return self.calculate_rewards(&stake_info.nft_nonce_with_lock_time, from_time,faction);
+        // nbr of referees who are stakers
+        let mut nbr_of_referrees = 0;
+        for referee in self.get_referees(&address).iter() {
+            if !self.staking_info(&referee).is_empty() {
+                nbr_of_referrees += 1;
+            }
+        }
+        // add 1 to nbr_of_referrees if he have a referrer
+        if !self.get_referrer(&address).is_empty() {
+            nbr_of_referrees += 1;
+        }
+        return self.calculate_rewards(&stake_info.nft_nonce_with_lock_time, from_time,faction,nbr_of_referrees);
     }
 
     #[view(getNftNonce)]
@@ -483,4 +545,12 @@ pub trait NftStaking {
     #[view(getFactionBonus)]
     #[storage_mapper("faction_bonus")]
     fn faction_bonus(&self, faction: u64) -> SingleValueMapper<u64>;
+
+    #[view(getReferees)]
+    #[storage_mapper("get_referees")]
+    fn get_referees(&self, address: &ManagedAddress) -> UnorderedSetMapper<ManagedAddress>;
+
+    #[view(getReferrer)]
+    #[storage_mapper("get_referrer")]
+    fn get_referrer(&self, address: &ManagedAddress) -> SingleValueMapper<ManagedAddress>;
 }
