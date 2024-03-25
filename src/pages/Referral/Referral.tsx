@@ -4,13 +4,7 @@ import { useGetAccountInfo } from '@multiversx/sdk-dapp/hooks/account/useGetAcco
 import { useGetPendingTransactions } from '@multiversx/sdk-dapp/hooks/transactions/useGetPendingTransactions';
 import { useGetNetworkConfig } from '@multiversx/sdk-dapp/hooks/useGetNetworkConfig';
 import { ProxyNetworkProvider } from '@multiversx/sdk-network-providers/out';
-import { Button, Loader, MxLink } from 'components';
-import {
-  contractGameAddress,
-  contractMarketAddress,
-  contractMarketDbAddress,
-  mvxExplorerUrl
-} from 'config';
+import { Button, MxLink } from 'components';
 import { RouteNamesEnum } from 'localConstants';
 import { useCallShadowLandsQuery } from 'pages/Game/queries';
 import { useSendShadowLandsTransaction } from 'pages/Game/transactions';
@@ -64,6 +58,14 @@ export const Referral = () => {
     } else {
       console.log('Friend referral code is empty');
     }
+  };
+
+  const handleTwitterShare = () => {
+    const tweetText = `Join me in the Shadow Lands game by Dusty Bones and earn $DUST by managing your land!\n\n${userReferralLink}\n\n#multiversx #crypto #play2earn`;
+    const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(
+      tweetText
+    )}`;
+    window.open(twitterUrl, '_blank');
   };
 
   useEffect(() => {
@@ -179,13 +181,17 @@ export const Referral = () => {
             <h2 className='text-2xl sm:text-2xl font-bold mb-4'>
               Your referral link
             </h2>
-            <input
-              type='text'
-              value={userReferralLink}
-              className='border rounded-md p-2 w-full mb-8'
-              readOnly
-              onClick={copyToClipboard}
-            />
+
+            <div className='flex flex-row p-2 w-full mb-8 gap-2'>
+              <input
+                type='text'
+                value={userReferralLink}
+                className='border rounded-md'
+                readOnly
+                onClick={copyToClipboard}
+              />
+              <Button onClick={handleTwitterShare}>Share on 𝕏</Button>
+            </div>
           </div>
           {isCopied && (
             <span className='text-green-500 mb-8'>Link copied!</span>
