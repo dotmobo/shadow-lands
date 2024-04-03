@@ -195,8 +195,8 @@ export const Map = ({
               onPointerOut={(event) => hover(false)}
             />
 
-            {/* Afficher seulement en mars 2024 */}
-            {new Date().getMonth() === 2 &&
+            {/* Afficher seulement en avril 2024 */}
+            {new Date().getMonth() === 3 &&
               new Date().getFullYear() === 2024 && <NeonLeaderBoard />}
 
             {selectedStatue === StatueType.Dusty && (
