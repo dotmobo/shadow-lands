@@ -82,11 +82,12 @@ export const contractMarketDbAddress =
 export enum StatueType {
   Dusty = 'DUSTY',
   Shroom = 'SHROOM',
-  Pingu = 'PINGU'
+  Pingu = 'PINGU',
+  Burnify = 'BURNIFY'
 }
-export const selectedStatue = StatueType.Pingu;
+export const selectedStatue = StatueType.Burnify;
 export const linkStatue =
-  'https://twitter.com/intent/follow?screen_name=xPingouins';
+  'https://twitter.com/intent/follow?screen_name=BurnifyApp';
 
 // Factions
 export const priceChooseFaction = 100;
