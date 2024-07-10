@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { useGLTF, useAnimations } from '@react-three/drei';
+import { MeshBasicMaterial } from 'three';
 
 export function StatueBurnify({ color, ...props }: any) {
   const group = useRef();
@@ -11,8 +12,7 @@ export function StatueBurnify({ color, ...props }: any) {
   }, [group]);
 
   const initialMaterial = materials['Material.001'].clone();
-  const highlightMaterial = initialMaterial.clone();
-  highlightMaterial.color.set(color);
+  const highlightMaterial = new MeshBasicMaterial({color});
 
   return (
     <group ref={group} {...props} dispose={null}>
