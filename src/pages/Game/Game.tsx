@@ -289,7 +289,7 @@ export const Game = () => {
                       className='inline-block rounded-lg px-3 py-2 text-center hover:no-underline my-0 bg-purple-600 text-white hover:bg-purple-700 mr-0 disabled:bg-gray-200 disabled:text-black disabled:cursor-not-allowed'
                       onClick={() =>
                         (window.location.href =
-                          'https://www.frameit.gg/marketplace/nft/SHALAN-55b9a9-01/130852')
+                          'https://xoxno.com/collection/SHALAN-55b9a9?name=Land')
                       }
                     >
                       <FontAwesomeIcon icon={faTree} className='mr-1' />
